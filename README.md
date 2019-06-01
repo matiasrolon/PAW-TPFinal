@@ -29,7 +29,9 @@ Con nuestra propuesta queremos dar un sentido de pertenencia a una comunidad que
 Algunas definiciones:
 
 -**Obra**: Pelicula, serie de televisión.
+
 -**Review**: Critica sobre la obra.
+
 -**Critic**: Usuario logueado en la pagina.
 
 El sitio cuenta con las siguientes **secciones**:
@@ -60,20 +62,20 @@ Informacion que debe persistir el sitio:
 
 #### Home page
 
-![Home](/res/doc/Home Page.png)
+![Home](/res/doc/HomePage.png)
 - TOP Obras.
 - TOP de críticos.
 
 #### Ranking de criticos
 
-![Ranking de criticos]("/res/doc/Ranking criticos.png")
+![Ranking de criticos](/res/doc/RankingCriticos.png)
 - Muestra una tabla de los criticos ordenados por puntuacion.
 - La puntuacion de los criticos se calcula como la suma de los "likes" menos los "dislikes" de cada una de sus criticas.
 - Permite acceder al perfil de los críticos mediante un enlace.
 
 #### Perfil de criticos
 
-![Perfil de Critico]("/res/doc/Datos - Personales - Critico.png")
+![Perfil de Critico](/res/doc/PerfilCritico.png)
 - Muestra el nombre y un mail de contacto (opcional).
 - Actividad (Fuera del alcance?)
 - TOP criticas.
@@ -82,14 +84,14 @@ Informacion que debe persistir el sitio:
 
 #### Ranking de obras
 
-![Ranking de peliculas]()
+![Ranking de peliculas](/res/doc/RankingPeliculas.png)
 - Muestra una tabla con TODAS las obras ordenadas por puntuación.
 - Las obras pueden filtrarse por **Película** o **Serie**.
 - Permite acceder al perfil de la obra mediante un enlace.
 
 #### Perfil de obra
 
-![Perfil de pelicula]("/res/doc/Perfil pelicula.png")
+![Perfil de pelicula](/res/doc/PerfilPelicula.png)
 - Posee la portada y la descripcion de la obra. Ademas incluye su puntuación y cantidad de reviews.
 - Muestra el trailer oficial de la obra.
 - Las obras pueden ser votadas con una puntuación de 1 a 10 estrellas, teniendo como resultado el promedio de todos sus votos hechos por los usuarios logueados en la página (No es necesario escribir una critica para votar).
@@ -100,28 +102,28 @@ Informacion que debe persistir el sitio:
 
 #### Reviews de pelicula
 
-![Review de pelicula (Misma pagina)]("/res/doc/Review pelicula.png")
+![Review de pelicula (Misma pagina)](/res/doc/ReviewsPelicula.png)
 -Apareceran con una paginacion cada determinada cantidad de reviews.
 -Tendra los datos del usuario que la haya realizado, su puntaje actual, la votacion de la pelicula y la informacion de la review en si.
 
 #### Agregar Review.
 
-![Confeccion de una review]("/res/doc/Apartado Review.png")
+![Confeccion de una review](/res/doc/AgregarReview.png)
 -El usuario dejará una reseña con un puntaje para la pelicula, teniendo un titulo introductorio y un cuerpo de la critica.
 -Tendra que agregar un minimo de Tags acerca de los temas que tratan en la review.
 
 #### Registro, Login y Usuarios
 
-![Registro]("/res/doc/Registro.png")
-![Login]("/res/doc/Login.png")
+![Registro](/res/doc/Registro.png)
+![Login](/res/doc/Login.png)
 - Permite registrarse y loguearse en el sitio.
 - Todos los usuarios pueden hacer criticas.
 - Todos los usuarios pueden puntuar criticas de otros usuarios y peliculas.
 
 #### Noticias del dia
 
-![Novedades]("/res/doc/Novedades.png")
-![Novedad particular]("/res/doc/Novedad particular.png")
+![Novedades](/res/doc/NoticiaDelDia.png)
+![Novedad particular](/res/doc/NoticiaParticular.png)
 - Muestra tarjetas con el titulo y el copete de la noticia, permitiendo acceder al articulo completo haciendo click sobre la alguna de ellas.
 - Estan ordenadas cronologicamente.
 
@@ -148,10 +150,10 @@ A continuación se muestra como se llevaran a cabo las actividades para el desar
 ### Tercera entrega - 21/6/19 (14 Dias)
 
 1. Implementación 
-    - Modulo de usuarios - 4 dias.
+    - Modulo de usuarios - 3 dias.
     - Modulo de obras - 2 dias.
     - Modulo de Criticas - 5 dias.
-    - Modulo de Rankings - 1 dia.
+    - Modulo de Rankings (Peliculas y Criticos) - 2 dia.
 2. Testing - 2 dias.
 
 ### Cuarta entrega -28/6/19 (7 Dias)
@@ -162,5 +164,5 @@ A continuación se muestra como se llevaran a cabo las actividades para el desar
 
 ---
 
-## SITE MAP 
+## Site Map 
 
