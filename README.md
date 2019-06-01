@@ -19,7 +19,7 @@ Con nuestra propuesta queremos dar un sentido de pertenencia a una comunidad que
 
 ## Tecnologias
 
-- Front-end: HTML, CSS y Javascript. 
+- Front-end: HTML, CSS y Javascript.
 - Back-end: PHP, utilizando Laravel como framework.
 
 ---
@@ -41,10 +41,10 @@ El sitio cuenta con las siguientes **secciones**:
 - Perfil de critico.
 - Ranking de obras.
 - Perfil de obra.
-    - Reviews de obra.
-    - Agregar Review. 
-- Noticias del dia. 
-- Estrenos. 
+  - Reviews de obra.
+  - Agregar Review.
+- Noticias del dia.
+- Estrenos.
 - Premios.
 
 ### Tareas
@@ -58,17 +58,19 @@ Informacion que debe persistir el sitio:
 - Criticas: Pelicula, usuario, titulo, descripcion, tags, puntuacion de pelicula, votos negativos, votos positivos.
 - Noticias del dia: Titulo, copete, cuerpo, fecha, tags, autor, imagen, epigrafe.
 - Estrenos: Nombre, fecha de estreno, descripcion.
-- Premios:  fecha de realizacion, festival/evento, categoria del premio, nombre, nominados, ganador. 
+- Premios:  fecha de realizacion, festival/evento, categoria del premio, nombre, nominados, ganador.
 
 #### Home page
 
 ![Home](/res/doc/HomePage.png)
+
 - TOP Obras.
 - TOP de críticos.
 
 #### Ranking de criticos
 
 ![Ranking de criticos](/res/doc/RankingCriticos.png)
+
 - Muestra una tabla de los criticos ordenados por puntuacion.
 - La puntuacion de los criticos se calcula como la suma de los "likes" menos los "dislikes" de cada una de sus criticas.
 - Permite acceder al perfil de los críticos mediante un enlace.
@@ -76,6 +78,7 @@ Informacion que debe persistir el sitio:
 #### Perfil de criticos
 
 ![Perfil de Critico](/res/doc/PerfilCritico.png)
+
 - Muestra el nombre y un mail de contacto (opcional).
 - Actividad (Fuera del alcance?)
 - TOP criticas.
@@ -85,6 +88,7 @@ Informacion que debe persistir el sitio:
 #### Ranking de obras
 
 ![Ranking de peliculas](/res/doc/RankingPeliculas.png)
+
 - Muestra una tabla con TODAS las obras ordenadas por puntuación.
 - Las obras pueden filtrarse por **Película** o **Serie**.
 - Permite acceder al perfil de la obra mediante un enlace.
@@ -92,6 +96,7 @@ Informacion que debe persistir el sitio:
 #### Perfil de obra
 
 ![Perfil de pelicula](/res/doc/PerfilPelicula.png)
+
 - Posee la portada y la descripcion de la obra. Ademas incluye su puntuación y cantidad de reviews.
 - Muestra el trailer oficial de la obra.
 - Las obras pueden ser votadas con una puntuación de 1 a 10 estrellas, teniendo como resultado el promedio de todos sus votos hechos por los usuarios logueados en la página (No es necesario escribir una critica para votar).
@@ -103,12 +108,14 @@ Informacion que debe persistir el sitio:
 #### Reviews de pelicula
 
 ![Review de pelicula (Misma pagina)](/res/doc/ReviewsPelicula.png)
+
 -Apareceran con una paginacion cada determinada cantidad de reviews.
 -Tendra los datos del usuario que la haya realizado, su puntaje actual, la votacion de la pelicula y la informacion de la review en si.
 
-#### Agregar Review.
+#### Agregar Review
 
 ![Confeccion de una review](/res/doc/AgregarReview.png)
+
 -El usuario dejará una reseña con un puntaje para la pelicula, teniendo un titulo introductorio y un cuerpo de la critica.
 -Tendra que agregar un minimo de Tags acerca de los temas que tratan en la review.
 
@@ -116,6 +123,7 @@ Informacion que debe persistir el sitio:
 
 ![Registro](/res/doc/Registro.png)
 ![Login](/res/doc/Login.png)
+
 - Permite registrarse y loguearse en el sitio.
 - Todos los usuarios pueden hacer criticas.
 - Todos los usuarios pueden puntuar criticas de otros usuarios y peliculas.
@@ -124,6 +132,7 @@ Informacion que debe persistir el sitio:
 
 ![Novedades](/res/doc/NoticiaDelDia.png)
 ![Novedad particular](/res/doc/NoticiaParticular.png)
+
 - Muestra tarjetas con el titulo y el copete de la noticia, permitiendo acceder al articulo completo haciendo click sobre la alguna de ellas.
 - Estan ordenadas cronologicamente.
 
@@ -143,13 +152,13 @@ A continuación se muestra como se llevaran a cabo las actividades para el desar
 
 ### Segunda entrega - 7/6/19 (7 Dias)
 
-1. Diseño de objetos MVC - 1 dia.
+1. Diseño de objetos MVC - 3 dias.
 2. Diseño del modelos de datos (BD) - 2 dias.
-3. Implementación del modelo de datos - 2 dias.
+3. Implementación del modelo de datos - 1 dia.
 
 ### Tercera entrega - 21/6/19 (14 Dias)
 
-1. Implementación 
+1. Implementación
     - Modulo de usuarios - 3 dias.
     - Modulo de obras - 2 dias.
     - Modulo de Criticas - 5 dias.
@@ -164,5 +173,4 @@ A continuación se muestra como se llevaran a cabo las actividades para el desar
 
 ---
 
-## Site Map 
-
+## Site Map
