@@ -108,12 +108,14 @@ Informacion que debe persistir el sitio:
 #### Reviews de pelicula
 
 ![Review de pelicula (Misma pagina)](/res/doc/ReviewsPelicula.png)
+
 -Apareceran con una paginacion cada determinada cantidad de reviews.
 -Tendra los datos del usuario que la haya realizado, su puntaje actual, la votacion de la pelicula y la informacion de la review en si.
 
 #### Agregar Review
 
 ![Confeccion de una review](/res/doc/AgregarReview.png)
+
 -El usuario dejará una reseña con un puntaje para la pelicula, teniendo un titulo introductorio y un cuerpo de la critica.
 -Tendra que agregar un minimo de Tags acerca de los temas que tratan en la review.
 
