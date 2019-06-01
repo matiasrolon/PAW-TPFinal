@@ -120,14 +120,30 @@ A continuación se muestra como se llevaran a cabo las actividades para el desar
 
 ### Segunda entrega - 7/6/19 (7 Dias)
 
-1. Diseño de objetos MVC
-2. Diseño del modelos de datos (BD)
-3. Implementación del modelo de datos
+1. Diseño de objetos MVC (3 dias)
+2. Diseño del modelos de datos (BD) (1 dia)
+3. Implementación de la base de datos (1 dia)
 
 ### Tercera entrega - 21/6/19 (14 Dias)
 
 1. Implementación
-2. Testing
+    1. Implementacion del Modelo de Objetos:
+        1. Interfaz especializada para usuario administrador/owner. (10 horas)
+        1. ABM Obras: trabajo que hara el Owner. (2 horas)
+        1. ABM Usuarios: Registro y login. El Owner puede dar de baja usuarios. (4 horas)
+        1. AB_ Criticas (1 hora)
+        1. ABM Noticias (1 hora)
+        1. ABM Estrenos (1 hora)
+        1. ABM Premios (1 hora)
+    1. Implementacion de la vista
+        1. Estructura del sitio (HTML) + Formularios (8+ horas)
+        1. Validacion de formularios (Front-End, JS) (8+)
+        1. Diseño grafico CSS (Sin animaciones, JS donde sea necesario) (2 dias)
+    1. Implementacion de los controladores
+        1. Recuperacion de datos mediante AJAX (1 o 2 dias)
+        1. Validacion de formularios (Back-End) (4 horas)
+        1. Funcion de Busqueda (1 o 2 dias)
+1. Testing
 
 > Desarollo incremental???
 
@@ -141,27 +157,27 @@ A continuación se muestra como se llevaran a cabo las actividades para el desar
 
 ## Wireframes
 
-![Home]("/res/doc/Home Page.png")
+![Home](/res/doc/Home.png)
 
-![Ranking de peliculas]()
+![Ranking de peliculas o Explorar o Busqueda avanzada]()
 
-![Perfil de pelicula]("/res/doc/Perfil pelicula.png")
+![Perfil de pelicula](/res/doc/Perfil-pelicula.png)
 
-![Review de pelicula (Misma pagina)]("/res/doc/Review pelicula.png")
+![Review de pelicula (Misma pagina)](/res/doc/Review-pelicula.png)
 
-![Confeccion de una review]("/res/doc/Apartado Review.png")
+![Confeccion de una review](/res/doc/Apartado-Review.png)
 
-![Ranking de criticos]("/res/doc/Ranking criticos.png")
+![Ranking de criticos](/res/doc/Ranking-Criticos.png)
 
-![Perfil de Critico]("/res/doc/Datos - Personales - Critico.png")
+![Perfil de Critico](/res/doc/Critico.png)
 
-![Novedades]("/res/doc/Novedades.png")
+![Novedades](/res/doc/Novedades.png)
 
-![Novedad particular]("/res/doc/Novedad particular.png")
+![Novedad particular](/res/doc/Novedad-particular.png)
 
-![Registro]("/res/doc/Registro.png")
+![Registro](/res/doc/Registro.png)
 
-![Login]("/res/doc/Login.png")
+![Login](/res/doc/Login.png)
 
 ## SITE MAP (Grafo de como se navega el sitio)
 
