@@ -4,9 +4,9 @@
 
 **Nombre del proyecto:**   MVJ Review
 
-**Propósito:**    Sitio de críticas de cine.
+**Propósito:**    Sitio de críticas de cine y televisión.
 
-### Descripción
+**Descripción:**
 
 El sitio propone generar una comunidad de críticos amateurs de cine/series/cortos en donde se dejan opiniones personales sobre dicho contenido. Estas opiniones pueden ser votadas. Tanto los autores como las opiniones tienen un ranking.
 
@@ -19,57 +19,83 @@ Con nuestra propuesta queremos dar un sentido de pertenencia a una comunidad que
 
 ## Tecnologias
 
-- Front-end: **COMPLETAR**
-- Back-end: **COMPLETAR**
-- Otro: **COMPLETAR**
+- Front-end: HTML, CSS y Javascript.
+- Back-end: PHP, utilizando Laravel como framework.
 
 ---
 
 ## Presupuesto funcional
 
 Algunas definiciones:
-**Obra**: Pelicula, serie de televisión.
+
+-**Obra**: Pelicula, serie de televisión.
+
+-**Review**: Critica sobre la obra.
+
+-**Critic**: Usuario logueado en la pagina.
 
 El sitio cuenta con las siguientes **secciones**:
 
 - Home o página principal.
-- Ranking de obras.
-- Perfil de obra (**OPCIONAL: Sugerir obras similares. (Fuera del alcance)**)
 - Ranking de críticos.
-- Perfil de criticos.
-- Noticias. (**Creo que esta abarca las dos secciones siguientes**)
-- Estrenos. (**QUE VA EXACTAMENTE ACA?**)
+- Perfil de critico.
+- Ranking de obras.
+- Perfil de obra.
+  - Reviews de obra.
+  - Agregar Review.
+- Noticias del dia.
+- Estrenos.
 - Premios.
 
 ### Tareas
 
-#### Modelo de objetos
-
-En base a las funciones que brinda el sitio.
-
 #### Modelo de datos
 
-Toda informacion que deba ser persistida por el sitio **COMPLETAR**:
+Informacion que debe persistir el sitio:
 
-- Obras: Películas y series. Titulo, año, puntuacion
-- Usuarios: Nombre, mail, puntaje en base a criticas.
-- Criticas: Pelicula, usuario, valoración, descripcion.
-- Noticias: Titulo, copete, cuerpo, fecha, tags, autor
-- Estrenos
-- Premios
+- Obras: Películas y series. Titulo, año, director,productor, genero, actores,argumento, puntuacion, fecha de estreno, fecha de finalizacion, categoria.
+- Usuarios: Nombre, mail, edad, informacion de presentacion, puntaje en base a criticas.
+- Criticas: Pelicula, usuario, titulo, descripcion, tags, puntuacion de pelicula, votos negativos, votos positivos.
+- Noticias del dia: Titulo, copete, cuerpo, fecha, tags, autor, imagen, epigrafe.
+- Estrenos: Nombre, fecha de estreno, descripcion.
+- Premios:  fecha de realizacion, festival/evento, categoria del premio, nombre, nominados, ganador.
 
 #### Home page
+
+![Home](/res/doc/HomePage.png)
 
 - TOP Obras.
 - TOP de críticos.
 
+#### Ranking de criticos
+
+![Ranking de criticos](/res/doc/RankingCriticos.png)
+
+- Muestra una tabla de los criticos ordenados por puntuacion.
+- La puntuacion de los criticos se calcula como la suma de los "likes" menos los "dislikes" de cada una de sus criticas.
+- Permite acceder al perfil de los críticos mediante un enlace.
+
+#### Perfil de criticos
+
+![Perfil de Critico](/res/doc/PerfilCritico.png)
+
+- Muestra el nombre y un mail de contacto (opcional).
+- Actividad (Fuera del alcance?)
+- TOP criticas.
+- Peliculas favoritas.
+- Series favoritas.
+
 #### Ranking de obras
+
+![Ranking de peliculas](/res/doc/RankingPeliculas.png)
 
 - Muestra una tabla con TODAS las obras ordenadas por puntuación.
 - Las obras pueden filtrarse por **Película** o **Serie**.
 - Permite acceder al perfil de la obra mediante un enlace.
 
 #### Perfil de obra
+
+![Perfil de pelicula](/res/doc/PerfilPelicula.png)
 
 - Posee la portada y la descripcion de la obra. Ademas incluye su puntuación y cantidad de reviews.
 - Muestra el trailer oficial de la obra.
@@ -79,21 +105,31 @@ Toda informacion que deba ser persistida por el sitio **COMPLETAR**:
 - A su vez, las críticas del usuario son votadas por otros pares también de 1 al 10 estrellas. A partir de estos votos, el usuario consigue aumentar su rango y por lo tanto, su lugar en el ranking general del sitio.
 - A medida que sube el promedio del puntaje de una crítica, se posiciona mejor cuando se visualicen las críticas totales de esa película.
 
-#### Ranking de criticos
+#### Reviews de pelicula
 
-- Muestra una tabla de los criticos ordenados por puntuacion.
-- La puntuacion de los criticos se calcula como la suma de los "likes" menos los "dislikes" de cada una de sus criticas.
-- Permite acceder al perfil de los críticos mediante un enlace.
+![Review de pelicula (Misma pagina)](/res/doc/ReviewsPelicula.png)
+-Apareceran con una paginacion cada determinada cantidad de reviews.
+-Tendra los datos del usuario que la haya realizado, su puntaje actual, la votacion de la pelicula y la informacion de la review en si.
 
-#### Perfil de criticos
+#### Agregar Review
 
-- Muestra el nombre y un mail de contacto (opcional).
-- Actividad (Fuera del alcance?)
-- TOP criticas.
-- Peliculas favoritas.
-- Series favoritas.
+![Confeccion de una review](/res/doc/AgregarReview.png)
+-El usuario dejará una reseña con un puntaje para la pelicula, teniendo un titulo introductorio y un cuerpo de la critica.
+-Tendra que agregar un minimo de Tags acerca de los temas que tratan en la review.
 
-#### Noticias
+#### Registro, Login y Usuarios
+
+![Registro](/res/doc/Registro.png)
+![Login](/res/doc/Login.png)
+
+- Permite registrarse y loguearse en el sitio.
+- Todos los usuarios pueden hacer criticas.
+- Todos los usuarios pueden puntuar criticas de otros usuarios y peliculas.
+
+#### Noticias del dia
+
+![Novedades](/res/doc/NoticiaDelDia.png)
+![Novedad particular](/res/doc/NoticiaParticular.png)
 
 - Muestra tarjetas con el titulo y el copete de la noticia, permitiendo acceder al articulo completo haciendo click sobre la alguna de ellas.
 - Estan ordenadas cronologicamente.
@@ -106,12 +142,6 @@ Toda informacion que deba ser persistida por el sitio **COMPLETAR**:
 
 - Completar!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
-#### Registro, Login y Usuarios
-
-- Permite registrarse y loguearse en el sitio.
-- Todos los usuarios pueden hacer criticas.
-- Todos los usuarios pueden puntuar criticas de otros usuarios y peliculas.
-
 ---
 
 ## Presupuesto Temporal
@@ -120,65 +150,25 @@ A continuación se muestra como se llevaran a cabo las actividades para el desar
 
 ### Segunda entrega - 7/6/19 (7 Dias)
 
-1. Diseño de objetos MVC (3 dias)
-2. Diseño del modelos de datos (BD) (1 dia)
-3. Implementación de la base de datos (1 dia)
+1. Diseño de objetos MVC - 3 dias.
+2. Diseño del modelos de datos (BD) - 2 dias.
+3. Implementación del modelo de datos - 1 dia.
 
 ### Tercera entrega - 21/6/19 (14 Dias)
 
 1. Implementación
-    1. Implementacion del Modelo de Objetos:
-        1. Interfaz especializada para usuario administrador/owner. (10 horas)
-        1. ABM Obras: trabajo que hara el Owner. (2 horas)
-        1. ABM Usuarios: Registro y login. El Owner puede dar de baja usuarios. (4 horas)
-        1. AB_ Criticas (1 hora)
-        1. ABM Noticias (1 hora)
-        1. ABM Estrenos (1 hora)
-        1. ABM Premios (1 hora)
-    1. Implementacion de la vista
-        1. Estructura del sitio (HTML) + Formularios (8+ horas)
-        1. Validacion de formularios (Front-End, JS) (8+)
-        1. Diseño grafico CSS (Sin animaciones, JS donde sea necesario) (2 dias)
-    1. Implementacion de los controladores
-        1. Recuperacion de datos mediante AJAX (1 o 2 dias)
-        1. Validacion de formularios (Back-End) (4 horas)
-        1. Funcion de Busqueda (1 o 2 dias)
-1. Testing
-
-> Desarollo incremental???
+    - Modulo de usuarios - 3 dias.
+    - Modulo de obras - 2 dias.
+    - Modulo de Criticas - 5 dias.
+    - Modulo de Rankings (Peliculas y Criticos) - 2 dia.
+2. Testing - 2 dias.
 
 ### Cuarta entrega -28/6/19 (7 Dias)
 
-1. Puesta a punto
-2. Preparación de la exposición del sistema.
-3. Publicación
+1. Puesta a punto - 5 dias
+2. Preparación de la exposición del sistema. - 1 dia
+3. Publicación - 1 dia
 
 ---
 
-## Wireframes
-
-![Home](/res/doc/Home.png)
-
-![Ranking de peliculas o Explorar o Busqueda avanzada]()
-
-![Perfil de pelicula](/res/doc/Perfil-pelicula.png)
-
-![Review de pelicula (Misma pagina)](/res/doc/Review-pelicula.png)
-
-![Confeccion de una review](/res/doc/Apartado-Review.png)
-
-![Ranking de criticos](/res/doc/Ranking-Criticos.png)
-
-![Perfil de Critico](/res/doc/Critico.png)
-
-![Novedades](/res/doc/Novedades.png)
-
-![Novedad particular](/res/doc/Novedad-particular.png)
-
-![Registro](/res/doc/Registro.png)
-
-![Login](/res/doc/Login.png)
-
-## SITE MAP (Grafo de como se navega el sitio)
-
-**COMPLETAR**
+## Site Map
