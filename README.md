@@ -138,11 +138,14 @@ Informacion que debe persistir el sitio:
 
 #### Estrenos
 
-- Completar!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+![Estrenos](/res/doc/Estrenos.png)
+- Muestra los estrenos cercanos a la fecha de consulta.
+- Tiene una seccion para estreno de Pelicula y otro para series.
 
 #### Premios
 
-- Completar!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+![Premios](/res/doc/Premios.png)
+- Muestra peliculas que obtuvieron algún premio en festivales de cine reconocidos.
 
 ---
 
