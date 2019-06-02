@@ -1,4 +1,4 @@
-# Programacion en Ambiente Web -TP Final
+﻿# Programacion en Ambiente Web -TP Final
 
 ## Propuesta
 
@@ -174,3 +174,5 @@ A continuación se muestra como se llevaran a cabo las actividades para el desar
 ---
 
 ## Site Map
+
+![Site Map](/res/doc/SiteMap.png)
