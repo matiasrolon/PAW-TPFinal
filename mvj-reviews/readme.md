@@ -7,14 +7,26 @@ Mas adelante podemos cambiar este archivo de ubicacion. El objetivo es llevar cu
 
 *Nota:* el SO utilizado en este caso es Windows 10 (64 bits).
 
-- [PHP](https://www.php.net/).
-- [Composer](https://getcomposer.org/).
-- [Laravel](https://laravel.com/). (version utilizada 5.8. No se recomienda utilizar versiones anteriores).
-        - Ejecutar `laravel artisan --version` en la consola del SO para ver la version instalada.
+1. [XAMPP](https://www.apachefriends.org/es/index.html) (Apache, MySQL y PHP). O alternativamente:
+   - [Apache HTTP Server](http://httpd.apache.org/)
+   - [MySQL](https://www.mysql.com/)
+   - [PHP](https://www.php.net/).
+1. [Composer](https://getcomposer.org/).
+1. [Laravel](https://laravel.com/). (version utilizada 5.8. No se recomienda utilizar versiones anteriores).
+   - Ejecutar `laravel artisan --version` en la consola del SO para ver la version instalada.
 
-### Guia de intalacion
+### Guia de instalacion
 
 1. Clonar el repositorio.
 1. Pararse en el directorio 'mvj-reviews'.
 1. Abrir una terminal y ejecutar `composer install` para descargar las dependencias.
+1. crear un archivo **.env** y configurar la base de datos. (Ya debe estar creada)
 1. Podemos levantar el servidor php de prueba ejecutando `php artisan serve`.
+
+---
+
+## TO-DO List
+
+- [x] Ajustar la migracion de crear tabla de usuarios segun el modelo.
+- [ ] Agregar los triggers para calcular el campo puntos de la tabla usuarios.
+- [ ] Crear todas las migraciones faltantes segun del modelo.

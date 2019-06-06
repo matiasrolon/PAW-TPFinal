@@ -17,12 +17,23 @@ class CreateUsersTable extends Migration
             // Tuve que agregar las longitudes de los strings para que no de error
             // Al ejecutar php artisan migrate
             $table->bigIncrements('id');
-            $table->string('name', 100);
+            $table->string('username', 100); //Antes era name
             $table->string('email', 100)->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password', 32);
-            $table->rememberToken();
-            $table->timestamps();
+            $table->rememberToken(); //Creo que es para las sesiones. Segun la documentacion de Lrvl es VARCAHR(100)
+            $table->timestamps(); //Agrega los campos de fecha de alta y fecha de actualizacion
+
+            // Ademas agrego los cambios propuestos
+            $table->string('nombre', 100);
+            $table->date('fecha_nacim');
+            $table->string('biografia', 500);
+            $table->string('genero_fav', 50);
+            $table->string('pelicula_fav', 50);
+            $table->string('serie_fav', 50);
+            $table->binary('avatar'); // BLOB
+            // Calculado por triggers.
+            $table->integer('puntos');
         });
     }
 
