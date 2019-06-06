@@ -13,6 +13,7 @@ Mas adelante podemos cambiar este archivo de ubicacion. El objetivo es llevar cu
    - [PHP](https://www.php.net/).
 1. [Composer](https://getcomposer.org/).
 1. [Laravel](https://laravel.com/). (version utilizada 5.8. No se recomienda utilizar versiones anteriores).
+   - Recomiendo instalarlo desde composer: `composer global require laravel/installer`.
    - Ejecutar `laravel artisan --version` en la consola del SO para ver la version instalada.
 
 ### Guia de instalacion
@@ -20,8 +21,9 @@ Mas adelante podemos cambiar este archivo de ubicacion. El objetivo es llevar cu
 1. Clonar el repositorio.
 1. Pararse en el directorio 'mvj-reviews'.
 1. Abrir una terminal y ejecutar `composer install` para descargar las dependencias.
-1. crear un archivo **.env** y configurar la base de datos. (Ya debe estar creada)
-1. Podemos levantar el servidor php de prueba ejecutando `php artisan serve`.
+1. Crear un archivo **.env** y configurar la base de datos. (Ya debe estar creada. Codificacion: utf8mb4)
+1. En la terminal ejecutar `php artisan migrate` para crear la estructura de la BD.
+1. Levantar el servidor php de prueba ejecutando `php artisan serve`.
 
 ---
 
