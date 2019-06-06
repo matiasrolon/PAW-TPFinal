@@ -7,10 +7,10 @@ Mas adelante podemos cambiar este archivo de ubicacion. El objetivo es llevar cu
 
 *Nota:* el SO utilizado en este caso es Windows 10 (64 bits).
 
-- [PHP](https://www.php.net/).
-- [Composer](https://getcomposer.org/).
-- [Laravel](https://laravel.com/). (version utilizada 5.8. No se recomienda utilizar versiones anteriores).
-  - Ejecutar `laravel artisan --version` en la consola del SO para ver la version instalada.
+* [PHP](https://www.php.net/).
+* [Composer](https://getcomposer.org/).
+* [Laravel](https://laravel.com/). (version utilizada 5.8. No se recomienda utilizar versiones anteriores).
+  * Ejecutar `laravel artisan --version` en la consola del SO para ver la version instalada.
 
 ### Guia de intalacion
 
