@@ -1,4 +1,6 @@
 <?php
+/* Esto lo puso automaticamente el VS Code cuando escribi Route */
+//use Symfony\Component\Routing\Annotation\Route;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,3 +16,5 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('/prueba', 'PagesController@Prueba');
