@@ -24,11 +24,3 @@ Mas adelante podemos cambiar este archivo de ubicacion. El objetivo es llevar cu
 1. Crear un archivo **.env** y configurar la base de datos. (Ya debe estar creada. Codificacion: utf8mb4)
 1. En la terminal ejecutar `php artisan migrate` para crear la estructura de la BD.
 1. Levantar el servidor php de prueba ejecutando `php artisan serve`.
-
----
-
-## TO-DO List
-
-- [x] Ajustar la migracion de crear tabla de usuarios segun el modelo.
-- [ ] Agregar los triggers para calcular el campo puntos de la tabla usuarios.
-- [ ] Crear todas las migraciones faltantes segun del modelo.
