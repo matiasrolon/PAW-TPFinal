@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateRangosTable extends Migration
+class CreateGeneroTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,9 @@ class CreateRangosTable extends Migration
      */
     public function up()
     {
-        Schema::create('rango', function (Blueprint $table) {
+        Schema::create('genero', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('nombre',50);
-            $table->string('descripcion',100);
-            $table->BigInteger('puntaje_desde');
-            $table->BigInteger('puntaje_hasta');
+            $table->string('nombre', 30); // Nombre del genero
             // $table->timestamps();
         });
     }
@@ -30,6 +27,6 @@ class CreateRangosTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('rango');
+        Schema::dropIfExists('genero');
     }
 }

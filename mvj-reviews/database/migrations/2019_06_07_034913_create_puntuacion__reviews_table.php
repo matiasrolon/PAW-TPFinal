@@ -14,12 +14,12 @@ class CreatePuntuacionReviewsTable extends Migration
     public function up()
     {
         Schema::create('puntuacion__review', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->timestamps();
-            $table->date('fecha');
-            $table->integer('voto');
             $table->bigInteger('review_id')->unsigned();
             $table->bigInteger('user_id')->unsigned();
+            $table->primary(['review_id','user_id']);
+            $table->boolean('voto'); // True = Like. False = Dislike.
+            $table->timestamps(); // Fecha de creacion y actualizacion
+            
             //foreign keys
             $table->foreign('user_id')->references('id')->on('user');
             $table->foreign('review_id')->references('id')->on('review');

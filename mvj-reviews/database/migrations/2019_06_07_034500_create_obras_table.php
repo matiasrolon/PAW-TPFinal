@@ -15,16 +15,16 @@ class CreateObrasTable extends Migration
     {
         Schema::create('obra', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->timestamps();
-            $table->string('titulo');
+            $table->string('titulo', 100);
             $table->date('fecha_estreno');
-            $table->string('sinopsis',300);
-            $table->bigInteger('anio');
+            $table->string('sinopsis',500);
+            $table->year('anio'); // Va desde 1901 hasta 2155 en MariaDB
             $table->string('pais',30)->nullable();
-            $table->datetime('duracion');
-            $table->string('categoria');//pelicula / serie / corto / etc
+            $table->double('duracion_min'); // Duracion en minutos
+            $table->string('categoria', 20);// Pelicula / serie / corto / etc
             $table->date('fecha_finalizacion')->nullable();
-            $table->double('puntaje');
+            $table->double('puntaje'); //Calculado con triggers
+            $table->timestamps();
         });
     }
 

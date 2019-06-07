@@ -15,12 +15,12 @@ class CreatePuntuacionObrasTable extends Migration
     public function up()
     {
         Schema::create('puntuacion__obra', function (Blueprint $table) {
-          $table->timestamps();
-          $table->date('fecha');
-          $table->integer('puntaje');
           $table->bigInteger('obra_id')->unsigned();
           $table->bigInteger('user_id')->unsigned();
           $table->primary(['obra_id','user_id']);
+          $table->tinyInteger('puntaje'); // 1 a 10
+          $table->timestamps(); //Fecha de alta y actualizacion
+
           //foreign keys
           $table->foreign('user_id')->references('id')->on('user');
           $table->foreign('obra_id')->references('id')->on('obra');
