@@ -17,7 +17,7 @@ class CreateObraArtistaTable extends Migration
             $table->bigInteger('obra_id')->unsigned();
             $table->bigInteger('artista_id')->unsigned();
             $table->bigInteger('rol_id')->unsigned();
-            $table->primary(['obra_id', 'artista_id', 'rol_id']);
+            $table->primary(['obra_id', 'artista_id']);
 
             // Foreign Keys
             $table->foreign('obra_id')->references('id')->on('obra');
