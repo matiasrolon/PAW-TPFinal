@@ -38,3 +38,12 @@ Lista de comandos utiles de Laravel.
 ## Modelo - Eloquent
 
 - **Crear Modelo:** php artisan make:model Persona
+
+## Solucion de Problemas
+- Problema1: **No Application Encryption Key Has Been Specified.**
+
+Solucion:
+```
+php artisan key:generate
+php artisan config:cache
+```

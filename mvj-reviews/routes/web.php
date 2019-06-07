@@ -17,4 +17,6 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/obras','ObraController@index');
+
 Route::get('/prueba', 'PagesController@Prueba');
