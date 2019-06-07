@@ -19,14 +19,4 @@ class Review extends Model
         return $this->belongsTo('App\Models\Obra');
     }
 
-    public function votos()
-    {
-        $voto = DB::table('puntuacion_review')
-                  ->select(DB::raw('sum(voto) as votos'))
-                  ->where('review_id', $this->id)
-                  ->get();
-    }
-
-
-
 }
