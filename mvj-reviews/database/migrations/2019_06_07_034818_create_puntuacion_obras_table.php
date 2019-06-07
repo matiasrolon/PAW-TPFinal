@@ -1,3 +1,4 @@
+
 <?php
 
 use Illuminate\Support\Facades\Schema;
@@ -13,7 +14,7 @@ class CreatePuntuacionObrasTable extends Migration
      */
     public function up()
     {
-        Schema::create('puntuacion__obras', function (Blueprint $table) {
+        Schema::create('puntuacion__obra', function (Blueprint $table) {
           $table->timestamps();
           $table->date('fecha');
           $table->integer('puntaje');
@@ -33,6 +34,6 @@ class CreatePuntuacionObrasTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('puntuacion__obras');
+        Schema::dropIfExists('puntuacion__obra');
     }
 }

@@ -17,7 +17,7 @@ class CreatePasswordResetsTable extends Migration
             // Nuevamente tuve que agregar las longitudes de los strings para que no de error
             // Al ejecutar php artisan migrate
             $table->string('email', 100)->index();
-            
+
             /* Si no lo toco, va a usar el que configure como default (191) en AppServiceProvider.php
             porque desconozco la longitud del token generado */
             $table->string('token');

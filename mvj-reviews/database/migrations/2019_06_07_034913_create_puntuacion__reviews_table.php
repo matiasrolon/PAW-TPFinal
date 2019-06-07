@@ -13,7 +13,7 @@ class CreatePuntuacionReviewsTable extends Migration
      */
     public function up()
     {
-        Schema::create('puntuacion__reviews', function (Blueprint $table) {
+        Schema::create('puntuacion__review', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->timestamps();
             $table->date('fecha');
@@ -33,6 +33,6 @@ class CreatePuntuacionReviewsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('puntuacion__reviews');
+        Schema::dropIfExists('puntuacion__review');
     }
 }
