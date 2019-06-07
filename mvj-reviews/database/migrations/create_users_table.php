@@ -13,7 +13,7 @@ class CreateUsersTable extends Migration
      */
     public function up()
     {
-        Schema::create('users', function (Blueprint $table) {
+        Schema::create('user', function (Blueprint $table) {
             // Tuve que agregar las longitudes de los strings para que no de error
             // Al ejecutar php artisan migrate
             $table->bigIncrements('id');
@@ -28,12 +28,15 @@ class CreateUsersTable extends Migration
             $table->string('nombre', 100);
             $table->date('fecha_nacim');
             $table->string('biografia', 500);
-            $table->string('genero_fav', 50);
-            $table->string('pelicula_fav', 50);
-            $table->string('serie_fav', 50);
-            $table->binary('avatar'); // BLOB
-            // Calculado por triggers.
-            $table->integer('puntos');
+            $table->string('genero_fav', 50)->nullable();;
+            $table->string('pelicula_fav', 50)->nullable();;
+            $table->string('serie_fav', 50)->nullable();;
+            $table->binary('avatar'); // BLOB=
+            $table->integer('puntos'); // calculado por triggers
+            $table->bigInteger('rango_id')->unsigned();
+            //foreign keys
+            $table->foreign('rango_id')->references('id')->on('rango');
+
         });
     }
 
@@ -44,6 +47,6 @@ class CreateUsersTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('users');
+        Schema::dropIfExists('user');
     }
 }
