@@ -19,9 +19,9 @@ class CreatePuntuacionReviewsTable extends Migration
             $table->primary(['review_id','user_id']);
             $table->boolean('voto'); // True = Like. False = Dislike.
             $table->timestamps(); // Fecha de creacion y actualizacion
-            
+
             //foreign keys
-            $table->foreign('user_id')->references('id')->on('user');
+            $table->foreign('user_id')->references('id')->on('users');
             $table->foreign('review_id')->references('id')->on('review');
         });
     }

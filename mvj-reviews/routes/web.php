@@ -17,6 +17,8 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/obras','ObraController@index');
+Route::get('/home', 'HomeController@index')->name('home');
 
-Route::get('/prueba', 'PagesController@Prueba');
+Auth::routes(); // para Login, olvido su contraseña(esta no anda), y registrarse
+
+Route::get('/obras','ObraController@index');

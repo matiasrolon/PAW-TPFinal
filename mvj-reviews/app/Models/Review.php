@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Http\Models;
+namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Puntuacion_Obra extends Model
+class Review extends Model
 {
     //
-    protected $table = 'puntuacion_obra';
+    protected $table = 'review';
 
     public function user()
     {
@@ -18,4 +18,5 @@ class Puntuacion_Obra extends Model
     {
         return $this->belongsTo('App\Models\Obra');
     }
+
 }
