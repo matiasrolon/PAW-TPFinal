@@ -14,9 +14,9 @@ class Review extends Model
         return $this->belongsTo('App\Models\User');
     }
 
-    public function obra()
+    public function film()
     {
-        return $this->belongsTo('App\Models\Obra');
+        return $this->belongsTo('App\Models\Film');
     }
 
 }

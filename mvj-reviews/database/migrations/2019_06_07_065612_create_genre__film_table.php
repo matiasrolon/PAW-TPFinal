@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateGeneroObraTable extends Migration
+class CreateGenreFilmTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,14 +13,14 @@ class CreateGeneroObraTable extends Migration
      */
     public function up()
     {
-        Schema::create('genero__obra', function (Blueprint $table) {
-            $table->bigInteger('genero_id')->unsigned();
-            $table->bigInteger('obra_id')->unsigned();
-            $table->primary(['genero_id', 'obra_id']);
+        Schema::create('genre__film', function (Blueprint $table) {
+            $table->bigInteger('genre_id')->unsigned();
+            $table->bigInteger('film_id')->unsigned();
+            $table->primary(['genre_id', 'film_id']);
 
             // Foreign Keys
-            $table->foreign('genero_id')->references('id')->on('genero');
-            $table->foreign('obra_id')->references('id')->on('obra');
+            $table->foreign('genre_id')->references('id')->on('genre');
+            $table->foreign('film_id')->references('id')->on('film');
 
             // $table->timestamps();
         });

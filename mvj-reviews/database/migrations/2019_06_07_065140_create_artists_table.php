@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateGeneroTable extends Migration
+class CreateArtistsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,11 @@ class CreateGeneroTable extends Migration
      */
     public function up()
     {
-        Schema::create('genero', function (Blueprint $table) {
+        Schema::create('artist', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('nombre', 30); // Nombre del genero
+            $table->string('nombre', 100);
+            $table->date('fecha_nacim');
+            $table->string('pais', 30); //Nacionalidad
             // $table->timestamps();
         });
     }
@@ -27,6 +29,6 @@ class CreateGeneroTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('genero');
+        Schema::dropIfExists('artist');
     }
 }

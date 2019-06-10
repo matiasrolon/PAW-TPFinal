@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateNovedadTable extends Migration
+class CreateNewnessTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateNovedadTable extends Migration
      */
     public function up()
     {
-        Schema::create('novedad', function (Blueprint $table) {
+        Schema::create('newness', function (Blueprint $table) {
             $table->bigIncrements('id');
             // $table->string('categoria', 20);
             $categorias = array('noticia', 'estreno', 'premio');
@@ -35,6 +35,6 @@ class CreateNovedadTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('novedad');
+        Schema::dropIfExists('newness');
     }
 }

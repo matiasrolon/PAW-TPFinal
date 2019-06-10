@@ -4,18 +4,18 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Puntuacion_Review extends Model
+class Score_Film extends Model
 {
     //
-    protected $table = 'puntuacion_review';
+    protected $table = 'score_film';
 
     public function user()
     {
         return $this->belongsTo('App\Models\User');
     }
 
-    public function review()
+    public function film()
     {
-        return $this->belongsTo('App\Models\Review');
+        return $this->belongsTo('App\Models\Film');
     }
 }

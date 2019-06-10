@@ -71,7 +71,7 @@ class RegisterController extends Controller
             // preestablecidos > biografia, puntos,avatar( uno por defecto)
             'biografia' => 'Aun no tienes biografia.',
             'puntos' => 0,
-
+            'estado' =>'activo',  
         ]);
     }
 }

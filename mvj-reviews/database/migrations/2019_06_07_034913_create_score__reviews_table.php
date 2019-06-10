@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreatePuntuacionReviewsTable extends Migration
+class CreateScoreReviewsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreatePuntuacionReviewsTable extends Migration
      */
     public function up()
     {
-        Schema::create('puntuacion__review', function (Blueprint $table) {
+        Schema::create('score__review', function (Blueprint $table) {
             $table->bigInteger('review_id')->unsigned();
             $table->bigInteger('user_id')->unsigned();
             $table->primary(['review_id','user_id']);

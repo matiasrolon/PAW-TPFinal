@@ -4,8 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Rango extends Model
+class Range extends Model
 {
     //
-    protected $table = 'rango';
+    protected $table = 'range';
 }

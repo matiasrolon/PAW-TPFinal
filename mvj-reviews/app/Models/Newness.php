@@ -4,8 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Artista extends Model
+class Newness extends Model
 {
     //
-    protected $table = 'artista';
+    protected $table = 'newness';
 }

@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateTagObraTable extends Migration
+class CreateTagFilmTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,13 @@ class CreateTagObraTable extends Migration
      */
     public function up()
     {
-        Schema::create('tag__obra', function (Blueprint $table) {
-            $table->bigInteger('obra_id')->unsigned();
+        Schema::create('tag__film', function (Blueprint $table) {
+            $table->bigInteger('film_id')->unsigned();
             $table->string('tag_id', 100);
-            $table->primary(['obra_id', 'tag_id']);
+            $table->primary(['film_id', 'tag_id']);
 
             // Foregin Keys
-            $table->foreign('obra_id')->references('id')->on('obra');
+            $table->foreign('film_id')->references('id')->on('film');
             $table->foreign('tag_id')->references('nombre')->on('tag');
 
             // $table->timestamps();

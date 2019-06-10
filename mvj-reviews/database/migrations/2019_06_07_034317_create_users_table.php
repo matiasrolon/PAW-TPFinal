@@ -20,6 +20,7 @@ class CreateUsersTable extends Migration
           $table->string('email')->unique();
           $table->timestamp('email_verified_at')->nullable();
           $table->string('password');
+          $table->string('estado');
           $table->date('fecha_nacim')->nullable();
           $table->string('biografia', 500)->nullable();
           $table->string('genero_fav', 50)->nullable();
@@ -27,11 +28,13 @@ class CreateUsersTable extends Migration
           $table->string('serie_fav', 50)->nullable();
           $table->binary('avatar')->nullable(); // BLOB=
           $table->integer('puntos')->nullable(); // calculado por triggers
-          $table->bigInteger('rango_id')->unsigned()->nullable();
+          $table->bigInteger('range_id')->unsigned()->nullable();
+          $table->bigInteger('role_id')->unsigned()->nullable();
           $table->rememberToken();
           $table->timestamps();
           //foreign keys
-          $table->foreign('rango_id')->references('id')->on('rango');
+          $table->foreign('range_id')->references('id')->on('range');
+          $table->foreign('role_id')->references('id')->on('role');
         });
     }
 

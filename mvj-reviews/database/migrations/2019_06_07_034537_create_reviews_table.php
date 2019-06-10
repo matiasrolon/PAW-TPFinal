@@ -20,11 +20,11 @@ class CreateReviewsTable extends Migration
             $table->string('descripcion', 2000);
             $table->timestamps(); // Fecha de alta y actualizacion
             $table->BigInteger('user_id')->unsigned();
-            $table->BigInteger('obra_id')->unsigned();
+            $table->BigInteger('film_id')->unsigned();
 
             //foreign keys
             $table->foreign('user_id')->references('id')->on('users');
-            $table->foreign('obra_id')->references('id')->on('obra');
+            $table->foreign('film_id')->references('id')->on('film');
 
             //Otra forma de declarar foreignkey
             /*
