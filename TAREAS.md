@@ -1,4 +1,8 @@
-TO-DO:
+### TO-DO (General):
+- [ ] Termina estructura de las views (.blades) ---> Matias
+- [ ] Averiguar como se interactua con una API externa (IMDB o Similar) ---> Juan
+
+### TO-DO (funcional):
 
 - [ ] Controllers:
   - [ ] Review Controller
