@@ -4,9 +4,17 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use App\Http\Models\Obra;
+
 class ObraController extends Controller
 {
     //
+
+    public function index(){
+          $obras = Obra::All();
+          return view('obras',compact('obras'));
+    }
+
     public function store(Request $request)
     {
         // Validate the request...
@@ -37,5 +45,7 @@ class ObraController extends Controller
         $obra->fecha_finalizacion = $request->fecha_finalizacion;
         $obra->puntaje = 0;
         $obra->save();
-    }
+    };
+}
+
 }

@@ -22,7 +22,7 @@ class CreatePuntuacionObrasTable extends Migration
           $table->timestamps(); //Fecha de alta y actualizacion
 
           //foreign keys
-          $table->foreign('user_id')->references('id')->on('user');
+          $table->foreign('user_id')->references('id')->on('users');
           $table->foreign('obra_id')->references('id')->on('obra');
         });
     }

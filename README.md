@@ -43,9 +43,10 @@ El sitio cuenta con las siguientes **secciones**:
 - Perfil de obra.
   - Reviews de obra.
   - Agregar Review.
-- Noticias del dia.
-- Estrenos.
-- Premios.
+- Novedades
+   - Noticias del dia.
+   - Estrenos.
+   - Premios.
 
 ### Tareas
 
@@ -116,8 +117,7 @@ Informacion que debe persistir el sitio:
 
 ![Confeccion de una review](/res/doc/AgregarReview.png)
 
--El usuario dejará una reseña con un puntaje para la pelicula, teniendo un titulo introductorio y un cuerpo de la critica.
--Tendra que agregar un minimo de Tags acerca de los temas que tratan en la review.
+-El usuario dejará una reseña para la pelicula, teniendo un titulo introductorio y un cuerpo de la critica.
 
 #### Registro, Login y Usuarios
 
@@ -126,7 +126,7 @@ Informacion que debe persistir el sitio:
 
 - Permite registrarse y loguearse en el sitio.
 - Todos los usuarios pueden hacer criticas.
-- Todos los usuarios pueden puntuar criticas de otros usuarios y peliculas.
+- Todos los usuarios pueden puntuar criticas de otros usuarios, como tambien peliculas.
 
 #### Noticias del dia
 

@@ -6,16 +6,20 @@ use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
-    //
 
     // TODO: HACER FUNCION PARA CONFIRMAR EL SIGN_UP
+
+
+    public function profile(Request $request){
+      return view('perfil');
+    }
 
     public function store(Request $request)
     {
         // Validate the request...
         $validator = Validator::make($request, [
             'username' => 'required|max:100',
-            'email' => 'required|email|unique:user,email'
+            'email' => 'required|email|unique:user,email',
             'password' => 'required|max:32',
             'nombre' => 'required|max:100',
             'fecha_nacim' => 'max:100',
@@ -30,7 +34,7 @@ class UserController extends Controller
             return redirect('post/create')
                         ->withErrors($validator)
                         ->withInput();
-
+        }
         $user = new User;
         $user->username = $request->username;
         $user->email = $request->email;
