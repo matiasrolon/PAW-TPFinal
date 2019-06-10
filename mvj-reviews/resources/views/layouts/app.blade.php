@@ -37,6 +37,8 @@
 
                     </ul>
 
+                    <input class="buscador" name="buscar" placeholder="buscar film">
+
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ml-auto">
                         <!-- Authentication Links -->
@@ -75,6 +77,23 @@
                     </ul>
                 </div>
             </div>
+        </nav>
+        <nav class="menus">
+          <div class="seccion-menu">
+                <a href="/home">Home</a>
+          </div>
+
+          <div class="seccion-menu">
+                <a href="/ranking-films">Ranking films</a>
+          </div>
+
+          <div class="seccion-menu">
+                <a href="/ranking-criticos">Ranking Criticos</a>
+          </div>
+
+          <div class="seccion-menu">
+                <a href=""> Novedades </a>
+          </div>
         </nav>
 
         <main class="py-4">
