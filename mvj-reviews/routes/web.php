@@ -18,6 +18,7 @@ Route::get('/', function () {
 });
 
 Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/perfil', 'UserController@profile')->name('perfil');
 
 Auth::routes(); // para Login, olvido su contraseña(esta no anda), y registrarse
 
