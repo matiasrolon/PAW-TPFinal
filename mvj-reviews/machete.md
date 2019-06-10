@@ -38,3 +38,4 @@ Lista de comandos utiles de Laravel.
 ## Modelo - Eloquent
 
 - **Crear Modelo:** php artisan make:model Persona
+- **Crear Modelo (Dentro de una carpeta especifica):** php artisan make:model Http/Models/Review
