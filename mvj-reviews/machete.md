@@ -8,6 +8,13 @@ Lista de comandos utiles de Laravel.
 - **Correr servidor de pruebas:** php artisan serve
 - **Ayuda:** php artisan help <comando>
 - **Lista de comandos:** php artisan list
+- **Orden correcto de parametros en BelongToMany:**
+```
+Class ClaseA extends Model
+    public function ClasesB(){ //retorna todas las clasesB que tiene Clase A (Relacion N a N)
+      return $this->belongsToMany('App\Models\ClaseB', 'claseA_claseB' (tabla), 'claseA_id', 'claseB_id');
+```
+(fijarse que el ultimo parametro sea el nombre que figura en la tabla intermedia para el id de la clase que se quiere obtener).
 
 ## Controlador (MVC)
 
@@ -39,9 +46,16 @@ Lista de comandos utiles de Laravel.
 
 - **Crear Modelo:** php artisan make:model Persona
 - **Crear Modelo (Dentro de una carpeta especifica):** php artisan make:model Http/Models/Review
+
+## Pruebas - Seeders
+- **Crear seeder:** php artisan make:seeder NAMETableSeeder
+- **Ejecutar seeder:** puede hacerse de las siguientes maneras
+    -php artisan migrate --seed
+    -php artisan migrate:refresh --seeds
+    -php artisan db:seed (Para ejecutarlos sin los migrates)
+    
 ## Solucion de Problemas
 - Problema1: **No Application Encryption Key Has Been Specified.**
-
 Solucion:
 ```
 php artisan key:generate

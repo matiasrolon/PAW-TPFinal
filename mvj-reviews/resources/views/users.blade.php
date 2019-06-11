@@ -6,10 +6,10 @@
   </head>
   <body>
 
-    <h2>Obras:</h2>
+    <h2>Usuarios:</h2>
     <ul>
-    @foreach($obras as $obra)
-        <li>{{ $obra }}</li>
+    @foreach($users as $user)
+        <li>{{ $user }}</li>
     @endforeach
     </ul>
   </body>

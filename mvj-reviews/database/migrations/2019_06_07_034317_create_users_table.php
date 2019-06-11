@@ -29,12 +29,12 @@ class CreateUsersTable extends Migration
           $table->binary('avatar')->nullable(); // BLOB=
           $table->integer('puntos')->nullable(); // calculado por triggers
           $table->bigInteger('range_id')->unsigned()->nullable();
-          $table->bigInteger('role_id')->unsigned()->nullable();
+         //$table->bigInteger('role_id')->unsigned()->nullable();
           $table->rememberToken();
           $table->timestamps();
           //foreign keys
           $table->foreign('range_id')->references('id')->on('range');
-          $table->foreign('role_id')->references('id')->on('role');
+          //$table->foreign('role_id')->references('id')->on('role');
         });
     }
 

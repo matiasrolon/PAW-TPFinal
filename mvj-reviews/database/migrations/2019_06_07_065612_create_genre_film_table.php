@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateFilmArtistTable extends Migration
+class CreateGenreFilmTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,16 +13,14 @@ class CreateFilmArtistTable extends Migration
      */
     public function up()
     {
-        Schema::create('film__artist', function (Blueprint $table) {
+        Schema::create('genre_film', function (Blueprint $table) {
+            $table->bigInteger('genre_id')->unsigned();
             $table->bigInteger('film_id')->unsigned();
-            $table->bigInteger('artist_id')->unsigned();
-            $table->bigInteger('function_id')->unsigned();
-            $table->primary(['film_id', 'artist_id', 'function_id']);
+            $table->primary(['genre_id', 'film_id']);
 
             // Foreign Keys
+            $table->foreign('genre_id')->references('id')->on('genre');
             $table->foreign('film_id')->references('id')->on('film');
-            $table->foreign('artist_id')->references('id')->on('artist');
-            $table->foreign('function_id')->references('id')->on('function');
 
             // $table->timestamps();
         });
@@ -35,6 +33,6 @@ class CreateFilmArtistTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('obra__artista');
+        Schema::dropIfExists('genre_film');
     }
 }

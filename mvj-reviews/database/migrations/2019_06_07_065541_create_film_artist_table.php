@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateTagFilmTable extends Migration
+class CreateFilmArtistTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,14 +13,16 @@ class CreateTagFilmTable extends Migration
      */
     public function up()
     {
-        Schema::create('tag__film', function (Blueprint $table) {
+        Schema::create('film_artist', function (Blueprint $table) {
             $table->bigInteger('film_id')->unsigned();
-            $table->string('tag_id', 100);
-            $table->primary(['film_id', 'tag_id']);
+            $table->bigInteger('artist_id')->unsigned();
+            $table->bigInteger('function_id')->unsigned();
+            $table->primary(['film_id', 'artist_id', 'function_id']);
 
-            // Foregin Keys
+            // Foreign Keys
             $table->foreign('film_id')->references('id')->on('film');
-            $table->foreign('tag_id')->references('nombre')->on('tag');
+            $table->foreign('artist_id')->references('id')->on('artist');
+            $table->foreign('function_id')->references('id')->on('function');
 
             // $table->timestamps();
         });
@@ -33,6 +35,6 @@ class CreateTagFilmTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('tag__obra');
+        Schema::dropIfExists('film_artist');
     }
 }

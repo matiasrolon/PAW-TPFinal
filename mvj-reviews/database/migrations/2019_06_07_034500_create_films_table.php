@@ -18,7 +18,6 @@ class CreateFilmsTable extends Migration
             $table->string('titulo', 100);
             $table->date('fecha_estreno');
             $table->string('sinopsis',500);
-            $table->year('anio'); // Va desde 1901 hasta 2155 en MariaDB
             $table->string('pais',30)->nullable();
             $table->double('duracion_min'); // Duracion en minutos
             $table->string('categoria', 20);// Pelicula / serie / corto / etc

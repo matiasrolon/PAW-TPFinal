@@ -3,16 +3,27 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\User;
 
 class UserController extends Controller
 {
+  //CLASE POR AHORA INACTIVA, YA QUE LA VALIDACION DE REGISTRO LA HACE Auth\RegistrerController
+  // METODOS profile() y index() PROXIMOS A IMPLEMENTAR SI FUESEN NECESARIOS.
 
     // TODO: HACER FUNCION PARA CONFIRMAR EL SIGN_UP
 
 
+  //----pruebas----------------------------------
+    public function index(){
+      $users = User::All();
+      return view('users',compact('users'));
+    }
+
     public function profile(Request $request){
       return view('perfil');
     }
+
+//----------------------------------------------
 
     public function store(Request $request)
     {

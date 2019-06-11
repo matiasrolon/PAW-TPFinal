@@ -5,7 +5,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateScoreFilmsTable extends Migration
+class CreateScoreFilmTable extends Migration
 {
     /**
      * Run the migrations.
@@ -14,7 +14,7 @@ class CreateScoreFilmsTable extends Migration
      */
     public function up()
     {
-        Schema::create('score__film', function (Blueprint $table) {
+        Schema::create('score_film', function (Blueprint $table) {
           $table->bigInteger('film_id')->unsigned();
           $table->bigInteger('user_id')->unsigned();
           $table->primary(['film_id','user_id']);
@@ -34,6 +34,6 @@ class CreateScoreFilmsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('score__film');
+        Schema::dropIfExists('score_film');
     }
 }

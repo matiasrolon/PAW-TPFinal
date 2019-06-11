@@ -11,8 +11,9 @@ class ObraController extends Controller
     //
 
     public function index(){
-          $obras = Obra::All();
-          return view('obras',compact('obras'));
+      //Ejemplo de interaccion con api de mercado libre 
+          //$data = json_decode( file_get_contents('https://api.mercadolibre.com/users/226384143/'), true );
+          //echo $data['nickname'];
     }
 
     public function store(Request $request)

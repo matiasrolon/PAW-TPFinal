@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateGenreFilmTable extends Migration
+class CreateTagFilmTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,14 +13,14 @@ class CreateGenreFilmTable extends Migration
      */
     public function up()
     {
-        Schema::create('genre__film', function (Blueprint $table) {
-            $table->bigInteger('genre_id')->unsigned();
+        Schema::create('tag_film', function (Blueprint $table) {
             $table->bigInteger('film_id')->unsigned();
-            $table->primary(['genre_id', 'film_id']);
+            $table->string('tag_id', 100);
+            $table->primary(['film_id', 'tag_id']);
 
-            // Foreign Keys
-            $table->foreign('genre_id')->references('id')->on('genre');
+            // Foregin Keys
             $table->foreign('film_id')->references('id')->on('film');
+            $table->foreign('tag_id')->references('nombre')->on('tag');
 
             // $table->timestamps();
         });
@@ -33,6 +33,6 @@ class CreateGenreFilmTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('genero__obra');
+        Schema::dropIfExists('tag_film');
     }
 }

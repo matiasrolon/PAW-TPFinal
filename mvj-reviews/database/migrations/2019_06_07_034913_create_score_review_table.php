@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateScoreReviewsTable extends Migration
+class CreateScoreReviewTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateScoreReviewsTable extends Migration
      */
     public function up()
     {
-        Schema::create('score__review', function (Blueprint $table) {
+        Schema::create('score_review', function (Blueprint $table) {
             $table->bigInteger('review_id')->unsigned();
             $table->bigInteger('user_id')->unsigned();
             $table->primary(['review_id','user_id']);
@@ -33,6 +33,6 @@ class CreateScoreReviewsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('puntuacion__review');
+        Schema::dropIfExists('score_review');
     }
 }

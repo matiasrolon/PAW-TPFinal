@@ -13,13 +13,10 @@
 |
 */
 
-Route::get('/', function () {
-    return view('home');
-});
-
+Auth::routes(); // para Login, olvido su contraseña(esta no anda), y registrarse
+Route::get('/', 'HomeController@index');
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/perfil', 'UserController@profile')->name('perfil');
+Route::get('/users','UserController@index'); //-->HECHA. para pruebas por el momento
 
-Auth::routes(); // para Login, olvido su contraseña(esta no anda), y registrarse
-
-Route::get('/obras','ObraController@index');
+//Apartir de aca irian las que todavia no estan disponibles o estan en proceso
