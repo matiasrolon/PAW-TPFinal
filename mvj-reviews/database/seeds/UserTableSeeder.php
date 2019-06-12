@@ -38,12 +38,45 @@ class UserTableSeeder extends Seeder
         $user_admin2->estado = 'activo';
         $user_admin2->save();
         $user_admin2->roles()->attach($role_admin);
-        //usuario comun
+        //usuario comun 1
         $user = new User();
         $user->nombre = "Juan Perez";
         $user->username = "juanperez";
         $user->email = "juanperez@gmail.com";
         $user->password = bcrypt('juanperez');
+        $user->biografia = 'Aun no tienes una biografia.';
+        $user->puntos = 0;
+        $user->estado = 'activo';
+        $user->save();
+        $user->roles()->attach($role_critic);
+        //usuario comun 2
+        $user = new User();
+        $user->nombre = "Jose¿ Ramirez";
+        $user->username = "joseramirez";
+        $user->email = "joseramirez@gmail.com";
+        $user->password = bcrypt('joseramirez');
+        $user->biografia = 'Aun no tienes una biografia.';
+        $user->puntos = 0;
+        $user->estado = 'activo';
+        $user->save();
+        $user->roles()->attach($role_critic);
+        //usuario comun 3
+        $user = new User();
+        $user->nombre = "Jorge Gonzales";
+        $user->username = "jorgegonzales";
+        $user->email = "jorgegonzales@gmail.com";
+        $user->password = bcrypt('jorgegonzales');
+        $user->biografia = 'Aun no tienes una biografia.';
+        $user->puntos = 0;
+        $user->estado = 'activo';
+        $user->save();
+        $user->roles()->attach($role_critic);
+        //usuario comun 4
+        $user = new User();
+        $user->nombre = "Lucia Lopez";
+        $user->username = "lucialopez";
+        $user->email = "lucialopez@gmail.com";
+        $user->password = bcrypt('lucialopez');
         $user->biografia = 'Aun no tienes una biografia.';
         $user->puntos = 0;
         $user->estado = 'activo';

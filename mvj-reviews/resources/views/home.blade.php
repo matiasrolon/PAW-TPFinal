@@ -18,6 +18,7 @@
                     <a href="/films/{{$pelicula['id']}}">
                         <img class="poster" src="data:image/png;base64,{{$pelicula['portada']}}">
                     </a>
+                    <div> {{$pelicula['puntaje']}}</div>
                     <p class="titulo-film">{{ $pelicula['titulo']}}</p>
                   </div>
 
@@ -31,6 +32,7 @@
                             <a href="/films/{{$serie['id']}}">
                                 <img class="poster" src="data:image/png;base64,{{$serie['portada']}}">
                             </a>
+                            <div> {{$serie['puntaje']}}</div>
                             <p class="titulo-film">{{ $serie['titulo']}}</p>
                         </div>
 
