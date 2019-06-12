@@ -13,10 +13,12 @@
 |
 */
 
-Auth::routes(); // para Login, olvido su contraseña(esta no anda), y registrarse
+//PONER ESTADO DE LAS RUTAS Y VIEWS PARA ENTRAR A WEB.PHP Y DISTINGUIR LAS PENDIENTES MAS FACIL
+
+Auth::routes(); // para Login, olvido su contraseña(no anda), y registrarse
 Route::get('/', 'HomeController@index');
-Route::get('/home', 'HomeController@index')->name('home');
-Route::get('/perfil', 'UserController@profile')->name('perfil');
-Route::get('/users','UserController@index'); //-->HECHA. para pruebas por el momento
+Route::get('/home', 'HomeController@index')->name('home'); //---> EMPEZADA.
+Route::get('/perfil', 'UserController@profile')->name('perfil'); //-->PENDIENTE.
+Route::get('/users','UserController@index'); //--->VERSION DE PRUEBA.
 
 //Apartir de aca irian las que todavia no estan disponibles o estan en proceso

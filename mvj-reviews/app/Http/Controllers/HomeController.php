@@ -38,7 +38,7 @@ class HomeController extends Controller
         }
 
         //Aca irian los primeros 15 o 20 usuarios con mejor ranking
-        $users = User::orderBy('puntos','desc')->take(2)->get();
+        $users = User::orderBy('puntos','desc')->take(5)->get();
 
         return view('home', compact('peliculas','series','users'));
     }

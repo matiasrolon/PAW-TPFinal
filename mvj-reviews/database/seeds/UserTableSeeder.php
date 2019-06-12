@@ -38,6 +38,17 @@ class UserTableSeeder extends Seeder
         $user_admin2->estado = 'activo';
         $user_admin2->save();
         $user_admin2->roles()->attach($role_admin);
+        //admin3
+        $user_admin2 = new User();
+        $user_admin2->nombre = "Juan Real";
+        $user_admin2->username = "admin3";
+        $user_admin2->email = "juancreal1@gmail.com";
+        $user_admin2->password = bcrypt('admin3');
+        $user_admin2->biografia = 'Administrador principal de MVJ Reviews';
+        $user_admin2->puntos = 10;
+        $user_admin2->estado = 'activo';
+        $user_admin2->save();
+        $user_admin2->roles()->attach($role_admin);
         //usuario comun 1
         $user = new User();
         $user->nombre = "Juan Perez";
