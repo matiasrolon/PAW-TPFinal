@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Film;
+use App\Models\User;
 
 class HomeController extends Controller
 {
@@ -23,6 +25,24 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+      //Cambiar consulta: Peliculas con mas puntos de la ultima semana o mes.
+
+        $peliculas = Film::where('categoria','Pelicula')->get();
+        foreach ($peliculas as $pelicula) {
+          $pelicula->portada = base64_encode($pelicula->poster);
+        }
+
+        $series = Film::where('categoria','Serie')->get();
+        foreach ($series as $serie) {
+          $serie->portada = base64_encode($serie->poster);
+        }
+
+        //Aca irian los primeros 15 o 20 usuarios con mejor ranking
+        $users = User::orderBy('puntos','desc')->take(2)->get();
+
+        return view('home', compact('peliculas','series','users'));
     }
+
+
+
 }

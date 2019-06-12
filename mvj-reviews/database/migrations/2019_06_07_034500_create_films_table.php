@@ -22,6 +22,7 @@ class CreateFilmsTable extends Migration
             $table->double('duracion_min'); // Duracion en minutos
             $table->string('categoria', 20);// Pelicula / serie / corto / etc
             $table->date('fecha_finalizacion')->nullable();
+            $table->binary('poster')->nullable();
             $table->double('puntaje'); //Calculado con triggers
             $table->timestamps();
         });

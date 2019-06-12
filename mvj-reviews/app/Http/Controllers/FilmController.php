@@ -4,14 +4,14 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-use App\Http\Models\Obra;
+use App\Models\Film;
 
-class ObraController extends Controller
+class FilmController extends Controller
 {
     //
 
     public function index(){
-      //Ejemplo de interaccion con api de mercado libre 
+      //Ejemplo de interaccion con api de mercado libre
           //$data = json_decode( file_get_contents('https://api.mercadolibre.com/users/226384143/'), true );
           //echo $data['nickname'];
     }
@@ -35,11 +35,10 @@ class ObraController extends Controller
                         ->withErrors($validator)
                         ->withInput();
 
-        $obra = new Obra;
+        $obra = new Film;
         $obra->titulo = $request->titulo;
-        $obra->fecha_estreno = $request->titulo;
+        $obra->fecha_estreno = $request->fecha_estreno;
         $obra->sinopsis = $request->sinopsis;
-        $obra->anio = $request->anio;
         $obra->pais = $request->pais;
         $obra->duracion_min = $request->duracion_min;
         $obra->categoria = $request->categoria;

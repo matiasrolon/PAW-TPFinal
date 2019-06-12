@@ -10,6 +10,9 @@
 
     <title>@yield('title')</title>
 
+
+    @yield('publics')
+
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
 

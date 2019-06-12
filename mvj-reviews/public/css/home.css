@@ -1,61 +1,52 @@
 
-    html, body {
-        background-color: #fff;
-        color: #636b6f;
-        font-family: 'Nunito', sans-serif;
-        font-weight: 200;
-        height: 100vh;
-        margin: 0;
-    }
+/*-------- HOME -------- */
+.users-populares{
+  width: 30%;
+  display: inline;
+  top: 0%;
 
-    .full-height {
-        height: 100vh;
-    }
+}
 
-    .flex-center {
-        align-items: center;
-        display: flex;
-        justify-content: center;
-    }
+.users-populares div, table{
+    display: inline-block;
+}
 
-    .position-ref {
-        position: relative;
-    }
+.users-populares h3{
+  display: block;
+  width: 100%;
+}
 
-    .top-right {
-        position: absolute;
-        right: 10px;
-        top: 18px;
-    }
+.peliculas{
+    display: inline-grid;
+    grid-template-columns: repeat(4,auto);
+    grid-template-rows: repeat(2,auto);
+    margin: auto;
+}
 
-    .content {
-        text-align: center;
-    }
+.series{
+    display: inline-grid;
+    grid-template-columns: repeat(4,auto);
+    grid-template-rows: repeat(1,auto);
+    margin: auto;
+}
 
-    .title {
-        font-size: 84px;
-    }
+.films-populares{
+  width: 70%;
+  display: inline-block;
+}
 
-    .links > a {
-        color: #636b6f;
-        padding: 0 25px;
-        font-size: 13px;
-        font-weight: 600;
-        letter-spacing: .1rem;
-        text-decoration: none;
-        text-transform: uppercase;
-    }
+.cuadro-film{
+  overflow: hidden;
+}
 
-    .m-b-md {
-        margin-bottom: 30px;
-    }
+.poster{
+  display: inline-block;
+  width: 200px;
+  height: 300px;
+}
 
-    .barra-login{
-      text-align: right;
-      display: block;
-    }
+.titulo-film{
+  overflow: hidden;
+}
 
-    .barra-login a{
-      margin: 10px;
-      font-size: 20px;
-    }
+/*------ ------ ------*/

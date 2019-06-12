@@ -21,9 +21,9 @@ class UserTableSeeder extends Seeder
         $user_admin1->username = "admin1";
         $user_admin1->email = "matirolon96@gmail.com";
         $user_admin1->password = bcrypt('admin1');
-        //'password' => Hash::make($data['password']) // otra forma de hashear la password
+                  //'password' => Hash::make($data['password']) // otra forma de hashear la password
         $user_admin1->biografia = 'Administrador principal de MVJ Reviews';
-        $user_admin1->puntos = 0;
+        $user_admin1->puntos = 10;
         $user_admin1->estado = 'activo';
         $user_admin1->save();
         $user_admin1->roles()->attach($role_admin);
@@ -34,7 +34,7 @@ class UserTableSeeder extends Seeder
         $user_admin2->email = "victorioskfati@gmail.com";
         $user_admin2->password = bcrypt('admin2');
         $user_admin2->biografia = 'Administrador principal de MVJ Reviews';
-        $user_admin2->puntos = 0;
+        $user_admin2->puntos = 20;
         $user_admin2->estado = 'activo';
         $user_admin2->save();
         $user_admin2->roles()->attach($role_admin);
