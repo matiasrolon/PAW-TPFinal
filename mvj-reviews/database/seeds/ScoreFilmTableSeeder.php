@@ -14,8 +14,9 @@ class ScoreFilmTableSeeder extends Seeder
      * @return void
      */
     public function run()
-    {   //La pelicula con id=2 tiene 2 votos con un puntaje total de 13.
-        //Por ende el puntaje en Film de esa pelicula deberia ser 6.5
+    {   //La pelicula con id=2 tiene 3 votos con un puntaje total de 16.
+        //Por ende el puntaje en Film de esa pelicula deberia ser 5.33 (16/3)
+        
         $score_film = new Score_Film();
         $score_film->user_id = User::find(1)->id;
         $score_film->film_id = Film::find(2)->id;
@@ -34,6 +35,11 @@ class ScoreFilmTableSeeder extends Seeder
         $score_film->puntaje = 7;
         $score_film->save();
 
+        $score_film = new Score_Film();
+        $score_film->user_id = User::find(7)->id;
+        $score_film->film_id = Film::find(3)->id;
+        $score_film->puntaje = 3;
+        $score_film->save();
         //AGREGAR MAS PRUEBAS PARA LUEGO PROBAR EL RANKING
         //(SIN NECESIDAD QUE ESTE TERMINADA LA PAGINA DE VOTAR PELICULA)
     }

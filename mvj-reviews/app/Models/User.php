@@ -48,7 +48,7 @@ class User extends Authenticatable
      {
         parent::boot();
 
-        self::saving(function ($user) {
+        self::creating(function ($user) {
                $user->puntos = 0;
                $user->estado = 'activo';
                //$user->avatar = file_get_content(IMAGEN POR DEFECTO);

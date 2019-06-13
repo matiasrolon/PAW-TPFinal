@@ -29,15 +29,15 @@ class Score_Review extends Model
        self::created(function ($score_review) { //actualizo puntaje de usuario y votos de Review
               $review = Review::find($score_review->review_id);
               $user = User::find($score_review->user_id);
-              //if (($score_review->voto)===true){
-                $review->positivos = ()$review->positivos)+1;
-                $user->puntos = ($user->puntos) +1;
-              //}else{
-            //    $review->negativos= ($review->negativos)+1;
-              //  $user->puntos = ($user->puntos) -1;
+              if ($score_review->voto){ // true = like.
+                $review->increment('positivos');
+                $user->increment('puntos');
+              }else{
+                $review->decrement('negativos');
+                $user->decrement('puntos');
               }
-              $review->update();
-              $user->update();//update de usuario.
+              $review->save();
+              $user->save();//update de usuario.
            }
         );
 
