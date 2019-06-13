@@ -16,6 +16,7 @@ Class ClaseA extends Model
 ```
 (fijarse que el ultimo parametro sea el nombre que figura en la tabla intermedia para el id de la clase que se quiere obtener).
 
+
 ## Controlador (MVC)
 
 - **Agregar nuevo controlador:** php artisan make:controller ControllerName
@@ -53,7 +54,8 @@ Class ClaseA extends Model
     -php artisan migrate --seed
     -php artisan migrate:refresh --seeds
     -php artisan db:seed (Para ejecutarlos sin los migrates)
-    
+- **importante:** En los triggers de creacion siempre hacerlos con CREATED/CREATING. No importa que a la hora de crear las instancias se haya persistido con SAVE(). (Esto debido a que en ocaciones posteriores tambien se usara el SAVE() para hacer Updates, y por lo tanto estaran presentes las acciones del trigger dicho al principio, lo cual ocasionaria problemas;
+
 ## Solucion de Problemas
 
 ### Problema 1: **No Application Encryption Key Has Been Specified.**
@@ -76,3 +78,16 @@ Mas info en [https://curl.haxx.se/docs/sslcerts.html](https://curl.haxx.se/docs/
 #### Solucion
 
 [https://stackoverflow.com/questions/55526568/failed-loading-cafile-stream-in-file-get-contents](https://stackoverflow.com/questions/55526568/failed-loading-cafile-stream-in-file-get-contents)
+
+### Problema 3: **Unable to prepare route … for serialization. Uses Closure**
+
+#### Descripcion
+
+Sucede cuando ejecutas este comando para volver a compilar el proyecto por algun motivo en especial
+```
+php artisan clear-compile
+php artisan optimize
+```
+
+#### Solucion 
+Me funciono con la TERCER respuesta y explicacion del link adjunto. (https://stackoverflow.com/questions/45266254/laravel-unable-to-prepare-route-for-serialization-uses-closure)
