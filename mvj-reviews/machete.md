@@ -55,9 +55,24 @@ Class ClaseA extends Model
     -php artisan db:seed (Para ejecutarlos sin los migrates)
     
 ## Solucion de Problemas
-- Problema1: **No Application Encryption Key Has Been Specified.**
-Solucion:
+
+### Problema 1: **No Application Encryption Key Has Been Specified.**
+
+#### Solucion
+
 ```
 php artisan key:generate
 php artisan config:cache
 ```
+
+### Problema 2: **failed loading cafile stream: 'C:\xampp\apache\bin\curl-ca-bundle.crt'**
+
+#### Descripcion
+
+Sucede cuando la aplicacion intenta acceder a un sitio web que utiliza HTTPS, en este caso, cuando intentamos acceder a la API. El **problema** es que la aplicacion *curl* no posee una lista de CAs valida contra la que comparar el certificado del sitio al que esta intentando acceder.
+
+Mas info en [https://curl.haxx.se/docs/sslcerts.html](https://curl.haxx.se/docs/sslcerts.html).
+
+#### Solucion
+
+[https://stackoverflow.com/questions/55526568/failed-loading-cafile-stream-in-file-get-contents](https://stackoverflow.com/questions/55526568/failed-loading-cafile-stream-in-file-get-contents)
