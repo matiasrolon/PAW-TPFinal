@@ -41,7 +41,7 @@ class Score_Film extends Model
               $film->puntaje = $totalScore/$qScores;
               $film->save();
            }
-        );
+        ); 
 
    }
 

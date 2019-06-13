@@ -14,6 +14,11 @@ class UserController extends Controller
 
 
   //----pruebas----------------------------------
+
+  public function AuthRouteAPI(Request $request){
+   return $request->user();
+  }
+
     public function index(){
       $users = User::All();
       return view('users',compact('users'));

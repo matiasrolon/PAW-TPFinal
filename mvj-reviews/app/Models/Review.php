@@ -24,7 +24,7 @@ class Review extends Model
    {
        parent::boot();
 
-       self::saving(function ($review) { //antes de guardarlo inserto sus puntos iniciales
+       self::creating(function ($review) { //antes de guardarlo inserto sus puntos iniciales
             // $review->created_at = date("Y-m-d H:i:s"); //probando funcion date.
              $review->positivos = 0;
               $review->negativos= 0;
