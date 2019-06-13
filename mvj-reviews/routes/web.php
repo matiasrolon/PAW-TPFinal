@@ -12,6 +12,11 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
+/*CONSIDERACIONES GENERALES
+  FILM -> tiene PUNTAJE (Promedio entre puntajes)
+  USER -> tiene PUNTOS (Suma de las reviews)
+  REVIEW -> tiene VOTOS NEGATIVOS y VOTOS POSITIVOS. (o solo votos, hay que ver).
+*/
 
 //PONER ESTADO DE LAS RUTAS Y VIEWS PARA ENTRAR A WEB.PHP Y DISTINGUIR LAS PENDIENTES MAS FACIL
 

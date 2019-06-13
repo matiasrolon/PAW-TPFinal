@@ -23,8 +23,6 @@ class UserTableSeeder extends Seeder
         $user_admin1->password = bcrypt('admin1');
                   //'password' => Hash::make($data['password']) // otra forma de hashear la password
         $user_admin1->biografia = 'Administrador principal de MVJ Reviews';
-        $user_admin1->puntos = 10;
-        $user_admin1->estado = 'activo';
         $user_admin1->save();
         $user_admin1->roles()->attach($role_admin);
         //admin2
@@ -34,8 +32,6 @@ class UserTableSeeder extends Seeder
         $user_admin2->email = "victorioskfati@gmail.com";
         $user_admin2->password = bcrypt('admin2');
         $user_admin2->biografia = 'Administrador principal de MVJ Reviews';
-        $user_admin2->puntos = 20;
-        $user_admin2->estado = 'activo';
         $user_admin2->save();
         $user_admin2->roles()->attach($role_admin);
         //admin3
@@ -45,8 +41,6 @@ class UserTableSeeder extends Seeder
         $user_admin2->email = "juancreal1@gmail.com";
         $user_admin2->password = bcrypt('admin3');
         $user_admin2->biografia = 'Administrador principal de MVJ Reviews';
-        $user_admin2->puntos = 10;
-        $user_admin2->estado = 'activo';
         $user_admin2->save();
         $user_admin2->roles()->attach($role_admin);
         //usuario comun 1
@@ -56,8 +50,6 @@ class UserTableSeeder extends Seeder
         $user->email = "juanperez@gmail.com";
         $user->password = bcrypt('juanperez');
         $user->biografia = 'Aun no tienes una biografia.';
-        $user->puntos = 0;
-        $user->estado = 'activo';
         $user->save();
         $user->roles()->attach($role_critic);
         //usuario comun 2
@@ -67,8 +59,6 @@ class UserTableSeeder extends Seeder
         $user->email = "joseramirez@gmail.com";
         $user->password = bcrypt('joseramirez');
         $user->biografia = 'Aun no tienes una biografia.';
-        $user->puntos = 0;
-        $user->estado = 'activo';
         $user->save();
         $user->roles()->attach($role_critic);
         //usuario comun 3
@@ -78,8 +68,6 @@ class UserTableSeeder extends Seeder
         $user->email = "jorgegonzales@gmail.com";
         $user->password = bcrypt('jorgegonzales');
         $user->biografia = 'Aun no tienes una biografia.';
-        $user->puntos = 0;
-        $user->estado = 'activo';
         $user->save();
         $user->roles()->attach($role_critic);
         //usuario comun 4
@@ -89,8 +77,6 @@ class UserTableSeeder extends Seeder
         $user->email = "lucialopez@gmail.com";
         $user->password = bcrypt('lucialopez');
         $user->biografia = 'Aun no tienes una biografia.';
-        $user->puntos = 0;
-        $user->estado = 'activo';
         $user->save();
         $user->roles()->attach($role_critic);
     }

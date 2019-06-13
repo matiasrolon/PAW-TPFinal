@@ -43,4 +43,18 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public static function boot()
+     {
+        parent::boot();
+
+        self::saving(function ($user) {
+               $user->puntos = 0;
+               $user->estado = 'activo';
+               //$user->avatar = file_get_content(IMAGEN POR DEFECTO);
+               //$user->biografia = "Aun no tienes biografia"; //  ???????
+            }
+         );
+
+    }
 }

@@ -8,6 +8,7 @@ class Review extends Model
 {
     //
     protected $table = 'review';
+    protected $fillable = ['film_id','user_id','titulo','descripcion','positivos','negativos'];
 
     public function user()
     {
@@ -18,5 +19,18 @@ class Review extends Model
     {
         return $this->belongsTo('App\Models\Film');
     }
+
+    public static function boot()
+   {
+       parent::boot();
+
+       self::saving(function ($review) { //antes de guardarlo inserto sus puntos iniciales
+            // $review->created_at = date("Y-m-d H:i:s"); //probando funcion date.
+             $review->positivos = 0;
+              $review->negativos= 0;
+           }
+        );
+
+   }
 
 }

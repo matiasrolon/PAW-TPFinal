@@ -18,7 +18,9 @@ class CreateReviewsTable extends Migration
             $table->bigIncrements('id');
             $table->string('titulo', 50);
             $table->string('descripcion', 2000);
-            $table->timestamps(); // Fecha de alta y actualizacion
+            $table->bigInteger('positivos');
+            $table->bigInteger('negativos');
+            $table->timestamps(); // Created_at: fecha de alta | updated_at: ult. modificacion
             $table->BigInteger('user_id')->unsigned();
             $table->BigInteger('film_id')->unsigned();
 
