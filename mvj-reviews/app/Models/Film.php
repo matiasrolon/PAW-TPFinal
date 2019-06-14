@@ -7,6 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 class Film extends Model
 {
     protected $table = 'film';
+    
+    // Faltan mas propiedades aca. ACTUALICENME
     protected $fillable = ['titulo','fecha_estreno','pais','sinopsis','duracion_min',
                           'categoria','fecha_finalizacion','puntaje','poster'];
 

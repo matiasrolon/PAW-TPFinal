@@ -25,5 +25,6 @@ Route::get('/', 'HomeController@index');
 Route::get('/home', 'HomeController@index')->name('home'); //---> EMPEZADA.
 Route::get('/perfil', 'UserController@profile')->name('perfil'); //-->PENDIENTE.
 Route::get('/users','UserController@index'); //--->VERSION DE PRUEBA.
+Route::get('/search', 'FilmController@index');
 
 //Apartir de aca irian las que todavia no estan disponibles o estan en proceso
