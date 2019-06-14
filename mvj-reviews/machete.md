@@ -20,6 +20,11 @@ Class ClaseA extends Model
 ## Controlador (MVC)
 
 - **Agregar nuevo controlador:** php artisan make:controller ControllerName
+-**Agregar nueva ruta a routes/web.php:** para que no salte error al cargar la pagina, por cada ruta nueva que definamos en routes/web.php tendremos que hacer:
+```
+php artisan clear-compile
+php artisan optimize
+```
 
 ## Base de Datos - Migrations
 
@@ -89,5 +94,5 @@ php artisan clear-compile
 php artisan optimize
 ```
 
-#### Solucion 
+#### Solucion
 Me funciono con la TERCER respuesta y explicacion del link adjunto. (https://stackoverflow.com/questions/45266254/laravel-unable-to-prepare-route-for-serialization-uses-closure)

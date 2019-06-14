@@ -7,11 +7,9 @@ use App\Models\User;
 
 class UserController extends Controller
 {
-  //CLASE POR AHORA INACTIVA, YA QUE LA VALIDACION DE REGISTRO LA HACE Auth\RegistrerController
-  // METODOS profile() y index() PROXIMOS A IMPLEMENTAR SI FUESEN NECESARIOS.
 
-    // TODO: HACER FUNCION PARA CONFIRMAR EL SIGN_UP
-
+  // TODO: HACER FUNCION PARA CONFIRMAR EL SIGN_UP
+  //       PROFILE()
 
   //----pruebas----------------------------------
 
@@ -19,9 +17,9 @@ class UserController extends Controller
    return $request->user();
   }
 
-    public function index(){
-      $users = User::All();
-      return view('users',compact('users'));
+    public function ranking(){
+      $users = User::All()->join('review', 'users.id', '=', 'review.user_id')->get();
+      return view('ranking-users',compact('users'));
     }
 
     public function profile(Request $request){
@@ -29,7 +27,7 @@ class UserController extends Controller
     }
 
 //----------------------------------------------
-
+//PROCEDIMIENTO INACTIVO, YA QUE LA VALIDACION DE REGISTRO LA HACE Auth\RegistrerController
     public function store(Request $request)
     {
         // Validate the request...

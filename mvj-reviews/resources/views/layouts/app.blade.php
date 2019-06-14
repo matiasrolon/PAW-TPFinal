@@ -83,7 +83,7 @@
         </nav>
         <nav class="menus">
           <div class="seccion-menu">
-                <a href="/home">Home</a>
+                <a href="{{ route('home') }}">Home</a>
           </div>
 
           <div class="seccion-menu">
@@ -91,7 +91,7 @@
           </div>
 
           <div class="seccion-menu">
-                <a href="/ranking-criticos">Ranking Criticos</a>
+                <a href="{{ route('ranking-users') }}">Ranking Criticos</a>
           </div>
 
           <div class="seccion-menu">
