@@ -36,9 +36,9 @@ class FilmController extends Controller
         // $jsonApi = $httpResponse->getBody()->getContents();
         $jsonApi = $httpResponse->getBody()->getContents();
         $json = $jsonApi;
-        
+
         // $json = json_decode(file_get_contents('https://api.themoviedb.org/3/search/movie?api_key=41b4c84d818976ed8ab5cb8bd88066a3&language=es-MX&query=Rapido%20y%20furioso&page=1&include_adult=false'), true);
-        
+
         // print_r("RESULTADO: ");
         echo ($json);
         // print_r("--------------- FIN ----------------");
@@ -48,7 +48,7 @@ class FilmController extends Controller
     /**
      * Esta funcion busca en la BD si hay coincidencias de Obras en la BD. Sino, lo busca en la API
      * y agrega las coincidencias traidas de la API.
-     * Luego responde con las coincidencias. 
+     * Luego responde con las coincidencias.
      * @var filmName query que inserto el usuario en el buscador
      */
     public function search($filmName) {

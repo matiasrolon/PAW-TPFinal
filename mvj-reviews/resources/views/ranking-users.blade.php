@@ -7,10 +7,26 @@
 @endsection
 
 @section('content')
-    <h2>Usuarios:</h2>
-    <ul>
-    @foreach($users as $user)
-        <li>{{ $user }}</li>
-    @endforeach
-    </ul>
+    <h2>Ranking de criticos de MVJ:</h2>
+    <table>
+              <tr>
+                <td>Usuario</td>
+                <td>Rango</td>
+                <td>Reviews</td>
+                <td>Puntos</td>
+              </tr>
+        @foreach($users as $user)
+              <tr>
+                  <div class="tupla-user">
+                      <td>
+                          <a href="{{route('user',$user['username']) }}">
+                             {{$user['username']}}</td>
+                          </a>
+                      <td>{{$user['nombre']}}</td>
+                      <td>100</td> <!--aca irian las reviews totales del user-->
+                      <td>{{$user['puntos']}}</td>
+                  </div>
+              </tr>
+        @endforeach
+    </table>
 @endsection

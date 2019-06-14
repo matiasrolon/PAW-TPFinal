@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+USE App\Models\Range;
 
 class User extends Authenticatable
 {
@@ -14,6 +15,11 @@ class User extends Authenticatable
 
     public function roles(){
       return $this->belongsToMany('App\Models\Role', 'user_role', 'user_id', 'role_id');
+    }
+
+    public function range()
+    {
+        return $this->belongsTo('App\Models\Range');
     }
 
     /**
@@ -48,9 +54,19 @@ class User extends Authenticatable
      {
         parent::boot();
 
+        self::saving(function ($user) {
+              $puntos = $user->puntos;
+              $rango = Range::where('puntaje_desde',$puntos)->first();
+              if (($rango!=null)&&($user->range_id != $rango->id)){
+                $user->range_id = $rango->id;
+              }
+            }
+        );
+
         self::creating(function ($user) {
                $user->puntos = 0;
                $user->estado = 'activo';
+               $user->range_id = Range::where('nombre','Principiante')->first()->id;
                //$user->avatar = file_get_content(IMAGEN POR DEFECTO);
                //$user->biografia = "Aun no tienes biografia"; //  ???????
             }

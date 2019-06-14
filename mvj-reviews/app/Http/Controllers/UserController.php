@@ -11,22 +11,21 @@ class UserController extends Controller
   // TODO: HACER FUNCION PARA CONFIRMAR EL SIGN_UP
   //       PROFILE()
 
-  //----pruebas----------------------------------
 
   public function AuthRouteAPI(Request $request){
    return $request->user();
   }
 
     public function ranking(){
-      $users = User::All()->join('review', 'users.id', '=', 'review.user_id')->get();
+      $users = User::join('range', 'users.range_id', '=', 'range.id')->orderBy('puntos','desc')->take(100)->get();
       return view('ranking-users',compact('users'));
     }
 
-    public function profile(Request $request){
-      return view('perfil');
+    public function profile($username){
+      $user = User::where('username',$username)->first();
+      return view('profile',compact('user'));
     }
 
-//----------------------------------------------
 //PROCEDIMIENTO INACTIVO, YA QUE LA VALIDACION DE REGISTRO LA HACE Auth\RegistrerController
     public function store(Request $request)
     {

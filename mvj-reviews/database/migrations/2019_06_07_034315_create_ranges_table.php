@@ -16,10 +16,10 @@ class CreateRangesTable extends Migration
         Schema::create('range', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('nombre',50);
-            $table->string('descripcion',100);
+            $table->string('descripcion',100)->nullable();
             $table->BigInteger('puntaje_desde');
-            $table->BigInteger('puntaje_hasta');
-            // $table->timestamps();
+            $table->BigInteger('puntaje_hasta')->nullable();
+            $table->timestamps();
         });
     }
 

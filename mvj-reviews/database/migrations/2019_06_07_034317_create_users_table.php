@@ -28,7 +28,7 @@ class CreateUsersTable extends Migration
           $table->string('serie_fav', 50)->nullable();
           $table->binary('avatar')->nullable(); // BLOB=
           $table->integer('puntos'); // calculado por triggers
-          $table->bigInteger('range_id')->unsigned()->nullable();
+          $table->bigInteger('range_id')->unsigned();
          //$table->bigInteger('role_id')->unsigned()->nullable();
           $table->rememberToken();
           $table->timestamps();
