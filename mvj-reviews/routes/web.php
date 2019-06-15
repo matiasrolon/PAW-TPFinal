@@ -24,6 +24,17 @@ Auth::routes(); // para Login, olvido su contraseña(no anda), y registrarse
 Route::get('/', 'HomeController@index');
 Route::get('/home', 'HomeController@index')->name('home'); //---> EMPEZADA.
 Route::get('/search', 'FilmController@index');
-Route::get('/ranking-users', 'UserController@ranking')->name('ranking-users'); //-->PENDIENTE.
-Route::get('/profile', 'UserController@profile')->name('profile'); //-->PENDIENTE.
-Route::get('/user/{username}', 'UserController@profile')->name('user'); //-->PENDIENTE.
+Route::get('/ranking-users', 'UserController@ranking')->name('ranking-users'); //-->SIN ESTILO.
+Route::get('/profile', 'UserController@profile')->name('profile'); //-->SIN ESTILO.
+Route::get('/user/{username}', 'UserController@profile')->name('user'); //-->SIN ESTILO.
+Route::get('/ranking-films', 'FilmController@ranking')->name('ranking-films'); //-->SIN ESTILO.
+Route::get('/film/{id}', 'FilmController@profile')->name('film_profile'); //-->SIN ESTILO.
+
+
+
+
+
+
+
+
+//

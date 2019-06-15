@@ -5,12 +5,25 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Models\Film;
+use App\Models\Review;
 
 use GuzzleHttp\Client;
 
 class FilmController extends Controller
 {
     //
+    public function ranking(){
+      $films = Film::orderBy('puntaje','desc')->take(100)->get();
+      return view('ranking-films',compact('films'));
+    }
+
+    public function profile($film_id){
+      $film = Film::where('id','=',$film_id)->first();
+      $reviews = Review::where('id','=',$film_id)->get();
+  //var_dump($film->titulo);
+     //return $film->titulo;
+      return view('film_profile',compact('film','reviews'));
+    }
 
     public function index(){
       //Ejemplo de interaccion con api de mercado libre

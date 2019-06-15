@@ -87,7 +87,7 @@
           </div>
 
           <div class="seccion-menu">
-                <a href="/ranking-films">Ranking films</a>
+                <a href="{{ route('ranking-films') }}">Ranking films</a>
           </div>
 
           <div class="seccion-menu">
