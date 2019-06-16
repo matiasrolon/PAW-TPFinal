@@ -69,7 +69,6 @@ class RegisterController extends Controller
             'username' => $data['username'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
-            // preestablecidos > biografia, puntos,avatar( uno por defecto)
             'biografia' => 'Aun no tienes biografia.',
             'puntos' => 0,
             'estado' =>'activo',

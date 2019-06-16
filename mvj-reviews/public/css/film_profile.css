@@ -1,0 +1,11 @@
+.no-visible{
+  display: none;
+}
+
+.opciones-film .container .menu .item{
+  background: blue;
+  border: solid black 3px;
+  border-radius: 5px;
+  color: white;
+  display: inline-block;
+}
