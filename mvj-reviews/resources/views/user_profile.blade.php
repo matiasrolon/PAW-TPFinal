@@ -20,6 +20,7 @@
                         @else
                           <img class="avatar" src="data:image/png;base64,{{$user['avatar']}}">
                         @endif
+                        
                         {{$user}}
                       </div>
                       <div >

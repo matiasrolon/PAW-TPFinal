@@ -12,9 +12,16 @@
                   <div>{{ $film['pais'] }}</div>
                   <div>{{ $film['sinopsis'] }}</div>
                   <div>{{ $film['categoria'] }}</div>
-
                   <!-- AGREGAR MAS CAMPOS ;SI ES NECESARIO. -->
-
+                  <br>
+                  <div>
+                      <button type="button" name="button">Agregar Review</button>
+                      <form class="" action="/rate-film" method="post">
+                        <!--para pruebas con AJAX por ahora el puntaje sera mandado mediante un input comun-->>
+                        <input type="number" name="puntos" min=0 max=10 value="" placeholder="">
+                        <button type="button" name="button">Puntuar {{ $film['categoria'] }}</button>
+                      </form>
+                  <div>
                   <br>
                   <h2>reviews:</h2>
                   @if (count($reviews)>0)
