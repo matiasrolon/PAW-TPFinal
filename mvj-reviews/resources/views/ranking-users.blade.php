@@ -19,7 +19,7 @@
               <tr>
                   <div class="tupla-user">
                       <td>
-                          <a href="{{route('user',$user['username']) }}">
+                          <a href="{{route('user_profile',$user['username']) }}">
                              {{$user['username']}}</td>
                           </a>
                       <td>{{$user['nombre']}}</td>

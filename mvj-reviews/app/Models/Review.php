@@ -8,7 +8,7 @@ class Review extends Model
 {
     //
     protected $table = 'review';
-    protected $fillable = ['film_id','user_id','titulo','descripcion','positivos','negativos'];
+    protected $fillable = ['film_id','user_id','titulo','descripcion','positivos','negativos','puntaje_total'];
 
     public function user()
     {
@@ -28,6 +28,7 @@ class Review extends Model
             // $review->created_at = date("Y-m-d H:i:s"); //probando funcion date.
              $review->positivos = 0;
               $review->negativos= 0;
+              $review->puntaje_total= 0;
            }
         );
 

@@ -19,7 +19,8 @@ class FilmController extends Controller
 
     public function profile($film_id){
       $film = Film::where('id','=',$film_id)->first();
-      $reviews = Review::where('id','=',$film_id)->get();
+      $film->poster = base64_encode($film->poster);
+      $reviews = Review::where('film_id','=',$film_id)->join('users','review.user_id','=','users.id')->get();
   //var_dump($film->titulo);
      //return $film->titulo;
       return view('film_profile',compact('film','reviews'));

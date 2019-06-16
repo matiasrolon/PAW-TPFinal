@@ -82,7 +82,7 @@ class FilmTableSeeder extends Seeder
         $film1 = new Film();
         $film1->titulo = "Los Juegos del Hambre";
         $film1->fecha_estreno ='2012-06-06';
-        $film1->sinopsis = "Katniss es elegida como tributo para participar de un duelo a muerte entre 12 sobrevivientes";
+        $film1->sinopsis = "Katniss es elegida como tributo para participar de un duelo a muerte entre 24 sobrevivientes";
         $film1->pais = 'Estados Unidos';
         $film1->categoria = 'Pelicula';
         $film1->poster = file_get_contents ('https://i.pinimg.com/originals/f4/7e/a5/f47ea5c518f38b55f48ff13f1c0a6fb2.jpg');

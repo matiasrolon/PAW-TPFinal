@@ -20,6 +20,7 @@ class CreateReviewsTable extends Migration
             $table->string('descripcion', 2000);
             $table->bigInteger('positivos');
             $table->bigInteger('negativos');
+            $table->bigInteger('puntaje_total');
             $table->timestamps(); // Created_at: fecha de alta | updated_at: ult. modificacion
             $table->BigInteger('user_id')->unsigned();
             $table->BigInteger('film_id')->unsigned();

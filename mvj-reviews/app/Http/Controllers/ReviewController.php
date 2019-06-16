@@ -10,9 +10,10 @@ class ReviewController extends Controller
     public function index ()
     {
         $reviews = App\Models\Review::all();
-        return view('Review.index', compact('reviews'));
+      //  return view('Reviews', compact('reviews'));
     }
 
+    //No se usa por ahora, habria que copiar el codigo y enviarlo al trigger. (review.boot())
     public function store(Request $request)
     {
         // Validate the request...

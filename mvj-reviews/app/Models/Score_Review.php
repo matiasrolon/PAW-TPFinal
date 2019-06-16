@@ -33,9 +33,11 @@ class Score_Review extends Model
                 $review->increment('positivos');
                 $user->increment('puntos');
               }else{
-                $review->decrement('negativos');
+                $review->increment('negativos');
                 $user->decrement('puntos');
               }
+              $review->puntaje_total = ($review->positivos) - ($review->negativos);
+
               $review->save();
               $user->save();//update de usuario.
            }

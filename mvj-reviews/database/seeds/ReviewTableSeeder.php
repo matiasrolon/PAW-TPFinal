@@ -20,7 +20,7 @@ class ReviewTableSeeder extends Seeder
         $review->user_id = $user->id;
         $review->film_id = $film->id;
         $review->titulo = "Lo mejor del año";
-        $review->descripcion = "La verdad que me gusto mucho, la voy a volver a ver";
+        $review->descripcion = "MAe gusto mucho, la voy a volver a ver";
         $review->save();
 
         $user = User::find(3);
@@ -29,7 +29,7 @@ class ReviewTableSeeder extends Seeder
         $review->user_id = $user->id;
         $review->film_id = $film->id;
         $review->titulo = "Malisima";
-        $review->descripcion = "Perdi mi tiempo en ir a verla, debi haber exigido que me devuelvan el dinero";
+        $review->descripcion = "Perdi mi tiempo en ir a verla";
         $review->save();
 
         $user = User::find(1);
@@ -37,8 +37,8 @@ class ReviewTableSeeder extends Seeder
         $review = new Review();
         $review->user_id = $user->id;
         $review->film_id = $film->id;
-        $review->titulo = "Cuando Italia exporte buena calidad";
-        $review->descripcion = "Tendria que haber mas peliculas como estas, donde se muestra la fragilidad humana junto con la felicidad que puede aparecer hasta en el aspecto mas efimero y sencillo de la vida.";
+        $review->titulo = "Italia exporta buena calidad";
+        $review->descripcion = "Tendria que haber mas peliculas como estas";
         $review->save();
 
         $user = User::find(5);
@@ -47,7 +47,7 @@ class ReviewTableSeeder extends Seeder
         $review->user_id = $user->id;
         $review->film_id = $film->id;
         $review->titulo = "Parodia a los reallitys yankes";
-        $review->descripcion = "El enfoque es interesante, en mi puntuacion personal le doy un 78/100";
+        $review->descripcion = "El enfoque es interesante, 78/100";
         $review->save();
 
         $user = User::find(2);
@@ -56,7 +56,7 @@ class ReviewTableSeeder extends Seeder
         $review->user_id = $user->id;
         $review->film_id = $film->id;
         $review->titulo = "Mucho blabla y poco PUM PUM";
-        $review->descripcion = "Decepciona al no ser como en los libros, no convencen los momentos de accion";
+        $review->descripcion = "Decepciona al no ser como en los libros";
         $review->save();
 
         $user = User::find(3);
@@ -65,7 +65,7 @@ class ReviewTableSeeder extends Seeder
         $review->user_id = $user->id;
         $review->film_id = $film->id;
         $review->titulo = "De lo bizarro a lo brillante";
-        $review->descripcion = "Eso es exactamente lo que hace siempre Scorcece con sus habilidades para montar historias desopilantes y dejarnos enseñanzas a cada paso";
+        $review->descripcion = "Es exactamente lo que hace siempre Scorcece, genial ";
         $review->save();
     }
 }

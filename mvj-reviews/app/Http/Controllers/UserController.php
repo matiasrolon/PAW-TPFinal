@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\Review;
 
 class UserController extends Controller
 {
@@ -18,15 +19,31 @@ class UserController extends Controller
 
     public function ranking(){
       $users = User::join('range', 'users.range_id', '=', 'range.id')->orderBy('puntos','desc')->take(100)->get();
+      foreach ($users as $user) {
+        $user->avatar = base64_encode($user->avatar);
+      }
       return view('ranking-users',compact('users'));
     }
 
     public function profile($username){
       $user = User::where('username',$username)->first();
-      return view('profile',compact('user'));
+      $user->avatar =  base64_decode($user->avatar);
+      $reviews = Review::join('film','film_id','=','film.id')
+                          ->where('review.user_id',$user->id)
+                            ->select('review.*','film.titulo as pelicula','film.poster')
+                              ->orderBy('review.created_at')
+                                ->get();
+
+      foreach ($reviews as $re) {//convierte el poster para que despues pueda insertarse como imagen
+        $re->poster = base64_encode($re->poster);
+      }
+      $user->cantReviews = count($reviews);
+      //var_dump(json_decode($reviews));
+
+      return view('user_profile',compact('user','reviews'));
     }
 
-//PROCEDIMIENTO INACTIVO, YA QUE LA VALIDACION DE REGISTRO LA HACE Auth\RegistrerController
+//PROCEDIMIENTOS INACTIVOS, YA QUE LA VALIDACION DE REGISTRO LA HACE Auth\RegistrerController
     public function store(Request $request)
     {
         // Validate the request...
