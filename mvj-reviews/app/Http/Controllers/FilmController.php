@@ -4,9 +4,10 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use App\Models\User;
 use App\Models\Film;
 use App\Models\Review;
-
+use App\Models\Score_Film;
 use GuzzleHttp\Client;
 
 class FilmController extends Controller
@@ -25,6 +26,51 @@ class FilmController extends Controller
      //return $film->titulo;
       return view('film_profile',compact('film','reviews'));
     }
+
+    public function scoreFilm(){
+        $obj = json_decode($_POST["objeto"]);
+        $user = User::find($obj->user_id);
+        $film = Film::find($obj->film_id);
+        if ((($obj->puntaje)>10) || (($obj->puntaje)<0)){
+          $obj->estado = "FAILED";
+          $obj->mensaje = "El puntaje debe ser entre 1 y 10.";
+        }else{
+              if ($user==null){ //si no esta logeado -> no inserto nada en Score_Film
+                $obj->estado = "FAILED";
+                $obj->mensaje = "Debes iniciar sesion primero.";
+              }else{ // si esta logeado
+                $score_film = Score_Film::where('film_id',$film->id)
+                                          ->where('user_id',$user->id)
+                                          ->first();
+                if ($score_film==null){// si no existe ese puntaje del usuario para esa pelicula, lo creo
+                    $newScore_Film = new Score_Film();
+                    $newScore_Film->puntaje = $obj->puntaje;
+                    $newScore_Film->user_id = $user->id;
+                    $newScore_Film->film_id = $film->id;
+                    $newScore_Film->save();
+                    $obj->estado = "OK";
+                    $obj->mensaje = "Se añadio tu puntaje!";
+                }else{ //el usuario ya punteo esta pelicula alguna vez, actualizo puntaje
+                    Score_Film::where('film_id',$film->id)
+                                ->where('user_id',$user->id)
+                                ->update(['puntaje'=>($obj->puntaje)]);
+                //  ACTUALIZA PUNTAJE PELICULA
+                // (AVERIGUAR PORQUE NO FUNCIONA EL TRIGGER DE UPDATE EN SCORE_FILM)
+                                $qScores =  Score_Film::where('film_id',$film->id)->count();
+                                $totalScore =  Score_Film::where('film_id',$film->id)->sum('puntaje');
+
+                                $film = Film::find($film->id);
+                                $film->puntaje = $totalScore/$qScores;
+                                $film->save();
+
+                    $obj->estado = "OK";
+                    $obj->mensaje = "Se actualizo tu puntaje!";
+                }
+              }
+        }
+        echo json_encode($obj);
+    }
+
 
     public function index(){
       //Ejemplo de interaccion con api de mercado libre

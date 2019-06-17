@@ -33,6 +33,19 @@ class Score_Film extends Model
    {
        parent::boot();
 
+       self::updated(function ($score_film) {
+         /*  NO FUNCIONA 
+              //$puntajeAnt = $score_film->getOriginal('puntaje'); //el puntaje anterior
+              $qScores =  Score_Film::where('film_id',$score_film->film_id)->count();
+              $totalScore =  Score_Film::where('film_id',$score_film->film_id)->sum('puntaje');
+
+              $film = Film::find($score_film->film_id);
+              $film->puntaje = $totalScore/$qScores;
+              $film->save();
+          */
+          }
+       );
+
        self::created(function ($score_film) {
               $qScores =  Score_Film::where('film_id',$score_film->film_id)->count();
               $totalScore =  Score_Film::where('film_id',$score_film->film_id)->sum('puntaje');
@@ -41,7 +54,7 @@ class Score_Film extends Model
               $film->puntaje = $totalScore/$qScores;
               $film->save();
            }
-        ); 
+        );
 
    }
 

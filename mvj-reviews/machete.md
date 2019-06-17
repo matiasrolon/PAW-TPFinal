@@ -96,3 +96,28 @@ php artisan optimize
 
 #### Solucion
 Me funciono con la TERCER respuesta y explicacion del link adjunto. (https://stackoverflow.com/questions/45266254/laravel-unable-to-prepare-route-for-serialization-uses-closure)
+
+### Problema 4: **Error 419 (unknown status) - con Ajax**
+
+#### Descripcion:
+Salta al momento de hacer una solicitud AJAX con el metodo POST al servidor.
+
+#### Solucion:
+1. Se puede solucionar yendo a la clase App\Http\Kernel.php y en el apartado siguiente descomentar la linea marcada (NO SE RECOMIENDA, SOLO SI NO QUEDA OTRA MANERA).
+```
+protected $middlewareGroups = [
+    'web' => [
+                \App\Http\Middleware\EncryptCookies::class,
+                \Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse::class,
+                \Illuminate\Session\Middleware\StartSession::class,
+                // \Illuminate\Session\Middleware\AuthenticateSession::class,
+                \Illuminate\View\Middleware\ShareErrorsFromSession::class,
+                **\App\Http\Middleware\VerifyCsrfToken::class**, ---> DESCOMENTAR ESTA.
+                \Illuminate\Routing\Middleware\SubstituteBindings::class,
+    ]
+```    
+
+2. O BIEN, para solucionarlo y no dejar de perder un aspecto de seguridad en el proyecto, al momento de hacer la request AJAX, seteamos lo siguiente. (RECOMENDADA).
+```
+AJAXRequest.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'));
+```

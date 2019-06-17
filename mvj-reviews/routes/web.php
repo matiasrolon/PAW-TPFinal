@@ -29,8 +29,8 @@ Route::get('/ranking-users', 'UserController@ranking')->name('ranking-users'); /
 Route::get('/users/{username}', 'UserController@profile')->name('user_profile'); //-->SIN ESTILO.
 Route::get('/ranking-films', 'FilmController@ranking')->name('ranking-films'); //-->SIN ESTILO.
 Route::get('/films/{id}', 'FilmController@profile')->name('film_profile'); //-->SIN ESTILO.
-
-
+Route::post('/scoreFilm','FilmController@scoreFilm')->name('scoreFilm');
+Route::post('/addReview','ReviewController@addReview')->name('addReview');
 
 
 

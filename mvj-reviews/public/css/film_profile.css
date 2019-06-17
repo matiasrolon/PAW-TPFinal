@@ -2,10 +2,19 @@
   display: none;
 }
 
+.opciones-film .container .menu{
+  background-color: blue; 
+}
+
 .opciones-film .container .menu .item{
-  background: blue;
+  background: none;
   border: solid black 3px;
-  border-radius: 5px;
   color: white;
   display: inline-block;
+}
+
+
+.opciones-film .container .menu .item:hover{
+  background-color: violet;
+  cursor: pointer;
 }

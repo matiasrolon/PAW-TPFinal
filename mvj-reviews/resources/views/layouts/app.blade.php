@@ -14,8 +14,9 @@
     @yield('publics')
 
     <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}" defer></script>
-
+    <script src="{{ asset('js/app.js') }}"></script>
+    <script src="{{ asset('js/navApp.js') }}"></script>
+    <script>NavPrincipal.iniciarNavPrincipal("app");</script>
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
@@ -40,7 +41,7 @@
 
                     </ul>
 
-                    <input class="buscador" name="buscar" placeholder="buscar film">
+                    <input id="buscador" class="buscador" name="buscar" placeholder="buscar film">
 
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ml-auto">

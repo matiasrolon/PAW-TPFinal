@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Review;
+use App\Models\User;
+
 
 class ReviewController extends Controller
 {
@@ -12,6 +15,16 @@ class ReviewController extends Controller
         $reviews = App\Models\Review::all();
       //  return view('Reviews', compact('reviews'));
     }
+
+
+    public function addReview(){
+        $obj = json_decode($_POST["objeto"]);
+        $obj->estado = "OK";
+        $obj->mensaje = "Se agrego tu review!";
+
+        echo json_encode($obj);
+    }
+
 
     //No se usa por ahora, habria que copiar el codigo y enviarlo al trigger. (review.boot())
     public function store(Request $request)
@@ -28,7 +41,7 @@ class ReviewController extends Controller
             return redirect('post/create')
                         ->withErrors($validator)
                         ->withInput();
-
+        }
         $review = new Review;
         $review->titulo = $request->titulo;
         $review->descripcion = $request->titulo;
