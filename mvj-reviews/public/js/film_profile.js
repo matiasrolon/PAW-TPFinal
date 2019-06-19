@@ -148,9 +148,60 @@ Pagina.recibirResponseReview = function(response){
   var resp = JSON.parse(response.responseText);
   console.log("se recibio respuesta> "+ resp['mensaje']);
   var estadoReview = document.querySelector('.opcion.agregarReview .estado .descripcion-estado');
-
   if (resp['estado']='OK'){
     estadoReview.innerHTML = resp['mensaje'];
+    //CREO UN CUADRO DE REVIEWS COMO LAS QUE YA ESTAN EN LA PAGINA HASTA EL MOMENTO.
+    var seccionReviews = document.querySelector('.opcion.reviews');
+    var review = document.createElement('div');
+    review.classList.add('review-user');
+
+        var secInfoReview = document.createElement('section');
+        secInfoReview.classList.add('info-review-user');
+              var usuario = document.createElement('label');
+              usuario.innerHTML = "usuario: ";
+                    var refPerfil = document.createElement('a');
+                    refPerfil.setAttribute('href',"/users/"+resp['username']),
+                    refPerfil.innerHTML =resp['username'];
+              usuario.appendChild(refPerfil);
+              var fecha = document.createElement('label');
+              fecha.innerHTML = "fecha: "+ resp['created_at'];
+              var titulo = document.createElement('label');
+              titulo.innerHTML = "titulo: "+ resp['titulo'];
+              var likes = document.createElement('label');
+              likes.innerHTML = "likes: "+resp['positivos'];
+                    var botonLike = document.createElement('button');
+                    botonLike.classList.add('like-review');
+                    botonLike.setAttribute('username',resp['username']);
+                    botonLike.innerHTML = "Like";
+              likes.appendChild(botonLike);
+              var dislikes = document.createElement('label');
+              dislikes.innerHTML = "dislikes: "+resp['negativos'];
+                    var botonDislike =document.createElement('button');
+                    botonDislike.classList.add('deslike-review');
+                    botonDislike.setAttribute('username',Pagina.page_info.getAttribute('user'));
+                    botonDislike.innerHTML = "Dislike";
+              dislikes.appendChild(botonDislike);
+        secInfoReview.appendChild(usuario);
+        secInfoReview.appendChild(fecha);
+        secInfoReview.appendChild(titulo);
+        secInfoReview.appendChild(likes);
+        secInfoReview.appendChild(dislikes);
+
+        var secDescripReview = document.createElement('section');
+        secDescripReview.classList.add('descripcion-review-user');
+            var descripcion = document.createElement('label');
+            descripcion.innerHTML = "descripcion: "+ resp['descripcion'];
+        secDescripReview.appendChild(descripcion);
+
+    review.appendChild(secInfoReview);
+    review.appendChild(secDescripReview);
+    //agregoo la review al la pagina.
+    seccionReviews.appendChild(review);
+
+    //Por ultimo pongo en ver el recuadro de mensaje del estado de la review
+
   }else{
+    estadoReview.innerHTML = resp['mensaje'];
+    //Pongo en rojo recuadro de la review
   }
 }

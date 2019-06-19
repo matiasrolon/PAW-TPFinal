@@ -51,19 +51,31 @@
                                     @foreach ($reviews as $review)
                                       <div class="review-user">
                                           <section class="info-review-user">
-                                            <b>usuario: </b> <a href="{{ route('user_profile', $review['username']) }}">{{ $review['username'] }}</a>
-                                            <b>Fecha: </b>{{ $review['created_at'] }}
-                                            <b>titulo: </b>{{ $review['titulo'] }}
-                                            <b>Likes: </b> {{ $review['positivos'] }}
-                                            <b>Dislikes: </b> {{ $review['negativos'] }}
+                                            <label>
+                                              usuario:  <a href="{{ route('user_profile', $review['username']) }}">{{ $review['username'] }}</a>
+                                            </label>
+                                            <label>
+                                              Fecha: {{ $review['created_at'] }}
+                                            </label>
+                                            <label>
+                                              titulo: {{ $review['titulo'] }}
+                                            </label>
+                                            <label for=""> Likes: {{ $review['positivos'] }}
+                                                <button type="button" class="like-review" username="{{$review['username']}}" name="button">Like</button>
+                                            </label>
+                                            <label for=""> Dislikes: {{ $review['negativos'] }}
+                                                <button type="button" class="deslike-review" username="{{$review['username']}}" name="button">Dislike</button>
+                                            </label>
                                           </section>
                                           <section class="descripcion-review-user">
-                                            <b>descripcion:</b> {{ $review['descripcion'] }}
+                                            <label>
+                                              descripcion: {{ $review['descripcion'] }}
+                                            <label>
                                           </section>
                                       </div>
                                     @endforeach
                                   @else
-                                    <p>Aun no hay reviews hechas para este film. </p>
+                                    <p class="no-reviews">Aun no hay reviews hechas para este film. </p>
                                   @endif
                           </div> <!-- fin div info-reviews -->
                           <div class="opcion trailer">
