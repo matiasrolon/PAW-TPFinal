@@ -121,3 +121,18 @@ protected $middlewareGroups = [
 ```
 AJAXRequest.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'));
 ```
+
+### Problema 5: **SQLSTATE[42S22]: Column not found: 1054 Unknown column 'id' in 'where clause'**
+
+#### descripcion:
+  Sucede cuando se intenta actualizar (UPDATE) una registro ya existente de una tabla que tiene clave primaria compuesta. Ejemplo: Score_Review (User_id, review_id).
+  Esto pasa porque Eloquent la actualiza internamente mediante "id" y al buscarlo no lo encuentra.
+  Para solucionar esto en casos normales hay que declarar en la clase Models\Modelo.php la linea:
+```
+    protected $primaryKey = 'campo_id';
+```
+El problema es que Eloquent no deja declarar bajo esa sentencia a Primary Keys Compuestas.
+Por ende estamos en un problema, jamas encontrara el id de la tabla Score_Review.
+
+#### Solucion:
+La unica que se encontro por ahora es identificar a todas las tablas por ID. Y que la logica de que no se pueda repetir una combinacion (en este caso User_id, review_id) pase por nosotros, en los Triggers (convenientemente) o validaciones de entrada.

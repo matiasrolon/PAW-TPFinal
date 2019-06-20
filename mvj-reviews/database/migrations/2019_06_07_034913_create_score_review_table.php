@@ -14,9 +14,9 @@ class CreateScoreReviewTable extends Migration
     public function up()
     {
         Schema::create('score_review', function (Blueprint $table) {
+          $table->bigIncrements('id');
             $table->bigInteger('review_id')->unsigned();
             $table->bigInteger('user_id')->unsigned();
-            $table->primary(['review_id','user_id']);
             $table->boolean('voto'); // True = Like. False = Dislike.
             $table->timestamps(); // Fecha de creacion y actualizacion
 

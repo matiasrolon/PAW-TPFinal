@@ -10,7 +10,7 @@ class Score_Film extends Model
 {
     //
     protected $table = 'score_film';
-    protected $fillable = ['film_id','user_id','puntaje'];
+    protected $fillable = ['id','film_id','user_id','puntaje'];
 
     public function user()
     {
@@ -34,7 +34,7 @@ class Score_Film extends Model
        parent::boot();
 
        self::updated(function ($score_film) {
-         /*  NO FUNCIONA 
+         /*  NO FUNCIONA
               //$puntajeAnt = $score_film->getOriginal('puntaje'); //el puntaje anterior
               $qScores =  Score_Film::where('film_id',$score_film->film_id)->count();
               $totalScore =  Score_Film::where('film_id',$score_film->film_id)->sum('puntaje');

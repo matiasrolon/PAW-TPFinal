@@ -61,11 +61,14 @@
                                               titulo: {{ $review['titulo'] }}
                                             </label>
                                             <label for=""> Likes: {{ $review['positivos'] }}
-                                                <button type="button" class="like-review" username="{{$review['username']}}" name="button">Like</button>
+                                                <button type="button" class="like-review" review="{{$review['id']}}" user="{{$review['user_id']}}" name="button">Like</button>
                                             </label>
                                             <label for=""> Dislikes: {{ $review['negativos'] }}
-                                                <button type="button" class="deslike-review" username="{{$review['username']}}" name="button">Dislike</button>
+                                                <button type="button" class="dislike-review" review="{{$review['id']}}" user="{{$review['user_id']}}" name="button">Dislike</button>
                                             </label>
+                                            <div review="{{$review['id']}}" class="estado-puntaje-review">
+                                                <label class="descripcion"> </label>
+                                            </div>
                                           </section>
                                           <section class="descripcion-review-user">
                                             <label>
