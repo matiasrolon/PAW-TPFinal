@@ -41,13 +41,10 @@
             <div class="navseccion autenticacion">
                         @guest
                           <ul class="opciones-guest">
-                              <li class="">
                                     <a class="" href="{{ route('login') }}">{{ __('Login') }}</a>
-                              </li>
+                                  |
                               @if (Route::has('register'))
-                              <li class="">
                                     <a class="" href="{{ route('register') }}">{{ __('Register') }}</a>
-                              </li>
                               @endif
                           </ul>
                         @else
@@ -95,13 +92,16 @@
             <div class="seccion-menu">
                   <a href=""> Novedades </a>
             </div>
-
-            <div class="seccion-menu">
-                <a href=""> Admin Films </a>
-            </div>
-            <div class="seccion-menu">
-                <a href=""> Admin Novedades </a>
-            </div>
+            @auth
+                @if ( Auth::isAdmin() )
+                  <div class="seccion-menu">
+                      <a href=""> Admin Films </a>
+                  </div>
+                  <div class="seccion-menu">
+                      <a href=""> Admin Novedades </a>
+                  </div>
+                  @endif
+            @endauth
         </nav>
         <main id="content">
             @yield('content')

@@ -7,11 +7,11 @@
                 <div class="title m-b-md">
                      {{-- @guest = persona no logeada en la pagina.  (Y asi se comenta en blade) --}}
 
-                    @if ((!@guest) && (Auth::user()->username == $user['username']))
-
-                      El perfil al que entro es el del usuario logeado
+                    @if ((@auth) && (Auth::user()->username == $user['username']))
+                      <button> EDITAR PERFIL</button>(SIN FUNCIONALIDAD)
                     @else
-                      <p> Estas en el perfil del usuario con ID= {{$user['id']}} </p>
+                      <p> Estas en el perfil del usuario {{$user['username']}} </p>
+                    @endif
                       <div >
                         <h2>Datos usuario</h2>
                         <br>
@@ -20,7 +20,7 @@
                         @else
                           <img class="avatar" src="data:image/png;base64,{{$user['avatar']}}">
                         @endif
-                        
+
                         {{$user}}
                       </div>
                       <div >
@@ -40,7 +40,6 @@
                             <p>Aun no hay reviews hechas para este film. </p>
                         @endif
                       </div>
-                    @endif
 
                 </div>
               </div>

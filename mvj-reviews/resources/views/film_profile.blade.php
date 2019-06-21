@@ -13,11 +13,12 @@
                 <section class="info-film">
                   <h2>Info pelicula:</h2>
                     <img class="poster" src="data:image/png;base64,{{$film['poster']}}">
-                    <div> {{ $film['titulo'] }} </div>
-                    <div> {{ $film['fecha_estreno'] }} </div>
-                    <div> {{ $film['pais'] }} </div>
-                    <div> {{ $film['sinopsis'] }} </div>
-                    <div> {{ $film['categoria'] }} </div>
+                    <div> <b>titulo:</b> {{ $film['titulo'] }} </div>
+                    <div> <b>Estreno:</b> {{ $film['fecha_estreno'] }} </div>
+                    <div> <b>Pais:</b> {{ $film['pais'] }} </div>
+                    <div> <b>Sinopsis:</b> {{ $film['sinopsis'] }} </div>
+                    <div> <b>Categoria:</b> {{ $film['categoria'] }} </div>
+                    <div> <b>Puntaje:</b> {{ $film['puntaje'] }} </div>
                   <!-- AGREGAR MAS CAMPOS ;SI ES NECESARIO. -->
 
                 </section>
