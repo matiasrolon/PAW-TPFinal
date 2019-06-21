@@ -7,11 +7,16 @@
                 <div class="title m-b-md">
                      {{-- @guest = persona no logeada en la pagina.  (Y asi se comenta en blade) --}}
 
-                    @if ((@auth) && (Auth::user()->username == $user['username']))
-                      <button> EDITAR PERFIL</button>(SIN FUNCIONALIDAD)
-                    @else
+                    @guest
                       <p> Estas en el perfil del usuario {{$user['username']}} </p>
-                    @endif
+                    @else
+                        @if (Auth::user()->username == $user['username'])
+                          <button> EDITAR PERFIL</button>(SIN FUNCIONALIDAD)
+                        @else
+                          <p> Estas en el perfil del usuario {{$user['username']}} </p>
+                        @endif
+                    @endguest
+
                       <div >
                         <h2>Datos usuario</h2>
                         <br>

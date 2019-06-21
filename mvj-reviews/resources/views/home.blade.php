@@ -52,7 +52,7 @@
                 @foreach($users as $user)
                       <tr>
                           <div class="tupla-user">
-                              <td>{{$user['username']}}</td>
+                              <td><a href="/users/{{$user['username']}}"> {{$user['username']}}</a></td>
                               <td>100</td> <!--aca irian las reviews totales del user-->
                               <td>{{$user['puntos']}}</td>
                           </div>
