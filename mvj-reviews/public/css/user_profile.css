@@ -1,0 +1,21 @@
+img{
+  width: 200px;
+  height: 200px;
+}
+
+.review-user{
+  display: inline-block;
+  width: 30%;
+}
+
+.planilla{
+
+}
+
+      .dato-favorito{
+        display: block;
+      }
+
+      .dato-usuario{
+        display: block;
+      }

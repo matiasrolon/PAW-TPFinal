@@ -86,10 +86,6 @@
                           </div> <!-- fin div info-reviews -->
                           <div class="opcion trailer">
 
-                            <video
-                                src="{{ $film['trailer'] }}"  controls>
-                            </video>
-
                           </div><!-- fin div opcion trailer -->
                           <div class="opcion agregarReview">
                             <form class="form-agregar-review" method="post">

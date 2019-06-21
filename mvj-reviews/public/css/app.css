@@ -41,8 +41,8 @@
 }
 
 .resultados-buscador{
-  width: 33%;
-  left: 33.5%;
+  width: 40.5%;
+  left: 30%;
   text-align: left;
   list-style-position: inside;
   background: darkgrey;
@@ -51,6 +51,7 @@
   position: absolute;
   list-style: none;
   padding: 0%;
+  z-index: 1;
 }
 
 .resultados-buscador li img{
@@ -114,7 +115,7 @@
 }
 
 .resultados-buscador li{
-  width: 100vw;
+  width: 100%;
 }
 
 .seccion-menu a{

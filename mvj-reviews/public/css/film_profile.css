@@ -48,3 +48,14 @@ div.detalles-pelicula{
   background-color: violet;
   cursor: pointer;
 }
+
+.review-user{
+display: block;
+    border: solid 3px;
+    margin-bottom: 5%;
+}
+
+.descripcion-review-user{
+  background: lightblue;
+  padding: 1%;
+}
