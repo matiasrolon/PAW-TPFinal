@@ -31,28 +31,40 @@
 .navseccion.buscador{
   width: 100%;
   border-radius: 8px;
+  margin-top: 2%;
 }
 
-    .navseccion.buscador input{
-      width: 80%;
-    }
+.navseccion.buscador input{
+  width: 100%;
+  font-size: 100%;
+  height: 100%;
+}
 
-          .resultados-buscador{
-            width: 33%;
-            left: 33.5%;
-            text-align: left;
-            list-style-position: inside;
-            background: darkgrey;
-            margin-top: 0%;
-            margin-bottom: 0%;
-            position: absolute;
-            list-style: none;
-            padding: 0%;
-          }
+.resultados-buscador{
+  width: 33%;
+  left: 33.5%;
+  text-align: left;
+  list-style-position: inside;
+  background: darkgrey;
+  margin-top: 0%;
+  margin-bottom: 0%;
+  position: absolute;
+  list-style: none;
+  padding: 0%;
+}
+
+.resultados-buscador li img{
+  width: 90px;
+  height: 120px;
+}
 
 .navseccion.autenticacion{
   width: 100%;
   text-align: right;
+}
+
+.item-resultado{
+  display: flex;
 }
 
 .opciones-login{
@@ -101,6 +113,9 @@
     margin-right: 0px;
 }
 
+.resultados-buscador li{
+  width: 100vw;
+}
 
 .seccion-menu a{
   color: black;

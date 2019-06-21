@@ -80,6 +80,7 @@ NavPrincipal.enviarRequestSearchFilm = function(request){
 */
 
 NavPrincipal.recibirResponseSearchFilm= function(response){ //imprime lista de resultados en buscador
+    console.log(response);
     var resp = JSON.parse(response.responseText);
     console.log("se recibio respuesta de searchLocalFilm ");
 
@@ -88,12 +89,18 @@ NavPrincipal.recibirResponseSearchFilm= function(response){ //imprime lista de r
     lista.classList.add('resultados-buscador');
     if (resp.length>0){
       for( i in resp){
+        //<img class="poster" src="data:image/png;base64,{{$film['poster']}}">
           console.log(resp[i].titulo);
           var linkFilm = document.createElement('a');
           linkFilm.setAttribute('href',"/films/"+resp[i].id);
-              var item = document.createElement('li');
-              item.classList.add('item-resultado');
-              item.innerHTML = resp[i].titulo + "("+resp[i].fecha_estreno+")";
+          var item = document.createElement('li');
+          let img = document.createElement('img');
+          let p = document.createElement('p');
+          img.src = "data:image/png;base64,"+resp[i].poster;
+          item.classList.add('item-resultado');
+          p.innerHTML = resp[i].titulo + "("+resp[i].fecha_estreno+")";
+          item.appendChild(img);
+          item.appendChild(p);
           linkFilm.appendChild(item);
           lista.appendChild(linkFilm);
       }

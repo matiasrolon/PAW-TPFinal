@@ -13,14 +13,21 @@
             <h3> Peliculas Populares</h3>
             <section class="peliculas">
               @foreach($peliculas as $pelicula)
-
-                  <div class="cuadro-film">
-                    <a href="/films/{{$pelicula['id']}}">
-                        <img class="poster" src="data:image/png;base64,{{$pelicula['portada']}}">
+              <div class="flip-card">
+                  <div class="cuadro-film flip-card-inner">
+                    <div class="flip-card-front">
+                      <p class="puntuacion puntuacion-muy-buena">{{$pelicula['puntaje']}}</p>
+                      <img class="poster" src="data:image/png;base64,{{$pelicula['portada']}}">
+                    </div>
+                    <a style="display:block" href="/films/{{$pelicula['id']}}">
+                      <div class="flip-card-back">
+                        <p>{{ $pelicula['fecha_estreno']}}</p>
+                        <p class="titulo-film">{{ $pelicula['titulo']}}</p>
+                        <p>{{ $pelicula['sinopsis']}}</p>
+                      </div>
                     </a>
-                    <div> {{$pelicula['puntaje']}}</div>
-                    <p class="titulo-film">{{ $pelicula['titulo']}}</p>
                   </div>
+                </div>
 
               @endforeach
             </section>

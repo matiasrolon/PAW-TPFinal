@@ -74,7 +74,7 @@ class FilmController extends Controller
      * @var filmName query que inserta el usuario en el buscador
      */
     public function searchLocalFilm($filmname) {
-      $obj = Film::where('titulo', 'like','%' . $filmname .'%')->select('id','titulo','fecha_estreno','pais','sinopsis')->get();
+      $obj = Film::where('titulo', 'like','%' . $filmname .'%')->select('id','titulo','fecha_estreno','pais','sinopsis', \DB::raw('TO_BASE64(poster) as poster'))->get();
 
           //$obj[];
           //$obj->estado = 'OK';

@@ -11,16 +11,18 @@
 @section('content')
             <div id="page_info" class="content" film="{{ $film['id'] }}" user="@guest{{ -1 }}@else{{ Auth::user()->id }}@endguest">
                 <section class="info-film">
-                  <h2>Info pelicula:</h2>
                     <img class="poster" src="data:image/png;base64,{{$film['poster']}}">
-                    <div> <b>titulo:</b> {{ $film['titulo'] }} </div>
-                    <div> <b>Estreno:</b> {{ $film['fecha_estreno'] }} </div>
-                    <div> <b>Pais:</b> {{ $film['pais'] }} </div>
-                    <div> <b>Sinopsis:</b> {{ $film['sinopsis'] }} </div>
-                    <div> <b>Categoria:</b> {{ $film['categoria'] }} </div>
-                    <div> <b>Puntaje:</b> {{ $film['puntaje'] }} </div>
+                    <div class="detalles-pelicula">
+                      <ul>
+                        <h2>{{ $film['titulo'] }} </h2>
+                        <li> <b>Estreno:</b> {{ $film['fecha_estreno'] }} </li>
+                        <li> <b>Pais:</b> {{ $film['pais'] }} </li>
+                        <li> <b>Sinopsis:</b> {{ $film['sinopsis'] }} </li>
+                        <li> <b>Categoria:</b> {{ $film['categoria'] }} </li>
+                        <li> <b>Puntaje:</b> {{ $film['puntaje'] }} </li>
+                      </ul>
+                    </div>
                   <!-- AGREGAR MAS CAMPOS ;SI ES NECESARIO. -->
-
                 </section>
 
                 <section class="opciones-film">
