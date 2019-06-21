@@ -11,6 +11,7 @@ class Score_Film extends Model
     //
     protected $table = 'score_film';
     protected $fillable = ['id','film_id','user_id','puntaje'];
+    protected $primaryKey = 'id';
 
     public function user()
     {
@@ -46,7 +47,7 @@ class Score_Film extends Model
           }
        );
 
-       self::created(function ($score_film) {
+       self::saved(function ($score_film) {
               $qScores =  Score_Film::where('film_id',$score_film->film_id)->count();
               $totalScore =  Score_Film::where('film_id',$score_film->film_id)->sum('puntaje');
 

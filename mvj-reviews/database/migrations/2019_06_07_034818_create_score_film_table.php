@@ -15,9 +15,10 @@ class CreateScoreFilmTable extends Migration
     public function up()
     {
         Schema::create('score_film', function (Blueprint $table) {
+          $table->bigIncrements('id');
           $table->bigInteger('film_id')->unsigned();
           $table->bigInteger('user_id')->unsigned();
-          $table->primary(['film_id','user_id']);
+          //$table->primary(['film_id','user_id']);
           $table->tinyInteger('puntaje'); // 1 a 10
           $table->timestamps(); //Fecha de alta y actualizacion
 

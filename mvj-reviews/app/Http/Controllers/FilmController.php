@@ -54,18 +54,11 @@ class FilmController extends Controller
                     $obj->estado = "OK";
                     $obj->mensaje = "Se añadio tu puntaje!";
                 }else{ //el usuario ya punteo esta pelicula alguna vez, actualizo puntaje
-                    Score_Film::where('film_id',$film->id)
-                                ->where('user_id',$user->id)
-                                ->update(['puntaje'=>($obj->puntaje)]);
-                //  ACTUALIZA PUNTAJE PELICULA
-                // (AVERIGUAR PORQUE NO FUNCIONA EL TRIGGER DE UPDATE EN SCORE_FILM)
-                                $qScores =  Score_Film::where('film_id',$film->id)->count();
-                                $totalScore =  Score_Film::where('film_id',$film->id)->sum('puntaje');
-
-                                $film = Film::find($film->id);
-                                $film->puntaje = $totalScore/$qScores;
-                                $film->save();
-
+                    $f = Score_Film::where('film_id',$film->id)
+                                    ->where('user_id',$user->id)
+                                    ->first();
+                    $f->puntaje = $obj->puntaje;
+                    $f->save();
                     $obj->estado = "OK";
                     $obj->mensaje = "Se actualizo tu puntaje!";
                 }
@@ -85,7 +78,7 @@ class FilmController extends Controller
 
           //$obj[];
           //$obj->estado = 'OK';
-          //$obj->mensaje = 'recibi la request de search '+$filmname;  
+          //$obj->mensaje = 'recibi la request de search '+$filmname;
       echo json_encode($obj);
     }
 

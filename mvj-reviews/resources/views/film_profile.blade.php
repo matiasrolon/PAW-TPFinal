@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title') pelicula | MVJ Reviews @endsection
+@section('title') {{ $film['titulo'] }} | MVJ Reviews @endsection
 
 @section('publics')
     <script src="{{ asset('js/film_profile.js') }}"></script>
