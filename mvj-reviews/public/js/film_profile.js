@@ -17,7 +17,7 @@ Pagina.iniciarPagina= function(contenedorHTML){
 
         Pagina.cargarBotonesReview();
 
-      //  Pagina.ordenarElementos();
+        Pagina.ordenarElementos();
       //--> FUNCIONA PERO AL FINAL TIRA UNA EXCEPCION QUE NO TE DEJA SEGUIR DESPUES. ARRGLAR.
      });
 }
@@ -30,15 +30,15 @@ Pagina.iniciarPagina= function(contenedorHTML){
 Pagina.ordenarElementos = function(){
 
   botonAgregarReview = document.querySelector('.opciones-film .container .menu .item.agregarReview');
-  console.log(botonAgregarReview);
+  //console.log(botonAgregarReview);
   botonAgregarReview.addEventListener("click", function(){ Pagina.mostrarOpcion('agregarReview')});
 
   botonReviews = document.querySelector('.opciones-film .container .menu .item.reviews');
-  console.log(botonReviews);
+  //console.log(botonReviews);
   botonReviews.addEventListener("click", function(){ Pagina.mostrarOpcion('reviews')});
 
   botonTrailer = document.querySelector('.opciones-film .container .menu .item.trailer');
-  console.log(botonTrailer);
+  //console.log(botonTrailer);
   botonTrailer.addEventListener("click", function(){ Pagina.mostrarOpcion('trailer')});
 
   Pagina.mostrarOpcion('agregarReview');
@@ -49,19 +49,18 @@ Pagina.ordenarElementos = function(){
        Descripcion:  Decide que opcion de las tres mencionadas arriba va a verse ante el usuario.
 */
 Pagina.mostrarOpcion = function(opcionElegida){
-  opciones = document.querySelectorAll('.opciones-film .container .opcion');
-  for( i in opciones) {
-      //console.log(i);
-      if (!opciones[i].classList.contains(opcionElegida)){
-          //console.log(opciones[i]);
-          opciones[i].classList.add('no-visible');
-      }else{
-        if (opciones[i].classList.contains('no-visible')){
-          opciones[i].classList.remove('no-visible');
-        }
-      }
+  opcionAnt = document.querySelector('.opciones-film .container .opcion.elegida');
+  console.log(opcionAnt);
+  if (opcionAnt!=null){
+    opcionAnt.classList.remove('elegida');
+
+    opcionActual = document.querySelector('.opciones-film .container .opcion.'+opcionElegida);
+    opcionActual.classList.add('elegida');
+  }else{
+    opcionActual = document.querySelector('.opciones-film .container .opcion.'+opcionElegida);
+    opcionActual.classList.add('elegida');
   }
-  console.log("termino mostrarOpcion");
+  console.log(opcionActual);
 }
 
 
@@ -160,17 +159,17 @@ Pagina.recibirResponseAgregarReview = function(response){
         var secInfoReview = document.createElement('section');
         secInfoReview.classList.add('info-review-user');
               var usuario = document.createElement('label');
-              usuario.innerHTML = "usuario: ";
+              usuario.innerHTML = " Usuario: ";
                     var refPerfil = document.createElement('a');
                     refPerfil.setAttribute('href',"/users/"+resp['username']),
                     refPerfil.innerHTML =resp['username'];
               usuario.appendChild(refPerfil);
               var fecha = document.createElement('label');
-              fecha.innerHTML = "fecha: "+ resp['created_at'];
+              fecha.innerHTML = " Fecha: "+ resp['created_at'];
               var titulo = document.createElement('label');
-              titulo.innerHTML = "titulo: "+ resp['titulo'];
+              titulo.innerHTML = " Titulo: "+ resp['titulo'];
               var likes = document.createElement('label');
-              likes.innerHTML = "likes: "+resp['positivos'];
+              likes.innerHTML = " Likes: "+resp['positivos'];
                     var botonLike = document.createElement('button');
                     botonLike.classList.add('like-review');
                     botonLike.setAttribute('user',resp['user_id']);
@@ -181,7 +180,7 @@ Pagina.recibirResponseAgregarReview = function(response){
                     })
               likes.appendChild(botonLike);
               var dislikes = document.createElement('label');
-              dislikes.innerHTML = "dislikes: "+resp['negativos'];
+              dislikes.innerHTML = " Dislikes: "+resp['negativos'];
                     var botonDislike =document.createElement('button');
                     botonDislike.classList.add('deslike-review');
                     botonDislike.setAttribute('user',resp['user_id']);

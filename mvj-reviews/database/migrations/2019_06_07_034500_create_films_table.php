@@ -23,6 +23,7 @@ class CreateFilmsTable extends Migration
             $table->string('categoria', 20);// Pelicula / serie / corto / etc
             $table->date('fecha_finalizacion')->nullable();
             $table->binary('poster')->nullable();
+            $table->string('trailer',300)->nullable();
             $table->double('puntaje'); //Calculado con triggers
             $table->timestamps();
         });

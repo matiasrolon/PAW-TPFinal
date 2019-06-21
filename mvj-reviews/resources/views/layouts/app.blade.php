@@ -26,80 +26,83 @@
 </head>
 <body>
     <div id="app">
-        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
-            <div class="container">
-                <a class="navbar-brand" href="{{ url('/') }}">
+        <nav class="nav-principal">
+            <div class="navseccion icono">
+                <a class="" href="{{ url('/') }}">
                   MVJ Reviews
                 </a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
-                    <span class="navbar-toggler-icon"></span>
+                <button class="" type="button" aria-label="{{ __('Toggle navigation') }}">
+                    <span class=""></span>
                 </button>
-
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <!-- Left Side Of Navbar -->
-                    <ul class="navbar-nav mr-auto">
-
-                    </ul>
-
+            </div>
+            <div class="navseccion buscador">
                     <input id="buscador" class="buscador" name="buscar" placeholder="buscar film">
-
-                    <!-- Right Side Of Navbar -->
-                    <ul class="navbar-nav ml-auto">
-                        <!-- Authentication Links -->
+            </div>
+            <div class="navseccion autenticacion">
                         @guest
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
-                            </li>
-                            @if (Route::has('register'))
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
-                                </li>
-                            @endif
+                          <ul class="opciones-guest">
+                              <li class="">
+                                    <a class="" href="{{ route('login') }}">{{ __('Login') }}</a>
+                              </li>
+                              @if (Route::has('register'))
+                              <li class="">
+                                    <a class="" href="{{ route('register') }}">{{ __('Register') }}</a>
+                              </li>
+                              @endif
+                          </ul>
                         @else
-                            <li class="nav-item dropdown">
-                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    {{ Auth::user()->username }} <span class="caret"></span>
-                                </a>
-
-                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                  <a class="dropdown-item" href="{{ route('user_profile', Auth::user()->username) }}">
-                                      {{ __('perfil') }}
-                                  </a>
-
-                                    <a class="dropdown-item" href="{{ route('logout') }}"
-                                       onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                        {{ __('Salir') }}
+                                <li class="">
+                                    <a class="" href="#">
+                                        {{ Auth::user()->username }} <span class=""></span>
+                                        <button class="boton-opciones-login" type="button" name="button"> > </button>
                                     </a>
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                        @csrf
-                                    </form>
 
-                                </div>
-                            </li>
+                                      <ul class="opciones-login no-visible">
+                                          <li>
+                                            <a class="" href="{{ route('user_profile', Auth::user()->username) }}">
+                                                {{ __('perfil') }}
+                                            </a>
+                                          </li>
+                                          <li>
+                                                <a class="" href="{{ route('logout') }}"
+                                                   onclick="event.preventDefault();
+                                                                 document.getElementById('logout-form').submit();">
+                                                    {{ __('Salir') }}
+                                                </a>
+                                                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                                    @csrf
+                                                </form>
+                                          </li>
+                                      </ul>
+                               </li>
                         @endguest
-                    </ul>
-                </div>
             </div>
         </nav>
+
         <nav class="menus">
-          <div class="seccion-menu">
-                <a href="{{ route('home') }}">Home</a>
-          </div>
+            <div class="seccion-menu">
+                  <a href="{{ route('home') }}">Home</a>
+            </div>
 
-          <div class="seccion-menu">
-                <a href="{{ route('ranking-films') }}">Ranking films</a>
-          </div>
+            <div class="seccion-menu">
+                  <a href="{{ route('ranking-films') }}">Ranking films</a>
+            </div>
 
-          <div class="seccion-menu">
-                <a href="{{ route('ranking-users') }}">Ranking Criticos</a>
-          </div>
+            <div class="seccion-menu">
+                  <a href="{{ route('ranking-users') }}">Ranking Criticos</a>
+            </div>
 
-          <div class="seccion-menu">
-                <a href=""> Novedades </a>
-          </div>
+            <div class="seccion-menu">
+                  <a href=""> Novedades </a>
+            </div>
+
+            <div class="seccion-menu">
+                <a href=""> Admin Films </a>
+            </div>
+            <div class="seccion-menu">
+                <a href=""> Admin Novedades </a>
+            </div>
         </nav>
-
         <main id="content">
             @yield('content')
         </main>

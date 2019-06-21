@@ -82,7 +82,11 @@
                                   @endif
                           </div> <!-- fin div info-reviews -->
                           <div class="opcion trailer">
-                              <h1> ACA IRIA EL TRAILER DEL FILM </h1>
+
+                            <video
+                                src="{{ $film['trailer'] }}"  controls>
+                            </video>
+
                           </div><!-- fin div opcion trailer -->
                           <div class="opcion agregarReview">
                             <form class="form-agregar-review" method="post">

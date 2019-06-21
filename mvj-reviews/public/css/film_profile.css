@@ -2,8 +2,16 @@
   display: none;
 }
 
+.opcion{
+  display: none;
+}
+
+.opcion.elegida{
+  display: inline-block;
+}
+
 .opciones-film .container .menu{
-  background-color: blue; 
+  background-color: blue;
 }
 
 .opciones-film .container .menu .item{
