@@ -95,15 +95,19 @@ php artisan optimize
 ```
 
 #### Solucion
+
 Me funciono con la TERCER respuesta y explicacion del link adjunto. (https://stackoverflow.com/questions/45266254/laravel-unable-to-prepare-route-for-serialization-uses-closure)
 
 ### Problema 4: **Error 419 (unknown status) - con Ajax**
 
-#### Descripcion:
+#### Descripcion
+
 Salta al momento de hacer una solicitud AJAX con el metodo POST al servidor.
 
-#### Solucion:
+#### Solucion
+
 1. Se puede solucionar yendo a la clase App\Http\Kernel.php y en el apartado siguiente descomentar la linea marcada (NO SE RECOMIENDA, SOLO SI NO QUEDA OTRA MANERA).
+
 ```
 protected $middlewareGroups = [
     'web' => [
@@ -115,24 +119,42 @@ protected $middlewareGroups = [
                 **\App\Http\Middleware\VerifyCsrfToken::class**, ---> DESCOMENTAR ESTA.
                 \Illuminate\Routing\Middleware\SubstituteBindings::class,
     ]
-```    
+```
 
 2. O BIEN, para solucionarlo y no dejar de perder un aspecto de seguridad en el proyecto, al momento de hacer la request AJAX, seteamos lo siguiente. (RECOMENDADA).
+
 ```
 AJAXRequest.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'));
 ```
 
 ### Problema 5: **SQLSTATE[42S22]: Column not found: 1054 Unknown column 'id' in 'where clause'**
 
-#### descripcion:
+#### Descripcion
+
   Sucede cuando se intenta actualizar (UPDATE) una registro ya existente de una tabla que tiene clave primaria compuesta. Ejemplo: Score_Review (User_id, review_id).
   Esto pasa porque Eloquent la actualiza internamente mediante "id" y al buscarlo no lo encuentra.
   Para solucionar esto en casos normales hay que declarar en la clase Models\Modelo.php la linea:
 ```
     protected $primaryKey = 'campo_id';
 ```
+
 El problema es que Eloquent no deja declarar bajo esa sentencia a Primary Keys Compuestas.
 Por ende estamos en un problema, jamas encontrara el id de la tabla Score_Review.
 
 #### Solucion:
+
 La unica que se encontro por ahora es identificar a todas las tablas por ID. Y que la logica de que no se pueda repetir una combinacion (en este caso User_id, review_id) pase por nosotros, en los Triggers (convenientemente) o validaciones de entrada.
+
+### Problema 6: **Class RangeTableSeeder does not exist**
+
+#### Descripcion
+
+Ocurre al usar el comando `php artisan --seed`.
+Los seeders no estan con PSR-4, por lo tanto cuando agregas un seeder (y tambien para las migraciones) hay que regenerar la tabla de clases para que laravel sepa donde de donde cargar las clases cuando las necesitas.
+
+#### Solucion
+
+Ejecutar el comando:
+```
+composer dump-autoload
+```
