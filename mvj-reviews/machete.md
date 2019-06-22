@@ -9,18 +9,20 @@ Lista de comandos utiles de Laravel.
 - **Ayuda:** php artisan help <comando>
 - **Lista de comandos:** php artisan list
 - **Orden correcto de parametros en BelongToMany:**
-```
+
+```php
 Class ClaseA extends Model
     public function ClasesB(){ //retorna todas las clasesB que tiene Clase A (Relacion N a N)
       return $this->belongsToMany('App\Models\ClaseB', 'claseA_claseB' (tabla), 'claseA_id', 'claseB_id');
 ```
-(fijarse que el ultimo parametro sea el nombre que figura en la tabla intermedia para el id de la clase que se quiere obtener).
 
+(fijarse que el ultimo parametro sea el nombre que figura en la tabla intermedia para el id de la clase que se quiere obtener).
 
 ## Controlador (MVC)
 
 - **Agregar nuevo controlador:** php artisan make:controller ControllerName
--**Agregar nueva ruta a routes/web.php:** para que no salte error al cargar la pagina, por cada ruta nueva que definamos en routes/web.php tendremos que hacer:
+- **Agregar nueva ruta a routes/web.php:** para que no salte error al cargar la pagina, por cada ruta nueva que definamos en routes/web.php tendremos que hacer:
+
 ```
 php artisan clear-compile
 php artisan optimize
@@ -54,12 +56,13 @@ php artisan optimize
 - **Crear Modelo (Dentro de una carpeta especifica):** php artisan make:model Http/Models/Review
 
 ## Pruebas - Seeders
+
 - **Crear seeder:** php artisan make:seeder NAMETableSeeder
 - **Ejecutar seeder:** puede hacerse de las siguientes maneras
     -php artisan migrate --seed
     -php artisan migrate:refresh --seeds
     -php artisan db:seed (Para ejecutarlos sin los migrates)
-- **importante:** En los triggers de creacion siempre hacerlos con CREATED/CREATING. No importa que a la hora de crear las instancias se haya persistido con SAVE(). (Esto debido a que en ocaciones posteriores tambien se usara el SAVE() para hacer Updates, y por lo tanto estaran presentes las acciones del trigger dicho al principio, lo cual ocasionaria problemas;
+- **Importante:** En los triggers de creacion siempre hacerlos con CREATED/CREATING. No importa que a la hora de crear las instancias se haya persistido con SAVE(). (Esto debido a que en ocaciones posteriores tambien se usara el SAVE() para hacer Updates, y por lo tanto estaran presentes las acciones del trigger dicho al principio, lo cual ocasionaria problemas;
 
 ## Solucion de Problemas
 
@@ -91,7 +94,7 @@ Mas info en [https://curl.haxx.se/docs/sslcerts.html](https://curl.haxx.se/docs/
 Sucede cuando ejecutas este comando para volver a compilar el proyecto por algun motivo en especial
 ```
 php artisan clear-compile
-php artisan optimize
+php artisan optimize /* Cachea las routes (archivo web.php) */
 ```
 
 #### Solucion
@@ -141,7 +144,7 @@ AJAXRequest.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('
 El problema es que Eloquent no deja declarar bajo esa sentencia a Primary Keys Compuestas.
 Por ende estamos en un problema, jamas encontrara el id de la tabla Score_Review.
 
-#### Solucion:
+#### Solucion
 
 La unica que se encontro por ahora es identificar a todas las tablas por ID. Y que la logica de que no se pueda repetir una combinacion (en este caso User_id, review_id) pase por nosotros, en los Triggers (convenientemente) o validaciones de entrada.
 
