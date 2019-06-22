@@ -30,7 +30,10 @@ NavPrincipal.iniciarNavPrincipal= function(contenedorHTML){
         NavPrincipal.buscador = document.getElementById('buscador');
         console.log(NavPrincipal.buscador);
         // cada vez que ingresa caracter en el buscador
-        NavPrincipal.buscador.addEventListener("keyup",NavPrincipal.buscarFilm);
+        NavPrincipal.buscador.addEventListener("keyup",function(){
+          clearTimeout(NavPrincipal.intervalo);
+          NavPrincipal.intervalo = setTimeout(NavPrincipal.buscarFilm, 300);
+        });
 
         //cuando hace click en cualquier espacio de la pagina, se sale la lista de resultados si la hubiera.
         content.addEventListener("click",NavPrincipal.borrarListaResultados);
@@ -47,21 +50,21 @@ NavPrincipal.borrarListaResultados = function(){
     }
 }
 
-NavPrincipal.buscarFilm = function(){
-    //Cuando apreta un caracter, se borra la lista de resultados actual ya que puede estar desactualizada.
-    NavPrincipal.borrarListaResultados();
 
-    if (NavPrincipal.buscador.value!=""){
-      var request = new XMLHttpRequest();
-      request.onreadystatechange = function(){ // cuando la peticion cambia de estado.
-        console.log("estado de la peticion search film: " + this.status);
-        if (this.readyState==4 && this.status==200){ // si se recibe correctamente la respuesta.
-            NavPrincipal.recibirResponseSearchFilm(this);
-        };
-      }
-      NavPrincipal.enviarRequestSearchFilm(request);
-      console.log('escribio letra, texto hasta ahora: ' + NavPrincipal.buscador.value);
-    }
+NavPrincipal.buscarFilm = function(){
+  console.log('entro a buscarFilm2...');
+    NavPrincipal.borrarListaResultados();
+  if (NavPrincipal.buscador.value!=""){
+          var request = new XMLHttpRequest();
+          request.onreadystatechange = function(){ // cuando la peticion cambia de estado.
+            console.log("estado de la peticion search film: " + this.status);
+            if (this.readyState==4 && this.status==200){ // si se recibe correctamente la respuesta.
+                NavPrincipal.recibirResponseSearchFilm(this);
+            };
+          }
+          NavPrincipal.enviarRequestSearchFilm(request);
+          console.log('escribio letra, texto hasta ahora: ' + NavPrincipal.buscador.value);
+  }
 }
 
 
