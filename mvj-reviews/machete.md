@@ -9,18 +9,20 @@ Lista de comandos utiles de Laravel.
 - **Ayuda:** php artisan help <comando>
 - **Lista de comandos:** php artisan list
 - **Orden correcto de parametros en BelongToMany:**
-```
+
+```php
 Class ClaseA extends Model
     public function ClasesB(){ //retorna todas las clasesB que tiene Clase A (Relacion N a N)
       return $this->belongsToMany('App\Models\ClaseB', 'claseA_claseB' (tabla), 'claseA_id', 'claseB_id');
 ```
-(fijarse que el ultimo parametro sea el nombre que figura en la tabla intermedia para el id de la clase que se quiere obtener).
 
+(fijarse que el ultimo parametro sea el nombre que figura en la tabla intermedia para el id de la clase que se quiere obtener).
 
 ## Controlador (MVC)
 
 - **Agregar nuevo controlador:** php artisan make:controller ControllerName
--**Agregar nueva ruta a routes/web.php:** para que no salte error al cargar la pagina, por cada ruta nueva que definamos en routes/web.php tendremos que hacer:
+- **Agregar nueva ruta a routes/web.php:** para que no salte error al cargar la pagina, por cada ruta nueva que definamos en routes/web.php tendremos que hacer:
+
 ```
 php artisan clear-compile
 php artisan optimize
@@ -54,12 +56,13 @@ php artisan optimize
 - **Crear Modelo (Dentro de una carpeta especifica):** php artisan make:model Http/Models/Review
 
 ## Pruebas - Seeders
+
 - **Crear seeder:** php artisan make:seeder NAMETableSeeder
 - **Ejecutar seeder:** puede hacerse de las siguientes maneras
     -php artisan migrate --seed
     -php artisan migrate:refresh --seeds
     -php artisan db:seed (Para ejecutarlos sin los migrates)
-- **importante:** En los triggers de creacion siempre hacerlos con CREATED/CREATING. No importa que a la hora de crear las instancias se haya persistido con SAVE(). (Esto debido a que en ocaciones posteriores tambien se usara el SAVE() para hacer Updates, y por lo tanto estaran presentes las acciones del trigger dicho al principio, lo cual ocasionaria problemas;
+- **Importante:** En los triggers de creacion siempre hacerlos con CREATED/CREATING. No importa que a la hora de crear las instancias se haya persistido con SAVE(). (Esto debido a que en ocaciones posteriores tambien se usara el SAVE() para hacer Updates, y por lo tanto estaran presentes las acciones del trigger dicho al principio, lo cual ocasionaria problemas;
 
 ## Solucion de Problemas
 
@@ -91,19 +94,23 @@ Mas info en [https://curl.haxx.se/docs/sslcerts.html](https://curl.haxx.se/docs/
 Sucede cuando ejecutas este comando para volver a compilar el proyecto por algun motivo en especial
 ```
 php artisan clear-compile
-php artisan optimize
+php artisan optimize /* Cachea las routes (archivo web.php) */
 ```
 
 #### Solucion
+
 Me funciono con la TERCER respuesta y explicacion del link adjunto. (https://stackoverflow.com/questions/45266254/laravel-unable-to-prepare-route-for-serialization-uses-closure)
 
 ### Problema 4: **Error 419 (unknown status) - con Ajax**
 
-#### Descripcion:
+#### Descripcion
+
 Salta al momento de hacer una solicitud AJAX con el metodo POST al servidor.
 
-#### Solucion:
+#### Solucion
+
 1. Se puede solucionar yendo a la clase App\Http\Kernel.php y en el apartado siguiente descomentar la linea marcada (NO SE RECOMIENDA, SOLO SI NO QUEDA OTRA MANERA).
+
 ```
 protected $middlewareGroups = [
     'web' => [
@@ -115,24 +122,42 @@ protected $middlewareGroups = [
                 **\App\Http\Middleware\VerifyCsrfToken::class**, ---> DESCOMENTAR ESTA.
                 \Illuminate\Routing\Middleware\SubstituteBindings::class,
     ]
-```    
+```
 
 2. O BIEN, para solucionarlo y no dejar de perder un aspecto de seguridad en el proyecto, al momento de hacer la request AJAX, seteamos lo siguiente. (RECOMENDADA).
+
 ```
 AJAXRequest.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'));
 ```
 
 ### Problema 5: **SQLSTATE[42S22]: Column not found: 1054 Unknown column 'id' in 'where clause'**
 
-#### descripcion:
+#### Descripcion
+
   Sucede cuando se intenta actualizar (UPDATE) una registro ya existente de una tabla que tiene clave primaria compuesta. Ejemplo: Score_Review (User_id, review_id).
   Esto pasa porque Eloquent la actualiza internamente mediante "id" y al buscarlo no lo encuentra.
   Para solucionar esto en casos normales hay que declarar en la clase Models\Modelo.php la linea:
 ```
     protected $primaryKey = 'campo_id';
 ```
+
 El problema es que Eloquent no deja declarar bajo esa sentencia a Primary Keys Compuestas.
 Por ende estamos en un problema, jamas encontrara el id de la tabla Score_Review.
 
-#### Solucion:
+#### Solucion
+
 La unica que se encontro por ahora es identificar a todas las tablas por ID. Y que la logica de que no se pueda repetir una combinacion (en este caso User_id, review_id) pase por nosotros, en los Triggers (convenientemente) o validaciones de entrada.
+
+### Problema 6: **Class RangeTableSeeder does not exist**
+
+#### Descripcion
+
+Ocurre al usar el comando `php artisan --seed`.
+Los seeders no estan con PSR-4, por lo tanto cuando agregas un seeder (y tambien para las migraciones) hay que regenerar la tabla de clases para que laravel sepa donde de donde cargar las clases cuando las necesitas.
+
+#### Solucion
+
+Ejecutar el comando:
+```
+composer dump-autoload
+```
