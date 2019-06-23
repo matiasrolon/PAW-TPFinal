@@ -19,5 +19,6 @@ class DatabaseSeeder extends Seeder
          $this->call(ScoreFilmTableSeeder::class);
          $this->call(ReviewTableSeeder::class);
          $this->call(ScoreReviewTableSeeder::class);
+         $this->call(PendentSearchTableSeeder::class);
     }
 }

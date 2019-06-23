@@ -29,10 +29,17 @@ NavPrincipal.iniciarNavPrincipal= function(contenedorHTML){
        console.log('APP asocio js con html ');
         NavPrincipal.buscador = document.getElementById('buscador');
         console.log(NavPrincipal.buscador);
+
         // cada vez que ingresa caracter en el buscador
-        NavPrincipal.buscador.addEventListener("keyup",function(){
-          clearTimeout(NavPrincipal.intervalo);
-          NavPrincipal.intervalo = setTimeout(NavPrincipal.buscarFilm, 300);
+        NavPrincipal.buscador.addEventListener("keyup",function(event){
+            console.log("se presiono: "+ event.keyCode);
+            if (event.keyCode ==13){
+              console.log("SE APRETO ENTER -> Redireccionar a resultados");
+              window.location.replace('/search/' +NavPrincipal.buscador.value);
+            }else{
+                clearTimeout(NavPrincipal.intervalo);
+                NavPrincipal.intervalo = setTimeout(NavPrincipal.buscarFilm, 300);
+            }
         });
 
         //cuando hace click en cualquier espacio de la pagina, se sale la lista de resultados si la hubiera.
@@ -52,7 +59,7 @@ NavPrincipal.borrarListaResultados = function(){
 
 
 NavPrincipal.buscarFilm = function(){
-  console.log('entro a buscarFilm2...');
+  console.log('entro a buscarFilm...');
     NavPrincipal.borrarListaResultados();
   if (NavPrincipal.buscador.value!=""){
           var request = new XMLHttpRequest();
@@ -70,17 +77,11 @@ NavPrincipal.buscarFilm = function(){
 
 NavPrincipal.enviarRequestSearchFilm = function(request){
     console.log("se va a enviar a '"+ NavPrincipal.buscador.value+"''");
-    request.open("GET", "/search/"+NavPrincipal.buscador.value, true);
+    request.open("GET", "/searchSuggestions/"+NavPrincipal.buscador.value, true);
 //    request.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'));
     request.send();
 }
 
-/*
-<ul class="resultados-buscador">
-    <li class="item-resultado">Item 1</li>
-    <li class="item-resultado">Item 2</li>
-</ul>
-*/
 
 NavPrincipal.recibirResponseSearchFilm= function(response){ //imprime lista de resultados en buscador
     console.log(response);

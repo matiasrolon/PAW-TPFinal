@@ -43,6 +43,4 @@ class HomeController extends Controller
         return view('home', compact('peliculas','series','users'));
     }
 
-
-
 }

@@ -39,6 +39,7 @@ class ApiController extends Controller
         // print_r("--------------- FIN ----------------");
         return $json;
     }
+    
 
     public function search($nombre) {
         //$user_input no esta con los %20, sino escrito bien. Sino no funciona
