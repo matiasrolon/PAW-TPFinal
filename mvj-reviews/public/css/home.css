@@ -7,6 +7,12 @@
 
 }
 
+.ranking {
+  float: right;
+  margin-top: 2%;
+  padding: 2%;
+}
+
 .users-populares div, table{
     display: inline-block;
 }

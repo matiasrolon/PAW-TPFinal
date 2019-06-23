@@ -8,14 +8,11 @@ img{
   width: 30%;
 }
 
-.planilla{
 
+.dato-favorito{
+  display: block;
 }
 
-      .dato-favorito{
-        display: block;
-      }
-
-      .dato-usuario{
-        display: block;
-      }
+.dato-usuario{
+  display: block;
+}

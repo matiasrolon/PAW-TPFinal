@@ -3,12 +3,12 @@
 @section('title') Ranking Criticos | MVJ Reviews @endsection
 
 @section('publics')
-  <link href="{{ asset('css/home.css') }}" rel="stylesheet">
+  <link href="{{ asset('css/ranking_users.css') }}" rel="stylesheet">
 @endsection
 
 @section('content')
     <h2>Ranking de criticos de MVJ:</h2>
-    <table>
+    <table class="tabla">
               <tr>
                 <td>Usuario</td>
                 <td>Rango</td>
