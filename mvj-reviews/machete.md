@@ -10,7 +10,8 @@ Lista de comandos utiles de Laravel.
 - **Lista de comandos:** php artisan list
 - **Orden correcto de parametros en BelongToMany:**
 
-```php
+```
+php
 Class ClaseA extends Model
     public function ClasesB(){ //retorna todas las clasesB que tiene Clase A (Relacion N a N)
       return $this->belongsToMany('App\Models\ClaseB', 'claseA_claseB' (tabla), 'claseA_id', 'claseB_id');
