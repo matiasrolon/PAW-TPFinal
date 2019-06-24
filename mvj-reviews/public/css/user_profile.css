@@ -16,3 +16,12 @@ img{
 .dato-usuario{
   display: block;
 }
+
+.planilla-usuario{
+  display: flex;
+}
+
+.planilla-usuario img{
+ width: 200px;
+ height: 200px;
+}

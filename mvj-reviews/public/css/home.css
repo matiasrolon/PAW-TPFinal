@@ -26,8 +26,11 @@
     display: inline-grid;
     grid-template-columns: repeat(4,auto);
     grid-template-rows: repeat(2,auto);
-    margin: auto;
-    margin-left: 20%
+    margin-left: 20%;
+}
+
+.container-peliculas-populares{
+  margin: auto;
 }
 
 .series{
@@ -41,6 +44,11 @@
   width: 70%;
   display: inline-block;
   position: relative;
+  margin: auto !important;
+}
+
+.films-populares h3{
+  padding: 2%;
 }
 
 .cuadro-film{

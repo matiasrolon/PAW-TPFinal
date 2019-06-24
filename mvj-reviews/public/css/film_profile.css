@@ -29,8 +29,8 @@
 
 .opciones-film{
   display: flex;
+  margin: 2% 1%;
 }
-
 
 .info-film {
   display: flex;
@@ -51,6 +51,10 @@ div.detalles-pelicula ul{
 
 div.detalles-pelicula{
   margin-left: 5%;
+  background: grey;
+  border-radius: 5px 5px;
+  padding: 1% 1% 1% 5%;
+  margin-bottom: %;
 }
 
 .reviews-film-container{
@@ -76,4 +80,8 @@ display: block;
 
 input.titulo-review {
   width: 200px;
+}
+
+.info-review-user{
+  height: 400px;
 }
