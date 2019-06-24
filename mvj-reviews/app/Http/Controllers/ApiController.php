@@ -2,15 +2,16 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use function GuzzleHttp\json_decode;
+// use Illuminate\Http\Request;
+use GuzzleHttp\Client;
+use App\Models\Film;
 
 class ApiController extends Controller
 {
     // Esto iria en el .env?
     protected $API_KEY = '41b4c84d818976ed8ab5cb8bd88066a3';
 
-    public function example(){
+    public function prueba(){
 
         //Lo hago aca para probar. Despues hay que crear la estructura de objetos adecuada
 
@@ -35,12 +36,13 @@ class ApiController extends Controller
         // $json = json_decode(file_get_contents('https://api.themoviedb.org/3/search/movie?api_key=41b4c84d818976ed8ab5cb8bd88066a3&language=es-MX&query=Rapido%20y%20furioso&page=1&include_adult=false'), true);
 
         // print_r("RESULTADO: ");
-        echo ($json);
+        // var_dump($json);
+        // echo ($json);
         // print_r("--------------- FIN ----------------");
         return $json;
     }
 
-    public function search($nombre) {
+    public function search() {
         //$user_input no esta con los %20, sino escrito bien. Sino no funciona
         $user_input = 'Rapido y furioso'; //Es lo que pone en el buscador
         $client = new Client();
@@ -59,6 +61,7 @@ class ApiController extends Controller
         $page = 1;
         $total_pages = 1; // Al menos una pagina
         while ($page <= $total_pages){
+            // Voy pidiendo las paginas de a una.
             $parameters['page'] = strval($page); // Convierto a string
             $httpResponse = $client->request($method, $url, ['query' => $parameters]);
             $jsonApi = $httpResponse->getBody()->getContents();
