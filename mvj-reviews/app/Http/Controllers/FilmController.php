@@ -8,7 +8,9 @@ use App\Models\User;
 use App\Models\Film;
 use App\Models\Review;
 use App\Models\Score_Film;
+use App\Models\PendentSearch;
 use GuzzleHttp\Client;
+
 
 class FilmController extends Controller
 {
@@ -29,6 +31,8 @@ class FilmController extends Controller
      //return $film->titulo;
       return view('film_profile',compact('film','reviews'));
     }
+
+
 
     public function scoreFilm(){
         $obj = json_decode($_POST["objeto"]);
@@ -74,12 +78,31 @@ class FilmController extends Controller
      * @var filmName query que inserta el usuario en el buscador
      */
     public function searchLocalFilm($filmname) {
-      $obj = Film::where('titulo', 'like','%' . $filmname .'%')->select('id','titulo','fecha_estreno','pais','sinopsis', \DB::raw('TO_BASE64(poster) as poster'))->get();
-
-          //$obj[];
-          //$obj->estado = 'OK';
-          //$obj->mensaje = 'recibi la request de search '+$filmname;
+      $obj = Film::where('titulo', 'like','%' . $filmname .'%')
+                   ->select('id','titulo','fecha_estreno','pais','sinopsis', \DB::raw('TO_BASE64(poster) as poster'))
+                   ->get();
       echo json_encode($obj);
+    }
+
+    /*
+    Buscar (vista) que nos direcciona a la pagina con los resultados de la busqueda.
+    */
+    public function search($searchText){
+        $results = Film::where('titulo','like','%' . $searchText .'%')
+                         ->get();
+        if (count($results)==0){
+            $search = PendentSearch::where('busqueda',$searchText)
+                                    ->first();
+            if ($search!=null){ //existe ya esa busqueda pendiente, actualizo cant busquedas
+                $search->cant_busquedas =  ($search->cant_busquedas) +1;
+                $search->save();
+            }else{
+              $new_search = new PendentSearch();
+              $new_search->busqueda = $searchText;
+              $new_search->save();
+            }
+        }
+        return view('search',compact('results','searchText'));
     }
 
     public function store(Request $request)

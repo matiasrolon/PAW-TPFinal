@@ -15,11 +15,11 @@
                     <div class="detalles-pelicula">
                       <ul>
                         <h2>{{ $film['titulo'] }} </h2>
-                        <li> <b>Estreno:</b> {{ $film['fecha_estreno'] }} </li>
-                        <li> <b>Pais:</b> {{ $film['pais'] }} </li>
-                        <li> <b>Sinopsis:</b> {{ $film['sinopsis'] }} </li>
-                        <li> <b>Categoria:</b> {{ $film['categoria'] }} </li>
-                        <li> <b>Puntaje:</b> {{ $film['puntaje'] }} </li>
+                        <li> <strong>Estreno:</strong> {{ $film['fecha_estreno'] }} </li>
+                        <li> <strong>Pais:</strong> {{ $film['pais'] }} </li>
+                        <li> <strong>Sinopsis:</strong> {{ $film['sinopsis'] }} </li>
+                        <li> <strong>Categoria:</strong> {{ $film['categoria'] }} </li>
+                        <li> <strong>Puntaje:</strong> {{ $film['puntaje'] }} </li>
                       </ul>
                     </div>
                   <!-- AGREGAR MAS CAMPOS ;SI ES NECESARIO. -->
@@ -36,7 +36,7 @@
                           <!-- ___________________________________________________________________________   -->
                       </div><!-- fin div acciones-film -->
 
-                      <div class="container">
+                      <div class="container reviews-film-container">
                           <nav class="menu">
                               <div class="item trailer">
                                 trailer

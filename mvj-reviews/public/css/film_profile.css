@@ -21,7 +21,16 @@
   display: inline-block;
 }
 
+.acciones{
+  width: 200px;
+  margin-left: 5%;
+  position: relative;
+}
 
+.opciones-film{
+  display: flex;
+  margin: 2% 1%;
+}
 
 .info-film {
   display: flex;
@@ -42,6 +51,15 @@ div.detalles-pelicula ul{
 
 div.detalles-pelicula{
   margin-left: 5%;
+  background: grey;
+  border-radius: 5px 5px;
+  padding: 1% 1% 1% 5%;
+  margin-bottom: %;
+}
+
+.reviews-film-container{
+  float:right;
+  margin-left: 5%;
 }
 
 .opciones-film .container .menu .item:hover{
@@ -58,4 +76,12 @@ display: block;
 .descripcion-review-user{
   background: lightblue;
   padding: 1%;
+}
+
+input.titulo-review {
+  width: 200px;
+}
+
+.info-review-user{
+  height: 400px;
 }

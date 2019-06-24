@@ -32,7 +32,8 @@ Route::post('/scoreFilm','FilmController@scoreFilm')->name('scoreFilm');
 Route::post('/addReview','ReviewController@addReview')->name('addReview');
 Route::post('/addScoreReview','ReviewController@addScoreReview')->name('addScoreReview');
 Route::get('/searchAPI', 'ApiController@search');
-Route::get('/search/{filmname}','FilmController@searchLocalFilm')->name('searchFilm');
+Route::get('/searchSuggestions/{filmname}','FilmController@searchLocalFilm')->name('searchLocalFilm');
+Route::get('/search/{filmname}','FilmController@search')->name('search');
 
 
 

@@ -11,26 +11,28 @@
         <section class="films-populares">
 
             <h3> Peliculas Populares</h3>
-            <section class="peliculas">
-              @foreach($peliculas as $pelicula)
-              <div class="flip-card">
-                  <div class="cuadro-film flip-card-inner">
-                    <div class="flip-card-front">
-                      <p class="puntuacion puntuacion-muy-buena">{{$pelicula['puntaje']}}</p>
-                      <img class="poster" src="data:image/png;base64,{{$pelicula['portada']}}">
-                    </div>
-                    <a style="display:block" href="/films/{{$pelicula['id']}}">
-                      <div class="flip-card-back">
-                        <p>{{ $pelicula['fecha_estreno']}}</p>
-                        <p class="titulo-film">{{ $pelicula['titulo']}}</p>
-                        <p>{{ $pelicula['sinopsis']}}</p>
+            <div class="container-peliculas-populares">
+              <section class="peliculas">
+                @foreach($peliculas as $pelicula)
+                <div class="flip-card">
+                    <div class="cuadro-film flip-card-inner">
+                      <div class="flip-card-front">
+                        <p class="puntuacion puntuacion-muy-buena">{{$pelicula['puntaje']}}</p>
+                        <img class="poster" src="data:image/png;base64,{{$pelicula['portada']}}">
                       </div>
-                    </a>
+                      <a style="display:block" href="/films/{{$pelicula['id']}}">
+                        <div class="flip-card-back">
+                          <p>{{ $pelicula['fecha_estreno']}}</p>
+                          <p class="titulo-film">{{ $pelicula['titulo']}}</p>
+                          <p>{{ $pelicula['sinopsis']}}</p>
+                        </div>
+                      </a>
+                    </div>
                   </div>
-                </div>
 
-              @endforeach
-            </section>
+                @endforeach
+              </section>
+            </div>
             <br>
             <h3> Series Populares</h3>
             <section class="series">
@@ -48,7 +50,7 @@
         </section>
 
         <section class="users-populares">
-          <div class="ranking">
+          <div class="ranking tabla">
             <h3> Ranking Usuarios</h3>
             <table>
                       <tr>

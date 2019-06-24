@@ -1,0 +1,12 @@
+.tabla-rank{
+  padding: 3%;
+  border-radius: 5px 5px;
+  border: solid 1px;
+  margin: auto;
+  width: 800px;
+}
+
+
+.rank > table > tbody > tr:hover{
+  background-color: #9dc8f5;
+}
