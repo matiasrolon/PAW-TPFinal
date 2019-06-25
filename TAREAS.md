@@ -4,14 +4,23 @@
 
 - [ ] Termina estructura de las views (.blades) ---> Matias
 - [ ] Averiguar como se interactua con una API externa (IMDB o Similar) ---> Juan
+- Documentar el codigo aunque sea un poquito: que recibe, que devuelve, funciones complejas (que no se entiende a simple vista que hace).
+- [ ] Revisar funcion FilmController\store()
+- Como devolver JSONs (interesante): [https://laravel.com/docs/5.8/responses#json-responses](https://laravel.com/docs/5.8/responses#json-responses)
 
 ## TO-DO (funcional)
 
 ### MashUp - API
 
-- [ ] Parsear peliculas.
-- [ ] Analizar requisitos de la BD para almacenar pelicuas de la API.
-- [ ] Funcion que adapta el formato de las peliculas de la API para insertarlas en la BD.
+- [x] Parsear peliculas. --> Funcion ApiController/search()
+- [x] Analizar requisitos de la BD para almacenar pelicuas de la API.
+  - Campo de ID de la pelicula en la API.
+  - Campo Hash de la info de la API para ver si fue actualizada.
+- [x] Funcion que adapta el formato de las peliculas de la API para insertarlas en la BD.
+  - [ ] Solo falta parsear los trailers.
+  - [ ] Por mejorar: obtener mas detalles de las obras.
+- [ ] Testear si funciona el metodo ApiController/guardarObra()
+- [ ] Como aseguramos que las funciones de la API sean solo accesibles por el admin?
 
 ### Controllers
 
