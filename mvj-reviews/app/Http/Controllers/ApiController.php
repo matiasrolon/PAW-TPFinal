@@ -5,13 +5,45 @@ namespace App\Http\Controllers;
 // use Illuminate\Http\Request;
 use GuzzleHttp\Client;
 use App\Models\Film;
-use League\Flysystem\Exception;
-use function GuzzleHttp\json_decode;
+use Storage;
+// use function GuzzleHttp\json_decode;
 
 class ApiController extends Controller
 {
     // Esto iria en el .env?
     protected $API_KEY = '41b4c84d818976ed8ab5cb8bd88066a3';
+
+    public function getConfig($config, $abreviacion)
+    {
+        if ($config == 'pais') {
+            $archivo = Storage::get('api.countries.json');
+            $contenido = json_decode($archivo);
+            $i = 0;
+            $idioma = false;
+            while (!$idioma && $i < sizeof($contenido)) {
+                if ($contenido[$i]->iso_3166_1 == $abreviacion) {
+                    $idioma =  $contenido[$i]->english_name;
+                }
+                $i++;
+            }
+            return $idioma;
+        }
+        if ($config == 'genero') {
+            $archivo = Storage::get('api.genres.json');
+            $contenido = json_decode($archivo);
+            $i = 0;
+            $genero = false;
+            while (!$genero && $i < sizeof($contenido)) {
+                if ($contenido[$i]->id == $abreviacion) {
+                    $genero =  $contenido[$i]->name;
+                }
+                $i++;
+            }
+            return $genero;
+        }
+        if ($config == 'config') { }
+    }
+
 
     /**
      * * Utilizada para comparar la obra obtenida de la API con el hash almacenado en la BD,
@@ -72,7 +104,9 @@ class ApiController extends Controller
             }
             // Convierto pais a string separado por comas.
             if (isset($obraAPI['origin_country'])) {
-                $film['pais'] = trim(implode(',', $obraAPI['origin_country']));
+                $abreviacion = trim(implode(',', $obraAPI['origin_country']));
+                $pais = $this->getConfig('pais', $abreviacion);
+                $film['pais'] = $pais;
             }
             if (isset($obraAPI['overview'])) {
                 $film['sinopsis'] = $obraAPI['overview'];
@@ -92,23 +126,29 @@ class ApiController extends Controller
             }
             // if (isset()) {$film[''] = ;}
             // $film['puntaje'] = $obraAPI['vote_average'];
-            
+
+            if (isset($obraAPI['poster_path'])) {
+                $film['poster'] = $obraAPI['poster_path'];
+            }
+
             // Requiere de un parseo complejo
             // $film['trailer'] = "";
 
-            // Fecha de estreno y categoria
+            // Categoria
             if (isset($obraAPI['media_type'])) {
                 if ($obraAPI['media_type'] == 'movie') { // Pelicula
                     $film['categoria'] = 'pelicula';
-                    if (isset($obraAPI['release_date'])) {
-                        $film['fecha_estreno'] = $obraAPI['release_date']; // ESTA EN INGLES.
-                    }
                 } elseif ($obraAPI['media_type'] == 'tv') { // Serie
                     $film['categoria'] = 'serie';
-                    if (isset($obraAPI['first_air_date'])) {
-                        $film['fecha_estreno'] = $obraAPI['first_air_date']; // ESTA EN INGLES.
-                    }
                 }
+            }
+
+            // Fecha de estreno
+            if (isset($obraAPI['release_date'])) {
+                $film['fecha_estreno'] = $obraAPI['release_date']; // ESTA EN INGLES.
+            }
+            if (isset($obraAPI['first_air_date'])) {
+                $film['fecha_estreno'] = $obraAPI['first_air_date']; // ESTA EN INGLES.
             }
 
             // ID. idPelicula != idSerie para la API
@@ -138,6 +178,9 @@ class ApiController extends Controller
         try {
             // Objeto Film
             $film = json_decode($_POST('objeto'), TRUE);
+            // $film = array();
+            // $film['id_themoviedb'] = 238;
+            // $film['categoria'] = 'pelicula';
             $client = new Client();
             $method = 'GET';
             if ($film['categoria'] == 'serie') {
@@ -160,18 +203,22 @@ class ApiController extends Controller
                 if ($tmp != false) {
                     $obra = $tmp;
                     // Consigo la portada
-                    $obra['poster'] = $this->getPortadaObra($obra);
+                    $obra['poster'] = $this->getPortadaObra($obra['poster']);
                     if ($obra['poster'] == false) {
                         $obra['poster'] = "";
                     } else {
-                        $obra['hash'] = $this->getHashObra($tmp); //Evito el hash de la imagen
+                        $obra['hash'] = $this->getHashObra($tmp); // Evito el hash de la imagen
+                        $obra['categoria'] = $film['categoria']; // Esto NO esta demas
 
                         // Guardo la obra en la BD. ESTA BIEN QUE LO HAGA ACA? CREO QUE NO. #PREGUNTAEXISTENCIAL
+                        // Deberia ser un JSON?
                         if ($obra->save()) {
-                            return true;
+                            return response()->json('OK: Obra guardada correctamente.');
                         } else {
-                            return false;
+                            return response()->json('Error: No se ha guardado la obra.', 500);
                         }
+
+                        // return response($obra['hash'], 200);
                     }
                 } else {
                     return false;

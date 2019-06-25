@@ -17,10 +17,14 @@
   - Campo de ID de la pelicula en la API.
   - Campo Hash de la info de la API para ver si fue actualizada.
 - [x] Funcion que adapta el formato de las peliculas de la API para insertarlas en la BD.
-  - [ ] Solo falta parsear los trailers.
+  - [ ] Parsear los trailers.
+  - [x] Generos de obras.
   - [ ] Por mejorar: obtener mas detalles de las obras.
-- [ ] Testear si funciona el metodo ApiController/guardarObra()
+- [ ] Como se almacena la configuracion de la API y como se actualiza.
+- [x] Testear si funciona el metodo ApiController/guardarObra()
+  - [ ] Preguntar si ya existe una pelicula con el mismo valor en 'id_themoviedb'
 - [ ] Como aseguramos que las funciones de la API sean solo accesibles por el admin?
+- [ ] Problema: paises de origen en la API estan en ingles. Pasarlos a castellano?
 
 ### Controllers
 
