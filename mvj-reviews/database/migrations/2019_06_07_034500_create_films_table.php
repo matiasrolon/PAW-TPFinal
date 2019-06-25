@@ -26,6 +26,10 @@ class CreateFilmsTable extends Migration
             $table->string('trailer',300)->nullable();
             $table->double('puntaje'); //Calculado con triggers
             $table->timestamps();
+
+            //Agregue para usar con la API
+            $table->string('hash', 40)->nullable();
+            $table->integer('id_themoviedb')->nullable()->unique();
         });
        DB::statement("ALTER TABLE film ADD poster MEDIUMBLOB");
     }
