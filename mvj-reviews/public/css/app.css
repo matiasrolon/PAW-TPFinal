@@ -16,9 +16,9 @@
 
 #app, body{
   width: 100%;
-  background-color: black;
+  background-color:#BEC3E8;
   font-family: 'Pridi', serif;
-  color: white;
+  color: black;
 }
 
 .nav-principal{
@@ -112,7 +112,7 @@
 
 
 .menus{
-  background-color: #9dc8f5;
+  background-color: #3140B8;
   display: inline-block;
   width: 100%;
   height: 30%;

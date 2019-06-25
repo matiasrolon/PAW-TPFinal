@@ -23,4 +23,15 @@ class Film extends Model
     public function artistsFunction(){
       return $this->hasMany('App\Models\Film_Artist', 'film_id', 'id');
     }
+
+    public static function boot()
+   {
+       parent::boot();
+
+       self::creating(function ($film) {
+              $film->puntaje = 0;
+           }
+        );
+
+   }
 }

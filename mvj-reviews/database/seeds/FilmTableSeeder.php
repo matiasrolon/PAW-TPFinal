@@ -22,7 +22,6 @@ class FilmTableSeeder extends Seeder
         $film1->poster = file_get_contents ('https://i.pinimg.com/originals/f4/7e/a5/f47ea5c518f38b55f48ff13f1c0a6fb2.jpg');
         $film1->trailer ='https://www.youtube.com/watch?v=V75dMMIW2B4&ab_channel=Movieclips';
         $film1->duracion_min = 179;
-        $film1->puntaje=0;
         $film1->save();
 //pelicula id =2
         $film1 = new Film();
@@ -34,7 +33,6 @@ class FilmTableSeeder extends Seeder
         $film1->trailer ='https://www.youtube.com/watch?v=-pNMIhnlEho&ab_channel=amboliatoto';
         $film1->poster = file_get_contents ('https://images-na.ssl-images-amazon.com/images/I/71NbaIPFvkL._SY445_.jpg');
         $film1->duracion_min = 135;
-        $film1->puntaje=0;
         $film1->save();
 //pelicula id =3
         $film1 = new Film();
@@ -46,7 +44,6 @@ class FilmTableSeeder extends Seeder
         $film1->trailer ='https://www.youtube.com/watch?v=1bq0qff4iF8&ab_channel=MovieclipsClassicTrailers';
         $film1->poster = file_get_contents ('https://i.pinimg.com/originals/f4/7e/a5/f47ea5c518f38b55f48ff13f1c0a6fb2.jpg');
         $film1->duracion_min = 179;
-        $film1->puntaje=0;
         $film1->save();
 //pelicula id =4
         $film1 = new Film();
@@ -58,7 +55,6 @@ class FilmTableSeeder extends Seeder
         $film1->trailer ='https://www.youtube.com/watch?v=1bq0qff4iF8&ab_channel=MovieclipsClassicTrailers';
         $film1->poster = file_get_contents ('https://images-na.ssl-images-amazon.com/images/I/71NbaIPFvkL._SY445_.jpg');
         $film1->duracion_min = 135;
-        $film1->puntaje=0;
         $film1->save();
 //pelicula 5
         $film1 = new Film();
@@ -70,7 +66,6 @@ class FilmTableSeeder extends Seeder
         $film1->trailer ='https://www.youtube.com/watch?v=1bq0qff4iF8&ab_channel=MovieclipsClassicTrailers';
         $film1->poster = file_get_contents ('https://i.pinimg.com/originals/f4/7e/a5/f47ea5c518f38b55f48ff13f1c0a6fb2.jpg');
         $film1->duracion_min = 179;
-        $film1->puntaje=0;
         $film1->save();
 //pelicula id =6
         $film1 = new Film();
@@ -82,7 +77,6 @@ class FilmTableSeeder extends Seeder
         $film1->trailer ='https://www.youtube.com/watch?v=1bq0qff4iF8&ab_channel=MovieclipsClassicTrailers';
         $film1->poster = file_get_contents ('https://images-na.ssl-images-amazon.com/images/I/71NbaIPFvkL._SY445_.jpg');
         $film1->duracion_min = 135;
-        $film1->puntaje=0;
         $film1->save();
 //pelicula id =7
         $film1 = new Film();
@@ -94,7 +88,6 @@ class FilmTableSeeder extends Seeder
         $film1->trailer ='https://www.youtube.com/watch?v=1bq0qff4iF8&ab_channel=MovieclipsClassicTrailers';
         $film1->poster = file_get_contents ('https://i.pinimg.com/originals/f4/7e/a5/f47ea5c518f38b55f48ff13f1c0a6fb2.jpg');
         $film1->duracion_min = 179;
-        $film1->puntaje=0;
         $film1->save();
 //pelicula id =8
         $film1 = new Film();
@@ -106,7 +99,6 @@ class FilmTableSeeder extends Seeder
         $film1->trailer ='https://www.youtube.com/watch?v=1bq0qff4iF8&ab_channel=MovieclipsClassicTrailers';
         $film1->poster = file_get_contents ('https://images-na.ssl-images-amazon.com/images/I/71NbaIPFvkL._SY445_.jpg');
         $film1->duracion_min = 135;
-        $film1->puntaje=0;
         $film1->save();
 
 
@@ -122,7 +114,6 @@ class FilmTableSeeder extends Seeder
         $film1->trailer ='https://www.youtube.com/watch?v=1bq0qff4iF8&ab_channel=MovieclipsClassicTrailers';
         $film1->poster = file_get_contents ('https://playmax.xyz/img/c/400/1/1485452104/58.jpg');
         $film1->duracion_min = 0;
-        $film1->puntaje=0;
         $film1->save();
 
 //serie 2 id =10
@@ -136,7 +127,6 @@ class FilmTableSeeder extends Seeder
         $film1->trailer ='https://www.youtube.com/watch?v=1bq0qff4iF8&ab_channel=MovieclipsClassicTrailers';
         $film1->poster = file_get_contents ('http://www.caratulasylogos.com/sites/default/files/breaking_bad.jpg');
         $film1->duracion_min = 45;
-        $film1->puntaje=0;
         $film1->save();
 
 //serie 3 id =11
@@ -150,7 +140,6 @@ class FilmTableSeeder extends Seeder
         $film1->trailer ='https://www.youtube.com/watch?v=1bq0qff4iF8&ab_channel=MovieclipsClassicTrailers';
         $film1->poster = file_get_contents ('https://playmax.xyz/img/c/400/1/1485452104/58.jpg');
         $film1->duracion_min = 60;
-        $film1->puntaje=0;
         $film1->save();
 
 //serie 4 id =12

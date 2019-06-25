@@ -17,16 +17,17 @@ class CreateFilmsTable extends Migration
             $table->bigIncrements('id');
             $table->string('titulo', 100);
             $table->date('fecha_estreno');
-            $table->string('sinopsis',500);
+            $table->string('sinopsis',1000);
             $table->string('pais',30)->nullable();
-            $table->double('duracion_min'); // Duracion en minutos
+            $table->double('duracion_min')->nullable();
             $table->string('categoria', 20);// Pelicula / serie / corto / etc
             $table->date('fecha_finalizacion')->nullable();
-            $table->binary('poster')->nullable();
+          //  $table->binary('poster')->nullable();
             $table->string('trailer',300)->nullable();
             $table->double('puntaje'); //Calculado con triggers
             $table->timestamps();
         });
+       DB::statement("ALTER TABLE film ADD poster MEDIUMBLOB");
     }
 
     /**
