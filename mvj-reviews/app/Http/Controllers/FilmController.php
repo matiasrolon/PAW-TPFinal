@@ -105,6 +105,39 @@ class FilmController extends Controller
         return view('search',compact('results','searchText'));
     }
 
+    /**
+     * Para saber si la version que recupero de la API fue actualizada.
+     * @param Film $filmAntiguo es el Film que tengo almacenado en la BD
+     * @param Film $filmNuevo es el Film que recupero de la busqueda que hizo la API.
+     * @return integer Codigos de respuesta:
+     * * 1 = Esta actualizada;
+     * * 0 = No esta actualizada;
+     * * -1 = Error. Distinto id;
+     * * -2 = Error. Distintto id_themoviedb;
+     */
+    public function isUpToDate($filmAntiguo, $filmNuevo){
+        if ($filmAntiguo['id'] != $filmNuevo['id']) {
+            return -1;
+        } elseif ($filmAntiguo['id_themoviedb'] != $filmNuevo['id_themoviedb']) {
+            return -2;
+        } elseif ($filmAntiguo['hash'] != $filmNuevo['hash']) {
+            return 0;
+        } else {
+            return 1; 
+        }
+    }
+
+    /**
+     * - FIXME: Faltan algunas validaciones. No son de urgencia, solo dejo el recordatorio.
+     * - Las fechas se almacenan en ingles: YYYY-MM-DD. En la API tambien es asi, por lo que esta bueno que asi sea.
+     * - Mostrar la fecha en castellano debe ser un problema que soluciona la vista (MVC).
+     * - Falta guardar el poster.
+     * - Cambiar el campo 'trailer' por 'trailer_url'.
+     * - Agregar los campos:
+     *      'id_themoviedb' int
+     *      'hash' string(40)
+     *      'cant_temporadas' int
+     */
     public function store(Request $request)
     {
         // Validate the request...

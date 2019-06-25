@@ -5,105 +5,247 @@ namespace App\Http\Controllers;
 // use Illuminate\Http\Request;
 use GuzzleHttp\Client;
 use App\Models\Film;
+use League\Flysystem\Exception;
+use function GuzzleHttp\json_decode;
 
 class ApiController extends Controller
 {
     // Esto iria en el .env?
     protected $API_KEY = '41b4c84d818976ed8ab5cb8bd88066a3';
 
-    public function prueba(){
-
-        //Lo hago aca para probar. Despues hay que crear la estructura de objetos adecuada
-
-        //$user_input no esta con los %20, sino escrito bien. Sino no funciona
-        $user_input = 'Rapido y furioso'; //Es lo que pone en el buscador
-        $client = new Client();
-        $method = 'GET';
-        $url2 = 'https://api.themoviedb.org/3/search/movie?api_key=41b4c84d818976ed8ab5cb8bd88066a3&language=es-MX&query=Rapido%20y%20furioso&page=1&include_adult=false';
-        $url = 'https://api.themoviedb.org/3/search/movie';
-        // Parametros de la API
-        $parameters = ['api_key' => '41b4c84d818976ed8ab5cb8bd88066a3',
-                        'language' => 'es-MX',
-                        'query' => $user_input,
-                        'page' => '1',
-                        'include_adult' => 'false'];
-        $httpResponse = $client->request($method, $url, ['query' => $parameters]);
-        // $httpResponse = $client->request($method, $url2);
-        // $jsonApi = $httpResponse->getBody()->getContents();
-        $jsonApi = $httpResponse->getBody()->getContents();
-        $json = $jsonApi;
-
-        // $json = json_decode(file_get_contents('https://api.themoviedb.org/3/search/movie?api_key=41b4c84d818976ed8ab5cb8bd88066a3&language=es-MX&query=Rapido%20y%20furioso&page=1&include_adult=false'), true);
-
-        // print_r("RESULTADO: ");
-        // var_dump($json);
-        // echo ($json);
-        // print_r("--------------- FIN ----------------");
-        return $json;
+    /**
+     * * Utilizada para comparar la obra obtenida de la API con el hash almacenado en la BD,
+     * el cual pertenece la misma obra, que fue almacenada en un momento anterior.
+     * @param $obraApi 
+     * Recibe una obra como arreglo.
+     * @return string. sha1 de la obra.
+     */
+    private function getHashObra($obraApi)
+    {
+        // La funcion serialize es muy lenta comparada con json_encode
+        // Pero json_encode dio el error: Malformed UTF-8 characters, possibly incorrectly encoded.
+        // Algun otra alternativa?
+        return sha1(serialize($obraApi));
     }
-    
 
-    public function search() {
-        //$user_input no esta con los %20, sino escrito bien. Sino no funciona
-        $user_input = 'Rapido y furioso'; //Es lo que pone en el buscador
+    /**
+     * Recupera la portada de la obra mediante la API.
+     * Esta funcion es CONSIDERABLEMENTE lenta.
+     * @param string $urlPoster URL que proporciona la API.
+     * @return binary|false la imagen.
+     */
+    private function getPortadaObra($urlPoster)
+    {
         $client = new Client();
-        $method = 'GET';
-        $url = 'https://api.themoviedb.org/3/search/multi';
+        $basePath = 'https://image.tmdb.org/t/p/original';
+        $path =  $basePath . $urlPoster; // Trae un Slash / por defecto.
+        $httpResponse = $client->request('GET', $path);
+        if ($httpResponse->getStatusCode() == 200) {
+            $poster = $httpResponse->getBody()->getContents();
+            // Es necesario guardar la extension? En ese caso, viene al final de poster_path.
+            // $film['poster'] = base64_encode($poster);
+            return $poster;
+        } else {
+            return false;
+        }
+    }
 
-        // Parametros de la API
-        $parameters = ['api_key' => '41b4c84d818976ed8ab5cb8bd88066a3',
-                        'language' => 'es-MX',
-                        'query' => $user_input,
-                        'page' => '1',
-                        'include_adult' => 'true'];
+    /**
+     * Recibe la pelicula o serie de la API.
+     * En Film['poster'] guarda la URL de la imagen. Mas tarde debera ser recuperada.
+     * Para ello utilizar getPortadaObra()
+     * @todo 
+     * * Que agregue el trailer sugerido por la API. Esta tarea podria quedar a cargo del administrador?
+     * * Cantidad de temporadas? --> Si lo agregan en la BD
+     * @return Film|false. Devuelve una instancia de Film lista para almacenar en la BD.
+     */
+    private function parsearObra($obraAPI)
+    {
+        try {
+            $film = new Film();
+            /* protected $fillable = ['titulo','fecha_estreno','pais','sinopsis','duracion_min',
+                          'categoria','fecha_finalizacion','puntaje','poster','trailer'];
+                          */
 
-        //WARNING: 40 requests every 10 seconds max
-
-        $page = 1;
-        $total_pages = 1; // Al menos una pagina
-        while ($page <= $total_pages){
-            // Voy pidiendo las paginas de a una.
-            $parameters['page'] = strval($page); // Convierto a string
-            $httpResponse = $client->request($method, $url, ['query' => $parameters]);
-            $jsonApi = $httpResponse->getBody()->getContents();
-            $resp = json_decode($jsonApi, true);
-            $total_results = (int) $resp['total_results']; // Cant peliculas encontradas
-            $total_pages = (int) $resp["total_pages"]; // Total de paginas
-            $results = $resp["results"]; // Arreglo
-
-            // Recorro Obras (Pueden ser peliculas, series o actores)
-            for ($i= 0; $i < sizeof($results); $i++){
-                $film = new Film();
-                // ['titulo','fecha_estreno','pais','sinopsis','duracion_min',
-                //          'categoria','fecha_finalizacion','puntaje','poster'];
-
-                // ACTUALIZAR CAMPOS
-                // $film['categoria'] = $results[$i]['media_type'];
-                $film['titulo'] = $results[$i]['title'];
-                // $film['pais'] = $results[$i]['title'];
-                $film['sinopsis'] = $results[$i]['overview'];
-                // $film['duracion_min'] = $results[$i]['title'];
-                // $film['fecha_finalizacion'] = $results[$i]['title'];
-                // $film['puntaje'] = $results[$i]['title'];
-                // $film['poster'] = $results[$i]['title'];
-
-                if ($results[$i]['media_type'] == 'movie'){ // Pelicula
-                    $film['categoria'] = 'pelicula'; // REVISAR. CAMBIARON EL TIPO EN LA BD
-                    $film['fecha_estreno'] = $results[$i]['release_date']; // ESTA EN INGLES. REVISAR
-                } elseif ($results[$i]['media_type'] == 'tv'){ // Serie
-                    $film['categoria'] = 'serie'; // REVISAR. CAMBIARON EL TIPO EN LA BD
-                    $film['fecha_estreno'] = $results[$i]['first_air_date']; // ESTA EN INGLES. REVISAR
+            if (isset($obraAPI['title'])) {
+                $film['titulo'] = $obraAPI['title'];
+            }
+            // Convierto pais a string separado por comas.
+            if (isset($obraAPI['origin_country'])) {
+                $film['pais'] = trim(implode(',', $obraAPI['origin_country']));
+            }
+            if (isset($obraAPI['overview'])) {
+                $film['sinopsis'] = $obraAPI['overview'];
+            }
+            // A menudo este campo no esta disponible
+            if (isset($obraAPI['runtime'])) {
+                $film['duracion_min'] = $obraAPI['runtime'];
+            }
+            if (isset($obraAPI['media_type'])) {
+                $film['categoria'] = $obraAPI['media_type'];
+            }
+            // Ya termino la serie
+            if (isset($obraAPI['in_production']) && isset($obraAPI['last_air_date'])) {
+                if ($obraAPI['in_production'] == false) {
+                    $film['fecha_finalizacion'] = $obraAPI['last_air_date'];
                 }
+            }
+            // if (isset()) {$film[''] = ;}
+            // $film['puntaje'] = $obraAPI['vote_average'];
+            
+            // Requiere de un parseo complejo
+            // $film['trailer'] = "";
 
+            // Fecha de estreno y categoria
+            if (isset($obraAPI['media_type'])) {
+                if ($obraAPI['media_type'] == 'movie') { // Pelicula
+                    $film['categoria'] = 'pelicula';
+                    if (isset($obraAPI['release_date'])) {
+                        $film['fecha_estreno'] = $obraAPI['release_date']; // ESTA EN INGLES.
+                    }
+                } elseif ($obraAPI['media_type'] == 'tv') { // Serie
+                    $film['categoria'] = 'serie';
+                    if (isset($obraAPI['first_air_date'])) {
+                        $film['fecha_estreno'] = $obraAPI['first_air_date']; // ESTA EN INGLES.
+                    }
+                }
             }
 
-            $page++;
+            // ID. idPelicula != idSerie para la API
+            if (isset($obraAPI['id'])) {
+                $film['id_themoviedb'] = $obraAPI['id'];
+            }
+
+            // Funcion hasa sobre la obra para posterior comparacion
+            // Paso la obra a json para que sea string (necesario para el sha1)
+            // $film['hash'] = $this->getHashObra($obraAPI);
+
+            return $film;
+        } catch (Exception $e) {
+            Log::error($e . ' --- Error en el metodo parsearObra() de ApiController. IdObraAPI: ' . $obraAPI['title'] || '');
+            return false;
         }
+    }
 
 
-        $page = $resp['page']; // Empieza en 1
+    /**
+     * Esta funcion debe ser utilizada para almacenar la obra. Aunque no se si deberia hacerlo aca.
+     * Hace una nueva solicitud a la API para traer todos los detalles.
+     * @return boolean Se guardo o no en la BD
+     */
+    public function guardarObra()
+    {
+        try {
+            // Objeto Film
+            $film = json_decode($_POST('objeto'), TRUE);
+            $client = new Client();
+            $method = 'GET';
+            if ($film['categoria'] == 'serie') {
+                $url = 'https://api.themoviedb.org/3/tv/' . $film['id_themoviedb'];
+            } elseif ($film['categoria'] == 'pelicula') {
+                $url = 'https://api.themoviedb.org/3/movie/' . $film['id_themoviedb'];
+            }
 
+            // Parametros de la API
+            $parameters = [
+                'api_key' => '41b4c84d818976ed8ab5cb8bd88066a3',
+                'language' => 'es-MX',
+            ];
 
+            $httpResponse = $client->request($method, $url, ['query' => $parameters]);
+            if ($httpResponse->getStatusCode() == 200) {
+                $jsonApi = $httpResponse->getBody()->getContents();
+                $resp = json_decode($jsonApi, true);
+                $tmp = $this->parsearObra($resp);
+                if ($tmp != false) {
+                    $obra = $tmp;
+                    // Consigo la portada
+                    $obra['poster'] = $this->getPortadaObra($obra);
+                    if ($obra['poster'] == false) {
+                        $obra['poster'] = "";
+                    } else {
+                        $obra['hash'] = $this->getHashObra($tmp); //Evito el hash de la imagen
 
+                        // Guardo la obra en la BD. ESTA BIEN QUE LO HAGA ACA? CREO QUE NO. #PREGUNTAEXISTENCIAL
+                        if ($obra->save()) {
+                            return true;
+                        } else {
+                            return false;
+                        }
+                    }
+                } else {
+                    return false;
+                }
+            } else {
+                return false;
+            }
+        } catch (Exception $e) {
+            Log::error($e . " --- Error en el metodo guardarObra() de ApiController.");
+        }
+    }
+
+    /**
+     * Busca tanto peliculas como series en base a su nombre en castellano e ingles.
+     * @param string $keywords Lo que introduce el usuario en el buscador 
+     * @return array|false. Un arreglo de Film con los resultados que dio la API.
+     * Los campos del arreglo son los mismos que los de Film
+     */
+    public function search($keywords)
+    {
+        try {
+            //$user_input no esta con los %20, sino escrito bien. Sino no funciona
+            // $user_input = 'Silicon valley'; //Es lo que pone en el buscador
+            $user_input = $keywords;
+            $client = new Client();
+            $method = 'GET';
+            $url = 'https://api.themoviedb.org/3/search/multi';
+
+            // Parametros de la API
+            $parameters = [
+                'api_key' => '41b4c84d818976ed8ab5cb8bd88066a3',
+                'language' => 'es-MX',
+                'query' => $user_input,
+                'page' => '1',
+                'include_adult' => 'true'
+            ];
+
+            //WARNING: 40 requests every 10 seconds max
+            $films = array(); // Aca devuelvo el resultado
+            $page = 1;
+            $total_pages = 1; // Al menos una pagina
+            while ($page <= $total_pages) {
+                // Voy pidiendo las paginas de a una.
+                $parameters['page'] = strval($page); // Convierto a string
+                $httpResponse = $client->request($method, $url, ['query' => $parameters]);
+                if ($httpResponse->getStatusCode() == 200) {
+                    $jsonApi = $httpResponse->getBody()->getContents();
+                    $resp = json_decode($jsonApi, true);
+                    $total_results = (int)$resp['total_results']; // Cant peliculas encontradas
+                    $total_pages = (int)$resp["total_pages"]; // Total de paginas
+                    $results = $resp["results"]; // Arreglo
+
+                    // Recorro Obras (Pueden ser peliculas, series o actores)
+                    for ($i = 0; $i < sizeof($results); $i++) {
+                        $tmp = $this->parsearObra($results[$i]);
+                        if ($tmp != false) {
+                            //Agrego la obra al arreglo
+                            $films[] = $tmp;
+                        }
+                    }
+                    $page++;
+                } else {
+                    $films = false;
+                }
+
+                // Para que no se cuelgue la API, espero 1 seg entre cada pagina.
+                sleep(1);
+            }
+            // var_dump($httpResponse->getStatusCode());
+            // print("AQUI VA MI VAR DUMP: \n");
+            $json = json_encode($films); // Todo debe ser UTF-8
+            return response()->json($films);
+        } catch (Exception $e) {
+            Log::error($e . ' --- Error en el metodo search() de ApiController.');
+        }
     }
 }

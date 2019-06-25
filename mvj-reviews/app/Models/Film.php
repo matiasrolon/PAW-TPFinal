@@ -10,7 +10,7 @@ class Film extends Model
 
     // Faltan mas propiedades aca. ACTUALICENME
     protected $fillable = ['titulo','fecha_estreno','pais','sinopsis','duracion_min',
-                          'categoria','fecha_finalizacion','puntaje','poster','trailer'];
+                          'categoria','fecha_finalizacion','puntaje','poster','trailer', 'id_themoviedb', 'hash'];
 
     public function tags(){
       return $this->belongsToMany('App\Models\Tag', 'tag_film', 'film_id', 'tag_id');

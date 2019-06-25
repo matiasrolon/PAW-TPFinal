@@ -127,7 +127,7 @@ class FilmTableSeeder extends Seeder
 
 //serie 2 id =10
         $film1 = new Film();
-        $film1->titulo = "Breacking Bad";
+        $film1->titulo = "Breaking Bad";
         $film1->fecha_estreno ='2008-07-10';
         $film1->fecha_finalizacion ='2013-10-13';
         $film1->sinopsis = "Un profesor se mete en el negocio de las drogas cuando se entera que tiene cancer.";
