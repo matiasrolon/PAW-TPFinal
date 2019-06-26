@@ -19,6 +19,7 @@
   background-color:#BEC3E8;
   font-family: 'Pridi', serif;
   color: black;
+  margin: 0%;
 }
 
 .nav-principal{
@@ -114,7 +115,7 @@
 .menus{
   background-color: #3140B8;
   display: inline-block;
-  width: 100%;
+  width: 99.3%;
   height: 30%;
   padding: 5px;
   position: static;

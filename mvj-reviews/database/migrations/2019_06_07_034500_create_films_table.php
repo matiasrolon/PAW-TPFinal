@@ -31,6 +31,7 @@ class CreateFilmsTable extends Migration
             $table->string('hash', 40)->nullable();
             $table->integer('id_themoviedb')->nullable()->unique();
         });
+        //ya que eloquent solo tiene binary, que lo mapea con un BLOB comun. (Menos tamaño)
        DB::statement("ALTER TABLE film ADD poster MEDIUMBLOB");
     }
 

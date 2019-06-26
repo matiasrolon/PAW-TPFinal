@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Review;
+use App\Models\PendentSearch;
 
 class UserController extends Controller
 {
@@ -42,6 +43,7 @@ class UserController extends Controller
 
       return view('user_profile',compact('user','reviews'));
     }
+
 
 //PROCEDIMIENTOS INACTIVOS, YA QUE LA VALIDACION DE REGISTRO LA HACE Auth\RegistrerController
     public function store(Request $request)

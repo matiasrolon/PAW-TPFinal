@@ -1,0 +1,45 @@
+
+.pendientes{
+  display: inline-block;
+  width: 30%;
+}
+
+.busqueda{
+  display: inline-block;
+  width: 99%;
+  border: solid 1px black;
+  background-color: purple;
+}
+
+.info-busqueda p{
+  margin: 2%;
+  display: block;
+}
+
+.info-busqueda{
+  display: inline-block;
+  width: 75%;
+}
+
+.resolver-busqueda{
+  display: inline-block;
+  position: relative;
+  float: right;
+}
+/*----------------------------------------------------*/
+
+.administrador-films{
+  display: inline-block;
+  width: 69%;
+  height: 100%;
+  position: absolute;
+  align-items: center;
+    margin-top: 5%;
+}
+
+.resultados{
+  display: inline-block;
+  height: 70%;
+  width: 100%;
+  background-color: blue;
+}
