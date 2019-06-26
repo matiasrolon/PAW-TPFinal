@@ -52,7 +52,7 @@ class ApiController extends Controller
      * Recibe una obra como arreglo.
      * @return string. sha1 de la obra.
      */
-    private function getHashObra($filmApi)
+    private function getFilmHash($filmApi)
     {
         // La funcion serialize es muy lenta comparada con json_encode
         // Pero json_encode dio el error: Malformed UTF-8 characters, possibly incorrectly encoded.
@@ -102,7 +102,7 @@ class ApiController extends Controller
             // Convierto pais a string separado por comas.
             if (isset($filmAPI['origin_country'])) {
                 $abreviacion = trim(implode(',', $filmAPI['origin_country']));
-                $pais = '';//$this->getConfig('pais', $abreviacion);
+                $pais = ''; //$this->getConfig('pais', $abreviacion);
                 $film['pais'] = $pais;
             }
             if (isset($filmAPI['overview'])) {
@@ -123,7 +123,9 @@ class ApiController extends Controller
             }
 
             if (isset($filmAPI['poster_path'])) {
-                $film['poster'] = 'https://image.tmdb.org/t/p/w500/' . $filmAPI['poster_path'];
+                // $film['poster'] = 'https://image.tmdb.org/t/p/w500/' . $filmAPI['poster_path'];
+                // Me parece que es asi (PROBAR!!!)
+                $film['poster'] = 'https://image.tmdb.org/t/p/w500' . $filmAPI['poster_path'];
             }
 
             // Requiere de un parseo complejo
@@ -153,7 +155,7 @@ class ApiController extends Controller
 
             // Funcion hasa sobre la obra para posterior comparacion
             // Paso la obra a json para que sea string (necesario para el sha1)
-            // $film['hash'] = $this->getHashObra($obraAPI);
+            // $film['hash'] = $this->getFilmHash($obraAPI);
 
             return $film;
         } catch (Exception $e) {
@@ -202,7 +204,7 @@ class ApiController extends Controller
                     if ($obra['poster'] == false) {
                         $obra['poster'] = "";
                     } else {
-                        $obra['hash'] = $this->getHashObra($tmp); // Evito el hash de la imagen
+                        $obra['hash'] = $this->getFilmHash($tmp); // Evito el hash de la imagen
                         $obra['categoria'] = $film['categoria']; // Esto NO esta demas
 
                         // Guardo la obra en la BD. ESTA BIEN QUE LO HAGA ACA? CREO QUE NO. #PREGUNTAEXISTENCIAL
@@ -282,12 +284,21 @@ class ApiController extends Controller
                 }
 
                 // Para que no se cuelgue la API, espero 1 seg entre cada pagina.
-              //  sleep(1);
+                // sleep(1);
+                // 0.33 segundos. Lo mas optimo
+                usleep(333333);
             }
             // var_dump($httpResponse->getStatusCode());
             // print("AQUI VA MI VAR DUMP: \n");
-            $json = json_encode($films); // Todo debe ser UTF-8
-            return $json;
+            // $json = json_encode($films); // Todo debe ser UTF-8
+            // return $json;
+            // Por que sacaron esto? 
+            /* Como esta puesto arriba, devuelve un doc HTML con un json en el body
+                En cambio como esta abajo devuelve 'application/json' en el heade Content-Type.
+                Ademas note que en usan la forma de arriba, estaba escapando todos los slashes /
+                en Film['poster']
+                Tengo entendido que el de abajo es lo correcto. */
+            return response()->json($films);
         } catch (Exception $e) {
             Log::error($e . ' --- Error en el metodo search() de ApiController.');
         }
