@@ -54,26 +54,35 @@ AdminFilms.recibirResponseSearchFilmsAdmin = function (response) {
   var divResultados = document.getElementsByClassName('resultados')[0];
 
   // Agrego cada resultado al contenedor
-  resp.forEach(function(value, index, array) {
+  resp.forEach(function (value, index, array) {
     var resultado = document.createElement('div');
     resultado.classList.add('resultado');
     resultado.id = "r" + index.toString();
-    
+
+    // Primero recupero el poster. Podria ser async?
+    var poster = document.createElement('img');
+    poster.classList.add('poster');
+    poster.src = value['poster'];
+    poster.alt = 'Poster';
+    resultado.appendChild(poster);
+
     // En vez de hacer un for podria hacerse a mano, eligiendo solo lo que queremos mostrar
     // Ej la imagen.
     // Cada value es un objeto Film
     // Itero sobre los films
     for (f in value) {
       // console.log(f + " - " + value[f]);
-      var encabezado = document.createElement('h4');
-      encabezado.classList.add('encabezado-resultado');
-      encabezado.innerHTML = f; // Ej: 'titulo'
-      resultado.appendChild(encabezado);
+      if (f != 'poster') {
+        var encabezado = document.createElement('h4');
+        encabezado.classList.add('encabezado-resultado');
+        encabezado.innerHTML = f; // Ej: 'titulo'
+        resultado.appendChild(encabezado);
 
-      var cuerpo = document.createElement('p');
-      cuerpo.classList.add('cuerpo-resultado');
-      cuerpo.innerHTML = value[f]; // EJ: 'Buscando a nemo'
-      resultado.appendChild(cuerpo);
+        var cuerpo = document.createElement('p');
+        cuerpo.classList.add('cuerpo-resultado');
+        cuerpo.innerHTML = value[f]; // EJ: 'Buscando a nemo'
+        resultado.appendChild(cuerpo);
+      }
     }
 
     // Lo agrego al contenedor
