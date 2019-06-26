@@ -112,12 +112,13 @@
 
 
 .menus{
-  background-color: #3140B8;
+  background-color: #6498e8;
   display: inline-block;
   width: 100%;
   height: 30%;
   padding: 5px;
   position: static;
+  border-radius: 5px 5px;
 }
 
 .seccion-menu{

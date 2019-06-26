@@ -61,7 +61,7 @@ php artisan optimize
 - **Crear seeder:** php artisan make:seeder NAMETableSeeder
 - **Ejecutar seeder:** puede hacerse de las siguientes maneras
     -php artisan migrate --seed
-    -php artisan migrate:refresh --seeds
+    -php artisan migrate:refresh --seed
     -php artisan db:seed (Para ejecutarlos sin los migrates)
 - **Importante:** En los triggers de creacion siempre hacerlos con CREATED/CREATING. No importa que a la hora de crear las instancias se haya persistido con SAVE(). (Esto debido a que en ocaciones posteriores tambien se usara el SAVE() para hacer Updates, y por lo tanto estaran presentes las acciones del trigger dicho al principio, lo cual ocasionaria problemas;
 

@@ -106,6 +106,29 @@ class FilmController extends Controller
     }
 
     /**
+    * Busca peliculas o series de un genero especifico ordenadas por puntaje. (De a pedazos de data)
+    * @var genero     Id del Genero
+    * @var categoria  {PELICULA / SERIE}
+    * @var offset     Comienza desde X registro
+    * @var cant       Cantidad de tuplas que retorna.
+    */
+    public function searchByGenre($genero, $categoria, $offset, $cant) {
+      $peliculas = Film::leftjoin('genre_film', 'film.id', '=', 'genre_film.film_id')
+                   ->leftjoin('genre', 'genre.id', '=', 'genre_film.genre_id')
+                   ->where('genre.id', '=', $genero)
+                   ->where('film.categoria', '=', $categoria)
+                   ->select('film.id','film.titulo','film.fecha_estreno','film.pais','film.sinopsis', 'film.puntaje', \DB::raw('TO_BASE64(film.poster) as poster'))
+                   ->orderBy('puntaje','desc')
+                   ->skip($offset)->take($cant)
+                   ->get();
+      // $peliculas = Film::select('id','titulo','fecha_estreno','pais','sinopsis','sinopsis', \DB::raw('TO_BASE64(poster) as poster')
+      //               ->get();
+      echo json_encode($peliculas);
+    }
+
+
+
+    /**
      * Para saber si la version que recupero de la API fue actualizada.
      * @param Film $filmAntiguo es el Film que tengo almacenado en la BD
      * @param Film $filmNuevo es el Film que recupero de la busqueda que hizo la API.
@@ -123,7 +146,7 @@ class FilmController extends Controller
         } elseif ($filmAntiguo['hash'] != $filmNuevo['hash']) {
             return 0;
         } else {
-            return 1; 
+            return 1;
         }
     }
 

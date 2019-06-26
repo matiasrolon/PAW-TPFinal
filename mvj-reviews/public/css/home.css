@@ -7,6 +7,24 @@
 
 }
 
+.generos{
+  float: left;
+  margin-top: 2%;
+  padding: 2%;
+  border-radius: 5px 5px;
+  border: 1px solid white;
+}
+
+.generos li{
+  list-style: none;
+  border-radius: 5px 5px;
+}
+
+.generos li:hover{
+  background-color: #3140B8;
+  color: white;
+}
+
 .ranking {
   float: right;
   margin-top: 2%;
@@ -64,10 +82,10 @@
 }
 
 .puntuacion {
-       float: left;
+       float: right;
        position: fixed;
-       left: 5px;
-       top: -11px;
+       left: 155px;
+       top: 240px;
        z-index: 1000;
        padding: 5px;
        color: #FFFFFF;

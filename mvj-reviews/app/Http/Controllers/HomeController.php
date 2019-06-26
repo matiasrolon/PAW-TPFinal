@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Film;
 use App\Models\User;
+use App\Models\Genre;
 
 class HomeController extends Controller
 {
@@ -31,7 +32,6 @@ class HomeController extends Controller
         foreach ($peliculas as $pelicula) {
           $pelicula->portada = base64_encode($pelicula->poster);
         }
-
         $series = Film::where('categoria','Serie')->get();
         foreach ($series as $serie) {
           $serie->portada = base64_encode($serie->poster);
@@ -39,8 +39,8 @@ class HomeController extends Controller
 
         //Aca irian los primeros 15 o 20 usuarios con mejor ranking
         $users = User::orderBy('puntos','desc')->take(5)->get();
-
-        return view('home', compact('peliculas','series','users'));
+        $generos = Genre::all();
+        return view('home', compact('peliculas','series','users', 'generos'));
     }
 
 }
