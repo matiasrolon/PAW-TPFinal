@@ -102,7 +102,7 @@ class ApiController extends Controller
             // Convierto pais a string separado por comas.
             if (isset($filmAPI['origin_country'])) {
                 $abreviacion = trim(implode(',', $filmAPI['origin_country']));
-                $pais = ''; //$this->getConfig('pais', $abreviacion);
+                $pais = $this->getConfig('pais', $abreviacion);
                 $film['pais'] = $pais;
             }
             if (isset($filmAPI['overview'])) {
@@ -208,7 +208,7 @@ class ApiController extends Controller
                         $obra['categoria'] = $film['categoria']; // Esto NO esta demas
 
                         // Guardo la obra en la BD. ESTA BIEN QUE LO HAGA ACA? CREO QUE NO. #PREGUNTAEXISTENCIAL
-                        // Deberia ser un JSON?
+                        // IMPORTANTE: No se como validar que no existe otro film con el mismo 'id_themoviedb'
                         if ($obra->save()) {
                             return response()->json('OK: Obra guardada correctamente.');
                         } else {
@@ -283,22 +283,12 @@ class ApiController extends Controller
                     $films = false;
                 }
 
-                // Para que no se cuelgue la API, espero 1 seg entre cada pagina.
-                // sleep(1);
-                // 0.33 segundos. Lo mas optimo
+                // Para que no se cuelgue la API, espero 0.33 segundos.
+                // Creo que aun puede mejorarse, pero hay otras prioridades.
                 usleep(333333);
             }
-            // var_dump($httpResponse->getStatusCode());
-            // print("AQUI VA MI VAR DUMP: \n");
-            // $json = json_encode($films); // Todo debe ser UTF-8
-            // return $json;
-            // Por que sacaron esto? 
-            /* Como esta puesto arriba, devuelve un doc HTML con un json en el body
-                En cambio como esta abajo devuelve 'application/json' en el heade Content-Type.
-                Ademas note que en usan la forma de arriba, estaba escapando todos los slashes /
-                en Film['poster']
-                Tengo entendido que el de abajo es lo correcto. */
-            return response()->json($films);
+
+            return $films;
         } catch (Exception $e) {
             Log::error($e . ' --- Error en el metodo search() de ApiController.');
         }

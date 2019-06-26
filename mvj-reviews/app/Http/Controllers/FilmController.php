@@ -176,7 +176,9 @@ class FilmController extends Controller
         //$localFilms = $this->searchLocalFilm($filmname);
 
         $APIFilms = (new ApiController())->search($filmname);
-      echo json_encode($APIFilms);
+        return response()->json($APIFilms);
+        // echo $APIFilms;
+        // echo json_encode($APIFilms);
     }
 
 
