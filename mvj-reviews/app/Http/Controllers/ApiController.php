@@ -48,16 +48,16 @@ class ApiController extends Controller
     /**
      * * Utilizada para comparar la obra obtenida de la API con el hash almacenado en la BD,
      * el cual pertenece la misma obra, que fue almacenada en un momento anterior.
-     * @param $obraApi 
+     * @param $obraApi
      * Recibe una obra como arreglo.
      * @return string. sha1 de la obra.
      */
-    private function getHashObra($obraApi)
+    private function getHashObra($filmApi)
     {
         // La funcion serialize es muy lenta comparada con json_encode
         // Pero json_encode dio el error: Malformed UTF-8 characters, possibly incorrectly encoded.
         // Algun otra alternativa?
-        return sha1(serialize($obraApi));
+        return sha1(serialize($filmApi));
     }
 
     /**
@@ -66,7 +66,7 @@ class ApiController extends Controller
      * @param string $urlPoster URL que proporciona la API.
      * @return binary|false la imagen.
      */
-    private function getPortadaObra($urlPoster)
+    private function getPosterFilm($urlPoster)
     {
         $client = new Client();
         $basePath = 'https://image.tmdb.org/t/p/original';
@@ -85,75 +85,70 @@ class ApiController extends Controller
     /**
      * Recibe la pelicula o serie de la API.
      * En Film['poster'] guarda la URL de la imagen. Mas tarde debera ser recuperada.
-     * Para ello utilizar getPortadaObra()
-     * @todo 
+     * Para ello utilizar getPosterFilm()
+     * @todo
      * * Que agregue el trailer sugerido por la API. Esta tarea podria quedar a cargo del administrador?
      * * Cantidad de temporadas? --> Si lo agregan en la BD
      * @return Film|false. Devuelve una instancia de Film lista para almacenar en la BD.
      */
-    private function parsearObra($obraAPI)
+    private function parseFilm($filmAPI)
     {
         try {
             $film = new Film();
-            /* protected $fillable = ['titulo','fecha_estreno','pais','sinopsis','duracion_min',
-                          'categoria','fecha_finalizacion','puntaje','poster','trailer'];
-                          */
 
-            if (isset($obraAPI['title'])) {
-                $film['titulo'] = $obraAPI['title'];
+            if (isset($filmAPI['title'])) {
+                $film['titulo'] = $filmAPI['title'];
             }
             // Convierto pais a string separado por comas.
-            if (isset($obraAPI['origin_country'])) {
-                $abreviacion = trim(implode(',', $obraAPI['origin_country']));
-                $pais = $this->getConfig('pais', $abreviacion);
+            if (isset($filmAPI['origin_country'])) {
+                $abreviacion = trim(implode(',', $filmAPI['origin_country']));
+                $pais = '';//$this->getConfig('pais', $abreviacion);
                 $film['pais'] = $pais;
             }
-            if (isset($obraAPI['overview'])) {
-                $film['sinopsis'] = $obraAPI['overview'];
+            if (isset($filmAPI['overview'])) {
+                $film['sinopsis'] = $filmAPI['overview'];
             }
             // A menudo este campo no esta disponible
-            if (isset($obraAPI['runtime'])) {
-                $film['duracion_min'] = $obraAPI['runtime'];
+            if (isset($filmAPI['runtime'])) {
+                $film['duracion_min'] = $filmAPI['runtime'];
             }
-            if (isset($obraAPI['media_type'])) {
-                $film['categoria'] = $obraAPI['media_type'];
+            if (isset($filmAPI['media_type'])) {
+                $film['categoria'] = $filmAPI['media_type'];
             }
             // Ya termino la serie
-            if (isset($obraAPI['in_production']) && isset($obraAPI['last_air_date'])) {
-                if ($obraAPI['in_production'] == false) {
-                    $film['fecha_finalizacion'] = $obraAPI['last_air_date'];
+            if (isset($filmAPI['in_production']) && isset($filmAPI['last_air_date'])) {
+                if ($filmAPI['in_production'] == false) {
+                    $film['fecha_finalizacion'] = $filmAPI['last_air_date'];
                 }
             }
-            // if (isset()) {$film[''] = ;}
-            // $film['puntaje'] = $obraAPI['vote_average'];
 
-            if (isset($obraAPI['poster_path'])) {
-                $film['poster'] = $obraAPI['poster_path'];
+            if (isset($filmAPI['poster_path'])) {
+                $film['poster'] = 'https://image.tmdb.org/t/p/w500/' . $filmAPI['poster_path'];
             }
 
             // Requiere de un parseo complejo
             // $film['trailer'] = "";
 
             // Categoria
-            if (isset($obraAPI['media_type'])) {
-                if ($obraAPI['media_type'] == 'movie') { // Pelicula
+            if (isset($filmAPI['media_type'])) {
+                if ($filmAPI['media_type'] == 'movie') { // Pelicula
                     $film['categoria'] = 'pelicula';
-                } elseif ($obraAPI['media_type'] == 'tv') { // Serie
+                } elseif ($filmAPI['media_type'] == 'tv') { // Serie
                     $film['categoria'] = 'serie';
                 }
             }
 
             // Fecha de estreno
-            if (isset($obraAPI['release_date'])) {
-                $film['fecha_estreno'] = $obraAPI['release_date']; // ESTA EN INGLES.
+            if (isset($filmAPI['release_date'])) {
+                $film['fecha_estreno'] = $filmAPI['release_date']; // ESTA EN INGLES.
             }
-            if (isset($obraAPI['first_air_date'])) {
-                $film['fecha_estreno'] = $obraAPI['first_air_date']; // ESTA EN INGLES.
+            if (isset($filmAPI['first_air_date'])) {
+                $film['fecha_estreno'] = $filmAPI['first_air_date']; // ESTA EN INGLES.
             }
 
             // ID. idPelicula != idSerie para la API
-            if (isset($obraAPI['id'])) {
-                $film['id_themoviedb'] = $obraAPI['id'];
+            if (isset($filmAPI['id'])) {
+                $film['id_themoviedb'] = $filmAPI['id'];
             }
 
             // Funcion hasa sobre la obra para posterior comparacion
@@ -162,7 +157,7 @@ class ApiController extends Controller
 
             return $film;
         } catch (Exception $e) {
-            Log::error($e . ' --- Error en el metodo parsearObra() de ApiController. IdObraAPI: ' . $obraAPI['title'] || '');
+            Log::error($e . ' --- Error en el metodo parseFilm() de ApiController. IdObraAPI: ' . $filmAPI['title'] || '');
             return false;
         }
     }
@@ -173,7 +168,7 @@ class ApiController extends Controller
      * Hace una nueva solicitud a la API para traer todos los detalles.
      * @return boolean Se guardo o no en la BD
      */
-    public function guardarObra()
+    public function storeFilm()
     {
         try {
             // Objeto Film
@@ -199,11 +194,11 @@ class ApiController extends Controller
             if ($httpResponse->getStatusCode() == 200) {
                 $jsonApi = $httpResponse->getBody()->getContents();
                 $resp = json_decode($jsonApi, true);
-                $tmp = $this->parsearObra($resp);
+                $tmp = $this->parseFilm($resp);
                 if ($tmp != false) {
                     $obra = $tmp;
                     // Consigo la portada
-                    $obra['poster'] = $this->getPortadaObra($obra['poster']);
+                    $obra['poster'] = $this->getPosterFilm($obra['poster']);
                     if ($obra['poster'] == false) {
                         $obra['poster'] = "";
                     } else {
@@ -227,13 +222,15 @@ class ApiController extends Controller
                 return false;
             }
         } catch (Exception $e) {
-            Log::error($e . " --- Error en el metodo guardarObra() de ApiController.");
+            Log::error($e . " --- Error en el metodo storeFilm() de ApiController.");
         }
     }
 
+
+
     /**
      * Busca tanto peliculas como series en base a su nombre en castellano e ingles.
-     * @param string $keywords Lo que introduce el usuario en el buscador 
+     * @param string $keywords Lo que introduce el usuario en el buscador
      * @return array|false. Un arreglo de Film con los resultados que dio la API.
      * Los campos del arreglo son los mismos que los de Film
      */
@@ -273,24 +270,24 @@ class ApiController extends Controller
 
                     // Recorro Obras (Pueden ser peliculas, series o actores)
                     for ($i = 0; $i < sizeof($results); $i++) {
-                        $tmp = $this->parsearObra($results[$i]);
+                        $tmp = $this->parseFilm($results[$i]);
                         if ($tmp != false) {
-                            //Agrego la obra al arreglo
-                            $films[] = $tmp;
+                            //Agrego film al arreglo
+                            $films[$i] = $tmp;
                         }
                     }
                     $page++;
-                } else {
+                } else { // si la request a la API no fue exitosa
                     $films = false;
                 }
 
                 // Para que no se cuelgue la API, espero 1 seg entre cada pagina.
-                sleep(1);
+              //  sleep(1);
             }
             // var_dump($httpResponse->getStatusCode());
             // print("AQUI VA MI VAR DUMP: \n");
             $json = json_encode($films); // Todo debe ser UTF-8
-            return response()->json($films);
+            return $json;
         } catch (Exception $e) {
             Log::error($e . ' --- Error en el metodo search() de ApiController.');
         }

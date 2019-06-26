@@ -95,7 +95,7 @@
             @auth
                 @if ( Auth::isAdmin() )
                   <div class="seccion-menu">
-                      <a href=""> Admin Films </a>
+                      <a href="{{ route('admin-films') }}"> Admin Films </a>
                   </div>
                   <div class="seccion-menu">
                       <a href=""> Admin Novedades </a>

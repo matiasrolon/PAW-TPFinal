@@ -14,7 +14,17 @@ use GuzzleHttp\Client;
 
 class FilmController extends Controller
 {
-    //
+
+    /*
+    * Busca un film solo en la BD del sitio.
+    */
+    public function searchLocalFilm($filmname){
+      $obj = Film::where('titulo', 'like','%' . $filmname .'%')
+                   ->select('id','titulo','fecha_estreno','pais','sinopsis', \DB::raw('TO_BASE64(poster) as poster'))
+                   ->get();
+      return $obj;
+    }
+
     public function ranking(){
       $films = Film::orderBy('puntaje','desc')->take(100)->get();
       return view('ranking-films',compact('films'));
@@ -73,21 +83,20 @@ class FilmController extends Controller
 
 
     /**
-     * Esta funcion busca en la BD si hay coincidencias
-     * Luego responde con las coincidencias.
+     * Esta funcion busca en la BD si hay coincidencias con lo que pone el usuario en el buscador
+     * Luego responde con las coincidencias, que el vera en tiempo real (sin redireccionar la pagina).
      * @var filmName query que inserta el usuario en el buscador
      */
-    public function searchLocalFilm($filmname) {
-      $obj = Film::where('titulo', 'like','%' . $filmname .'%')
-                   ->select('id','titulo','fecha_estreno','pais','sinopsis', \DB::raw('TO_BASE64(poster) as poster'))
-                   ->get();
+    public function searchSuggestions($filmname) {
+      $obj = $this->searchLocalFilm($filmname);
       echo json_encode($obj);
     }
+
 
     /*
     Buscar (vista) que nos direcciona a la pagina con los resultados de la busqueda.
     */
-    public function search($searchText){
+    public function searchResults($searchText){
         $results = Film::where('titulo','like','%' . $searchText .'%')
                          ->get();
         if (count($results)==0){
@@ -149,6 +158,28 @@ class FilmController extends Controller
             return 1;
         }
     }
+
+
+    public function admin_films(){
+      $searches = PendentSearch::where('estado','pendiente')
+                                ->orderBy('cant_busquedas','desc')
+                                ->get();
+      return view('admin_films',compact('searches'));
+    }
+
+    /**
+    *
+    * @return
+    */
+    public function admin_searchFilms($filmname)
+    {
+        //$localFilms = $this->searchLocalFilm($filmname);
+
+        $APIFilms = (new ApiController())->search($filmname);
+      echo json_encode($APIFilms);
+    }
+
+
 
     /**
      * - FIXME: Faltan algunas validaciones. No son de urgencia, solo dejo el recordatorio.

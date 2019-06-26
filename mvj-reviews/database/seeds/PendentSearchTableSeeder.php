@@ -12,7 +12,7 @@ class PendentSearchTableSeeder extends Seeder
      */
     public function run()
     {
-        factory(PendentSearch::class, 10)->create();
+        factory(PendentSearch::class, 20)->create();
 
     }
 }
