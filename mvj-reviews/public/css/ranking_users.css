@@ -1,18 +1,25 @@
-.tabla{
-  padding: 3%;
-  border-radius: 5px 5px;
-  border: solid 1px;
-  margin: auto;
-  width: 800px;
-}
-
-
-section.rank {
-    padding: 1% 2%;
-    margin: 1% 15%;
-}
-
 #content {
-    padding: 1% 2%;
-    margin: 1% 15%;
+  margin: 15px;
+}
+
+
+.tabla{
+  padding: 5px 5px;
+  border-radius: 5px 5px;
+  border: solid 1px white;
+  width: 100%;
+  background: bisque;
+}
+
+thead{
+  padding: 0px 0px;
+  margin: 0px;
+  text-align: left;
+  text-transform: uppercase;
+}
+
+td, th {
+  padding: 5px 5px;
+  margin: 0px;
+  width: 50px;
 }

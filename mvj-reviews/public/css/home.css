@@ -1,23 +1,53 @@
-
 /*-------- HOME -------- */
 .users-populares{
   width: 30%;
   display: inline;
   top: 0%;
+}
 
+.tabla{
+/*   padding: 1% 1%; */
+  border-radius: 5px 5px;
+  border: solid 1px white;
+  width: 215px;
+  /* Esto hace que se me vaya para el fondo la tabla */
+  margin: 5px 15px;
+  background: bisque;
+}
+
+thead{
+  padding: 0px 0px;
+  margin: 0px;
+  text-align: left;
+  text-transform: uppercase;
+}
+
+td, th {
+  padding: 0px 5px;
+}
+
+.users-populares div, table{
+    display: inline-block;
+}
+
+.ranking {
+  float: right;
+  margin-top: 15px;
+  padding: 15px;
 }
 
 .generos{
   float: left;
-  margin: 2% 2%;
-  padding: 2%;
+  margin: 15px 15px;
+/*   padding: 2%; */
   border-radius: 5px 5px;
   border: 1px solid white;
   background: bisque;
 }
+
 ul.generos {
   padding: 0px;
-  width: 160px;
+  width: 150px;
 }
 
 ul.generos li:hover p::before{
@@ -26,8 +56,9 @@ ul.generos li:hover p::before{
 
 .generos li{
   list-style: none;
-  padding: 1% 7%;
-  width: auto;
+  padding: 0px 10px;
+/*   width: auto; */
+  margin: 0px 0px;
   border-radius: 5px 5px;
 }
 
@@ -36,15 +67,6 @@ ul.generos li:hover p::before{
   color: white;
 }
 
-.ranking {
-  float: right;
-  margin-top: 2%;
-  padding: 2%;
-}
-
-.users-populares div, table{
-    display: inline-block;
-}
 
 .films-populares h3{
   padding: 1% 5%;

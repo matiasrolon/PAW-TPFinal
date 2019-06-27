@@ -1,17 +1,40 @@
-.tabla-rank{
-  padding: 3%;
-  border-radius: 5px 5px;
-  border: solid 1px;
-  margin: auto;
-  width: 800px;
-}
-
 #content {
-    padding: 1% 2%;
-    margin: 1% 15%;
+/*     padding: 1% 2%; */
+/*     margin: 1% 15%; */
+  margin: 15px;
 }
 
+.tabla-rank{
+  padding: 5px 5px;
+  border-radius: 5px 5px;
+  border: solid 1px white;
+  width: 100%;
+  background: bisque;
+}
 
+thead{
+  padding: 0px 0px;
+  margin: 0px;
+  text-align: left;
+  text-transform: uppercase;
+}
+
+td, th {
+  padding: 5px 5px;
+  margin: 0px;
+  width: 50px;
+}
+
+td:first-of-type {
+  width: 300px;
+}
+
+td:nth-of-type(4) {
+  width: 90px;
+}
+
+/*
 .rank > table > tbody > tr:hover{
   background-color: #9dc8f5;
 }
+*/

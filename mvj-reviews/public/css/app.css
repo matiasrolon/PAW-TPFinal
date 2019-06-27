@@ -4,16 +4,6 @@
   display: none;
 }
 
-.tabla{
-  padding: 1% 1%;
-  border-radius: 5px 5px;
-  border: solid 1px white;
-  width: 215px;
-  margin: 2% 2%;
-  background: bisque;
-}
-
-
 #app, body{
   width: 100%;
   background-color:#BEC3E8;
@@ -23,11 +13,13 @@
 }
 
 .nav-principal{
+  background-color: rgba(100, 152, 232, 1);
   width: 100%;
   height: 10%;
-  margin-bottom: 2%;
+/*   margin-bottom: 2%; */
   display: grid;
   grid-template-columns: 30% 40% 30%;
+  /* Sacar el webkit. usar solo center */
   text-align: -webkit-center;
   position: relative;
 }
@@ -38,7 +30,7 @@
 
 .navseccion.icono{
   width: 100%;
-    text-align: left;
+  text-align: left;
 }
 
 .navseccion.buscador{
@@ -53,9 +45,15 @@
 
 .navseccion.buscador input{
   width: 100%;
-  font-size: 100%;
-  height: 100%;
+  font-size: 1em;
+/*   height: 100%; */
   border-radius: 5px 5px;
+}
+
+.navseccion.autenticacion{
+/*   width: 100%; */
+  text-align: right;
+  padding-right: 10px;
 }
 
 .resultados-buscador{
@@ -73,13 +71,8 @@
 }
 
 .resultados-buscador li img{
-  width: 90px;
+/*   width: 90px; */
   height: 120px;
-}
-
-.navseccion.autenticacion{
-  width: 100%;
-  text-align: right;
 }
 
 .item-resultado{
@@ -97,9 +90,10 @@
 .opciones-guest{ /* opciones para el usuario que no esta logeado*/
     list-style-position: inside;
     margin-top: 0px;
+    margin-right: 10px;
     list-style: none;
     display: inline-block;
-    right: 3%;
+/*     right: 3%; */
 }
 
 .resultado{
@@ -109,28 +103,25 @@
   float: right;
 }
 
-
-
-
 .menus{
-  background-color: #6498e8;
+  background-color: rgba(120, 172, 252);
   display: inline-block;
-  width: 99.3%;
+/*   width: 99.3%; */
+  width: 100%;
   height: 30%;
-  padding: 5px;
+/*   padding: 5px; */
   position: static;
-  border-radius: 5px 5px;
 }
 
 .seccion-menu{
     display: inline-block;
-    width: 13%;
+    min-width: 150px;
     color: black;
     text-align: center;
     border-color: grey;
-    height: 20%;
     border-radius: 2px 2px;
-    padding: 1% 1%;
+    padding: 10px 5px;
+    background-color: inherit;
 }
 
 .seccion-menu:hover{
@@ -148,5 +139,5 @@
 .seccion-menu a{
   color: black;
   text-decoration: none;
-  padding: 2% 2%;
+/*   padding: 2% 2%; */
 }

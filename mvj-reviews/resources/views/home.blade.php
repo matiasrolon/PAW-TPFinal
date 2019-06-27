@@ -72,20 +72,22 @@
           <div class="ranking tabla">
             <h3> Ranking Usuarios</h3>
             <table>
-                      <tr>
-                        <td>Usuario</td>
-                        <td>Reviews</td>
-                        <td>Puntos</td>
-                      </tr>
+              <thead>
+                <th>Usuario</th>
+                <th>Reviews</th>
+                <th>Puntos</th>
+              </thead>
+              <tbody>
                 @foreach($users as $user)
-                      <tr>
-                          <div class="tupla-user">
-                              <td><a href="/users/{{$user['username']}}"> {{$user['username']}}</a></td>
-                              <td>100</td> <!--aca irian las reviews totales del user-->
-                              <td>{{$user['puntos']}}</td>
-                          </div>
-                      </tr>
+                  <tr>
+                      <!-- <div class="tupla-user"> -->
+                          <td><a href="/users/{{$user['username']}}"> {{$user['username']}}</a></td>
+                          <td>FALTA</td> <!--aca irian las reviews totales del user-->
+                          <td>{{ number_format($user['puntos'], 2) }}</td>
+                      <!-- </div> -->
+                  </tr>
                 @endforeach
+              </tbody>
             </table>
           </div>
         </section>
