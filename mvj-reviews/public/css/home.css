@@ -82,6 +82,7 @@ ul.generos li:hover p::before{
     display: inline-grid;
     grid-template-columns: repeat(4,auto);
     /* height: 1000px; */
+    /* width: 100%; */
     margin: 1% 2%;
     overflow: scroll;
 }
