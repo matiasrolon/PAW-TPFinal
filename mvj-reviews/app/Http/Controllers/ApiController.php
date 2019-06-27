@@ -236,7 +236,7 @@ class ApiController extends Controller
      * @return array|false. Un arreglo de Film con los resultados que dio la API.
      * Los campos del arreglo son los mismos que los de Film
      */
-    public function search($keywords)
+    public function admin_search($keywords)
     {
         try {
             //$user_input no esta con los %20, sino escrito bien. Sino no funciona
@@ -270,12 +270,14 @@ class ApiController extends Controller
                     $total_pages = (int)$resp["total_pages"]; // Total de paginas
                     $results = $resp["results"]; // Arreglo
 
-                    // Recorro Obras (Pueden ser peliculas, series o actores)
+                    // Recorro films (Pueden ser peliculas, series o actores)
                     for ($i = 0; $i < sizeof($results); $i++) {
-                        $tmp = $this->parseFilm($results[$i]);
-                        if ($tmp != false) {
-                            //Agrego film al arreglo
-                            $films[$i] = $tmp;
+                        if ($results[$i]['media_type']!='person'){//por ahora no buscamos personas
+                            $tmp = $this->parseFilm($results[$i]);
+                            if ($tmp != false) {
+                                //Agrego film al arreglo
+                                $films[$i] = $tmp;
+                            }
                         }
                     }
                     $page++;
@@ -288,7 +290,7 @@ class ApiController extends Controller
                 usleep(333333);
             }
 
-            return $films;
+            return response()->json($films);
         } catch (Exception $e) {
             Log::error($e . ' --- Error en el metodo search() de ApiController.');
         }

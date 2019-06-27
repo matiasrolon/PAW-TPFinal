@@ -8,6 +8,12 @@
 - [ ] Revisar funcion FilmController\store()
 - Como devolver JSONs (interesante): [https://laravel.com/docs/5.8/responses#json-responses](https://laravel.com/docs/5.8/responses#json-responses)
 
+## TO-DO (Presentacion)
+
+- [ ] Verificar que las vistas cumplen con los [Estandares de la W3C](https://validator.w3.org/).
+- [x] Documento que indique como hacer el deployment del proyecto. [readme.md](readme.md).
+- [ ] Presentacion del software: puede ser una muestra de como anda, no necesariamente una ppt.
+
 ## TO-DO (funcional)
 
 ### MashUp - API

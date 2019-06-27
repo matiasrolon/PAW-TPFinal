@@ -23,14 +23,17 @@ Route::get('/users/{username}', 'UserController@profile')->name('user_profile');
 
 Route::post('/addReview','ReviewController@addReview')->name('addReview');
 Route::post('/addScoreReview','ReviewController@addScoreReview')->name('addScoreReview');
+
 Route::get('/film-by-genre/{genro}/{category}/{offset}/{qty}', 'FilmController@searchByGenre')->name('film-by-genre');
 Route::get('/ranking-films', 'FilmController@ranking')->name('ranking-films');
 Route::get('/films/{id}', 'FilmController@profile')->name('film_profile');
 Route::post('/scoreFilm','FilmController@scoreFilm')->name('scoreFilm');
 Route::get('/searchSuggestions/{filmname}','FilmController@searchSuggestions')->name('searchLocalFilm');
 Route::get('/search/{filmname}','FilmController@searchResults')->name('search');
+//para administradores
 Route::get('/admin/films','FilmController@admin_films')->name('admin-films');
-Route::get('/admin/searchFilms/{filmname}','FilmController@admin_searchFilms');
+Route::get('/admin/searchFilms/API/{filmname}','ApiController@admin_search');
+Route::get('/admin/searchFilms/DB/{filmname}','FilmController@admin_search');
 
-Route::get('/searchAPI/{keywords}', 'ApiController@search');
+//Route::get('/searchAPI/{keywords}', 'ApiController@search');
 Route::post('/storeFilm', 'ApiController@storeFilm');

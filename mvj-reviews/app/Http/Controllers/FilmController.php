@@ -171,14 +171,10 @@ class FilmController extends Controller
     *
     * @return
     */
-    public function admin_searchFilms($filmname)
+    public function admin_search($filmname)
     {
-        //$localFilms = $this->searchLocalFilm($filmname);
-
-        $APIFilms = (new ApiController())->search($filmname);
-        return response()->json($APIFilms);
-        // echo $APIFilms;
-        // echo json_encode($APIFilms);
+        $DBFilms = $this->searchLocalFilm($filmname);
+        return response()->json($DBFilms);
     }
 
 

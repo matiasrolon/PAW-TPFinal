@@ -103,7 +103,7 @@
 }
 
 .resultado{
-  background-color: red;
+  background-color: none;
   width: 30%;
   display: flex;
   float: right;
