@@ -15,8 +15,8 @@
     @foreach ($searches as $search)
       <div text="{{ $search['busqueda'] }}" class="busqueda">
             <div class="info-busqueda">
+              <p><b>Buscado {{$search['cant_busquedas']}} veces</b></p>
                 <p>{{ $search['busqueda'] }}</p>
-                <p><b>({{$search['cant_busquedas']}} veces)</b></p>
             </div>
               <button class="resolver-busqueda" type="button" name="button">Resuelto</button>
       </div>
@@ -32,12 +32,46 @@
               </select>
               <button type="button" name="button" id="btnBuscadorFilms">Buscar</button>
       </div>
-      <div class="resultados">
-      </div>
-      <div class="botones-opciones">
-            <button class="boton-opcion" type="button" name="button">GUARDAR</button>
-            <button class="boton-opcion" type="button" name="button">MODIFICAR</button>
-            <button class="boton-opcion" type="button" name="button">ELIMINAR</button>
+      <div class="admin-resultados">
+        <div class="resultado-seleccionado">
+          <div class="poster">
+              <img src="" alt="">
+          </div>
+          <div class="info">
+                  <div class="campo">
+                      <label for="">Titulo:</label>
+                          <textarea class="titulo" name="name" rows=1 disabled></textarea>
+                  </div>
+                  <div class="campo">
+                      <label for=""> Sinopsis:</label>
+                          <textarea class="sinopsis" name="name" rows=6 cols=80 disabled></textarea>
+                  </div>
+                  <div class="campo">
+                      <label for="">Categoria:</label>
+                          <textarea class="categoria" name="name" rows=1 disabled></textarea>
+                  </div>
+                  <div class="campo">
+                      <label for="" >Fecha estreno:</label>
+                          <textarea class="fecha-estreno" name="name" rows=1 disabled></textarea>
+                  </div>
+                  <div class="campo">
+                      <label for="">Pais:</label>
+                          <textarea class="pais" name="name" rows=1 disabled></textarea>
+                  </div>
+                  <div class="campo">
+                      <label for="">Duracion</label>
+                          <textarea class="duracion-min"  name="name" rows=1 disabled></textarea>
+                  </div>
+            </div>
+            <div class="opciones">
+                    <button class="boton-guardar" type="button" name="button">GUARDAR</button>
+                    <button class="boton-modificar" type="button" name="button">MODIFICAR</button>
+                    <button class="boton-eliminar" type="button" name="button">ELIMINAR</button>
+            </div>
+        </div>
+        <div class="resultados-obtenidos">
+
+        </div>
       </div>
 </div>
 
