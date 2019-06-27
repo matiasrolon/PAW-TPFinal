@@ -127,7 +127,7 @@ protected $middlewareGroups = [
 
 2. O BIEN, para solucionarlo y no dejar de perder un aspecto de seguridad en el proyecto, al momento de hacer la request AJAX, seteamos lo siguiente. (RECOMENDADA).
 
-```
+```Javascript
 AJAXRequest.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'));
 ```
 
