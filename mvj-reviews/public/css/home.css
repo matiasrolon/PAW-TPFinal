@@ -9,14 +9,25 @@
 
 .generos{
   float: left;
-  margin-top: 2%;
+  margin: 2% 2%;
   padding: 2%;
   border-radius: 5px 5px;
   border: 1px solid white;
+  background: bisque;
+}
+ul.generos {
+  padding: 0px;
+  width: 160px;
+}
+
+ul.generos li:hover p::before{
+  content: "# ";
 }
 
 .generos li{
   list-style: none;
+  padding: 1% 7%;
+  width: auto;
   border-radius: 5px 5px;
 }
 
@@ -35,20 +46,29 @@
     display: inline-block;
 }
 
-.users-populares h3{
-  display: block;
-  width: 100%;
+.films-populares h3{
+  padding: 1% 5%;
+  margin: 1% 1%;
 }
 
 .peliculas{
     display: inline-grid;
     grid-template-columns: repeat(4,auto);
-    grid-template-rows: repeat(2,auto);
-    margin-left: 20%;
+    /* grid-template-rows: repeat(2,auto); */
+    margin: 1% 2%;
+}
+
+.peliculas-genero{
+    display: inline-grid;
+    grid-template-columns: repeat(4,auto);
+    /* height: 1000px; */
+    margin: 1% 2%;
+    overflow: scroll;
 }
 
 .container-peliculas-populares{
   margin: auto;
+  width: auto;
 }
 
 .series{
@@ -59,14 +79,20 @@
 }
 
 .films-populares{
-  width: 70%;
+  width: 63%;
   display: inline-block;
   position: relative;
   margin: auto !important;
+  background: #d8dcdc;
 }
 
 .films-populares h3{
   padding: 2%;
+  width: 600px;
+}
+
+.titulo-film{
+  background: black;
 }
 
 .cuadro-film{
@@ -91,6 +117,7 @@
        color: #FFFFFF;
        font-weight: bold;
        border-radius: 5px 5px;
+       border: white 1px solid;
        backface-visibility: hidden;
     }
 
@@ -100,12 +127,12 @@
 }
 
 .puntuacion-buena {
-  background-color: yellow;
+  background-color: #a4a430;
   backface-visibility: hidden;
 }
 
 .puntuacion-muy-buena {
-  background-color: green;
+  background-color: #3bae06;
   backface-visibility: hidden;
 }
 
@@ -121,6 +148,7 @@
   height: 300px;
   perspective: 1000px;
   position: relative;
+  padding: 1% 1%;
   margin: 2.5% 2%;
 }
 

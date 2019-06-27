@@ -6,6 +6,11 @@
   width: 800px;
 }
 
+#content {
+    padding: 1% 2%;
+    margin: 1% 15%;
+}
+
 
 .rank > table > tbody > tr:hover{
   background-color: #9dc8f5;

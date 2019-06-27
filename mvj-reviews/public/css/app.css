@@ -5,12 +5,12 @@
 }
 
 .tabla{
-  padding: 3%;
+  padding: 1% 1%;
   border-radius: 5px 5px;
-  border: solid 1px;
-  margin: auto;
-  width: 200px;
-  margin-top: 20px;
+  border: solid 1px white;
+  width: 215px;
+  margin: 2% 2%;
+  background: bisque;
 }
 
 

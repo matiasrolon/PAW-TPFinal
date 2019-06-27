@@ -5,3 +5,14 @@
   margin: auto;
   width: 800px;
 }
+
+
+section.rank {
+    padding: 1% 2%;
+    margin: 1% 15%;
+}
+
+#content {
+    padding: 1% 2%;
+    margin: 1% 15%;
+}

@@ -5,13 +5,17 @@
 @section('publics')
   <link href="{{ asset('css/home.css') }}" rel="stylesheet">
   <script src="{{ asset('js/peliculasGenero.js') }}" charset="utf-8"></script>
+  <script src="{{ asset('js/filmCardData.js') }}" charset="utf-8"></script>
+  <script>
+    FilmCardData.modificarPuntajeClase();
+  </script>
 @endsection
 
 @section('content')
     <div class="content">
         <ul class="generos">
           @foreach($generos as $genero)
-            <li><div onclick="PeliculaGenero.initialize({{ $genero['id'] }}, 'pelicula', 'container1')"><p>{{ $genero['nombre'] }}</p></div></li>
+            <li><div value="{{ $genero['id'] }}" onclick="PeliculaGenero.initialize({{ $genero['id'] }}, 'pelicula', 'container1')"><p>{{ $genero['nombre'] }}</p></div></li>
           @endforeach
         </ul>
 
@@ -24,7 +28,7 @@
                 <div class="flip-card">
                     <div class="cuadro-film flip-card-inner">
                       <div class="flip-card-front">
-                        <p class="puntuacion puntuacion-muy-buena">{{number_format($pelicula['puntaje'],1)}}</p>
+                        <p class="puntuacion">{{number_format($pelicula['puntaje'],1)}}</p>
                         <img class="poster" src="data:image/png;base64,{{$pelicula['portada']}}">
                       </div>
                       <a style="display:block" href="/films/{{$pelicula['id']}}">
@@ -38,33 +42,30 @@
                   </div>
 
                 @endforeach
-              </section>
             </div>
             <br>
             <h3> Series Populares</h3>
             <div class="container-peliculas-populares">
-            <section class="films-populares">
-                  @foreach($series as $serie)
-                  <div class="flip-card">
-                      <div class="cuadro-film flip-card-inner">
+              <section class="peliculas">
+                    @foreach($series as $serie)
+                    <div class="flip-card">
                         <div class="cuadro-film flip-card-inner">
-                          <div class="flip-card-front">
-                            <p class="puntuacion puntuacion-muy-buena">{{ number_format($serie['puntuacion'], 1)}}</p>
-                            <img class="poster" src="data:image/png;base64,{{$pelicula['portada']}}">
-                          </div>
-                          <a style="display:block" href="/films/{{$serie['id']}}">
-                            <div class="flip-card-back">
-                              <p>{{ $serie['fecha_estreno']}}</p>
-                              <p class="titulo-film">{{ $serie['titulo']}}</p>
-                              <p>{{ $serie['sinopsis']}}</p>
+                            <div class="flip-card-front">
+                              <p class="puntuacion">{{ number_format($serie['puntuacion'], 1)}}</p>
+                              <img class="poster" src="data:image/png;base64,{{$pelicula['portada']}}">
                             </div>
-                          </a>
+                            <a style="display:block" href="/films/{{$serie['id']}}">
+                              <div class="flip-card-back">
+                                <p>{{ $serie['fecha_estreno']}}</p>
+                                <p class="titulo-film">{{ $serie['titulo']}}</p>
+                                <p>{{ $serie['sinopsis']}}</p>
+                              </div>
+                            </a>
                         </div>
-                      </div>
-                  </div>
-                  @endforeach
-            </section>
-          </div>
+                    </div>
+                    @endforeach
+              </section>
+            </div>
         </section>
 
         <section class="users-populares">
