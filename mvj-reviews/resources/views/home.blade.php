@@ -69,7 +69,8 @@
         </section>
 
         <section class="users-populares">
-          <div class="ranking tabla">
+          <!-- <div class="ranking tabla"> -->
+          <div class="ranking-tabla">
             <h3> Ranking Usuarios</h3>
             <table>
               <thead>
