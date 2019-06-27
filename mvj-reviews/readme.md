@@ -1,6 +1,6 @@
 # Instalacion
 
-Aqui voy a documentar pasos que segui para instalar tood lo necesario y ejecutar el proyecto.
+Aqui voy a documentar pasos que segui para instalar todo lo necesario y ejecutar el proyecto.
 Mas adelante podemos cambiar este archivo de ubicacion. El objetivo es llevar cuenta de lo que hice hasta ahora.
 
 ## Requerimientos
