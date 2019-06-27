@@ -1,20 +1,9 @@
-img{
-  width: 200px;
-  height: 200px;
+.content {
+  margin:15px;
 }
 
-.review-user{
-  display: inline-block;
-  width: 30%;
-}
-
-
-.dato-favorito{
-  display: block;
-}
-
-.dato-usuario{
-  display: block;
+.titulo {
+  color: white;
 }
 
 .planilla-usuario{
@@ -22,6 +11,65 @@ img{
 }
 
 .planilla-usuario img{
- width: 200px;
- height: 200px;
+  width: 200px;
+  height: 200px;
+  margin-right: 10px;
+}
+
+.info-usuario,.info-favoritos {
+  min-width: 300px;
+  border: 5px solid rgba(255,255,255, 0.3);
+  border-radius: 5px;
+  background-color: rgba(255,255,255, 0.3);
+  margin-left: 15px;
+  padding-left: 10px;
+  padding-right: 10px;
+  padding-bottom: 5px;
+}
+
+.titulo-info, .titulo-favoritos {
+  margin: 0px;
+  border-bottom: 2px dashed rgba(255,255,255, 0.3);
+}
+
+.dato-usuario,.dato-favorito{
+  display: block;
+  padding-top: 5px;
+}
+
+.container-reviews {
+  display: flex;
+}
+
+.review-user{
+  display: inline-block;
+  background-color: rgba(255,255,255, 0.3);
+  width: 300px;
+  border: solid 5px rgba(255,255,255, 0.3);
+  border-radius: 5px;
+  padding: 5px;
+  margin-right: 15px;
+}
+
+.review-user:hover {
+  background-color: rgba(0,0,0, 0.3);
+}
+
+.review-user a {
+  text-decoration: none;
+  color: inherit;
+}
+.review-user .poster{
+  width: 200px;
+  display: block;
+  margin: 10px auto;
+}
+
+.info-review-user {
+  border-top: 2px dashed rgba(255,255,255, 0.3);
+}
+
+.review-user .info-review {
+  display: block;
+  padding-left: 10px; 
 }
