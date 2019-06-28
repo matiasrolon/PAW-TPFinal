@@ -41,8 +41,8 @@
 
 ### VIEW
 
-- [] Agregar posibilidad de agregar varios generos, parseados por comas cuando los ingrese el usuario.
- En el back se vera si ese genero ya esta ingresado en base, si no esta lo creara.
+- [] Agregar posibilidad de agregar varios generos, parseados por comas cuando los ingrese el usuario. En el back se vera si ese genero ya esta ingresado en base, si no esta lo creara.
+  - **Esto lo veo dificil. Yo pondria un HTML select con los generos que hay en la BD. Lo mismo para paises.**
 - [] Los resultados dados de la API podrian aparecer en carrusel (si da el tiempo)
 
 ### AJAX
