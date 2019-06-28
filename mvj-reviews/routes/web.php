@@ -23,7 +23,7 @@ Route::get('/users/{username}', 'UserController@profile')->name('user_profile');
 
 Route::post('/addReview','ReviewController@addReview')->name('addReview');
 Route::post('/addScoreReview','ReviewController@addScoreReview')->name('addScoreReview');
-
+Route::get('/get-last-reviews','ReviewController@getLastReviews')->name('get-last-reviews');
 Route::get('/film-by-genre/{genro}/{category}/{offset}/{qty}', 'FilmController@searchByGenre')->name('film-by-genre');
 Route::get('/ranking-films', 'FilmController@ranking')->name('ranking-films');
 Route::get('/films/{id}', 'FilmController@profile')->name('film_profile');

@@ -91,7 +91,26 @@
               </tbody>
             </table>
           </div>
+          <div id="container101">
+            <ul class="ultimas-reviews-container">
+              @foreach($reviews as $review)
+                <li>
+                  <p>@<a href="/users/{{$review['username']}}">{{ $review['username'] }}</a> dijo:</p>
+                  <div class="comment">
+                    <div class="comment-inner">
+                    <h3><a href="/films/{{$review['film_id']}}">{{ $review['review_titulo'] }}</a></h3>
+                    <p>"{{ str_limit($review['review_descripcion'], $limit = 100, $end = '...')  }}..."</p>
+                    <p>Sobre: <a href="/films/{{$review['film_id']}}">{{ $review['film_titulo'] }} ({{ $review['film_fecha_estreno'] }})</a></p>
+                    </div>
+                  </div>
+
+                </li>
+              @endforeach
+            </ul>
+          </div>
         </section>
+
+        <section class="ultimas-reviews">
     </div>
 
   @endsection

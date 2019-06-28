@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Film;
 use App\Models\User;
+use App\Models\Review;
 use App\Models\Genre;
 
 class HomeController extends Controller
@@ -37,10 +38,19 @@ class HomeController extends Controller
           $serie->portada = base64_encode($serie->poster);
         }
 
+        $reviews = Review::join('users','review.user_id','=','users.id')
+                       ->join('film','review.film_id','=','film.id')
+                       ->select('review.id as review_id','review.titulo as review_titulo',
+                        'review.descripcion as review_descripcion','users.username as username',
+                        'film.id  as film_id', 'film.titulo as film_titulo', 'film.fecha_estreno as film_fecha_estreno')
+                       ->take(10)
+                       ->orderBy('review.created_at','desc')
+                       ->get();
+
         //Aca irian los primeros 15 o 20 usuarios con mejor ranking
         $users = User::orderBy('puntos','desc')->take(5)->get();
         $generos = Genre::all();
-        return view('home', compact('peliculas','series','users', 'generos'));
+        return view('home', compact('peliculas','series','reviews', 'users', 'generos'));
     }
 
 }
