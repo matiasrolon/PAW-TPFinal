@@ -35,7 +35,7 @@
                         <div class="flip-card-back">
                           <p>{{ $pelicula['fecha_estreno']}}</p>
                           <p class="titulo-film">{{ $pelicula['titulo']}}</p>
-                          <p>{{ $pelicula['sinopsis']}}</p>
+                          <p>{{ str_limit($pelicula['sinopsis'], $limit = 150, $end = '...') }}</p>
                         </div>
                       </a>
                     </div>
@@ -52,13 +52,13 @@
                         <div class="cuadro-film flip-card-inner">
                             <div class="flip-card-front">
                               <p class="puntuacion">{{ number_format($serie['puntuacion'], 1)}}</p>
-                              <img class="poster" src="data:image/png;base64,{{$pelicula['portada']}}">
+                              <img class="poster" src="data:image/png;base64,{{$serie['portada']}}">
                             </div>
                             <a style="display:block" href="/films/{{$serie['id']}}">
                               <div class="flip-card-back">
                                 <p>{{ $serie['fecha_estreno']}}</p>
                                 <p class="titulo-film">{{ $serie['titulo']}}</p>
-                                <p>{{ $serie['sinopsis']}}</p>
+                                <p>{{ str_limit($serie['sinopsis'], $limit = 150, $end = '...') }}</p>
                               </div>
                             </a>
                         </div>

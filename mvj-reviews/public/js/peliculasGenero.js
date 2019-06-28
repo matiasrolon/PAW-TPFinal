@@ -35,7 +35,9 @@ PeliculaGenero.buildGrid = function (response) {
     let k = PeliculaGenero.crearElemento("p", [], resp[ii]['fecha_estreno']);
 
     let l = PeliculaGenero.crearElemento("p", ["titulo-film"], resp[ii]['titulo']);
-    let m = PeliculaGenero.crearElemento("p", [], resp[ii]['sinopsis']);
+    let sin = resp[ii]['sinopsis'];
+    sin = (sin.length > 150)? sin.substring(0, 147) + "..." : sin;
+    let m = PeliculaGenero.crearElemento("p", [], sin);
     i.setAttribute("href", "/films/"+ resp[ii]['id']);
     f.appendChild(g);
     f.appendChild(h);

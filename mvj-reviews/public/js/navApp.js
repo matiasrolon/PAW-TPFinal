@@ -105,7 +105,9 @@ NavPrincipal.recibirResponseSearchFilm= function(response){ //imprime lista de r
           img.src = "data:image/png;base64,"+resp[i].poster;
           item.classList.add('item-resultado');
           p.innerHTML = resp[i].titulo + "("+resp[i].fecha_estreno+")";
-          p2.innerHTML = resp[i].sinopsis;
+          let sin = resp[i].sinopsis;
+          sin = (sin.length > 147)? sin.substring(0, 143) + "..." : sin;
+          p2.innerHTML = sin;
           item.appendChild(img);
           d.appendChild(p);
           d.appendChild(p2);
