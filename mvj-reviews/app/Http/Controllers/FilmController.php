@@ -20,7 +20,8 @@ class FilmController extends Controller
     */
     public function searchLocalFilm($filmname){
       $obj = Film::where('titulo', 'like','%' . $filmname .'%')
-                   ->select('id','titulo','fecha_estreno','pais','sinopsis', \DB::raw('TO_BASE64(poster) as poster'))
+                   ->select('id','titulo','sinopsis','fecha_estreno','duracion_min','fecha_finalizacion',
+                            'pais','puntaje','categoria', \DB::raw('TO_BASE64(poster) as poster'))
                    ->get();
       return $obj;
     }
@@ -180,46 +181,64 @@ class FilmController extends Controller
 
 
     /**
-     * - FIXME: Faltan algunas validaciones. No son de urgencia, solo dejo el recordatorio.
+     * - FIXME:
+     * - UPDATE 27/06 : Se considero que este es el controller ideal para realizar los store ya que
+    *                   ApiController se enfoca en la interaccion con la API. 
      * - Las fechas se almacenan en ingles: YYYY-MM-DD. En la API tambien es asi, por lo que esta bueno que asi sea.
      * - Mostrar la fecha en castellano debe ser un problema que soluciona la vista (MVC).
-     * - Falta guardar el poster.
      * - Cambiar el campo 'trailer' por 'trailer_url'.
-     * - Agregar los campos:
-     *      'id_themoviedb' int
-     *      'hash' string(40)
      *      'cant_temporadas' int
      */
-    public function store(Request $request)
-    {
-        // Validate the request...
-        $validator = Validator::make($request, [
-            'titulo' => 'required|max:100',
-            'fecha_estreno' => 'date',
-            'sinopsis' => 'required|max:500',
-            'anio' => 'regex:/[0-9]{4}/',
-            'pais' => 'max:30',
-            'duracion_min' => 'regex:/[0-9]+/',
-            'categoria' => 'regex:/[0-9]{4}/',
-            'fecha_finalizacion' => 'date'
-        ]);
+    public function store(){
+        $request = json_decode($_POST['objeto']);
+        //Validacion a la hora de crear un nuevo film. VALIDATOR TIRA ERROR, CORREGIR
+            /*$validator = Validator::make($request, [
+                'titulo' => 'required|max:150',
+                'fecha_estreno' => 'date',
+                'sinopsis' => 'required|max:500',
+                'pais' => 'max:30',
+                'duracion_min' => 'regex:/[0-9]+/',
+                'categoria' => 'regex:/[0-9]{4}/',
+                'fecha_finalizacion' => 'date'
+            ]);*/
 
-        if ($validator->fails()) {
-            return redirect('post/create')
-                        ->withErrors($validator)
-                        ->withInput();
+            /*if ($validator->fails()) {
+              $error = $validator->messages()->toJson();
+              $request->estado ='FAILED';
+              $request->mensaje = $error;
+            }else{*/
 
-        $obra = new Film;
-        $obra->titulo = $request->titulo;
-        $obra->fecha_estreno = $request->fecha_estreno;
-        $obra->sinopsis = $request->sinopsis;
-        $obra->pais = $request->pais;
-        $obra->duracion_min = $request->duracion_min;
-        $obra->categoria = $request->categoria;
-        $obra->fecha_finalizacion = $request->fecha_finalizacion;
-        $obra->puntaje = 0;
-        $obra->save();
-    };
-}
+                //Si es un film de la API, contendra ID=-1;
+                $filmOriginal = Film::where('id',$request->id)->first();
+                if ($filmOriginal!=null){
+                  $filmOriginal->titulo = $request->titulo;
+                  $filmOriginal->fecha_estreno = $request->fecha_estreno;
+                  $filmOriginal->sinopsis = $request->sinopsis;
+                  $filmOriginal->pais = $request->pais;
+                  $filmOriginal->poster = $request->poster; //sin el file_get_contents porque ya esta en base64
+                  //$obra->duracion_min = $request->duracion_min;
+                  $filmOriginal->categoria = $request->categoria;
+                  //$obra->fecha_finalizacion = $request->fecha_finalizacion;
+                  $filmOriginal->save();
+                  $request->estado ='OK';
+                  $request->mensaje = 'Se actualizo el film con exito.';
+                }else{
+                        $obra = new Film;
+                        $obra->titulo = $request->titulo;
+                        $obra->fecha_estreno = $request->fecha_estreno;
+                        $obra->sinopsis = $request->sinopsis;
+                        $obra->pais = $request->pais;
+                        $obra->poster = file_get_contents($request->poster);
+                        //$obra->duracion_min = $request->duracion_min;
+                        $obra->categoria = $request->categoria;
+                        //$obra->fecha_finalizacion = $request->fecha_finalizacion;
+                        $obra->save();
+                        $request->id = $obra->id;// actualizo con el nuevo id
+                        $request->estado ='OK';
+                        $request->mensaje = 'Se guardo el film con exito.';
+                }//end IF id!=-1
+        //    }//end IF validator
+      return response()->json($request);
+    }//end store film
 
-}
+}//end controller
