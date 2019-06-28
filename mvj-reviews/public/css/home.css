@@ -123,6 +123,7 @@ ul.generos li:hover p::before{
     grid-template-columns: repeat(4,auto);
     /* grid-template-rows: repeat(2,auto); */
     margin: 1% 0%;
+    grid-gap: 1%;
 }
 
 .peliculas-genero{
