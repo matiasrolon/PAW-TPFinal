@@ -51,10 +51,11 @@ div.detalles-pelicula ul{
 
 div.detalles-pelicula{
   margin-left: 5%;
+  margin-right: 5%;
   background: grey;
   border-radius: 5px 5px;
-  padding: 1% 1% 1% 5%;
-  margin-bottom: %;
+  /* padding: 1% 1% 1% 5%; */
+  padding: 15px;
 }
 
 .reviews-film-container{
