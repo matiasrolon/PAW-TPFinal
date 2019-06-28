@@ -28,12 +28,13 @@
     <div id="app">
         <nav class="nav-principal">
             <div class="navseccion icono">
+                <img class="logo-st" src="{{ asset('images/logo.svg') }}" alt="logo">
                 <a class="" href="{{ url('/') }}">
                   MVJ Reviews
                 </a>
-                <button class="" type="button" aria-label="{{ __('Toggle navigation') }}">
+                <!-- <button class="" type="button" aria-label="{{ __('Toggle navigation') }}">
                     <span class=""></span>
-                </button>
+                </button> -->
             </div>
             <div class="navseccion buscador">
                     <input id="buscador" class="buscador" name="buscar" placeholder="buscar film">
