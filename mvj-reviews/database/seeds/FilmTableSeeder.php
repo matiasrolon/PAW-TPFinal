@@ -57,7 +57,7 @@ class FilmTableSeeder extends Seeder
         $film1->pais = 'Italia';
         $film1->categoria = 'Pelicula';
         $film1->trailer ='https://www.youtube.com/watch?v=1bq0qff4iF8&ab_channel=MovieclipsClassicTrailers';
-        $film1->poster = file_get_contents ('https://pics.filmaffinity.com/la_vita_e_bella-646167341-large.jpg');
+        $film1->poster = file_get_contents ('https://imagessl6.casadellibro.com/m/ig/6/2128386.jpg');
         $film1->duracion_min = 135;
         $film1->save();
         $film1->genres()->attach(Genre::inRandomOrder()->first());
@@ -150,7 +150,7 @@ class FilmTableSeeder extends Seeder
         $film1->pais = 'Estados Unidos';
         $film1->categoria = 'Serie';
         $film1->trailer ='https://www.youtube.com/watch?v=1bq0qff4iF8&ab_channel=MovieclipsClassicTrailers';
-        $film1->poster = file_get_contents ('https://playmax.xyz/img/c/400/1/1485452104/58.jpg');
+        $film1->poster = file_get_contents ('http://www.encadenados.org/rdc/images/stories/todo_demas/num_96/friends-1.jpg');
         $film1->duracion_min = 60;
         $film1->save();
         $film1->genres()->attach(Genre::inRandomOrder()->first());
@@ -164,7 +164,7 @@ class FilmTableSeeder extends Seeder
         $film1->pais = 'Irlanda';
         $film1->categoria = 'Serie';
         $film1->trailer ='https://www.youtube.com/watch?v=1bq0qff4iF8&ab_channel=MovieclipsClassicTrailers';
-        $film1->poster = file_get_contents ('http://www.caratulasylogos.com/sites/default/files/breaking_bad.jpg');
+        $film1->poster = file_get_contents ('https://cdn3.cineralia.com/wp-content/uploads/2015/03/Vikingos_Vikings_Serie_de_TV-616055151-large.jpg');
         $film1->duracion_min = 45;
         $film1->puntaje=0;
         $film1->save();
