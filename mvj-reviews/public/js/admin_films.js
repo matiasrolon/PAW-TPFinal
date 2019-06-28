@@ -96,12 +96,16 @@ Funcion: Recibe la respuesta de la operacion y muestra el resultado acorde en pa
       var resp = JSON.parse(response.responseText);
       console.log("se recibio respuesta> se grabo la peli con el id="+ resp['id']);
 
-        document.querySelector('.admin-resultados .resultado-seleccionado .opciones .estado-opciones')
-        .innerHTML = resp['mensaje'];
+      let p = document.querySelector('.admin-resultados .resultado-seleccionado .poster');
+      let par = document.createElement('p');
+      par.innerText = resp['mensaje'];
+      p.appendChild(par);
       if (resp['estado']='OK'){
+        par.classList.add('resultado-Ok');
         document.querySelector('.admin-resultados .resultado-seleccionado .info')
         .setAttribute('id',resp['id']);
       }else{
+        par.classList.add('resultado-Failed');
         //con css mostrar algo en rojo, o campos erroneos (cuando ande validar en el back)
       }
   }
@@ -179,6 +183,7 @@ AdminFilms.recibirResponseSearchFilmsAdmin = function (response,origen) {
     resultado.classList.add(origen);//para distinguir via CSS las que vienen de API de las que vienen de BD
     //cargo los datos en el cuadro principal de ABM al hacer click sobre la imagen
     resultado.addEventListener("click",function(){
+        AdminFilms.mostrarResultadoSeleccionado();
         AdminFilms.establecerResultadoSeleccionado(value,origen,base64);
     });
     resultado.classList.add(clase_resultado_obtenido);
@@ -189,6 +194,11 @@ AdminFilms.recibirResponseSearchFilmsAdmin = function (response,origen) {
 
 }
 
+
+AdminFilms.mostrarResultadoSeleccionado = function() {
+  var resultado = document.querySelector('.resultado-seleccionado');
+  resultado.classList.remove('resultado-seleccionado-oculto');
+}
 
 
 /* en los textarea del resultado seleccionado inserto los valores de la imagen clicleada.
@@ -223,7 +233,7 @@ AdminFilms.establecerResultadoSeleccionado = function(resultado,origen,base64){
           textarea.innerHTML = resultado['duracion_min'];
         var textarea = document.querySelector(info + ' .genero');
 
-        
+
         // Fix provisional
         if (resultado['genero'] == undefined){
           textarea.innerHTML = '';
