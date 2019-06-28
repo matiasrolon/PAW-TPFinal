@@ -24,7 +24,7 @@
                         {{$user['username']}}</td>
                 </a>
                 <td>{{$user['nombre']}}</td>
-                <td>FALTA HACER</td>
+                <td>{{ $user['cantReviews'] }}</td>
                 <!--aca irian las reviews totales del user-->
                 <td>{{ number_format($user['puntos'], 2) }}</td>
                 <!-- </div> -->

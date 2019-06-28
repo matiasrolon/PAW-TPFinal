@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Review;
+use Illuminate\Support\Facades\DB;
 use App\Models\PendentSearch;
 
 class UserController extends Controller
@@ -19,9 +20,20 @@ class UserController extends Controller
   }
 
     public function ranking(){
-      $users = User::join('range', 'users.range_id', '=', 'range.id')->orderBy('puntos','desc')->take(100)->get();
+      $users = User::join('range', 'users.range_id', '=', 'range.id')->orderBy('puntos','desc')->take(100)->select('users.*', 'range.id as rid', 'range.nombre as rnom')->get();
+      /* SOLUCIONADO: ERA EL LARAVEL PIJA ESTE.
+      CUANDO DOS TABLAS DISTINTAS TIENEN UN CAMPO CON EL MISMO NOMBRE Y HACES UN JOIN DE ESAS 2 TABLAS
+      SOBREESCRIBE LOS CAMPOS CON EL MISMO NOMBRE.
+      PARA EVITAR ESTO HAY QUE RENOMBRAR LOS CAMPOS QUE TIENEN EL MISMO NOMBRE. */
+      // $cantReviews = User::join('review', 'users.id', '=', 'review.user_id')->count('review.user_id')->groupBy('users.id')->get();
+      
+      // echo $users;
       foreach ($users as $user) {
         $user->avatar = base64_encode($user->avatar);
+        $cantReviews = DB::table('review')->select('film_id')->where('user_id', $user->id)->get();
+        // $cantReviews = Review::selectRaw('COUNT(film_id) as asd')->where('user_id', '=', $user->id)->get();
+        $user->cantReviews = $cantReviews->count();
+        // echo $user->id . ' - - - ' . $cantReviews;
       }
       return view('ranking-users',compact('users'));
     }
