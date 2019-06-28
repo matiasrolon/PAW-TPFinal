@@ -23,8 +23,8 @@
                     <a href="{{route('user_profile',$user['username']) }}">
                         {{$user['username']}}</td>
                 </a>
-                <td>{{$user['nombre']}}</td>
-                <td>FALTA HACER</td>
+                <td>{{$user['rnom']}}</td>
+                <td>{{ $user['cantReviews'] }}</td>
                 <!--aca irian las reviews totales del user-->
                 <td>{{ number_format($user['puntos'], 2) }}</td>
                 <!-- </div> -->
