@@ -72,11 +72,59 @@
 
 .resultados-buscador li img{
 /*   width: 90px; */
-  height: 120px;
+  display: none;
+  height: 240px;
+  border-radius: 5px 5px;
+  border: 2px solid white;
+}
+
+li.item-resultado:hover img{
+  display: block;
+}
+
+
+li.item-resultado:hover p{
+  display: block;
+}
+
+li.item-resultado:hover h4{
+  border: 2px solid #000000;
+}
+
+
+li.item-resultado:hover {
+  background-color: #96ff7f;
+  border-radius: 5px 5px;
+  border: 2px solid black;
+}
+
+.resultados-buscador div {
+  width: 400px;
+  display: table-column;
+}
+
+.resultados-buscador li p{
+  display:none;
+  padding: 8% 2%;
+  margin: 2% 1%;
+  color: #4f4b4b;
+  border: 2px dashed #989898;
+  border-radius: 5px 5px;
+}
+
+.resultados-buscador li h4{
+  padding: 2%;
+  margin: 1% 1%;
+  color: black;
+  display: block;
+  border-radius: 5px 5px;
 }
 
 .item-resultado{
   display: flex;
+  background: #bbbbbb;
+  border: 1px solid white;
+  border-radius: 5px 5px;
 }
 
 .opciones-login{
@@ -130,6 +178,10 @@
 
 .seccion-menu:hover a::before{
   content: "# ";
+}
+
+ul.resultados-buscador a {
+    text-decoration: none;
 }
 
 .resultados-buscador li{

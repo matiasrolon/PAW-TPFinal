@@ -99,12 +99,17 @@ NavPrincipal.recibirResponseSearchFilm= function(response){ //imprime lista de r
           linkFilm.setAttribute('href',"/films/"+resp[i].id);
           var item = document.createElement('li');
           let img = document.createElement('img');
-          let p = document.createElement('p');
+          let p = document.createElement('h4');
+          let p2 = document.createElement('p');
+          let d = document.createElement('div');
           img.src = "data:image/png;base64,"+resp[i].poster;
           item.classList.add('item-resultado');
           p.innerHTML = resp[i].titulo + "("+resp[i].fecha_estreno+")";
+          p2.innerHTML = resp[i].sinopsis;
           item.appendChild(img);
-          item.appendChild(p);
+          d.appendChild(p);
+          d.appendChild(p2);
+          item.appendChild(d);
           linkFilm.appendChild(item);
           lista.appendChild(linkFilm);
       }
