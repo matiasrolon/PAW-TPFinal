@@ -40,7 +40,7 @@
           <div class="info">
                   <div class="campo">
                       <label for="">Titulo:</label>
-                          <textarea class="titulo" name="name" rows=1 disabled></textarea>
+                          <textarea class="titulo" name="name" rows=1 cols=80 disabled></textarea>
                   </div>
                   <div class="campo">
                       <label for=""> Sinopsis:</label>
@@ -55,6 +55,10 @@
                           <textarea class="fecha-estreno" name="name" rows=1 disabled></textarea>
                   </div>
                   <div class="campo">
+                      <label for="" >Genero:</label>
+                          <textarea class="genero" name="name" rows=1 disabled></textarea>
+                  </div>
+                  <div class="campo">
                       <label for="">Pais:</label>
                           <textarea class="pais" name="name" rows=1 disabled></textarea>
                   </div>
@@ -64,6 +68,7 @@
                   </div>
             </div>
             <div class="opciones">
+                    <label class="estado-opciones"></label>
                     <button class="boton-guardar" type="button" name="button">GUARDAR</button>
                     <button class="boton-modificar" type="button" name="button">MODIFICAR</button>
                     <button class="boton-eliminar" type="button" name="button">ELIMINAR</button>

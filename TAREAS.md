@@ -2,9 +2,6 @@
 
 ## TO-DO (General)
 
-- [ ] Termina estructura de las views (.blades) ---> Matias
-- [ ] Averiguar como se interactua con una API externa (IMDB o Similar) ---> Juan
-- Documentar el codigo aunque sea un poquito: que recibe, que devuelve, funciones complejas (que no se entiende a simple vista que hace).
 - [ ] Revisar funcion FilmController\store()
 - Como devolver JSONs (interesante): [https://laravel.com/docs/5.8/responses#json-responses](https://laravel.com/docs/5.8/responses#json-responses)
 
@@ -15,6 +12,25 @@
 - [ ] Presentacion del software: puede ser una muestra de como anda, no necesariamente una ppt.
 
 ## TO-DO (funcional)
+#### API
+- [] Datos recuperados d ela API que esten vacios, que queden asi.
+ Actualmente cuando no hay nada, pone como valor "undefined" o "false";
+
+#### DB
+- [] Conservar en base el id_themoviedb para que cada vez que se recupera una peli de la api
+ no pasarla al front si ya esta cargada en base. Por mas que se distinga visualmente
+ cuales son de la api y cuales de nuestra bd, queda mejor si directamente las filtramos.
+
+#### VIEW
+- [] Agregar posibilidad de agregar varios generos, parseados por comas cuando los ingrese el usuario.
+ En el back se vera si ese genero ya esta ingresado en base, si no esta lo creara.
+- [] Los resultados dados de la API podrian aparecer en carrusel (si da el tiempo)
+
+#### AJAX
+- [] Primero cargar los datos de las peliculas, y que los resultados ya tengan el tamaño de div
+   que tendran cuando la imagen llegue (en una peticion aparte), y solo se inserte en el recuadro.
+   (actualmente varia segun el tamaño del contenido)
+
 
 ### MashUp - API
 
