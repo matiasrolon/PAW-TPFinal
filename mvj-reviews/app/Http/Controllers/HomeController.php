@@ -49,6 +49,10 @@ class HomeController extends Controller
 
         //Aca irian los primeros 15 o 20 usuarios con mejor ranking
         $users = User::orderBy('puntos','desc')->take(5)->get();
+        foreach ($users as $user) {
+          $cantReviews = Review::select('film_id')->where('user_id', $user->id)->get();
+          $user->cantReviews = $cantReviews->count();
+        }
         $generos = Genre::all();
         return view('home', compact('peliculas','series','reviews', 'users', 'generos'));
     }
