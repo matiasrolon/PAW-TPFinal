@@ -15,6 +15,10 @@ use GuzzleHttp\Client;
 class FilmController extends Controller
 {
 
+    public function searchByApiId($idApi) {
+      return Film::where('id_themoviedb', '=', $idApi)->first();
+    }
+
     /*
     * Busca un film solo en la BD del sitio.
     */
@@ -217,6 +221,7 @@ class FilmController extends Controller
                   $filmOriginal->pais = $request->pais;
                   $filmOriginal->poster = $request->poster; //sin el file_get_contents porque ya esta en base64
                   //$obra->duracion_min = $request->duracion_min;
+                  $filmOriginal->duracion_min = $request->duracion_min;
                   $filmOriginal->categoria = $request->categoria;
                   //$obra->fecha_finalizacion = $request->fecha_finalizacion;
                   $filmOriginal->save();
@@ -230,8 +235,10 @@ class FilmController extends Controller
                         $obra->pais = $request->pais;
                         $obra->poster = file_get_contents($request->poster);
                         //$obra->duracion_min = $request->duracion_min;
+                        $obra->duracion_min = $request->duracion_min;
                         $obra->categoria = $request->categoria;
                         //$obra->fecha_finalizacion = $request->fecha_finalizacion;
+                        $obra->id_themoviedb = $request->id_themoviedb;
                         $obra->save();
                         $request->id = $obra->id;// actualizo con el nuevo id
                         $request->estado ='OK';

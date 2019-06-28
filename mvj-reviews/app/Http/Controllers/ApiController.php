@@ -98,39 +98,28 @@ class ApiController extends Controller
 
             if (isset($filmAPI['title'])) {
                 $film['titulo'] = $filmAPI['title'];
+            } else {
+                $film['titulo'] = '';
             }
             // Convierto pais a string separado por comas.
             if (isset($filmAPI['origin_country'])) {
                 $abreviacion = trim(implode(',', $filmAPI['origin_country']));
                 $pais = $this->getConfig('pais', $abreviacion);
                 $film['pais'] = $pais;
+            } else {
+                $film['pais'] = '';
             }
             if (isset($filmAPI['overview'])) {
                 $film['sinopsis'] = $filmAPI['overview'];
+            } else {
+                $film['sinopsis'] = '';
             }
             // A menudo este campo no esta disponible
             if (isset($filmAPI['runtime'])) {
                 $film['duracion_min'] = $filmAPI['runtime'];
+            } else {
+                $film['duracion_min'] = '';
             }
-            if (isset($filmAPI['media_type'])) {
-                $film['categoria'] = $filmAPI['media_type'];
-            }
-            // Ya termino la serie
-            if (isset($filmAPI['in_production']) && isset($filmAPI['last_air_date'])) {
-                if ($filmAPI['in_production'] == false) {
-                    $film['fecha_finalizacion'] = $filmAPI['last_air_date'];
-                }
-            }
-
-            if (isset($filmAPI['poster_path'])) {
-                // $film['poster'] = 'https://image.tmdb.org/t/p/w500/' . $filmAPI['poster_path'];
-                // Me parece que es asi (PROBAR!!!)
-                $film['poster'] = 'https://image.tmdb.org/t/p/w500' . $filmAPI['poster_path'];
-            }
-
-            // Requiere de un parseo complejo
-            // $film['trailer'] = "";
-
             // Categoria
             if (isset($filmAPI['media_type'])) {
                 if ($filmAPI['media_type'] == 'movie') { // Pelicula
@@ -138,11 +127,32 @@ class ApiController extends Controller
                 } elseif ($filmAPI['media_type'] == 'tv') { // Serie
                     $film['categoria'] = 'serie';
                 }
+            } else {
+                $film['categoria'] = '';
             }
+            // Ya termino la serie
+            if (isset($filmAPI['in_production']) && isset($filmAPI['last_air_date'])) {
+                if ($filmAPI['in_production'] == false) {
+                    $film['fecha_finalizacion'] = $filmAPI['last_air_date'];
+                }
+            } else {
+                $film['fecha_finalizacion'] = '';
+            }
+
+            if (isset($filmAPI['poster_path'])) {
+                $film['poster'] = 'https://image.tmdb.org/t/p/w500' . $filmAPI['poster_path'];
+            } else {
+                $film['poster'] = '';
+            }
+
+            // Requiere de un parseo complejo
+            // $film['trailer'] = "";
 
             // Fecha de estreno
             if (isset($filmAPI['release_date'])) {
                 $film['fecha_estreno'] = $filmAPI['release_date']; // ESTA EN INGLES.
+            } else {
+                $film['fecha_estreno'] = '';
             }
             if (isset($filmAPI['first_air_date'])) {
                 $film['fecha_estreno'] = $filmAPI['first_air_date']; // ESTA EN INGLES.
@@ -151,6 +161,8 @@ class ApiController extends Controller
             // ID. idPelicula != idSerie para la API
             if (isset($filmAPI['id'])) {
                 $film['id_themoviedb'] = $filmAPI['id'];
+            } else {
+                $film['id_themoviedb'] = '';
             }
 
             // Funcion hasa sobre la obra para posterior comparacion
@@ -252,7 +264,7 @@ class ApiController extends Controller
                 'language' => 'es-MX',
                 'query' => $user_input,
                 'page' => '1',
-                'include_adult' => 'true'
+                'include_adult' => 'false'
             ];
 
             //WARNING: 40 requests every 10 seconds max
@@ -270,13 +282,19 @@ class ApiController extends Controller
                     $total_pages = (int)$resp["total_pages"]; // Total de paginas
                     $results = $resp["results"]; // Arreglo
 
+                    $fc = new FilmController;
                     // Recorro films (Pueden ser peliculas, series o actores)
                     for ($i = 0; $i < sizeof($results); $i++) {
-                        if ($results[$i]['media_type']!='person'){//por ahora no buscamos personas
+                        if ($results[$i]['media_type'] != 'person') { //por ahora no buscamos personas
                             $tmp = $this->parseFilm($results[$i]);
                             if ($tmp != false) {
-                                //Agrego film al arreglo
-                                $films[$i] = $tmp;
+                                // Reviso que no este en la BD y si esta, no la agrego.
+                                // NO SE POR QUE CARAJOS NO ANDA.
+                                $colBd = $fc->searchByApiId($tmp->id_themoviedb);
+                                if ($colBd == null) {
+                                    // Agrego film al arreglo
+                                    $films[$i] = $tmp;
+                                }
                             }
                         }
                     }
@@ -284,6 +302,7 @@ class ApiController extends Controller
                 } else { // si la request a la API no fue exitosa
                     $films = false;
                 }
+
 
                 // Para que no se cuelgue la API, espero 0.33 segundos.
                 // Creo que aun puede mejorarse, pero hay otras prioridades.

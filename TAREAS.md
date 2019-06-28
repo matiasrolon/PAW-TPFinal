@@ -11,26 +11,45 @@
 - [x] Documento que indique como hacer el deployment del proyecto. [readme.md](readme.md).
 - [ ] Presentacion del software: puede ser una muestra de como anda, no necesariamente una ppt.
 
+## Error
+
+- Ejemplo:
+  1. agregue dos peliculas de el padrino mediante la API.
+  2. Voy a admin films y busco en TheMovieDB "el padrino"
+  3. Me carga solo las dos que tengo guardadas en la BD. y se ve el siguiente error en la consola de JS
+  ```
+    Uncaught TypeError: resp.forEach is not a function
+    at Object.AdminFilms.recibirResponseSearchFilmsAdmin (admin_films.js:157)
+    at XMLHttpRequest.request.onreadystatechange (admin_films.js:121)
+  ```
+
 ## TO-DO (funcional)
-#### API
-- [] Datos recuperados d ela API que esten vacios, que queden asi.
- Actualmente cuando no hay nada, pone como valor "undefined" o "false";
 
-#### DB
-- [] Conservar en base el id_themoviedb para que cada vez que se recupera una peli de la api
+### API
+
+- [x] Datos recuperados de la API que esten vacios, que queden asi. Actualmente cuando no hay nada, pone como valor "undefined" o "false";
+  - **Hecho pero en el campo genero sigue apareciendo undefined porque la API no trae ese campo.**
+
+- [ ] Controlar que seas admin para acceder a las paginas del admin.
+
+### DB
+
+- [x] Conservar en base el id_themoviedb para que cada vez que se recupera una peli de la api
  no pasarla al front si ya esta cargada en base. Por mas que se distinga visualmente
- cuales son de la api y cuales de nuestra bd, queda mejor si directamente las filtramos.
+ cuales son de la api y cuales de nuestra bd, queda mejor si directamente las filtramos.4
+  - **Hecho a medias: logre que se guarde le id_themoviedb pero no consigo lograr que NO se muestre como resultado. Tambien se guardan la duracion (que no se por que estaba comentada).**
 
-#### VIEW
+### VIEW
+
 - [] Agregar posibilidad de agregar varios generos, parseados por comas cuando los ingrese el usuario.
  En el back se vera si ese genero ya esta ingresado en base, si no esta lo creara.
 - [] Los resultados dados de la API podrian aparecer en carrusel (si da el tiempo)
 
-#### AJAX
+### AJAX
+
 - [] Primero cargar los datos de las peliculas, y que los resultados ya tengan el tamaño de div
    que tendran cuando la imagen llegue (en una peticion aparte), y solo se inserte en el recuadro.
    (actualmente varia segun el tamaño del contenido)
-
 
 ### MashUp - API
 

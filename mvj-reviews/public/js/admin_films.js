@@ -2,6 +2,7 @@ var window = window || {},
   document = document || {},
   console = console || {},
   AdminFilms = AdminFilms || {};
+  idTheMovieDb = '';
 
 AdminFilms.iniciarPagina = function (contenedorHTML) {
   window.addEventListener("DOMContentLoaded", function () {
@@ -73,6 +74,8 @@ AdminFilms.enviarRequestStoreFilm = function(request){
     "genero": document.querySelector(info+'.genero').value,
     "pais": document.querySelector(info+'.pais').value,
     "duracion_min": document.querySelector(info+'.duracion-min').value,
+    // Tomo la id de la variable global.
+    "id_themoviedb": idTheMovieDb
   };
 
   var objeto = JSON.stringify(film);
@@ -202,6 +205,10 @@ AdminFilms.establecerResultadoSeleccionado = function(resultado,origen,base64){
     film_select.setAttribute('id',-1);
   }
     var info = '.admin-resultados .resultado-seleccionado .info .campo';
+
+        // Guardo el id_themoviedb en una variable global
+        idTheMovieDb = resultado['id_themoviedb'];
+
         var textarea = document.querySelector(info + ' .titulo');
         textarea.innerHTML = resultado['titulo'];
         var textarea = document.querySelector(info + ' .sinopsis');
@@ -215,7 +222,15 @@ AdminFilms.establecerResultadoSeleccionado = function(resultado,origen,base64){
         var textarea = document.querySelector(info + ' .duracion-min');
           textarea.innerHTML = resultado['duracion_min'];
         var textarea = document.querySelector(info + ' .genero');
-        textarea.innerHTML = resultado['genero'];
+
+        
+        // Fix provisional
+        if (resultado['genero'] == undefined){
+          textarea.innerHTML = '';
+        } else {
+          textarea.innerHTML = resultado['genero'];
+        }
+
     var poster = '.admin-resultados .resultado-seleccionado .poster img';
     var poster = document.querySelector(poster);
     poster.src = base64+resultado['poster'];
