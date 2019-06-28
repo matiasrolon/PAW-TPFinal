@@ -3,6 +3,7 @@
 use Illuminate\Database\Seeder;
 use App\Models\User;
 use App\Models\Role;
+use App\Models\Genre;
 
 class UserTableSeeder extends Seeder
 {
@@ -25,6 +26,7 @@ class UserTableSeeder extends Seeder
         $user_admin1->biografia = 'Administrador principal de MVJ Reviews';
         $user_admin1->save();
         $user_admin1->roles()->attach($role_admin);
+
         //admin2
         $user_admin2 = new User();
         $user_admin2->nombre = "Victorio Scafati";
@@ -79,5 +81,6 @@ class UserTableSeeder extends Seeder
         $user->biografia = 'Aun no tienes una biografia.';
         $user->save();
         $user->roles()->attach($role_critic);
+
     }
 }

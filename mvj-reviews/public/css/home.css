@@ -58,7 +58,7 @@ div.comment{
 
 .comment-inner {
    background: white;
-   padding: 2% 2%; 
+   padding: 2% 2%;
    border-radius: 10px 0px 10px 10px;
 }
 
@@ -95,6 +95,7 @@ ul.generos li:hover p::before{
 /*   width: auto; */
   margin: 0px 0px;
   border-radius: 5px 5px;
+    cursor: pointer;
 }
 
 .generos li:hover{
@@ -112,7 +113,7 @@ ul.generos li:hover p::before{
     display: inline-grid;
     grid-template-columns: repeat(4,auto);
     /* grid-template-rows: repeat(2,auto); */
-    margin: 1% 2%;
+    margin: 1% 0%;
 }
 
 .peliculas-genero{

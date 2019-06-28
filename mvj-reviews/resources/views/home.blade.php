@@ -83,7 +83,7 @@
                   <tr>
                       <!-- <div class="tupla-user"> -->
                           <td><a href="/users/{{$user['username']}}"> {{$user['username']}}</a></td>
-                          <td>FALTA</td> <!--aca irian las reviews totales del user-->
+                          <td>{{ $user['cantReviews'] }}</td> 
                           <td>{{ number_format($user['puntos'], 2) }}</td>
                       <!-- </div> -->
                   </tr>
