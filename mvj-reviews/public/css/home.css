@@ -47,9 +47,14 @@ td, th {
   background: #e4dea1;
   width: 80%;
   list-style:none;
-  height: 400px;
+  height: 560px;
   padding: 2% 5%;
   overflow: scroll;
+  scroll-snap-type:;
+}
+
+.ultimas-reviews-container::-webkit-scrollbar {
+    display: none;
 }
 
 div.comment{

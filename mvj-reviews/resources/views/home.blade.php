@@ -6,8 +6,10 @@
   <link href="{{ asset('css/home.css') }}" rel="stylesheet">
   <script src="{{ asset('js/peliculasGenero.js') }}" charset="utf-8"></script>
   <script src="{{ asset('js/filmCardData.js') }}" charset="utf-8"></script>
+  <script src="{{ asset('js/home.js') }}" charset="utf-8"></script>
   <script>
     FilmCardData.modificarPuntajeClase();
+    Home.iniciarPagina();
   </script>
 @endsection
 
@@ -83,7 +85,7 @@
                   <tr>
                       <!-- <div class="tupla-user"> -->
                           <td><a href="/users/{{$user['username']}}"> {{$user['username']}}</a></td>
-                          <td>{{ $user['cantReviews'] }}</td> 
+                          <td>{{ $user['cantReviews'] }}</td>
                           <td>{{ number_format($user['puntos'], 2) }}</td>
                       <!-- </div> -->
                   </tr>
@@ -94,13 +96,13 @@
           <div id="container101">
             <ul class="ultimas-reviews-container">
               @foreach($reviews as $review)
-                <li>
+                <li review_id="{{$review['review_id']}}">
                   <p>@<a href="/users/{{$review['username']}}">{{ $review['username'] }}</a> dijo:</p>
                   <div class="comment">
                     <div class="comment-inner">
-                    <h3><a href="/films/{{$review['film_id']}}">{{ $review['review_titulo'] }}</a></h3>
+                    <h3>{{ $review['review_titulo'] }}</h3>
                     <p>"{{ str_limit($review['review_descripcion'], $limit = 100, $end = '...')  }}..."</p>
-                    <p>Sobre: <a href="/films/{{$review['film_id']}}">{{ $review['film_titulo'] }} ({{ $review['film_fecha_estreno'] }})</a></p>
+                    <p>Sobre: <a href="/films/{{$review['film_id']}}">{{ $review['film_titulo'] }}</a></p>
                     </div>
                   </div>
 

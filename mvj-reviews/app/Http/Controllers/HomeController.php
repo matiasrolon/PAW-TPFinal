@@ -29,7 +29,7 @@ class HomeController extends Controller
     {
       //Cambiar consulta: Peliculas con mas puntos de la ultima semana o mes.
 
-        $peliculas = Film::where('categoria','Pelicula')->get();
+        $peliculas = Film::where('categoria','Pelicula')->take(8)->orderBy('puntaje','desc')->get();
         foreach ($peliculas as $pelicula) {
           $pelicula->portada = base64_encode($pelicula->poster);
         }
@@ -43,12 +43,12 @@ class HomeController extends Controller
                        ->select('review.id as review_id','review.titulo as review_titulo',
                         'review.descripcion as review_descripcion','users.username as username',
                         'film.id  as film_id', 'film.titulo as film_titulo', 'film.fecha_estreno as film_fecha_estreno')
-                       ->take(10)
+                       ->take(5)
                        ->orderBy('review.created_at','desc')
                        ->get();
 
         //Aca irian los primeros 15 o 20 usuarios con mejor ranking
-        $users = User::orderBy('puntos','desc')->take(5)->get();
+        $users = User::orderBy('puntos','desc')->take(10)->get();
         foreach ($users as $user) {
           $cantReviews = Review::select('film_id')->where('user_id', $user->id)->get();
           $user->cantReviews = $cantReviews->count();
