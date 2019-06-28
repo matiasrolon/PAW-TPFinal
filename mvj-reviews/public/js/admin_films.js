@@ -207,6 +207,13 @@ AdminFilms.mostrarResultadoSeleccionado = function() {
 AdminFilms.establecerResultadoSeleccionado = function(resultado,origen,base64){
   //a la seccion info le agrego datos importantes de la peli seleccionada que no se muestran en los textareas.
   //pero que despues se mandara en la request si es que el usuario realiza una accion sobre el (Agregar/modificar/etc)
+  var estadoResultAnt = document.querySelector('.resultado-Ok');
+
+  if (estadoResultAnt!=null){
+    var padre = document.querySelector('.resultado-seleccionado .poster');
+      padre.removeChild(estadoResultAnt);
+  }
+
   var film_select = document.querySelector('.admin-resultados .resultado-seleccionado .info')
   film_select.setAttribute('origen',origen);
   if (origen=='DB'){

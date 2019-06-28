@@ -1,6 +1,6 @@
 /*-------- HOME -------- */
 .users-populares{
-  width: 23%;
+  width: 22%;
   display: block;
   top: 0%;
   float: right;
@@ -22,6 +22,10 @@
   border: solid 1px white;
   width: 215px;
   background: bisque;
+}
+
+.ranking-tabla h3{
+  text-align: center;
 }
 
 thead{
@@ -127,7 +131,7 @@ ul.generos li:hover p::before{
     /* height: 1000px; */
     /* width: 100%; */
     margin: 1% 2%;
-    overflow: scroll;
+    overflow: auto;
 }
 
 .container-peliculas-populares{
@@ -143,7 +147,7 @@ ul.generos li:hover p::before{
 }
 
 .films-populares{
-  width: 63%;
+  width: 64%;
   display: inline-block;
   position: relative;
   margin: auto !important;
