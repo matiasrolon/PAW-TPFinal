@@ -154,6 +154,7 @@ class FilmTableSeeder extends Seeder
         $film1->duracion_min = 60;
         $film1->save();
         $film1->genres()->attach(Genre::inRandomOrder()->first());
+        
 
 //serie 4 id =12
         $film1 = new Film();
@@ -164,7 +165,7 @@ class FilmTableSeeder extends Seeder
         $film1->pais = 'Irlanda';
         $film1->categoria = 'Serie';
         $film1->trailer ='https://www.youtube.com/watch?v=1bq0qff4iF8&ab_channel=MovieclipsClassicTrailers';
-        $film1->poster = file_get_contents ('https://cdn3.cineralia.com/wp-content/uploads/2015/03/Vikingos_Vikings_Serie_de_TV-616055151-large.jpg');
+        $film1->poster = file_get_contents ('https://www.hellofriki.com//wp-content/uploads/2015/12/vikings-temporada-4-poster.jpg');
         $film1->duracion_min = 45;
         $film1->puntaje=0;
         $film1->save();

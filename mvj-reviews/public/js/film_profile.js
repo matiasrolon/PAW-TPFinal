@@ -216,6 +216,11 @@ Pagina.recibirResponseAgregarReview = function(response){
     seccionReviews.appendChild(review);
 
     //Por ultimo pongo en verde el recuadro de mensaje del estado de la review
+    var padre =document.querySelector('#info-reviews');
+    var mensajeNoReviews = document.querySelector('#info-reviews .no-reviews');
+    if (mensajeNoReviews!=null){
+      padre.removeChild(mensajeNoReviews);
+    }
 
   }else{
     estadoReview.innerHTML = resp['mensaje'];

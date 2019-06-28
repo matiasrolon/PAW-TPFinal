@@ -68,7 +68,7 @@ PeliculaGenero.getNextChunckScroll = function(){
 }
 
 PeliculaGenero.initialize = function (genre, category, container) {
-  PeliculaGenero.elementsPerChunck = 5;
+  PeliculaGenero.elementsPerChunck = 4;
   PeliculaGenero.offset = 0;
   PeliculaGenero.genre = genre;
   PeliculaGenero.category = category;
