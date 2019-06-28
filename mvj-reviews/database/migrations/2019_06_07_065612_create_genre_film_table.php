@@ -22,7 +22,7 @@ class CreateGenreFilmTable extends Migration
             $table->foreign('genre_id')->references('id')->on('genre');
             $table->foreign('film_id')->references('id')->on('film');
 
-            // $table->timestamps();
+            $table->timestamps();
         });
     }
 

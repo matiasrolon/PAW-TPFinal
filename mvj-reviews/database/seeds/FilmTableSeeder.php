@@ -24,8 +24,7 @@ class FilmTableSeeder extends Seeder
         $film1->trailer ='https://www.youtube.com/watch?v=V75dMMIW2B4&ab_channel=Movieclips';
         $film1->duracion_min = 179;
         $film1->save();
-        $film1->genres()->attach( Genre::find(rand(1,10)));
-        $film1->save();
+        $film1->genres()->attach(Genre::inRandomOrder()->first());
 //pelicula id =2
         $film1 = new Film();
         $film1->titulo = "Atrapado sin salida";
@@ -37,8 +36,7 @@ class FilmTableSeeder extends Seeder
         $film1->poster = file_get_contents ('https://images-na.ssl-images-amazon.com/images/I/71NbaIPFvkL._SY445_.jpg');
         $film1->duracion_min = 135;
         $film1->save();
-        $film1->genres()->attach( Genre::find(rand(1,10)));
-        $film1->save();
+        $film1->genres()->attach(Genre::inRandomOrder()->first());
 //pelicula id =3
         $film1 = new Film();
         $film1->titulo = "Harry Potter y la camara secreta";
@@ -47,11 +45,10 @@ class FilmTableSeeder extends Seeder
         $film1->pais = 'Ingraterra';
         $film1->categoria = 'Pelicula';
         $film1->trailer ='https://www.youtube.com/watch?v=1bq0qff4iF8&ab_channel=MovieclipsClassicTrailers';
-        $film1->poster = file_get_contents ('https://i.pinimg.com/originals/f4/7e/a5/f47ea5c518f38b55f48ff13f1c0a6fb2.jpg');
+        $film1->poster = file_get_contents ('https://www.toledo.es/wp-content/uploads/2017/08/harry-potter-y-la-camara-secreta.jpg');
         $film1->duracion_min = 179;
         $film1->save();
-        $film1->genres()->attach( Genre::find(rand(1,10)));
-        $film1->save();
+        $film1->genres()->attach(Genre::inRandomOrder()->first());
 //pelicula id =4
         $film1 = new Film();
         $film1->titulo = "La vida es bella";
@@ -60,11 +57,10 @@ class FilmTableSeeder extends Seeder
         $film1->pais = 'Italia';
         $film1->categoria = 'Pelicula';
         $film1->trailer ='https://www.youtube.com/watch?v=1bq0qff4iF8&ab_channel=MovieclipsClassicTrailers';
-        $film1->poster = file_get_contents ('https://images-na.ssl-images-amazon.com/images/I/71NbaIPFvkL._SY445_.jpg');
+        $film1->poster = file_get_contents ('https://pics.filmaffinity.com/la_vita_e_bella-646167341-large.jpg');
         $film1->duracion_min = 135;
         $film1->save();
-        $film1->genres()->attach( Genre::find(rand(1,10)));
-        $film1->save();
+        $film1->genres()->attach(Genre::inRandomOrder()->first());
 //pelicula 5
         $film1 = new Film();
         $film1->titulo = "Transformers 3";
@@ -73,11 +69,10 @@ class FilmTableSeeder extends Seeder
         $film1->pais = 'Estados Unidos';
         $film1->categoria = 'Pelicula';
         $film1->trailer ='https://www.youtube.com/watch?v=1bq0qff4iF8&ab_channel=MovieclipsClassicTrailers';
-        $film1->poster = file_get_contents ('https://i.pinimg.com/originals/f4/7e/a5/f47ea5c518f38b55f48ff13f1c0a6fb2.jpg');
+        $film1->poster = file_get_contents ('https://mobimg.b-cdn.net/iphonegame_img/transformers_3_defend_the_earth/real/2_transformers_3_defend_the_earth.jpg');
         $film1->duracion_min = 179;
         $film1->save();
-        $film1->genres()->attach( Genre::find(rand(1,10)));
-        $film1->save();
+        $film1->genres()->attach(Genre::inRandomOrder()->first());
 //pelicula id =6
         $film1 = new Film();
         $film1->titulo = "El Dia de la Marmota";
@@ -86,11 +81,10 @@ class FilmTableSeeder extends Seeder
         $film1->pais = 'Estados Unidos';
         $film1->categoria = 'Pelicula';
         $film1->trailer ='https://www.youtube.com/watch?v=1bq0qff4iF8&ab_channel=MovieclipsClassicTrailers';
-        $film1->poster = file_get_contents ('https://images-na.ssl-images-amazon.com/images/I/71NbaIPFvkL._SY445_.jpg');
+        $film1->poster = file_get_contents ('http://bityouth.com/images/peliculas/2/4/5/7/9/8/groundhog_day-714116870-large.jpg');
         $film1->duracion_min = 135;
         $film1->save();
-        $film1->genres()->attach( Genre::find(rand(1,10)));
-        $film1->save();
+        $film1->genres()->attach(Genre::inRandomOrder()->first());
 //pelicula id =7
         $film1 = new Film();
         $film1->titulo = "Los Juegos del Hambre";
@@ -99,11 +93,11 @@ class FilmTableSeeder extends Seeder
         $film1->pais = 'Estados Unidos';
         $film1->categoria = 'Pelicula';
         $film1->trailer ='https://www.youtube.com/watch?v=1bq0qff4iF8&ab_channel=MovieclipsClassicTrailers';
-        $film1->poster = file_get_contents ('https://i.pinimg.com/originals/f4/7e/a5/f47ea5c518f38b55f48ff13f1c0a6fb2.jpg');
+        $film1->poster = file_get_contents ('https://static.pelisplus.co/movie/cover/original/96cf3213d534c423a2cdab4d92e098bc.jpg');
         $film1->duracion_min = 179;
         $film1->save();
-        $film1->genres()->attach( Genre::find(rand(1,10)));
-        $film1->save();
+        $film1->genres()->attach(Genre::inRandomOrder()->first());
+
 //pelicula id =8
         $film1 = new Film();
         $film1->titulo = "El Lobo de Wall street";
@@ -112,12 +106,10 @@ class FilmTableSeeder extends Seeder
         $film1->pais = 'Estados Unidos';
         $film1->categoria = 'Pelicula';
         $film1->trailer ='https://www.youtube.com/watch?v=1bq0qff4iF8&ab_channel=MovieclipsClassicTrailers';
-        $film1->poster = file_get_contents ('https://images-na.ssl-images-amazon.com/images/I/71NbaIPFvkL._SY445_.jpg');
+        $film1->poster = file_get_contents ('https://static.pelisplus.co/movie/cover/original/5cf25676a3bbad9368d7946edf84219e.jpg');
         $film1->duracion_min = 135;
         $film1->save();
-        $film1->genres()->attach( Genre::find(rand(1,10)));
-        $film1->save();
-
+        $film1->genres()->attach(Genre::inRandomOrder()->first());
 
 
 //serie 1 id =9
@@ -129,12 +121,11 @@ class FilmTableSeeder extends Seeder
         $film1->pais = 'Estados Unidos';
         $film1->categoria = 'Serie';
         $film1->trailer ='https://www.youtube.com/watch?v=1bq0qff4iF8&ab_channel=MovieclipsClassicTrailers';
-        $film1->poster = file_get_contents ('https://playmax.xyz/img/c/400/1/1485452104/58.jpg');
+        $film1->poster = file_get_contents ('https://imagessl3.casadellibro.com/m/ig/3/2354953.jpg');
         $film1->duracion_min = 0;
         $film1->save();
         $film1->save();
-        $film1->genres()->attach( Genre::find(rand(1,10)));
-        $film1->save();
+        $film1->genres()->attach(Genre::inRandomOrder()->first());
 
 //serie 2 id =10
         $film1 = new Film();
@@ -148,8 +139,7 @@ class FilmTableSeeder extends Seeder
         $film1->poster = file_get_contents ('http://www.caratulasylogos.com/sites/default/files/breaking_bad.jpg');
         $film1->duracion_min = 45;
         $film1->save();
-        $film1->genres()->attach( Genre::find(rand(1,10)));
-        $film1->save();
+        $film1->genres()->attach(Genre::inRandomOrder()->first());
 
 //serie 3 id =11
         $film1 = new Film();
@@ -163,8 +153,7 @@ class FilmTableSeeder extends Seeder
         $film1->poster = file_get_contents ('https://playmax.xyz/img/c/400/1/1485452104/58.jpg');
         $film1->duracion_min = 60;
         $film1->save();
-        $film1->genres()->attach( Genre::find(rand(1,10)));
-        $film1->save();
+        $film1->genres()->attach(Genre::inRandomOrder()->first());
 
 //serie 4 id =12
         $film1 = new Film();
@@ -179,7 +168,6 @@ class FilmTableSeeder extends Seeder
         $film1->duracion_min = 45;
         $film1->puntaje=0;
         $film1->save();
-        $film1->genres()->attach( Genre::find(rand(1,10)));
-        $film1->save();
+        $film1->genres()->attach(Genre::inRandomOrder()->first());
     }
 }
