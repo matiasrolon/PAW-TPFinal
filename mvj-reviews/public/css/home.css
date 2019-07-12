@@ -162,6 +162,7 @@ ul.generos li:hover p::before{
 
 .titulo-film{
   background: black;
+  color: rgb(242, 255, 3);
 }
 
 .cuadro-film{
@@ -249,7 +250,7 @@ ul.generos li:hover p::before{
 
 .flip-card-back {
   background-color: #bbb;
-  color: white;
+  color: black;
   transform: rotateY(180deg);
 }
 

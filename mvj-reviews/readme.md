@@ -19,8 +19,9 @@ Mas adelante podemos cambiar este archivo de ubicacion. El objetivo es llevar cu
 ### Guia de instalacion
 
 1. Clonar el repositorio.
-1. Pararse en el directorio 'mvj-reviews'.
-1. Abrir una terminal y ejecutar `composer install` para descargar las dependencias.
-1. Crear un archivo **.env** y configurar la base de datos. (Ya debe estar creada. Codificacion: utf8mb4)
-1. En la terminal ejecutar `php artisan migrate` para crear la estructura de la BD.
-1. Levantar el servidor php de prueba ejecutando `php artisan serve`.
+2. Pararse en el directorio 'mvj-reviews'.
+3. Abrir una terminal y ejecutar `composer install` para descargar las dependencias.
+4. Crear un archivo **.env**, a partir de **.env.example**, y configurar las propiedades de la base de datos (Ej: DB_propiedad) con su usuario y contraseña correspondiente. (Ya debe estar creada. Codificacion: utf8mb4)
+5. En la terminal ejecutar:
+  - `php artisan migrate --seed` para crear la estructura de la BD junto con un set de datos inicial.
+  - `php artisan serve` para levantar un servidor php de prueba.
