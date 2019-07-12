@@ -6,7 +6,7 @@
 
 #app, body{
   width: 100%;
-  background-color:#BEC3E8;
+  background-color: #F6CAAC;
   font-family: 'Pridi', serif;
   color: black;
   margin: 0%;
@@ -54,6 +54,7 @@
 /*   width: 100%; */
   text-align: right;
   padding-right: 10px;
+  list-style: none;
 }
 
 .resultados-buscador{
@@ -132,8 +133,23 @@ li.item-resultado:hover {
     list-style-position: inside;
     margin-top: 0px;
     position: absolute;
-        right: 3%;
+    right: 3%;
+    padding: 0%;
 }
+
+.opciones-login > li{
+  list-style: none;
+  background-color:rgba(120, 172, 252);
+  padding-left: 40%;
+  width: 60px;
+  padding-left: 8px;
+  border: solid 1px black;
+}
+
+.opciones-login > li > a{
+  text-decoration: none;
+}
+
 
 .opciones-guest{ /* opciones para el usuario que no esta logeado*/
     list-style-position: inside;

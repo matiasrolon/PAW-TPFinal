@@ -7,6 +7,7 @@ use App\Models\Film;
 use App\Models\User;
 use App\Models\Review;
 use App\Models\Genre;
+use Auth;
 
 class HomeController extends Controller
 {
