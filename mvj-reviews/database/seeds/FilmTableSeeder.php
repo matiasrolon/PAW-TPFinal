@@ -136,7 +136,7 @@ class FilmTableSeeder extends Seeder
         $film1->pais = 'Estados Unidos';
         $film1->categoria = 'Serie';
         $film1->trailer ='https://www.youtube.com/watch?v=1bq0qff4iF8&ab_channel=MovieclipsClassicTrailers';
-        $film1->poster = file_get_contents ('http://www.caratulasylogos.com/sites/default/files/breaking_bad.jpg');
+        $film1->poster = file_get_contents ('https://i1.wp.com/www.vastulisto.com/wp-content/uploads/2012/01/breaking_bad_season1_cover.jpg');
         $film1->duracion_min = 45;
         $film1->save();
         $film1->genres()->attach(Genre::inRandomOrder()->first());
@@ -154,7 +154,7 @@ class FilmTableSeeder extends Seeder
         $film1->duracion_min = 60;
         $film1->save();
         $film1->genres()->attach(Genre::inRandomOrder()->first());
-        
+
 
 //serie 4 id =12
         $film1 = new Film();

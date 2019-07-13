@@ -5,17 +5,14 @@ namespace App\Models;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-USE App\Models\Range;
+use App\Models\Range;
+use Spatie\Permission\Traits\HasRoles;
 
 class User extends Authenticatable
 {
-    use Notifiable;
+    use Notifiable, HasRoles;
 
     protected $table = 'users';
-
-    public function roles(){
-      return $this->belongsToMany('App\Models\Role', 'user_role', 'user_id', 'role_id');
-    }
 
     public function range()
     {

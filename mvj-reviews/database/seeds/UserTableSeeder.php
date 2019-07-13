@@ -2,7 +2,6 @@
 
 use Illuminate\Database\Seeder;
 use App\Models\User;
-use App\Models\Role;
 use App\Models\Genre;
 
 class UserTableSeeder extends Seeder
@@ -14,8 +13,7 @@ class UserTableSeeder extends Seeder
      */
     public function run()
     {
-        $role_admin =  Role::find(1);
-        $role_critic = Role::find(2);
+
         //admin1
         $user_admin1 = new User();
         $user_admin1->nombre = "Matias Rolon";
@@ -25,7 +23,7 @@ class UserTableSeeder extends Seeder
                   //'password' => Hash::make($data['password']) // otra forma de hashear la password
         $user_admin1->biografia = 'Administrador principal de MVJ Reviews';
         $user_admin1->save();
-        $user_admin1->roles()->attach($role_admin);
+        $user_admin1->assignRole('admin');
 
         //admin2
         $user_admin2 = new User();
@@ -35,16 +33,18 @@ class UserTableSeeder extends Seeder
         $user_admin2->password = bcrypt('admin2');
         $user_admin2->biografia = 'Administrador principal de MVJ Reviews';
         $user_admin2->save();
-        $user_admin2->roles()->attach($role_admin);
+        $user_admin2->assignRole('admin');
+
         //admin3
-        $user_admin2 = new User();
-        $user_admin2->nombre = "Juan Real";
-        $user_admin2->username = "admin3";
-        $user_admin2->email = "juancreal1@gmail.com";
-        $user_admin2->password = bcrypt('admin3');
-        $user_admin2->biografia = 'Administrador principal de MVJ Reviews';
-        $user_admin2->save();
-        $user_admin2->roles()->attach($role_admin);
+        $user_admin3 = new User();
+        $user_admin3->nombre = "Juan Real";
+        $user_admin3->username = "admin3";
+        $user_admin3->email = "juancreal1@gmail.com";
+        $user_admin3->password = bcrypt('admin3');
+        $user_admin3->biografia = 'Administrador principal de MVJ Reviews';
+        $user_admin3->save();
+        $user_admin3->assignRole('admin');
+
         //usuario comun 1
         $user = new User();
         $user->nombre = "Juan Perez";
@@ -53,7 +53,6 @@ class UserTableSeeder extends Seeder
         $user->password = bcrypt('juanperez');
         $user->biografia = 'Aun no tienes una biografia.';
         $user->save();
-        $user->roles()->attach($role_critic);
         //usuario comun 2
         $user = new User();
         $user->nombre = "Jose¿ Ramirez";
@@ -62,7 +61,6 @@ class UserTableSeeder extends Seeder
         $user->password = bcrypt('joseramirez');
         $user->biografia = 'Aun no tienes una biografia.';
         $user->save();
-        $user->roles()->attach($role_critic);
         //usuario comun 3
         $user = new User();
         $user->nombre = "Jorge Gonzales";
@@ -71,7 +69,6 @@ class UserTableSeeder extends Seeder
         $user->password = bcrypt('jorgegonzales');
         $user->biografia = 'Aun no tienes una biografia.';
         $user->save();
-        $user->roles()->attach($role_critic);
         //usuario comun 4
         $user = new User();
         $user->nombre = "Lucia Lopez";
@@ -80,7 +77,6 @@ class UserTableSeeder extends Seeder
         $user->password = bcrypt('lucialopez');
         $user->biografia = 'Aun no tienes una biografia.';
         $user->save();
-        $user->roles()->attach($role_critic);
 
     }
 }

@@ -94,7 +94,7 @@
                   <a href=""> Novedades </a>
             </div>
             @auth
-                @if ( Auth::isAdmin() )
+                @if ( Auth::user()->hasRole('admin') )
                   <div class="seccion-menu">
                       <a href="{{ route('admin-films') }}"> Admin Films </a>
                   </div>
