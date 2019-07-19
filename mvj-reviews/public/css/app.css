@@ -188,11 +188,35 @@ li.item-resultado:hover {
     background-color: inherit;
 }
 
+    .seccion-menu .submenu{
+      background-color: rgba(120, 172, 252);
+      border-radius: 2px 2px;
+      list-style: none;
+      position: absolute;
+      z-index: 2;
+      margin: 0%;
+      margin-top: 10px;
+      padding: 0%;
+    }
+          .submenu li{
+            margin: 0%;
+            padding: 10px 5px;
+            width: 150px;
+          }
+
+          .submenu li:hover{
+            color: black;
+            background-color: white;
+          }
+          .submenu li:hover a::before{
+            content: "# ";
+          }
+
 .seccion-menu:hover{
   background-color: white;
 }
 
-.seccion-menu:hover a::before{
+.seccion-menu:hover>a::before{
   content: "# ";
 }
 

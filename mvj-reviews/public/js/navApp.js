@@ -8,6 +8,27 @@ NavPrincipal.iniciarNavPrincipal= function(contenedorHTML){
 
       var content = document.getElementById('content');
 
+      //despliega submenu  de novedades
+      document.querySelector('.seccion-menu.novedades')
+      .addEventListener("mouseover",function(){
+          var sub = document.querySelector('.submenu.novedades');
+          sub.classList.remove("no-visible");
+      });
+
+      //saca submenu  de novedades
+      document.querySelector('.seccion-menu.novedades')
+      .addEventListener("mouseleave",function(){
+          var sub = document.querySelector('.submenu.novedades');
+          sub.classList.add("no-visible");
+      });
+
+      //despliega submenu  de novedades
+      document.querySelector('.seccion-menu.novedades')
+      .addEventListener("mouseover",function(){
+          var sub = document.querySelector('.submenu.novedades');
+          sub.classList.remove("no-visible");
+      });
+
       //cuando hace click en cualquier espacio de la pagina, se sale el menu del perfil.
       content.addEventListener("click",function(){
          var op = document.querySelector('.opciones-login');
