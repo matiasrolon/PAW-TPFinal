@@ -15,15 +15,15 @@ class CreateNewnessTable extends Migration
     {
         Schema::create('newness', function (Blueprint $table) {
             $table->bigIncrements('id');
-            // $table->string('categoria', 20);
             $categorias = array('noticia', 'estreno', 'premio');
             $table->enum('categoria', $categorias);
             $table->string('autor', 100);
-            $table->timestamp('fecha'); // Fecha para mostrar
+            $table->date('fecha'); // Fecha para mostrar (antes timestamp)
             $table->string('titulo', 100);
-            $table->string('copete', 200);
+            $table->string('copete', 500);
             $table->text('cuerpo', 5000); // Descripcion. TEXT se supone que no sera comparado en un query
-            $table->binary('imagen'); // BLOB
+            $table->binary('imagen')->nullable(); // BLOB
+            $table->string('epigrafe', 200)->nullable();
             $table->timestamps();
         });
     }

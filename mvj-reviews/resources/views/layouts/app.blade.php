@@ -93,9 +93,9 @@
             <div class="seccion-menu novedades">
                   <a href=""> Novedades </a>
                   <ul class="submenu novedades no-visible">
-                    <li><a href="#">Premios</a></li>
-                    <li><a href="#">Noticia del Dia</a></li>
-                    <li><a href="#">Estrenos</a></li>
+                    <li><a href="{{ route('premios') }}">Premios</a></li>
+                    <li><a href="{{ route('noticias') }}">Noticia del Dia</a></li>
+                    <li><a href="{{ route('estrenos') }}">Estrenos</a></li>
                   </ul>
             </div>
             @auth

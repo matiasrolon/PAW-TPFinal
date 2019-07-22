@@ -8,4 +8,5 @@ class Newness extends Model
 {
     //
     protected $table = 'newness';
+      protected $fillable = ['autor','categoria','cuerpo','copete','imagen','epigrafe','titulo','fecha'];
 }
