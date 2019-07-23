@@ -1,0 +1,39 @@
+.no-visible{
+  display: none;
+}
+
+.admin{
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.create-options.initial{
+  background-color: rgba(121, 226, 79, 0.7);
+  display: inline-block;
+  text-align: center;
+  width: 100%;
+  height: 200px;
+  vertical-align: middle;
+}
+
+    .create-options .option{
+      background-color: rgba(179, 179, 179, 0.77);
+      border: solid 1px black;
+      display: inline-block;
+      font-size: 80%;
+      /* vertical-align: middle; */
+      height: 90%;
+      width: 20%;
+      margin: 8px;
+    }
+
+.create-options.alternative{
+  background-color: rgba(121, 226, 79, 0.7);
+  display: block;
+  text-align: center;
+  width: 100%;
+  height: 30px;
+}
+;
+}

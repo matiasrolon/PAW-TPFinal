@@ -33,9 +33,10 @@ Route::post('/scoreFilm','FilmController@scoreFilm')->name('scoreFilm');
 Route::get('/searchSuggestions/{filmname}','FilmController@searchSuggestions')->name('searchLocalFilm');
 Route::get('/search/{filmname}','FilmController@searchResults')->name('search');
 //novedades
-Route::get('/novedades/noticias','NewnessController@noticiaDelDia')->name('noticias');
-Route::get('/novedades/estrenos','NewnessController@estrenos')->name('estrenos');
-Route::get('/novedades/premios','NewnessController@premios')->name('premios');
+Route::get('/novelties/news','NewnessController@news')->name('news');
+Route::get('/novelties/admin','NewnessController@admin_novelties')->name('admin-novelties');
+Route::get('/novelties/premieres','NewnessController@premiere')->name('premieres');//NO ANDA
+Route::get('/novelties/awars','NewnessController@awards')->name('awards');//NO ANDA
 
 //para administradores
 Route::get('/admin/films','FilmController@admin_films')->name('admin-films');

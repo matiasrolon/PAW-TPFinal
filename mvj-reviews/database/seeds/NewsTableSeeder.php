@@ -1,9 +1,9 @@
 <?php
 
 use Illuminate\Database\Seeder;
-use App\Models\Newness;
+use App\Models\News;
 
-class NewnessTableSeeder extends Seeder
+class NewsTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -12,6 +12,6 @@ class NewnessTableSeeder extends Seeder
      */
     public function run()
     {
-          factory(Newness::class, 10)->create();
+          factory(News::class, 10)->create();
     }
 }

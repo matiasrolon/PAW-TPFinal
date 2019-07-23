@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateNewnessTable extends Migration
+class CreateNewsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,17 +13,15 @@ class CreateNewnessTable extends Migration
      */
     public function up()
     {
-        Schema::create('newness', function (Blueprint $table) {
+        Schema::create('news', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $categorias = array('noticia', 'estreno', 'premio');
-            $table->enum('categoria', $categorias);
+            $table->binary('portada')->nullable(); // BLOB, por ahora nullable, puede ser propia o externa
             $table->string('autor', 100);
-            $table->date('fecha'); // Fecha para mostrar (antes timestamp)
+            $table->date('fecha'); // Fecha para mostrar
             $table->string('titulo', 100);
             $table->string('copete', 500);
             $table->text('cuerpo', 5000); // Descripcion. TEXT se supone que no sera comparado en un query
-            $table->binary('imagen')->nullable(); // BLOB
-            $table->string('epigrafe', 200)->nullable();
+            $table->string('fuente')->nullable();
             $table->timestamps();
         });
     }
@@ -35,6 +33,6 @@ class CreateNewnessTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('newness');
+        Schema::dropIfExists('news');
     }
 }

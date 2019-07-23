@@ -3,9 +3,9 @@
 @section('title') Estrenos | MVJ Reviews @endsection
 
 @section('publics')
-    <script src="{{ asset('js/newness/estrenos.js') }}"></script>
+    <script src="{{ asset('js/novelties/premieres.js') }}"></script>
     <script>Estrenos.iniciarEstrenos("content");</script>
-    <link href="{{ asset('css/newness/estrenos.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/novelties/premieres.css') }}" rel="stylesheet">
 @endsection
 
 @section('content')

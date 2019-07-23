@@ -1,11 +1,11 @@
 var window = window || {},
   document = document || {},
   console = console || {},
-  Noticias = Noticias || {};
+  Novedades = Novedades || {};
 
-Noticias.iniciarNoticias = function (contenedorHTML) {
+Novedades.iniciarNovedades = function (contenedorHTML) {
   window.addEventListener("DOMContentLoaded", function () {
-    console.log("Noticias asocio JS con HTML.");
+    console.log("Premios asocio JS con HTML.");
 
   });
 }

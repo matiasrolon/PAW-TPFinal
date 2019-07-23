@@ -20,6 +20,6 @@ class DatabaseSeeder extends Seeder
          $this->call(ReviewTableSeeder::class);
          $this->call(ScoreReviewTableSeeder::class);
          $this->call(PendentSearchTableSeeder::class);
-         $this->call(NewnessTableSeeder::class);
+         $this->call(NewsTableSeeder::class);
     }
 }

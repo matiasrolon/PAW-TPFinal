@@ -93,9 +93,9 @@
             <div class="seccion-menu novedades">
                   <a href=""> Novedades </a>
                   <ul class="submenu novedades no-visible">
-                    <li><a href="{{ route('premios') }}">Premios</a></li>
-                    <li><a href="{{ route('noticias') }}">Noticia del Dia</a></li>
-                    <li><a href="{{ route('estrenos') }}">Estrenos</a></li>
+                    <li><a href="{{ route('awards') }}">Premios</a></li>
+                    <li><a href="{{ route('news') }}">Noticia del Dia</a></li>
+                    <li><a href="{{ route('premieres') }}">Estrenos</a></li>
                   </ul>
             </div>
             @auth
@@ -104,7 +104,7 @@
                       <a href="{{ route('admin-films') }}"> Admin Films </a>
                   </div>
                   <div class="seccion-menu">
-                      <a href=""> Admin Novedades </a>
+                      <a href="{{ route('admin-novelties') }}"> Admin Novedades </a>
                   </div>
                   @endif
             @endauth

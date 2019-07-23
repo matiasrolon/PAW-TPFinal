@@ -3,9 +3,9 @@
 @section('title') Premios | MVJ Reviews @endsection
 
 @section('publics')
-    <script src="{{ asset('js/newness/premios.js') }}"></script>
+    <script src="{{ asset('js/novelties/awars.js') }}"></script>
     <script>Premios.iniciarPremios("content");</script>
-    <link href="{{ asset('css/newness/premios.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/novelties/awars.css') }}" rel="stylesheet">
 @endsection
 
 @section('content')
