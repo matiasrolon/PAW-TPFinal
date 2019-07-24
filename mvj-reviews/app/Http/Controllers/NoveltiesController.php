@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Models\News;
+use App\Models\Film;
 
-class NewnessController extends Controller
+class NoveltiesController extends Controller
 {
   /**
    * Create a new controller instance.
@@ -17,11 +19,6 @@ class NewnessController extends Controller
     //  $this->middleware('auth'); //Para que pase por el login si no es usuario
   }
 
-  public function news(){
-    $noticias = News::all(); // luego cambiar por valor fijo, para paginacion.
-       return view('novelties/news', compact('noticias'));
-  }
-
   public function admin_novelties(){
       if (Auth()->user()->hasRole('admin')){
           return view('novelties/admin-novelties');
@@ -30,12 +27,21 @@ class NewnessController extends Controller
       }
   }
 
+  public function create_news(){
+    //echo
+  }
+
+  //noticias
+  public function news(){
+    $noticias = News::all(); // luego cambiar por valor fijo, para paginacion.
+       return view('novelties/news', compact('noticias'));
+  }
 
 //estrenos
   public function premieres(){
-    //$estrenos = Newness::where('categoria','estreno')->get();
-    // return view('newness/estrenos', compact('estrenos'));
-    echo "no funciona todavia";
+    $hoy = Carbon::today();
+    $premieres = Film::whereDate('fecha_estreno', '>=', $hoy)->select('titulo','fecha_estreno','sinopsis')->get();
+     return view('novelties/premieres', compact('premieres'));
   }
 
 //premios

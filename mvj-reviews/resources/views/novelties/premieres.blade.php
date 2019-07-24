@@ -4,17 +4,17 @@
 
 @section('publics')
     <script src="{{ asset('js/novelties/premieres.js') }}"></script>
-    <script>Estrenos.iniciarEstrenos("content");</script>
+    <script>Premieres.startPremieres("content");</script>
     <link href="{{ asset('css/novelties/premieres.css') }}" rel="stylesheet">
 @endsection
 
 @section('content')
 
-@foreach ($estrenos as $estreno)
+@foreach ($premieres as $premiere)
       <div class="">
         <p>
-          <b>{{$estreno['titulo']}}</b>
-          {{$estreno['cuerpo']}}
+          <b>{{$premiere['titulo']}}</b>
+          {{$premiere['fecha_estreno']}}
         </p>
         <br>
       </div>

@@ -8,32 +8,60 @@
   height: 100%;
 }
 
+.forms-novelties{
+  display: inline-block;
+  width: 70%;
+}
+
+
 .create-options.initial{
   background-color: rgba(121, 226, 79, 0.7);
   display: inline-block;
   text-align: center;
   width: 100%;
-  height: 200px;
+  height: 100%;
   vertical-align: middle;
 }
 
     .create-options .option{
       background-color: rgba(179, 179, 179, 0.77);
       border: solid 1px black;
-      display: inline-block;
+      /* display: inline-block; */
       font-size: 80%;
-      /* vertical-align: middle; */
-      height: 90%;
-      width: 20%;
+      vertical-align: middle;
+      /* height: 90%; */
+      /* width: 20%; */
       margin: 8px;
     }
+    .create-options .option:hover{
+        background-color: rgba(17, 158, 27, 0.66);
+        cursor: pointer;
+    }
 
-.create-options.alternative{
+.create-options.secondary{
   background-color: rgba(121, 226, 79, 0.7);
-  display: block;
+  display: inline-block;
   text-align: center;
   width: 100%;
-  height: 30px;
+  height: 100%;
 }
-;
+
+/*panel para editar noticia / premio*/
+.edit-panel{
+  display: inline-block;
+  width: 15%;
+  vertical-align: top;
+  text-align: -webkit-center;
+}
+    .edit-panel .option{
+      display: block;
+      height: 10%;
+      width: 20%;
+    }
+
+
+.form.news .field.content{
+  background-color: white;
+  height: 70vh;
+  overflow: scroll;
 }

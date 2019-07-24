@@ -1,11 +1,11 @@
 var window = window || {},
   document = document || {},
   console = console || {},
-  Estrenos = Estrenos || {};
+  Premieres = Premieres || {};
 
-Estrenos.iniciarPagina = function (contenedorHTML) {
+Premieres.startPremieres = function (contenedorHTML) {
   window.addEventListener("DOMContentLoaded", function () {
-    console.log("newness/estrenos asocio JS con HTML.");
+    console.log("novelties/Premieres asocio JS con HTML.");
 
   });
 }
