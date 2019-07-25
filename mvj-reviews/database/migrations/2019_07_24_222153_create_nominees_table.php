@@ -13,7 +13,7 @@ class CreateNomineesTable extends Migration
      */
     public function up()
     {
-        Schema::create('nominees', function (Blueprint $table) {
+        Schema::create('nominee', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->timestamps();
             $table->string('nombre',100);
@@ -31,6 +31,6 @@ class CreateNomineesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('nominees');
+        Schema::dropIfExists('nominee');
     }
 }
