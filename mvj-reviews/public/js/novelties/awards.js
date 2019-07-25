@@ -1,11 +1,11 @@
 var window = window || {},
   document = document || {},
   console = console || {},
-  Premios = Premios || {};
+  Awards = Awards || {};
 
-Premios.iniciarPremios = function (contenedorHTML) {
+Awards.startAwards = function (contenedorHTML) {
   window.addEventListener("DOMContentLoaded", function () {
-    console.log("Premios asocio JS con HTML.");
+    console.log("Awards asocio JS con HTML.");
 
   });
 }

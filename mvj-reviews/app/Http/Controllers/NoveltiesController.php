@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Models\News;
+use App\Models\Award;
+use App\Models\Category;
+use App\Models\Nominee;
 use App\Models\Film;
 
 class NoveltiesController extends Controller
@@ -46,9 +49,24 @@ class NoveltiesController extends Controller
 
 //premios
   public function awards(){
-    //$premios = Newness::where('categoria','premio')->get();
-     //return view('newness/premios', compact('premios'));
-     echo "no funciona todavia";
+    $date = new Carbon('first day of this year');
+    $awards = Award::whereDate('fecha_realizacion','>=',$date)
+            ->select('award.nombre as nombreAward','award.id as award_id','fecha_realizacion',
+            \DB::raw('TO_BASE64(portada) as portada'),'pais')
+            ->orderBy('fecha_realizacion','asc')
+            ->get();
+    return view('novelties/awards', compact('awards'));
   }
+
+  public function award_profile($award_id){
+    $award = Award::find($award_id);
+    $categories = Category::where('award_id',$award->id)->get();
+    foreach ($categories as $cat ) {
+       $cat->nominees = Nominee::where('category_id',$cat->id)->get();
+    }
+    return view('novelties/award_profile', compact('award','categories'));
+
+  }
+
 
 }

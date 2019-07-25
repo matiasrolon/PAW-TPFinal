@@ -1,0 +1,18 @@
+.no-visible{
+  display: none;
+}
+
+a{
+  color: black;
+  text-decoration: none;
+}
+
+.portada{
+  display: inline-block;
+  width: 10vh;
+  height: 100%;
+}
+
+.award .data{
+  display: inline-block;
+}
