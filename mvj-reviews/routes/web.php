@@ -36,6 +36,7 @@ Route::get('/search/{filmname}','FilmController@searchResults')->name('search');
 Route::get('/novelties/news','NoveltiesController@news')->name('news');
 Route::get('/novelties/admin','NoveltiesController@admin_novelties')->name('admin-novelties');
 Route::post('/admin/create-news','NoveltiesController@create_news');
+Route::post('/admin/create-award','NoveltiesController@create_award');
 Route::get('/novelties/premieres','NoveltiesController@premieres')->name('premieres');//NO ANDA
 Route::get('/novelties/awars','NoveltiesController@awards')->name('awards');//NO ANDA
 
