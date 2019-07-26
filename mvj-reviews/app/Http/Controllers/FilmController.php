@@ -10,7 +10,8 @@ use App\Models\Review;
 use App\Models\Score_Film;
 use App\Models\PendentSearch;
 use GuzzleHttp\Client;
-
+use function GuzzleHttp\json_decode;
+use Illuminate\Validation\Validator;
 
 class FilmController extends Controller
 {
@@ -119,6 +120,19 @@ class FilmController extends Controller
         return view('search',compact('results','searchText'));
     }
 
+    public function solvePendentFilm() {
+      $searchText = json_decode( $_POST['objeto'], true )['searchText'];
+      // return 'PHP: ' . $searchText;
+      $search = PendentSearch::where('busqueda', $searchText)->first();
+      if ($search != null) {
+          $search->estado = 'Resuelta';
+          $search->save();
+          return response('OK');
+      } else {
+        return response('No se encontro una busqueda con ese nombre', 404);
+      }
+    }
+
     /**
     * Busca peliculas o series de un genero especifico ordenadas por puntaje. (De a pedazos de data)
     * @var genero     Id del Genero
@@ -164,7 +178,10 @@ class FilmController extends Controller
         }
     }
 
-
+    /**
+     * Muestra la pagina admin films, con las busquedas que fueron realizadas
+     * por los usuarios del sitio.
+     */
     public function admin_films(){
       $searches = PendentSearch::where('estado','pendiente')
                                 ->orderBy('cant_busquedas','desc')
@@ -173,8 +190,8 @@ class FilmController extends Controller
     }
 
     /**
-    *
-    * @return
+    * Devuelve las peliculas almacenadas en la BD que coinciden con la keyword
+    * @return json
     */
     public function admin_search($filmname)
     {
@@ -212,21 +229,22 @@ class FilmController extends Controller
               $request->mensaje = $error;
             }else{*/
 
-                //Si es un film de la API, contendra ID=-1;
+                //Si es un film de la API, contendra ID=-1;         ??????
                 $filmOriginal = Film::where('id',$request->id)->first();
                 if ($filmOriginal!=null){
                   $filmOriginal->titulo = $request->titulo;
                   $filmOriginal->fecha_estreno = $request->fecha_estreno;
                   $filmOriginal->sinopsis = $request->sinopsis;
                   $filmOriginal->pais = $request->pais;
-                  $filmOriginal->poster = $request->poster; //sin el file_get_contents porque ya esta en base64
+                  // Lo deshabilito temporalmente
+                  // $filmOriginal->poster = $request->poster; //sin el file_get_contents porque ya esta en base64
                   //$obra->duracion_min = $request->duracion_min;
                   $filmOriginal->duracion_min = $request->duracion_min;
                   $filmOriginal->categoria = $request->categoria;
                   //$obra->fecha_finalizacion = $request->fecha_finalizacion;
                   $filmOriginal->save();
                   $request->estado ='OK';
-                  $request->mensaje = 'Se actualizo el film con exito.';
+                  $request->mensaje = 'Se actualizó el film con exito.';
                 }else{
                         $obra = new Film;
                         $obra->titulo = $request->titulo;

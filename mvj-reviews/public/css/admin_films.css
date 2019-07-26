@@ -62,6 +62,13 @@ textarea.field-text{
   float: right;
 }
 
+.removed {
+  background-color: #5ce284;
+  transition: all 0.5s ease-out;
+  transform: translateX(-500px);
+  /* opacity: 0; */
+}
+
 
 /*---------------------------------RESULTADOS API Y BD LOCAL--------------------------------*/
 

@@ -54,3 +54,4 @@ Route::get('/admin/searchFilms/DB/{filmname}','FilmController@admin_search');
 Route::get('/get-last-reviews','ReviewController@getLastReviews')->name('get-last-reviews');
 //Route::get('/searchAPI/{keywords}', 'ApiController@search');
 //Route::post('/storeFilm', 'ApiController@storeFilm');
+Route::post('/admin/solvePendentFilm', 'FilmController@solvePendentFilm');

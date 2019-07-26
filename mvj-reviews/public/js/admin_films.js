@@ -12,28 +12,115 @@ AdminFilms.iniciarPagina = function (contenedorHTML) {
 
     AdminFilms.btnBuscador = document.getElementById('btnBuscadorFilms');
     AdminFilms.btnBuscador.addEventListener("click", function(){
-            //primero elimino los resultados de la busqueda anterior.
+            
+      // Primero elimino los resultados de la busqueda anterior.
             var seccionResultados = document.querySelector('.resultados-obtenidos');
             var resultadosAnt = document.querySelectorAll('.resultados-obtenidos .resultado-obtenido');
             console.log(resultadosAnt);
-            if (resultadosAnt.length>0){
-              resultadosAnt.forEach(function(resultAnt){
+            if (resultadosAnt.length > 0){
+              resultadosAnt.forEach(function (resultAnt) {
                 console.log(resultAnt);
                 seccionResultados.removeChild(resultAnt);
               });
             }
+
             //Se podria seleccionar acorde a lo que haya filtrado en el select de busqueda. Se deja generico por ahora.
             AdminFilms.enviarRequestSearchFilmsAdmin('API');
             AdminFilms.enviarRequestSearchFilmsAdmin('DB');
     });
 
     AdminFilms.cargarFuncionalidadABM();
+    AdminFilms.cargarFuncionalidadPendentSearches();
 
   });
 }
 
+/* PENDENT SEARCHES */
+
+/**
+ * Carga la funcionalidad para el boton "Resolver" de cada busqueda pendiente.
+ */
+AdminFilms.cargarFuncionalidadPendentSearches = function() {
+  var busqPendientes = document.querySelectorAll(".pendientes .busqueda");
+  console.log('Entro al foreach de cargarFuncionalidadPendentSearches');
+  busqPendientes.forEach(function (busqueda) {
+    var keyword = busqueda.getAttribute('text');
+    console.log('keyword: ' + keyword);
+
+    // Boton de RESOLVER
+    busqueda.querySelector('.button1').addEventListener('click', function() {
+
+      var request = new XMLHttpRequest();
+      request.onreadystatechange = function() {
+        console.log("estado del ajax post: " + this.status +': ' + this.responseText);
+        
+        if (this.readyState==4 && this.status==200) {
+          // Para la animacion
+          busqueda.classList.add('removed');
+          busqueda.addEventListener('transitionend', function() {
+            console.log('chau');
+            // Borro la pendent search del HTML
+            this.remove();
+          });
+          
+        } else if (this.readyState == 4 && this.status == 404) {
+          console.log('eliminarPendentSearch ERROR: ' + this.responseText);
+        }
+      }
+      request.open('POST', '/admin/solvePendentFilm', true);
+      // Sin esto tira HTTP STATUS 419
+      request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+      request.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'));
+      var json = {'searchText':keyword};
+      console.log('Sending request: ' + JSON.stringify(json));
+      request.send('objeto=' + JSON.stringify(json) );
+
+    }); // FIN DEL BOTON RESOLVER
+  });
+}
+
+/**
+ * Hace la peticion para eliminar la busqueda via AJAX.
+ */
+AdminFilms.eliminarPendentSearch = function (keyword) {
+  console.log('Entro a eliminarPendentSearch');
+  var request = new XMLHttpRequest();
+  request.onreadystatechange = function() {
+    console.log("estado del ajax post: " + this.status +': ' + this.responseText);
+    
+    if (this.readyState==4 && this.status==200) {
+      // Busco el div que tengo que borrar
+      console.log('entro aqui');
+      var busqPendientes = document.querySelectorAll(".pendientes .busqueda");
+      busqPendientes.forEach(function (busqueda) {
+        console.log('keywordd= ' + keyword);
+        if (busqueda.getAttribute('text') == keyword) {
+          console.log('busqueda.getAttribute(text)= ' + busqueda.getAttribute('text'));
+          // Borro la pendent search del HTML
+          busqueda.classList.add('removed');
+          busqueda.addEventListener('transitionend', function() {
+            console.log('chau');
+            this.remove();
+          })
+        }
+      });
+      
+    } else if (this.readyState == 4 && this.status == 404) {
+      console.log('eliminarPendentSearch ERROR: ' + this.responseText);
+    }
+  }
+  request.open('POST', '/admin/solvePendentFilm', true);
+  // Sin esto tira HTTP STATUS 419
+  request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+  request.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'));
+  var json = {'searchText':keyword};
+  request.send('objeto=' + JSON.stringify(json) );
+}
+
+
 // Funcion: agrega funcionalidad a los botones ni bien se carga la pagina.
 AdminFilms.cargarFuncionalidadABM = function(){
+  // Cuando presiono el boton modificar: permito editar los campos
   var btnGuardar = document.querySelector('.resultado-seleccionado .opciones .boton-modificar');
   btnGuardar.addEventListener("click",function(){
       var campos  = document.querySelectorAll('.resultado-seleccionado .info .campo textarea');
@@ -174,7 +261,7 @@ AdminFilms.recibirResponseSearchFilmsAdmin = function (response,origen) {
     if (typeof value['poster'] !== 'undefined'){ //a veces no carga bien la imagen proveniente de la api
         poster.src = base64 + value['poster'];
     }else{//establece una por defecto
-        poster.src = 'https://rimage.gnst.jp/livejapan.com/public/img/common/noimage.jpg';
+        poster.src = window.location + '/images/noimage.jpg';
     }
 
     poster.alt = 'Poster';
