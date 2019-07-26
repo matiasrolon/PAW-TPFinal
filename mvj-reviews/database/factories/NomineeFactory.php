@@ -9,7 +9,7 @@ use Faker\Generator as Faker;
 
 $factory->define(Nominee::class, function (Faker $faker) {
     return [
-      'nombre'=> $faker->sentence(3, false),
+      'nombre'=> $faker->name,
       'descripcion'=> Film::All()->random()->titulo,
       'resultado'=>'nominado',
       'category_id'=>Category::All()->random()->id

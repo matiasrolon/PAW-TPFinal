@@ -8,7 +8,7 @@
 
 @section('content')
       <div class="award">
-          <p> Festibal / Premios :{{$award['nombre']}}</p>
+          <p> Evento:{{$award['nombre']}}</p>
           <p></p>
       </div>
     <ul>

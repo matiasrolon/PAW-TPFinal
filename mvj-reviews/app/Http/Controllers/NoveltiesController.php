@@ -47,7 +47,7 @@ class NoveltiesController extends Controller
      return view('novelties/premieres', compact('premieres'));
   }
 
-//premios
+//premios (general)
   public function awards(){
     $date = new Carbon('first day of this year');
     $awards = Award::whereDate('fecha_realizacion','>=',$date)
@@ -58,6 +58,7 @@ class NoveltiesController extends Controller
     return view('novelties/awards', compact('awards'));
   }
 
+//info de premio en especifico, cuando se entra a el.
   public function award_profile($award_id){
     $award = Award::find($award_id);
     $categories = Category::where('award_id',$award->id)->get();

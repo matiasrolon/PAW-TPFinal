@@ -48,20 +48,49 @@
 
 /*panel para editar noticia / premio*/
 .edit-panel{
+  border-right: solid 1px black;
   display: inline-block;
   width: 15%;
   vertical-align: top;
   text-align: -webkit-center;
 }
+
+.button-section{
+  display: block;
+}
+
     .edit-panel .option{
-      display: block;
+      display: inline-block;
       height: 10%;
       width: 20%;
     }
 
+    .button-section.award .option.addCategory{
+        display: block;
+        width: 70%;
+        text-align: center;
+    }
+
+    .button-section.award .attribute-option.nominee{
+      width: 70%;
+    }
+
+          .button-section.award p{
+              display: inline;
+          }
+
+          .button-section.award input{
+              display: inline;
+              width: 25%;
+          }
 
 .form.news .field.content{
   background-color: white;
   height: 70vh;
   overflow: scroll;
+}
+
+.form.award .field.content{
+  min-height: 60vh;
+  overflow:hidden;
 }
