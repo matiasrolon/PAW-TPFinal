@@ -67,6 +67,7 @@ Novelties.addCategory = function(){
   var atrsec = document.querySelector('.edit-panel .button-section.award .attribute-option.nominee');
   if (atrsec.classList.contains('no-visible')){
     atrsec.classList.remove('no-visible');
+    atrsec.classList.remove('removed');
   }else{// si ya esta visible el campo, proceso a insertar la Category
       Novelties.insertCategoryInContent();
   }
@@ -80,7 +81,10 @@ Novelties.insertCategoryInContent = function(){
   }
   intervalo = setTimeout(function(){
         var secNom = document.querySelector('.edit-panel .button-section.award .attribute-option.nominee');
-        secNom.classList.add('no-visible');
+        secNom.classList.add('removed');
+        secNom.addEventListener('transitionend', function() {
+          this.classList.add('no-visible');
+        });
   }, 10000);
 
   //inserta categoria en el div content

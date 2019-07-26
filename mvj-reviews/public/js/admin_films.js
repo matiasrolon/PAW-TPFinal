@@ -12,7 +12,7 @@ AdminFilms.iniciarPagina = function (contenedorHTML) {
 
     AdminFilms.btnBuscador = document.getElementById('btnBuscadorFilms');
     AdminFilms.btnBuscador.addEventListener("click", function(){
-            
+
       // Primero elimino los resultados de la busqueda anterior.
             var seccionResultados = document.querySelector('.resultados-obtenidos');
             var resultadosAnt = document.querySelectorAll('.resultados-obtenidos .resultado-obtenido');
@@ -53,7 +53,7 @@ AdminFilms.cargarFuncionalidadPendentSearches = function() {
       var request = new XMLHttpRequest();
       request.onreadystatechange = function() {
         console.log("estado del ajax post: " + this.status +': ' + this.responseText);
-        
+
         if (this.readyState==4 && this.status==200) {
           // Para la animacion
           busqueda.classList.add('removed');
@@ -62,7 +62,7 @@ AdminFilms.cargarFuncionalidadPendentSearches = function() {
             // Borro la pendent search del HTML
             this.remove();
           });
-          
+
         } else if (this.readyState == 4 && this.status == 404) {
           console.log('eliminarPendentSearch ERROR: ' + this.responseText);
         }
@@ -87,7 +87,7 @@ AdminFilms.eliminarPendentSearch = function (keyword) {
   var request = new XMLHttpRequest();
   request.onreadystatechange = function() {
     console.log("estado del ajax post: " + this.status +': ' + this.responseText);
-    
+
     if (this.readyState==4 && this.status==200) {
       // Busco el div que tengo que borrar
       console.log('entro aqui');
@@ -104,7 +104,7 @@ AdminFilms.eliminarPendentSearch = function (keyword) {
           })
         }
       });
-      
+
     } else if (this.readyState == 4 && this.status == 404) {
       console.log('eliminarPendentSearch ERROR: ' + this.responseText);
     }
@@ -215,7 +215,7 @@ AdminFilms.enviarRequestSearchFilmsAdmin = function (origen) {
       };
     }
     //envio la request
-    console.log("se va a enviar a '" + AdminFilms.buscador.value + "''");
+    console.log("se va a enviar a '" + AdminFilms.buscador.value + "' a "+origen);
     if (origen=='API'){  request.open("GET", "/admin/searchFilms/API/" + AdminFilms.buscador.value, true);
     }else{ request.open("GET", "/admin/searchFilms/DB/" + AdminFilms.buscador.value, true);}
     request.send();
@@ -244,41 +244,42 @@ AdminFilms.recibirResponseSearchFilmsAdmin = function (response,origen) {
     clase_resultado_obtenido = 'externo';
   }
 
-  // Agrego cada resultado al contenedor
-  resp.forEach(function (value, index) {
+      // Agrego cada resultado al contenedor
+  if (resp.length>0){
+      resp.forEach(function (value, index) {
 
-    var resultado = document.createElement('div');
-    resultado.classList.add('resultado-obtenido');
-    resultado.id = "r" + index.toString();
+        var resultado = document.createElement('div');
+        resultado.classList.add('resultado-obtenido');
+        resultado.id = "r" + index.toString();
 
-    if (index % 5 == 0 ){ //para las imagenes del principio de cada fila.
-        resultado.classList.add('ini-fila');
-    }
-    // Primero recupero el poster.
-    var poster = document.createElement('img');
-    poster.classList.add('poster');
+        if (index % 5 == 0 ){ //para las imagenes del principio de cada fila.
+            resultado.classList.add('ini-fila');
+        }
+        // Primero recupero el poster.
+        var poster = document.createElement('img');
+        poster.classList.add('poster');
 
-    if (typeof value['poster'] !== 'undefined'){ //a veces no carga bien la imagen proveniente de la api
-        poster.src = base64 + value['poster'];
-    }else{//establece una por defecto
-        poster.src = window.location + '/images/noimage.jpg';
-    }
+        if (typeof value['poster'] !== 'undefined'){ //a veces no carga bien la imagen proveniente de la api
+            poster.src = base64 + value['poster'];
+        }else{//establece una por defecto
+            poster.src = window.location + '/images/noimage.jpg';
+        }
 
-    poster.alt = 'Poster';
-    poster.setAttribute('path',value['poster']);
-    resultado.appendChild(poster);
-    resultado.classList.add(origen);//para distinguir via CSS las que vienen de API de las que vienen de BD
-    //cargo los datos en el cuadro principal de ABM al hacer click sobre la imagen
-    resultado.addEventListener("click",function(){
-        AdminFilms.mostrarResultadoSeleccionado();
-        AdminFilms.establecerResultadoSeleccionado(value,origen,base64);
-    });
-    resultado.classList.add(clase_resultado_obtenido);
+        poster.alt = 'Poster';
+        poster.setAttribute('path',value['poster']);
+        resultado.appendChild(poster);
+        resultado.classList.add(origen);//para distinguir via CSS las que vienen de API de las que vienen de BD
+        //cargo los datos en el cuadro principal de ABM al hacer click sobre la imagen
+        resultado.addEventListener("click",function(){
+            AdminFilms.mostrarResultadoSeleccionado();
+            AdminFilms.establecerResultadoSeleccionado(value,origen,base64);
+        });
+        resultado.classList.add(clase_resultado_obtenido);
 
-    // Lo agrego al contenedor
-    divResultados.appendChild(resultado);
-  });
-
+        // Lo agrego al contenedor
+        divResultados.appendChild(resultado);
+      });
+    }  
 }
 
 
