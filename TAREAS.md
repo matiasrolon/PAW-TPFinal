@@ -13,7 +13,7 @@
 
 ## Error
 
-- Ejemplo:
+- **Uno:**
   1. agregue dos peliculas de el padrino mediante la API.
   2. Voy a admin films y busco en TheMovieDB "el padrino"
   3. Me carga solo las dos que tengo guardadas en la BD. y se ve el siguiente error en la consola de JS
@@ -22,15 +22,10 @@
     at Object.AdminFilms.recibirResponseSearchFilmsAdmin (admin_films.js:157)
     at XMLHttpRequest.request.onreadystatechange (admin_films.js:121)
   ```
+- **Dos:**
+  Cuando hago una busqueda en el admin films que puede tener muchos resultados, por ejemplo "EL", se cuelga el server hasta que pasan 60 segundos y no responde a ninguna otra conexion. Esto es asi solo con el server de prueba de artisan o con XAMPP tambien?
 
 ## TO-DO (funcional)
-
-### API
-
-- [x] Datos recuperados de la API que esten vacios, que queden asi. Actualmente cuando no hay nada, pone como valor "undefined" o "false";
-  - **Hecho pero en el campo genero sigue apareciendo undefined porque la API no trae ese campo.**
-
-- [ ] Controlar que seas admin para acceder a las paginas del admin.
 
 ### DB
 
@@ -53,6 +48,8 @@
 
 ### MashUp - API
 
+- [x] Datos recuperados de la API que esten vacios, que queden asi. Actualmente cuando no hay nada, pone como valor "undefined" o "false";
+  - **Hecho pero en el campo genero sigue apareciendo undefined porque la API no trae ese campo.**
 - [x] Parsear peliculas. --> Funcion ApiController/search()
 - [x] Analizar requisitos de la BD para almacenar pelicuas de la API.
   - Campo de ID de la pelicula en la API.
@@ -66,6 +63,9 @@
   - [ ] Preguntar si ya existe una pelicula con el mismo valor en 'id_themoviedb'
 - [ ] Como aseguramos que las funciones de la API sean solo accesibles por el admin?
 - [ ] Problema: paises de origen en la API estan en ingles. Pasarlos a castellano?
+- [ ] Dropdown list de paises en Admin films.
+- [ ] Dropdown list de generos en Admin films.
+- [ ] Que agregue la relacion genero-pelicula en la BD.
 
 ### Controllers
 
