@@ -13,6 +13,8 @@ use GuzzleHttp\Client;
 use function GuzzleHttp\json_decode;
 use Illuminate\Validation\Validator;
 
+use Storage;
+
 class FilmController extends Controller
 {
 
@@ -186,7 +188,35 @@ class FilmController extends Controller
       $searches = PendentSearch::where('estado','pendiente')
                                 ->orderBy('cant_busquedas','desc')
                                 ->get();
-      return view('admin_films',compact('searches'));
+
+      // Hago una lista de los paises disponibles
+      $paises = array();
+      $archivo = Storage::get('api.countries.es.json');
+      $contenido = json_decode($archivo);
+      $i = 0;
+      while ($i < sizeof($contenido)) {
+          // Error raro sino pongo el isset()
+          if (isset($contenido[$i]->spanish_name)) {
+              // Agrego el pais al arreglo
+              $paises[] =  $contenido[$i]->spanish_name;
+          }
+          $i++;
+      }
+      sort($paises);
+
+      $generos = array();
+      $archivo = Storage::get('api.genres.es.json');
+      $contenido = json_decode($archivo);
+      $i = 0;
+      while ($i < sizeof($contenido)) {
+          if (isset($contenido[$i]->name)) {
+              $generos[] =  $contenido[$i]->name;
+          }
+          $i++;
+      }
+      sort($generos);
+
+      return view('admin_films',compact('searches', 'paises', 'generos'));
     }
 
     /**

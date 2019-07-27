@@ -22,8 +22,12 @@
     at Object.AdminFilms.recibirResponseSearchFilmsAdmin (admin_films.js:157)
     at XMLHttpRequest.request.onreadystatechange (admin_films.js:121)
   ```
+
 - **Dos:**
   Cuando hago una busqueda en el admin films que puede tener muchos resultados, por ejemplo "EL", se cuelga el server hasta que pasan 60 segundos y no responde a ninguna otra conexion. Esto es asi solo con el server de prueba de artisan o con XAMPP tambien?
+
+- **Tres:**
+  En la home, lo de girar las tarjetas de las peliculas no funciona en FIREFOX.
 
 ## TO-DO (funcional)
 
