@@ -13,23 +13,29 @@ class ApiController extends Controller
     // Esto iria en el .env?
     protected $API_KEY = '41b4c84d818976ed8ab5cb8bd88066a3';
 
+    /**
+     * Modificado para que funcione con los archivos en castellano.
+     */
     public function getConfig($config, $abreviacion)
     {
         if ($config == 'pais') {
-            $archivo = Storage::get('api.countries.json');
+            // $archivo = Storage::get('api.countries.json');
+            $archivo = Storage::get('api.countries.es.json');
             $contenido = json_decode($archivo);
             $i = 0;
             $idioma = false;
             while (!$idioma && $i < sizeof($contenido)) {
                 if ($contenido[$i]->iso_3166_1 == $abreviacion) {
-                    $idioma =  $contenido[$i]->english_name;
+                    // $idioma =  $contenido[$i]->english_name;
+                    $idioma =  $contenido[$i]->spanish_name;
                 }
                 $i++;
             }
             return $idioma;
         }
         if ($config == 'genero') {
-            $archivo = Storage::get('api.genres.json');
+            // $archivo = Storage::get('api.genres.json');
+            $archivo = Storage::get('api.genres.es.json');
             $contenido = json_decode($archivo);
             $i = 0;
             $genero = false;
@@ -271,7 +277,8 @@ class ApiController extends Controller
             $films = array(); // Aca devuelvo el resultado
             $page = 1;
             $total_pages = 1; // Al menos una pagina
-            while ($page <= $total_pages) {
+            // Modifico para que no traiga mas de 3 paginas
+            while ($page <= $total_pages && $total_pages <= 3) {
                 // Voy pidiendo las paginas de a una.
                 $parameters['page'] = strval($page); // Convierto a string
                 $httpResponse = $client->request($method, $url, ['query' => $parameters]);
