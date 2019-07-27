@@ -118,6 +118,16 @@ class ApiController extends Controller
             } else {
                 $film['pais'] = '';
             }
+            // Generalmente vienen varios generos
+            if (isset($filmAPI['genre_ids'])) {
+                $generos = array();
+                for ($i = 0; $i < sizeof($filmAPI['genre_ids']); $i++) {
+                    $generos[] = $this->getConfig('genero', $filmAPI['genre_ids'][$i]); 
+                }
+                $film['genero'] = $generos; // Arreglo
+            } else {
+                $film['genero'] = '';
+            }
             if (isset($filmAPI['overview'])) {
                 $film['sinopsis'] = $filmAPI['overview'];
             } else {

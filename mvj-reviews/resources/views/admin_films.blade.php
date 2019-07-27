@@ -12,16 +12,16 @@
 @section('content')
 
 <div class="pendientes">
-              <p>Busquedas sin resultados</p>
-    @foreach ($searches as $search)
-      <div text="{{ $search['busqueda'] }}" class="busqueda">
-            <div class="info-busqueda">
-              <p><b>Buscado {{$search['cant_busquedas']}} veces</b></p>
-                <p>{{ $search['busqueda'] }}</p>
+    <h2>Busquedas sin resultados</h2>
+        @foreach ($searches as $search)
+            <div text="{{ $search['busqueda'] }}" class="busqueda">
+                <div class="info-busqueda">
+                    <p><b>Buscado {{$search['cant_busquedas']}} veces</b></p>
+                    <p>{{ $search['busqueda'] }}</p>
+                </div>
+                <button class="button1" class="resolver-busqueda" type="button" name="button">Resuelto</button>
             </div>
-              <button class="button1" class="resolver-busqueda" type="button" name="button">Resuelto</button>
-      </div>
-    @endforeach
+        @endforeach
 </div>
 <div class="administrador-films">
       <div class="administrador-films-barra-busqueda">
@@ -44,31 +44,47 @@
           <div class="info">
                   <div class="campo">
                       <label for="">Titulo:</label>
-                          <textarea class="field-text titulo" name="name" rows=1 cols=80 disabled></textarea>
+                          <textarea class="editable titulo" name="name" rows=1 cols=80 disabled></textarea>
                   </div>
                   <div class="campo">
                       <label for=""> Sinopsis:</label>
-                          <textarea class="field-text sinopsis" name="name" rows=6 cols=80 disabled></textarea>
+                          <textarea class="editable sinopsis" name="name" rows=6 cols=80 disabled></textarea>
                   </div>
                   <div class="campo">
                       <label for="">Categoria:</label>
-                          <textarea class="field-text categoria" name="name" rows=1 disabled></textarea>
+                          <textarea class="editable categoria" name="name" rows=1 disabled></textarea>
                   </div>
                   <div class="campo">
                       <label for="" >Fecha estreno:</label>
-                          <textarea class="field-text fecha-estreno" name="name" rows=1 disabled></textarea>
+                          <textarea class="editable fecha-estreno" name="name" rows=1 disabled></textarea>
                   </div>
                   <div class="campo">
                       <label for="" >Genero:</label>
-                          <textarea class="field-text genero" name="name" rows=1 disabled></textarea>
+                      <!-- <textarea class="editable genero" name="name" rows=1 disabled></textarea> -->
+                      <ul class="editable genero" disabled>
+                        <!-- <li>Drama</li> -->
+                        <!-- <li>Comedia</li> -->
+                      </ul>
+                      <select name="generos" id="generos" class="editable genero" selectedIndex='-1' disabled>
+                        <!-- <option disabled selected>Elija un genero</option> -->
+                        @for ($i = 0; $i < count($generos); $i++)
+                            <option value="{{ $generos[$i] }}">{{ $generos[$i] }}</option>
+                        @endfor
+                      </select>
+                      <button id="agregar-genero" class="button1 editable" disabled>Agregar</button>
                   </div>
                   <div class="campo">
                       <label for="">Pais:</label>
-                          <textarea class="field-text pais" name="name" rows=1 disabled></textarea>
+                          <!-- <textarea class="editable pais" name="name" rows=1 disabled></textarea> -->
+                        <select name="paises" id="paises" class='editable pais' selectedIndex="-1" disabled>
+                        @for ($i = 0; $i < count($paises); $i++)
+                            <option value="{{ $paises[$i] }}">{{ $paises[$i] }}</option>
+                        @endfor
+                        </select>
                   </div>
                   <div class="campo">
-                      <label for="">Duracion</label>
-                          <textarea class="field-text duracion-min"  name="name" rows=1 disabled></textarea>
+                      <label for="">Duracion:</label>
+                          <textarea class="editable duracion-min"  name="name" rows=1 disabled></textarea>
                   </div>
                   <div class="opciones">
                           <label class="estado-opciones"></label>

@@ -42,23 +42,23 @@ AdminFilms.iniciarPagina = function (contenedorHTML) {
  */
 AdminFilms.cargarFuncionalidadPendentSearches = function() {
   var busqPendientes = document.querySelectorAll(".pendientes .busqueda");
-  console.log('Entro al foreach de cargarFuncionalidadPendentSearches');
+  // console.log('Entro al foreach de cargarFuncionalidadPendentSearches');
   busqPendientes.forEach(function (busqueda) {
     var keyword = busqueda.getAttribute('text');
-    console.log('keyword: ' + keyword);
+    // console.log('keyword: ' + keyword);
 
     // Boton de RESOLVER
     busqueda.querySelector('.button1').addEventListener('click', function() {
 
       var request = new XMLHttpRequest();
       request.onreadystatechange = function() {
-        console.log("estado del ajax post: " + this.status +': ' + this.responseText);
+        // console.log("estado del ajax post: " + this.status +': ' + this.responseText);
 
         if (this.readyState==4 && this.status==200) {
           // Para la animacion
           busqueda.classList.add('removed');
           busqueda.addEventListener('transitionend', function() {
-            console.log('chau');
+            // console.log('chau');
             // Borro la pendent search del HTML
             this.remove();
           });
@@ -72,7 +72,7 @@ AdminFilms.cargarFuncionalidadPendentSearches = function() {
       request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
       request.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'));
       var json = {'searchText':keyword};
-      console.log('Sending request: ' + JSON.stringify(json));
+      // console.log('Sending request: ' + JSON.stringify(json));
       request.send('objeto=' + JSON.stringify(json) );
 
     }); // FIN DEL BOTON RESOLVER
@@ -82,24 +82,25 @@ AdminFilms.cargarFuncionalidadPendentSearches = function() {
 /**
  * Hace la peticion para eliminar la busqueda via AJAX.
  */
+/*
 AdminFilms.eliminarPendentSearch = function (keyword) {
-  console.log('Entro a eliminarPendentSearch');
+  // console.log('Entro a eliminarPendentSearch');
   var request = new XMLHttpRequest();
   request.onreadystatechange = function() {
-    console.log("estado del ajax post: " + this.status +': ' + this.responseText);
+    // console.log("estado del ajax post: " + this.status +': ' + this.responseText);
 
     if (this.readyState==4 && this.status==200) {
       // Busco el div que tengo que borrar
-      console.log('entro aqui');
+      // console.log('entro aqui');
       var busqPendientes = document.querySelectorAll(".pendientes .busqueda");
       busqPendientes.forEach(function (busqueda) {
-        console.log('keywordd= ' + keyword);
+        // console.log('keywordd= ' + keyword);
         if (busqueda.getAttribute('text') == keyword) {
-          console.log('busqueda.getAttribute(text)= ' + busqueda.getAttribute('text'));
+          // console.log('busqueda.getAttribute(text)= ' + busqueda.getAttribute('text'));
           // Borro la pendent search del HTML
           busqueda.classList.add('removed');
           busqueda.addEventListener('transitionend', function() {
-            console.log('chau');
+            // console.log('chau');
             this.remove();
           })
         }
@@ -116,17 +117,24 @@ AdminFilms.eliminarPendentSearch = function (keyword) {
   var json = {'searchText':keyword};
   request.send('objeto=' + JSON.stringify(json) );
 }
-
+*/
 
 // Funcion: agrega funcionalidad a los botones ni bien se carga la pagina.
 AdminFilms.cargarFuncionalidadABM = function(){
   // Cuando presiono el boton modificar: permito editar los campos
-  var btnGuardar = document.querySelector('.resultado-seleccionado .opciones .boton-modificar');
-  btnGuardar.addEventListener("click",function(){
-      var campos  = document.querySelectorAll('.resultado-seleccionado .info .campo textarea');
+  var btnModificar = document.querySelector('.resultado-seleccionado .opciones .boton-modificar');
+  btnModificar.addEventListener("click", function(){
+      // var campos  = document.querySelectorAll('.resultado-seleccionado .info .campo textarea');
+      var campos  = document.querySelectorAll('.resultado-seleccionado .info .campo .editable');
       campos.forEach(function(campo){
         campo.removeAttribute('disabled');
         campo.setAttribute('enabled','true');
+      });
+      
+      // Caso especial: la cruz en cada genero
+      var cruces = document.querySelectorAll('.resultado-seleccionado .campo .cruz');
+      cruces.forEach(function(cruz) {
+        cruz.style.display = 'inline-block';
       });
   });
 
@@ -141,6 +149,13 @@ AdminFilms.cargarFuncionalidadABM = function(){
           };
         }
         AdminFilms.enviarRequestStoreFilm(request);
+  });
+
+  // Boton de agregar genero
+  var btnGenero = document.getElementById('agregar-genero');
+  var selectGen = document.getElementById('generos');
+  btnGenero.addEventListener('click', function() {
+    AdminFilms.agregarGenero(selectGen.value);
   });
 }
 
@@ -288,6 +303,29 @@ AdminFilms.mostrarResultadoSeleccionado = function() {
   resultado.classList.remove('resultado-seleccionado-oculto');
 }
 
+/**
+ * Agrega un genero pasado por parametro a la lista UL de generos
+ */
+AdminFilms.agregarGenero = function(genero) {
+  var lista = document.querySelector('.admin-resultados .resultado-seleccionado .info .campo .genero');
+  // Si el genero es desconocido viene en false
+  if (genero != false) {
+    var li = document.createElement('li');
+    // Cruz para eliminar el genero
+    var cruz = document.createElement('span');
+    cruz.classList.add('cruz');
+    cruz.addEventListener('click', function() {
+      // Borra el li que lo contiene
+      this.parentElement.remove();
+    });
+    // Queda asi hasta que se presione el boton modificar.
+    // cruz.style.display = 'none';
+
+    li.innerHTML = genero; // Deberia ser un string
+    li.appendChild(cruz);
+    lista.appendChild(li);
+  }
+}
 
 /* en los textarea del resultado seleccionado inserto los valores de la imagen clicleada.
 * ademas, segun sea de BD o de API, habilito y desabilito botones de ABM. (Ideal tambien validar por backend)
@@ -320,8 +358,10 @@ AdminFilms.establecerResultadoSeleccionado = function(resultado,origen,base64){
         textarea.innerHTML = resultado['sinopsis'];
         var textarea = document.querySelector(info + ' .categoria');
         textarea.innerHTML = resultado['categoria'];
-        var textarea = document.querySelector(info + ' .pais');
-        textarea.innerHTML = resultado['pais'];
+        // var textarea = document.querySelector(info + ' .pais');
+        // textarea.innerHTML = resultado['pais'];
+        var select = document.querySelector(info + ' .pais');
+        select.value = resultado['pais'];
         var textarea = document.querySelector(info + ' .fecha-estreno');
         textarea.innerHTML = resultado['fecha_estreno'];
         var textarea = document.querySelector(info + ' .duracion-min');
@@ -329,11 +369,14 @@ AdminFilms.establecerResultadoSeleccionado = function(resultado,origen,base64){
         var textarea = document.querySelector(info + ' .genero');
 
 
-        // Fix provisional
+        // Testingggggg
+        // Carga la lista UL con los generos
+        var lista = document.querySelector(info + ' .genero');
         if (resultado['genero'] == undefined){
-          textarea.innerHTML = '';
+          lista.remove(); // PROBAR SI ESTO FUNCA
         } else {
-          textarea.innerHTML = resultado['genero'];
+          // textarea.innerHTML = resultado['genero'];
+          resultado['genero'].forEach(AdminFilms.agregarGenero);
         }
 
     var poster = '.admin-resultados .resultado-seleccionado .poster img';
@@ -359,10 +402,16 @@ AdminFilms.establecerResultadoSeleccionado = function(resultado,origen,base64){
     }
     //a todos los campos por defecto los traigo para no ser editados, una vez que clickea en el boton modificar
     //se cambia a enabled.
-    var campos  = document.querySelectorAll('.resultado-seleccionado .info .campo textarea');
+    // var campos  = document.querySelectorAll('.resultado-seleccionado .info .campo textarea');
+    var campos  = document.querySelectorAll('.resultado-seleccionado .info .campo .editable');
     campos.forEach(function(campo){
       campo.removeAttribute('enabled');
       campo.setAttribute('disabled','true');
     });
 
+    // Caso especial: la cruz en cada genero
+    var cruces = document.querySelectorAll('.resultado-seleccionado .campo .cruz');
+    cruces.forEach(function(cruz) {
+      cruz.style.display = 'none';
+    });
 }

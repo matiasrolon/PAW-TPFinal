@@ -1,8 +1,13 @@
 #content {
   display: grid;
-  grid-template-columns: 20% 80%;
+  grid-template-columns: 22% 80%;
 }
-textarea.field-text{
+
+.pendientes h2 {
+  font-size: 1.2em;
+}
+
+.editable{
   border-radius: 5px 5px;
   width: 100%;
   font-family: 'Pridi', serif;
@@ -26,8 +31,12 @@ textarea.field-text{
 
 .pendientes{
   display: inline-block;
-  /* width: 100%; */
-  padding: 2% 2%;
+/*   width: 100%; */
+/*   padding: 2% 2%; */
+  padding-left: 2%;
+  padding-right: 6%;
+  padding-bottom: 3%;
+  background-color: rgba(0,0,0, 0.1);
 }
 
 .busqueda{
@@ -109,7 +118,7 @@ textarea.field-text{
         margin: 3.9%;
         grid-gap: 2%;
         width: 120%;
-        overflow: auto;
+/*         overflow: auto; */
     }
 
         .resultado-obtenido{
@@ -181,12 +190,56 @@ textarea.field-text{
   margin: 0% 0% 0% 2%;
 }
 
-textarea{
+textarea, select, .resultado-seleccionado li{
   opacity: 1;
   background-color: yellowgreen;
-  opacity:;
 }
 
+.resultado-seleccionado ul {
+  padding: 0px 0px;
+  list-style: none;
+}
+
+.resultado-seleccionado ul li {
+  display: inline-block;
+  padding-top: 2px;
+  padding-bottom: 2px;
+  padding-left: 10px;
+  /* Espacio para la cruz */
+  padding-right: 10px;
+  border: 2px solid #858785;
+  border-radius: 15px;
+  margin-left: 0px;
+  margin-right: 10px;
+  margin-top: 2px;
+  margin-bottom: 2px;
+}
+
+.cruz {
+  background: url("/images/x-mark.png");
+  width: 16px; 
+  height: 16px;
+  display: inline-flex; /* Para luego usar relative, top y left para que se autoajuste el tamanio del li */
+  position: relative;
+  background-size: contain; /* Magic trick */
+  top: 4px;
+  left: 5px;
+/*   margin-top: 3px; */
+/*   margin-left: 5px; */
+  cursor: pointer;
+}
+
+.resultado-seleccionado .campo #generos {
+  width: calc(100% - 85px)
+}
+
+#agregar-genero {
+  width: auto;
+}
+
+.resultado-seleccionado .campo #paises {
+/*   background-color: black; */
+}
 
 input#buscadorFilms  {
     width: 50%;
@@ -205,6 +258,11 @@ input#buscadorFilms  {
   font-size: 16px;
   border-radius: 5px 5px;
   font-family: 'Pridi', serif;
+}
+
+.button1[disabled], .button1[disabled]:hover {
+  background-color: #cccccc;
+  color: #666666;
 }
 
 .boton-eliminar:hover {

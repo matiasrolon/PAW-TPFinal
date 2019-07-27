@@ -69,6 +69,7 @@
 - [ ] Problema: paises de origen en la API estan en ingles. Pasarlos a castellano?
 - [ ] Dropdown list de paises en Admin films.
 - [ ] Dropdown list de generos en Admin films.
+  - [ ] Revisar que hay generos compuestos. EJ: "Accion y Aventura" seguna la API.
 - [ ] Que agregue la relacion genero-pelicula en la BD.
 
 ### Controllers
