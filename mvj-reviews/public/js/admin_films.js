@@ -372,6 +372,8 @@ AdminFilms.establecerResultadoSeleccionado = function(resultado,origen,base64){
         // Testingggggg
         // Carga la lista UL con los generos
         var lista = document.querySelector(info + ' .genero');
+        // Borro los generos del film anterior
+        lista.innerHTML = '';
         if (resultado['genero'] == undefined){
           lista.remove(); // PROBAR SI ESTO FUNCA
         } else {
