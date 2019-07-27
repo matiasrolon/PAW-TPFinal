@@ -241,7 +241,7 @@
     },
     {
         "iso_3166_1": "EC",
-        "spanish_name": "ecuador"
+        "spanish_name": "Ecuador"
     },
     {
         "iso_3166_1": "EE",
@@ -261,7 +261,7 @@
     },
     {
         "iso_3166_1": "ES",
-        "spanish_name": "españa"
+        "spanish_name": "España"
     },
     {
         "iso_3166_1": "ET",
@@ -333,7 +333,7 @@
     },
     {
         "iso_3166_1": "GN",
-        "spanish_name": "guinea"
+        "spanish_name": "Guinea"
     },
     {
         "iso_3166_1": "GP",
@@ -377,7 +377,7 @@
     },
     {
         "iso_3166_1": "HN",
-        "spanish_name": "honduras"
+        "spanish_name": "Honduras"
     },
     {
         "iso_3166_1": "HR",
@@ -421,7 +421,7 @@
     },
     {
         "iso_3166_1": "ES",
-        "spanish_name": "islandia"
+        "spanish_name": "Islandia"
     },
     {
         "iso_3166_1": "IT",
@@ -429,7 +429,7 @@
     },
     {
         "iso_3166_1": "JM",
-        "spanish_name": "jamaica"
+        "spanish_name": "Jamaica"
     },
     {
         "iso_3166_1": "JO",
@@ -513,7 +513,7 @@
     },
     {
         "iso_3166_1": "LU",
-        "spanish_name ":" luxemburgo "
+        "spanish_name ": "Luxemburgo "
     },
     {
         "iso_3166_1": "LV",
@@ -581,7 +581,7 @@
     },
     {
         "iso_3166_1": "MT",
-        "spanish_name": "malta"
+        "spanish_name": "Malta"
     },
     {
         "iso_3166_1": "MU",
@@ -593,15 +593,15 @@
     },
     {
         "iso_3166_1": "MW",
-        "spanish_name": "malawi"
+        "spanish_name": "Malawi"
     },
     {
         "iso_3166_1": "MX",
-        "spanish_name": "mexico"
+        "spanish_name": "México"
     },
     {
         "iso_3166_1": "MI",
-        "spanish_name": "Malaysia"
+        "spanish_name": "Malasia"
     },
     {
         "iso_3166_1": "MZ",
@@ -633,7 +633,7 @@
     },
     {
         "iso_3166_1": "NI",
-        "spanish_name": "nicaragua"
+        "spanish_name": "Nicaragua"
     },
     {
         "iso_3166_1": "NL",
@@ -641,7 +641,7 @@
     },
     {
         "iso_3166_1": "NO",
-        "spanish_name": "Norway"
+        "spanish_name": "Noruega"
     },
     {
         "iso_3166_1": "NP",
@@ -665,11 +665,11 @@
     },
     {
         "iso_3166_1": "PA",
-        "spanish_name": "panamá"
+        "spanish_name": "Panamá"
     },
     {
         "iso_3166_1": "PE",
-        "spanish_name": "peru"
+        "spanish_name": "Perú"
     },
     {
         "iso_3166_1": "PF",
@@ -681,7 +681,7 @@
     },
     {
         "iso_3166_1": "PH",
-        "spanish_name": "filipinas"
+        "spanish_name": "Filipinas"
     },
     {
         "iso_3166_1": "YU",
@@ -729,7 +729,7 @@
     },
     {
         "iso_3166_1": "PY",
-        "spanish_name": "paraguay"
+        "spanish_name": "Paraguay"
     },
     {
         "iso_3166_1": "QA",
@@ -737,7 +737,7 @@
     },
     {
         "iso_3166_1": "RE",
-        "spanish_name": "reunión"
+        "spanish_name": "Reunión"
     },
     {
         "iso_3166_1": "RO",
@@ -769,10 +769,10 @@
     },
     {
         "iso_3166_1": "SE",
-        "spanish_name": "Sweden"
+        "spanish_name": "Suecia"
     },
     {
-        "iso_3166_1 ":" SG ",
+        "iso_3166_1 ":"SG",
         "spanish_name": "Singapur"
     },
     {
@@ -805,7 +805,7 @@
     },
     {
         "iso_3166_1": "SO",
-        "spanish_name": "somalia"
+        "spanish_name": "Somalia"
     },
     {
         "iso_3166_1": "SR",
@@ -905,11 +905,11 @@
     },
     {
         "iso_3166_1": "US",
-        "spanish_name": "Estados Unidos de América"
+        "spanish_name": "Estados Unidos"
     },
     {
         "iso_3166_1": "UY",
-        "spanish_name": "uruguay"
+        "spanish_name": "Uruguay"
     },
     {
         "iso_3166_1": "UZ",
@@ -917,7 +917,7 @@
     },
     {
         "iso_3166_1": "VA",
-        "spanish_name": "la Santa Sede"
+        "spanish_name": "Santa Sede"
     },
     {
         "iso_3166_1": "VC",

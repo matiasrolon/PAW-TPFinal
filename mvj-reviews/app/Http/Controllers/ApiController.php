@@ -6,6 +6,8 @@ namespace App\Http\Controllers;
 use GuzzleHttp\Client;
 use App\Models\Film;
 use Storage;
+use Mockery\Undefined;
+
 // use function GuzzleHttp\json_decode;
 
 class ApiController extends Controller
@@ -25,7 +27,8 @@ class ApiController extends Controller
             $i = 0;
             $idioma = false;
             while (!$idioma && $i < sizeof($contenido)) {
-                if ($contenido[$i]->iso_3166_1 == $abreviacion) {
+                // Error raro sino pongo el isset()
+                if (isset($contenido[$i]->iso_3166_1) && $contenido[$i]->iso_3166_1 == $abreviacion) {
                     // $idioma =  $contenido[$i]->english_name;
                     $idioma =  $contenido[$i]->spanish_name;
                 }
@@ -40,7 +43,7 @@ class ApiController extends Controller
             $i = 0;
             $genero = false;
             while (!$genero && $i < sizeof($contenido)) {
-                if ($contenido[$i]->id == $abreviacion) {
+                if (isset($contenido[$i]->id) && $contenido[$i]->id == $abreviacion) {
                     $genero =  $contenido[$i]->name;
                 }
                 $i++;
