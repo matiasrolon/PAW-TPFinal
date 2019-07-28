@@ -14,7 +14,7 @@
 @endsection
 
 @section('content')
-     <!-- <div class="content">
+     <div class="content">
         <ul class="generos">
           @foreach($generos as $genero)
             <li><div value="{{ $genero['id'] }}" onclick="PeliculaGenero.initialize({{ $genero['id'] }}, 'pelicula', 'container1')"><p>{{ $genero['nombre'] }}</p></div></li>
@@ -110,6 +110,6 @@
         </section>
 
         <section class="ultimas-reviews">
-    </div> -->
+    </div>
 
   @endsection
