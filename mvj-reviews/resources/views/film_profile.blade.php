@@ -89,13 +89,11 @@
                           </div><!-- fin div opcion trailer -->
                           <div class="opcion agregarReview">
                             <form class="form-agregar-review" method="post">
-                                  <label for="titulo-review"> titulo
-                                      <input type="text" class="titulo-review" placeholder="Titulo">
-                                  </label>
-                                  <label for="descripcion-review"> Critica
-                                      <input type="text" class="descripcion-review" placeholder="Ingrese review aqui">
-                                  </label>
-                                      <input id="enviarReview" type="button" name="button" value="Enviar Review">
+                                  <label for="titulo-review"> Titulo: </label>
+                                  <input type="text" class="titulo-review" placeholder="Titulo">
+                                  <label for="descripcion-review"> Review: </label>
+                                  <input type="text" class="descripcion-review" placeholder="Ingrese review aqui">
+                                  <input id="enviarReview" type="button" name="button" value="Enviar Review">
                             </form>
                             <div class="estado">
                                   <label class="descripcion-estado"> </label>

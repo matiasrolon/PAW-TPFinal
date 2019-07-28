@@ -4,24 +4,37 @@
   display: none;
 }
 
-#app, body{
-  width: 100%;
+body {
+  display: contents;
   background-color: #F6CAAC;
   font-family: 'Pridi', serif;
+  margin: auto;
+  width: auto;
+}
+
+#app{
   color: black;
-  margin: 0%;
+  margin: auto;
+  display: flex;
+  align-content: stretch;
+  flex-flow: column wrap;
+  margin-left: auto;
+  margin-right:auto;
+  height: auto;
+  width: auto;
 }
 
 .nav-principal{
   background-color: rgba(100, 152, 232, 1);
-  width: 100%;
-  height: 10%;
-/*   margin-bottom: 2%; */
+  width: auto;
+  1: 10%;
+  /* margin-bottom: 2%; */
   display: grid;
-  grid-template-columns: 30% 40% 30%;
+  grid-template-columns: 30% 1fr 30%;
   /* Sacar el webkit. usar solo center */
   text-align: -webkit-center;
   position: relative;
+  flex: 1 100%;
 }
 
 .navseccion{
@@ -29,12 +42,12 @@
 }
 
 .navseccion.icono{
-  width: 100%;
+  width: inherit;
   text-align: left;
 }
 
 .navseccion.buscador{
-  width: 100%;
+  width: auto;
   border-radius: 8px;
   margin-top: 3%;
 }
@@ -51,11 +64,11 @@
 }
 
 .navseccion.autenticacion{
-/*   width: 100%; */
+  width: auto;
   text-align: right;
   padding-right: 10px;
   list-style: none;
-}
+  }
 
 .resultados-buscador{
   width: 40.5%;
@@ -169,23 +182,31 @@ li.item-resultado:hover {
 
 .menus{
   background-color: rgba(120, 172, 252);
-  display: inline-block;
-/*   width: 99.3%; */
-  width: 100%;
-  height: 30%;
-/*   padding: 5px; */
-  position: static;
+  display: inline-block; */
+  width: auto;
+  height: 20;
+  /* position: static; */
+}
+
+@media screen and (max-width: 600px) {
+  .seccion-menu{
+    width: 100%;
+  }
 }
 
 .seccion-menu{
     display: inline-block;
+    height: 40px;
     min-width: 150px;
     color: black;
     text-align: center;
+    /* padding-top: 0.5%; */
     border-color: grey;
     border-radius: 2px 2px;
-    padding: 10px 5px;
-    background-color: inherit;
+    /* vertical-align: middle; */
+    px; */
+    padding: 1% 0.2%;
+    /* background-color: inherit; */
 }
 
     .seccion-menu .submenu{
@@ -231,7 +252,8 @@ ul.resultados-buscador a {
 .seccion-menu a{
   color: black;
   text-decoration: none;
-/*   padding: 2% 2%; */
+  vertical-align: middle;
+  margin-top: 20px;
 }
 
 .navseccion.icono{
