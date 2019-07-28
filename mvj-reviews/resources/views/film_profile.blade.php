@@ -20,7 +20,7 @@
                         <li> <strong>Sinopsis:</strong> {{ $film['sinopsis'] }} </li>
                         <li> <strong>Categoria:</strong> {{ $film['categoria'] }} </li>
                         <li> <strong>Genero:</strong> 
-                          @if ( !$generos )
+                          @if ( count($generos) > 0 )
                             {{-- Lo mismo que hacer un forEach a mano --}}
                             {{ $generos->pluck('nombre')->implode(', ') }}
                           @else
