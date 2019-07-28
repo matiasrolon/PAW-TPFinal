@@ -18,6 +18,10 @@
   flex: auto;
 }
 
+#content {
+  flex: 1 100%;
+}
+
 @media screen and (min-width: 768px) {
   .content {
       display: grid;
@@ -50,19 +54,18 @@
 @media screen and (max-width: 600px) {
   .generos, .ultimas-reviews-container, .ranking-tabla  {
     width: auto;
-    /* margin: 1%; */
   }
   .generos {
-    height: 20px;
-    margin: 1%;
+    margin: 0%;
     display: flex;
     flex-wrap: nowrap;
   }
 
   .generos li {
-/*     background-color: black; */
     list-style: none;
-    padding: 0px 10px;
+    padding: 1% 5%;
+    border-style: initial;
+    border: 1px solid #5e5b5b;
     height: 5%;
     width: auto;
     border-radius: 5px 5px;
@@ -70,7 +73,11 @@
 
    .generos li p{
      text-align:justify;
-     font-
+     white-space: nowrap;
+
+   }
+
+   .peliculas {
 
    }
 }

@@ -37,7 +37,7 @@
                 </button> -->
             </div>
             <div class="navseccion buscador">
-                    <input id="buscador" class="buscador" name="buscar" placeholder="buscar film">
+                    <input id="buscador" class="buscador" name="buscar" placeholder="Buscar film">
             </div>
             <div class="navseccion autenticacion">
                         @guest

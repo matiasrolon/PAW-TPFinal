@@ -12,12 +12,66 @@ body {
   width: auto;
 }
 
+body {
+  font-size: medium;
+}
+@media (min-width: 600px) {
+
+  .navseccion.buscador{
+    width: auto;
+    border-radius: 8px;
+    margin-top: 3%;
+    grid-area: a2;
+    padding: 2%;
+  }
+  
+  body {font-size: large;}
+
+  .nav-principal{
+      grid-template-columns: 30% 1fr 30%;
+      grid-template-areas: "a1 a2 a3";
+  }
+}
+
+@media screen and (max-width: 600px) {
+
+  body {font-size: larger;}
+
+  .seccion-menu{
+    width: 100%;
+  }
+
+  .nav-principal{
+    grid-template-rows: 1fr 30%;
+    grid-template-columns: 1fr 50%;
+    grid-template-areas: "a1 a3"
+                         "a2 a2";
+  }
+
+  .navseccion.icono a{
+    font-size: x-large;
+    margin-top: 2%;
+  }
+
+  .navseccion.icono img {
+    height: 20vw;
+    width: auto;
+  }
+
+
+  .navseccion.buscador{
+    width: auto;
+    border-radius: 8px;
+    grid-area: a2;
+    padding: 0% 2% 3% 2%;
+  }
+}
 #app{
   color: black;
   margin: auto;
   display: flex;
-  align-content: stretch;
-  flex-flow: column wrap;
+  /* align-content: stretch; */
+  flex-flow: row wrap;
   margin-left: auto;
   margin-right:auto;
   height: auto;
@@ -30,7 +84,7 @@ body {
   1: 10%;
   /* margin-bottom: 2%; */
   display: grid;
-  grid-template-columns: 30% 1fr 30%;
+
   /* Sacar el webkit. usar solo center */
   text-align: -webkit-center;
   position: relative;
@@ -46,11 +100,7 @@ body {
   text-align: left;
 }
 
-.navseccion.buscador{
-  width: auto;
-  border-radius: 8px;
-  margin-top: 3%;
-}
+
 
 .navseccion.buscador input[type="text"] {
   font-family: 'Pridi', serif;
@@ -66,8 +116,14 @@ body {
 .navseccion.autenticacion{
   width: auto;
   text-align: right;
-  padding-right: 10px;
+  padding-left: 1em;
   list-style: none;
+  font-size: larger;
+  grid-area: a3;
+  }
+
+  .navseccion.autenticacion ul{
+    padding: 0%;
   }
 
 .resultados-buscador{
@@ -182,17 +238,13 @@ li.item-resultado:hover {
 
 .menus{
   background-color: rgba(120, 172, 252);
-  display: inline-block; */
+  display: inline-block;
+  flex: 1 100%;
   width: auto;
   height: 20;
   /* position: static; */
 }
 
-@media screen and (max-width: 600px) {
-  .seccion-menu{
-    width: 100%;
-  }
-}
 
 .seccion-menu{
     display: inline-block;
@@ -258,14 +310,14 @@ ul.resultados-buscador a {
 
 .navseccion.icono{
   display: flex;
+  grid-area: a1;
 }
 
 .navseccion.icono a{
   color: black;
   text-decoration: none;
-  font-size: 30px;
-  margin-top: 2%;
 }
+
 
 img.logo-st {
   width: 60px;
