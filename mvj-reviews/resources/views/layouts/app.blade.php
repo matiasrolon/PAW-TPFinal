@@ -23,6 +23,9 @@
     <link href="https://fonts.googleapis.com/css?family=Pridi&display=swap" rel="stylesheet">
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <!-- Icons -->
+    <script type="text/javascript" src="{{ asset('js/fontawesome-free-5.9.0-web/js/solid.js') }}"> </script>
+    <script type="text/javascript" src="{{ asset('js/fontawesome-free-5.9.0-web/js/fontawesome.js') }}"> </script>
 </head>
 <body>
     <div id="app">
@@ -76,8 +79,12 @@
                         @endguest
             </div>
         </nav>
+        <div class="toggle-menu">
+          <div class="toggle-menu-hamburger">
+            <i class="fas fa-bars"></i>
+          </div>
 
-        <nav class="menus">
+          <nav class="menus no-visible-menu">
             <div class="seccion-menu">
                   <a href="{{ route('home') }}">Home</a>
             </div>
@@ -109,6 +116,7 @@
                   @endif
             @endauth
         </nav>
+        </div>
         <main id="content">
             @yield('content')
         </main>

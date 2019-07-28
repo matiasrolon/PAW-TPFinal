@@ -22,6 +22,15 @@ NavPrincipal.iniciarNavPrincipal= function(contenedorHTML){
           sub.classList.add("no-visible");
       });
 
+      document.querySelector('.toggle-menu div')
+      .addEventListener("click",function(){
+          var sub = document.querySelector('.menus');
+          if (sub.classList.contains("no-visible-menu"))
+            sub.classList.remove("no-visible-menu");
+          else
+            sub.classList.add("no-visible-menu");
+      });
+
       //despliega submenu  de novedades
       document.querySelector('.seccion-menu.novedades')
       .addEventListener("mouseover",function(){

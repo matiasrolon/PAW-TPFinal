@@ -24,13 +24,38 @@ body {
     grid-area: a2;
     padding: 2%;
   }
-  
+
   body {font-size: large;}
 
   .nav-principal{
       grid-template-columns: 30% 1fr 30%;
       grid-template-areas: "a1 a2 a3";
   }
+
+  .menus{
+    display: flex;
+  }
+
+  .toggle-menu-hamburger {
+    display: none;
+   }
+
+  .toggle-menu {
+    display: inline-block;
+    flex: 1 100%;
+    background: #c9daf4;
+    width: 100%;
+  }
+
+  .seccion-menu{
+    height: 40px;
+    min-width: 150px;
+    color: black;
+    text-align: center;
+    padding-top: 0.5%;
+    border-color: grey;
+    border-radius: 2px 2px;
+  } 
 }
 
 @media screen and (max-width: 600px) {
@@ -64,6 +89,41 @@ body {
     border-radius: 8px;
     grid-area: a2;
     padding: 0% 2% 3% 2%;
+  }
+
+  .no-visible-menu {
+    display: none !important;
+  }
+
+  .resultados-buscador div {
+    display: auto;
+    width: 100vw;
+  }
+
+  .toggle-menu {
+    display: flex;
+    flex: 1 100%;
+    background: #c9daf4;
+  }
+
+  .menus{
+    display: initial;
+  }
+  
+  .toggle-menu-hamburger {
+    visibility: visible;
+    padding: 3% 4%;
+    color: #000000;
+  }
+
+  .seccion-menu {
+    display: flex;
+    width: auto;
+    flex: 1 100%;
+  }
+
+  .menus:n-child(2) {
+    border-bottom: 2px dashed white;
   }
 }
 #app{
@@ -236,30 +296,16 @@ li.item-resultado:hover {
   float: right;
 }
 
+
 .menus{
-  background-color: rgba(120, 172, 252);
-  display: inline-block;
+  background-color: rgb(201, 218, 244);
   flex: 1 100%;
   width: auto;
+  flex-wrap: nowrap;
   height: 20;
   /* position: static; */
 }
 
-
-.seccion-menu{
-    display: inline-block;
-    height: 40px;
-    min-width: 150px;
-    color: black;
-    text-align: center;
-    /* padding-top: 0.5%; */
-    border-color: grey;
-    border-radius: 2px 2px;
-    /* vertical-align: middle; */
-    px; */
-    padding: 1% 0.2%;
-    /* background-color: inherit; */
-}
 
     .seccion-menu .submenu{
       background-color: rgba(120, 172, 252);
@@ -305,7 +351,7 @@ ul.resultados-buscador a {
   color: black;
   text-decoration: none;
   vertical-align: middle;
-  margin-top: 20px;
+  padding-top: 2%;
 }
 
 .navseccion.icono{
