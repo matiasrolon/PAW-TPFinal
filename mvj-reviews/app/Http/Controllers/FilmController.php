@@ -228,7 +228,19 @@ class FilmController extends Controller
     public function admin_search($filmname)
     {
         $DBFilms = $this->searchLocalFilm($filmname);
-        return response()->json($DBFilms);
+        // Agrego los generos a la respuesta
+        $filmsWithGenre = Array();
+        $genPorFilm = Array(); // Generos por film. Ya que el parse en el js espera recibir un arreglo
+        foreach ($DBFilms as $film) {
+          // Me devuelve un objeto genero. Me quedo solo con el nombre
+          foreach ($film->genres()->get() as $genre) {
+            $genPorFilm[] = $genre->nombre;
+          }
+          // Le saco la coma del final
+          $film->genero = $genPorFilm;
+          $filmsWithGenre[] = $film;
+        }
+        return response()->json($filmsWithGenre);
     }
 
 
