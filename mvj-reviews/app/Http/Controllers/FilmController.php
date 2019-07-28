@@ -23,8 +23,8 @@ class FilmController extends Controller
       return Film::where('id_themoviedb', '=', $idApi)->first();
     }
 
-    /*
-    * Busca un film solo en la BD del sitio.
+    /**
+    * Busca films (puede ser ninguno, uno o muchos) solo en la BD del sitio.
     */
     public function searchLocalFilm($filmname){
       $obj = Film::where('titulo', 'like','%' . $filmname .'%')
@@ -48,7 +48,8 @@ class FilmController extends Controller
                          ->get();
   //var_dump($film->titulo);
      //return $film->titulo;
-      return view('film_profile',compact('film','reviews'));
+      $generos = $film->genres()->get();
+      return view('film_profile',compact('film','reviews', 'generos'));
     }
 
 
@@ -274,8 +275,16 @@ class FilmController extends Controller
                   $filmOriginal->categoria = $request->categoria;
                   //$obra->fecha_finalizacion = $request->fecha_finalizacion;
                   $filmOriginal->save();
-
-                  // Agrego o elimino los generos
+                  
+                  // QUEDO SIN PROBARRRRRRRRRRRRRRRRRRRRRRRRRRRRRR
+                  // Reviso si cambiaron los generos
+                  $generosActuales = $filmOriginal->genres()->get();
+                  $generosEnviados = $request->genero;
+                  if ( !$generosActuales->diff($generosEnviados) ) {
+                    // Si no son iguales, borro los viejos y agrego los nuevos.
+                    $filmOriginal->genres()->delete();
+                    $filmOriginal->genres()->attach($generosEnviados);
+                  }
 
                   $request->estado ='OK';
                   $request->mensaje = 'Se actualizó el film con exito.';

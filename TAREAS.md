@@ -11,7 +11,7 @@
 - [x] Documento que indique como hacer el deployment del proyecto. [readme.md](readme.md).
 - [ ] Presentacion del software: puede ser una muestra de como anda, no necesariamente una ppt.
 
-## Error
+## Errores - PROBLEMAS
 
 - [ ] **Uno:**
   1. agregue dos peliculas de el padrino mediante la API.
@@ -38,6 +38,9 @@
 - [ ] **Seis:**
   En admin films, a veces no encuentra algunos resultados. Ej "Tron". Ademas deberia mostrar un cartel diciendo que no se encontro nada.
 
+- [ ] **Siete:**
+  En admin films, cuando recupera el film de la BD nuestra no trae los generos. Falta hacer un join ahi.
+
 ## TO-DO (funcional)
 
 ### DB
@@ -49,8 +52,8 @@
 
 ### VIEW
 
-- [] Agregar posibilidad de agregar varios generos, parseados por comas cuando los ingrese el usuario. En el back se vera si ese genero ya esta ingresado en base, si no esta lo creara.
-  - **Esto lo veo dificil. Yo pondria un HTML select con los generos que hay en la BD. Lo mismo para paises.**
+- [x] Agregar posibilidad de agregar varios generos, parseados por comas cuando los ingrese el usuario. En el back se vera si ese genero ya esta ingresado en base, si no esta lo creara.
+  - **Resuelto mas elegantemente.**
 - [] Los resultados dados de la API podrian aparecer en carrusel (si da el tiempo)
 
 ### AJAX
@@ -79,7 +82,7 @@
 - [x] Dropdown list de paises en Admin films. **Se admite solo un pais actualmente**
 - [x] Dropdown list de generos en Admin films.
   - [ ] Revisar que hay generos compuestos. EJ: "Accion y Aventura" seguna la API.
-- [ ] Que agregue la relacion genero-pelicula en la BD.
+- [x] Que agregue la relacion genero-pelicula en la BD.
 - [ ] Definir la manera en que el server devuelve al cliente la lista de generos de films.
 
 ### Controllers
@@ -106,6 +109,7 @@
 
 - [ ] HOME
 - [ ] INFO PELICULA -------> (en esa misma pagina tendra todas sus reviews, paginadas)
+  - [ ] MOSTRAR GENEROS ---> Mostrar los generos de la pelicula.
   - [ ] HACER REVIEW -----> (Si presiona "Hacer Review" -> form, cuando se envian los datos redirecciona de nuevo a Info pelicula)
   - [ ] VOTAR PELICULA ----> (Te devuelve la misma pagina con un mensaje abajo de las estrellitas que diga 'voto registrado').
   - [ ] VOTAR REVIEW ------> Un icono se pondra rojo o verde, el voto se enviara mediante ajax.
