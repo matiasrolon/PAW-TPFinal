@@ -374,10 +374,7 @@ AdminFilms.establecerResultadoSeleccionado = function(resultado,origen,base64){
         var lista = document.querySelector(info + ' .genero');
         // Borro los generos del film anterior
         lista.innerHTML = '';
-        if (resultado['genero'] == undefined){
-          lista.remove(); // PROBAR SI ESTO FUNCA
-        } else {
-          // textarea.innerHTML = resultado['genero'];
+        if (resultado['genero'] != undefined){
           resultado['genero'].forEach(AdminFilms.agregarGenero);
         }
 

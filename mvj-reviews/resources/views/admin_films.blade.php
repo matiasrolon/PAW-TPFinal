@@ -62,11 +62,9 @@
                       <label for="" >Genero:</label>
                       <!-- <textarea class="editable genero" name="name" rows=1 disabled></textarea> -->
                       <ul class="editable genero" disabled>
-                        <!-- <li>Drama</li> -->
-                        <!-- <li>Comedia</li> -->
                       </ul>
-                      <select name="generos" id="generos" class="editable genero" selectedIndex='-1' disabled>
-                        <!-- <option disabled selected>Elija un genero</option> -->
+                      <select name="generos" id="generos" class="editable genero" disabled>
+                        <option hidden selected>Elija un genero</option>
                         @for ($i = 0; $i < count($generos); $i++)
                             <option value="{{ $generos[$i] }}">{{ $generos[$i] }}</option>
                         @endfor
@@ -75,8 +73,9 @@
                   </div>
                   <div class="campo">
                       <label for="">Pais:</label>
-                          <!-- <textarea class="editable pais" name="name" rows=1 disabled></textarea> -->
-                        <select name="paises" id="paises" class='editable pais' selectedIndex="-1" disabled>
+                      <!-- <textarea class="editable pais" name="name" rows=1 disabled></textarea> -->
+                      <select name="paises" id="paises" class='editable pais' disabled>
+                        <option hidden selected>Elija un pais</option>
                         @for ($i = 0; $i < count($paises); $i++)
                             <option value="{{ $paises[$i] }}">{{ $paises[$i] }}</option>
                         @endfor
