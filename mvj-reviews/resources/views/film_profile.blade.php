@@ -19,6 +19,14 @@
                         <li> <strong>Pais:</strong> {{ $film['pais'] }} </li>
                         <li> <strong>Sinopsis:</strong> {{ $film['sinopsis'] }} </li>
                         <li> <strong>Categoria:</strong> {{ $film['categoria'] }} </li>
+                        <li> <strong>Genero:</strong> 
+                          @if ( count($generos) > 0 )
+                            {{-- Lo mismo que hacer un forEach a mano --}}
+                            {{ $generos->pluck('nombre')->implode(', ') }}
+                          @else
+                            No disponible
+                          @endif
+                        </li>
                         <li> <strong>Puntaje:</strong> {{ $film['puntaje'] }} </li>
                       </ul>
                     </div>

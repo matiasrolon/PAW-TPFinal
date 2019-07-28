@@ -230,7 +230,7 @@ textarea, select, .resultado-seleccionado li{
 }
 
 .resultado-seleccionado .campo #generos {
-  width: calc(100% - 85px)
+  width: calc(100% - 90px);
 }
 
 #agregar-genero {
