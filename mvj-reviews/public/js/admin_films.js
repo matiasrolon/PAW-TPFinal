@@ -2,7 +2,8 @@ var window = window || {},
   document = document || {},
   console = console || {},
   AdminFilms = AdminFilms || {};
-  idTheMovieDb = '';
+  idTheMovieDb = '',
+  vDebug = '';
 
 AdminFilms.iniciarPagina = function (contenedorHTML) {
   window.addEventListener("DOMContentLoaded", function () {
@@ -142,9 +143,12 @@ AdminFilms.cargarFuncionalidadABM = function(){
   btnGuardar.addEventListener("click",function(){
         //empiezo request ajax
         var request = new XMLHttpRequest();
+        // Prueba
+        // request.responseType = 'json';
         request.onreadystatechange = function(){ // cuando la peticion cambia de estado.
           console.log("estado del ajax post: " + this.status);
-          if (this.readyState==4 && this.status==200){ // si se recibe correctamente la respuesta.
+          // if (this.readyState==4 && this.status==200){ // si se recibe correctamente la respuesta.
+          if (this.readyState==4) {
               AdminFilms.recibirResponseStoreFilm(this);
           };
         }
@@ -157,6 +161,24 @@ AdminFilms.cargarFuncionalidadABM = function(){
   btnGenero.addEventListener('click', function() {
     AdminFilms.agregarGenero(selectGen.value);
   });
+}
+
+/**
+ * Funcion que devuelve los generos para el resultado seleccionado.
+ * Se utilizada para guardar los datos en la BD
+ * @returns Array of String con los nombres de cada genero.
+ */
+AdminFilms.getListaGeneros = function() {
+  var lista = document.querySelector('.resultado-seleccionado .info .campo .genero');
+  lista = lista.getElementsByTagName('li');
+  // console.log('Lista de generos:');
+  var resp = Array();
+  for (var i=0; i < lista.length; i++) {
+    // console.log("item: " + lista[i]);
+    // console.log("innerText: " + lista[i].innerText);
+    resp[i] = lista[i].innerText;
+  }
+  return resp;
 }
 
 /*
@@ -173,7 +195,8 @@ AdminFilms.enviarRequestStoreFilm = function(request){
     "categoria": document.querySelector(info+'.categoria').value,
     "fecha_estreno": document.querySelector(info+'.fecha-estreno').value,
     "poster": document.querySelector('.resultado-seleccionado .poster img').getAttribute('path'),
-    "genero": document.querySelector(info+'.genero').value,
+    // "genero": document.querySelector(info+'.genero').value,
+    "genero": AdminFilms.getListaGeneros(),
     "pais": document.querySelector(info+'.pais').value,
     "duracion_min": document.querySelector(info+'.duracion-min').value,
     // Tomo la id de la variable global.
@@ -193,24 +216,48 @@ AdminFilms.enviarRequestStoreFilm = function(request){
 Funcion: Recibe la respuesta de la operacion y muestra el resultado acorde en pantalla
          Si la operacion fue exitosa, actualiza atributos de los elementos.
 */
-  AdminFilms.recibirResponseStoreFilm = function(response){
-      console.log('recibi respuesta de ajax post store film');
-      var resp = JSON.parse(response.responseText);
-      console.log("se recibio respuesta> se grabo la peli con el id="+ resp['id']);
+AdminFilms.recibirResponseStoreFilm = function(response){
+  console.log('recibi respuesta de ajax post store film. Status: ' + response.status);
+  let p = document.querySelector('.admin-resultados .resultado-seleccionado .poster');
+  let par = document.createElement('p');
 
-      let p = document.querySelector('.admin-resultados .resultado-seleccionado .poster');
-      let par = document.createElement('p');
-      par.innerText = resp['mensaje'];
-      p.appendChild(par);
-      if (resp['estado']='OK'){
-        par.classList.add('resultado-Ok');
-        document.querySelector('.admin-resultados .resultado-seleccionado .info')
-        .setAttribute('id',resp['id']);
-      }else{
-        par.classList.add('resultado-Failed');
-        //con css mostrar algo en rojo, o campos erroneos (cuando ande validar en el back)
-      }
+  // Cuando laravel genera un error, devuelve status = 500
+  // console.log("response.status: " + response.status);
+  // console.log("ResponseType: " + response.responseType);
+  // var respType = response.getResponseHeader('Content-Type');
+  // console.log("RespType: " + respType);
+  // Si respType es 'text/html; charset=UTF-8' es que hubo un error, ya que espero un 'application/json'
+  if (response.responseText != null && response.status == 200) {
+    vDebug = response;
+    console.log("Response: " + response.responseText);
+    var resp = JSON.parse(response.responseText);
+
+    console.log("se recibio respuesta> se grabo la peli con el id="+ resp['id']);
+
+    if (resp['estado']='OK'){
+      par.classList.add('resultado-Ok');
+      document.querySelector('.admin-resultados .resultado-seleccionado .info')
+      .setAttribute('id',resp['id']);
+    }else{
+      // Atrapa errores contemplados por el programador en FilmController
+      par.classList.add('resultado-Failed');
+      //con css mostrar algo en rojo, o campos erroneos (cuando ande validar en el back)
+    }
+
+    par.innerText = resp['mensaje'];
+    p.appendChild(par);
+
+  } else {
+    // Atrapa errores generados por laravel
+    console.log('ERROR. Response: ' + response);  
+    vDebug = response;
+    console.log("Response: " + response.responseText); 
+
+    par.innerText = 'Error del servidor.';
+    par.classList.add('resultado-Failed');
+    p.appendChild(par);
   }
+}
 
 
 /*

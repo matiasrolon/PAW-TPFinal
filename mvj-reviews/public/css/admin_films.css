@@ -373,7 +373,11 @@ input#buscadorFilms  {
 }
 
 p.resultado-Ok {
-  background-color:#5ce284;
+  background-color: #5ce284;
+}
+
+p.resultado-Failed {
+  background-color: #a8325e;
 }
 
 .admin-resultados .resultado-seleccionado .poster .resultado-Failed p {

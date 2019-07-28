@@ -13,7 +13,7 @@
 
 ## Error
 
-- **Uno:**
+- [ ] **Uno:**
   1. agregue dos peliculas de el padrino mediante la API.
   2. Voy a admin films y busco en TheMovieDB "el padrino"
   3. Me carga solo las dos que tengo guardadas en la BD. y se ve el siguiente error en la consola de JS
@@ -23,11 +23,20 @@
     at XMLHttpRequest.request.onreadystatechange (admin_films.js:121)
   ```
 
-- **Dos:**
+- [ ] **Dos:**
   Cuando hago una busqueda en el admin films que puede tener muchos resultados, por ejemplo "EL", se cuelga el server hasta que pasan 60 segundos y no responde a ninguna otra conexion. Esto es asi solo con el server de prueba de artisan o con XAMPP tambien?
 
-- **Tres:**
+- [ ] **Tres:**
   En la home, lo de girar las tarjetas de las peliculas no funciona en FIREFOX.
+
+- [ ] **Cuatro:**
+  En admin films, sucede que una vez que modifique una descripcion de un film, todos los films que seleccione a continuacion tendran ESA descripcion. Incluso luego de recargar la pagina sigue pasando. No pude encontrar la causa.
+
+- [ ] **Cinco:**
+  En admin films la fecha se muestra en ingles (asi la trae la API y asi se almacena), pero deberia estar en castellano.
+
+- [ ] **Seis:**
+  En admin films, a veces no encuentra algunos resultados. Ej "Tron". Ademas deberia mostrar un cartel diciendo que no se encontro nada.
 
 ## TO-DO (funcional)
 
@@ -66,11 +75,12 @@
 - [x] Testear si funciona el metodo ApiController/guardarObra()
   - [ ] Preguntar si ya existe una pelicula con el mismo valor en 'id_themoviedb'
 - [ ] Como aseguramos que las funciones de la API sean solo accesibles por el admin?
-- [ ] Problema: paises de origen en la API estan en ingles. Pasarlos a castellano?
-- [ ] Dropdown list de paises en Admin films.
-- [ ] Dropdown list de generos en Admin films.
+- [x] Problema: paises de origen en la API estan en ingles. **Pasados a castellano**
+- [x] Dropdown list de paises en Admin films. **Se admite solo un pais actualmente**
+- [x] Dropdown list de generos en Admin films.
   - [ ] Revisar que hay generos compuestos. EJ: "Accion y Aventura" seguna la API.
 - [ ] Que agregue la relacion genero-pelicula en la BD.
+- [ ] Definir la manera en que el server devuelve al cliente la lista de generos de films.
 
 ### Controllers
 

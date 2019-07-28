@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Film;
 use App\Models\Review;
+use App\Models\Genre;
 use App\Models\Score_Film;
 use App\Models\PendentSearch;
 use GuzzleHttp\Client;
@@ -273,6 +274,9 @@ class FilmController extends Controller
                   $filmOriginal->categoria = $request->categoria;
                   //$obra->fecha_finalizacion = $request->fecha_finalizacion;
                   $filmOriginal->save();
+
+                  // Agrego o elimino los generos
+
                   $request->estado ='OK';
                   $request->mensaje = 'Se actualizó el film con exito.';
                 }else{
@@ -288,6 +292,18 @@ class FilmController extends Controller
                         //$obra->fecha_finalizacion = $request->fecha_finalizacion;
                         $obra->id_themoviedb = $request->id_themoviedb;
                         $obra->save();
+
+                        // Agrego los generos
+                        $generosEnviados = $request->genero;
+                        $coincidencias = Genre::all();
+                        // Obtengo todos los modelos de los generos que coinciden con los nombres de los que me enviaron
+                        $coincidencias = $coincidencias->intersect( Genre::whereIn('nombre', $generosEnviados)->get() );
+
+                        // Hago la relacion en la tabla intermedia
+                        foreach ($coincidencias as $coincidencia) {
+                            $obra->genres()->attach($coincidencia);
+                        }
+
                         $request->id = $obra->id;// actualizo con el nuevo id
                         $request->estado ='OK';
                         $request->mensaje = 'Se guardo el film con exito.';

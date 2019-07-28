@@ -9,7 +9,7 @@
     },
     {
         "id": 16,
-        "name": "Animación"
+        "name": "Animado"
     },
     {
         "id": 35,
@@ -74,35 +74,5 @@
     {
         "id": 37,
         "name": "Western"
-    },
-
-
-    {
-        "id": 10759,
-        "name": "Accion y Aventura"
-    },
-    {
-        "id": 10762,
-        "name": "Niños"
-    },
-    {
-        "id": 10763,
-        "name": "Noticias"
-    },
-    {
-        "id": 10764,
-        "name": "Reality show"
-    },
-    {
-        "id": 10766,
-        "name": "Novela"
-    },
-    {
-        "id": 10767,
-        "name": "Debate"
-    },
-    {
-        "id": 10768,
-        "name": "Guerra y Política"
     }
 ]
