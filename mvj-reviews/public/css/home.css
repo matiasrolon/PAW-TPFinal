@@ -49,6 +49,17 @@
     border-radius: 5px 5px;
   }
 
+  .flip-card-inner {
+    position: relative;
+    width: 200px;
+    height: 300px;
+  }
+
+  .puntuacion {
+       left: 155px;
+       top: 240px;
+    }
+
 }
 
 @media screen and (max-width: 700px) {
@@ -84,7 +95,15 @@
    .generos {
      width: auto;
    }
+   .flip-card-inner {
+      width: 100vw;
+      height: 80vh;
+   }
 
+   .puntuacion {
+       left: 310px;
+       top: 440px;
+    }
 }
 
 .ranking-tabla{/* margin-top: 15px; */margin: 2%;padding-left: 5px;padding-right: 65px;border-radius: 5px 5px;border: solid 1px white;width: auto;background: bisque;grid-area: ranking;}
@@ -183,7 +202,7 @@ ul.generos li:hover p::before{
 
 .peliculas{
     display: grid;
-    grid-template-columns: repeat(auto-fit,minmax(200px, 1fr));
+    grid-template-columns: repeat(auto-fill,minmax(200px, 1fr));
     margin: 1% 0%;
 }
 
@@ -227,9 +246,9 @@ ul.generos li:hover p::before{
 }
 
 .cuadro-film{
-  width: 150px;
-  height: 300px;
-  margin: 2% 2%;
+  /* width: 150px; */
+  /* height: 300px; */
+  /* margin: 2% 2%; */
 }
 
 .poster{
@@ -241,8 +260,6 @@ ul.generos li:hover p::before{
 .puntuacion {
        float: right;
        position: fixed;
-       left: 155px;
-       top: 240px;
        z-index: 1000;
        padding: 5px;
        color: #FFFFFF;
@@ -285,8 +302,6 @@ ul.generos li:hover p::before{
 
 .flip-card-inner {
   position: relative;
-  width: 200px;
-  height: 300px;
   text-align: center;
   transition: transform 0.6s;
   transform-style: preserve-3d;
