@@ -38,11 +38,13 @@ Route::get('/searchSuggestions/{filmname}','FilmController@searchSuggestions')->
 Route::get('/search/{filmname}','FilmController@searchResults')->name('search');
 
 //novelties
-Route::get('/novelties/admin','NoveltiesController@admin_novelties')->name('admin-novelties');
-Route::post('/admin/create-news','NoveltiesController@create_news');
-Route::post('/admin/create-award','NoveltiesController@create_award');
+Route::get('/admin/novelties','NoveltiesController@admin_novelties')->name('admin-novelties');
+Route::post('/admin/novelties/create-news','NoveltiesController@create_news');
+Route::post('/admin/novelties/create-award','NoveltiesController@create_award');
+//Route::post('/admin/novelties/create-noveltie','NoveltiesController@create_noveltie');
 
 Route::get('/novelties/news','NoveltiesController@news')->name('news');
+Route::get('/novelties/news/{news_id}','NoveltiesController@news_profile')->name('news-profile');//NO ANDA
 Route::get('/novelties/premieres','NoveltiesController@premieres')->name('premieres');//NO ANDA
 Route::get('/novelties/awards','NoveltiesController@awards')->name('awards');//NO ANDA
 Route::get('/novelties/awards/{award_id}','NoveltiesController@award_profile')->name('award-profile');//NO ANDA

@@ -235,7 +235,7 @@ class FilmController extends Controller
     /**
      * - FIXME:
      * - UPDATE 27/06 : Se considero que este es el controller ideal para realizar los store ya que
-    *                   ApiController se enfoca en la interaccion con la API. 
+    *                   ApiController se enfoca en la interaccion con la API.
      * - Las fechas se almacenan en ingles: YYYY-MM-DD. En la API tambien es asi, por lo que esta bueno que asi sea.
      * - Mostrar la fecha en castellano debe ser un problema que soluciona la vista (MVC).
      * - Cambiar el campo 'trailer' por 'trailer_url'.
@@ -269,7 +269,6 @@ class FilmController extends Controller
                   $filmOriginal->pais = $request->pais;
                   // Lo deshabilito temporalmente
                   // $filmOriginal->poster = $request->poster; //sin el file_get_contents porque ya esta en base64
-                  //$obra->duracion_min = $request->duracion_min;
                   $filmOriginal->duracion_min = $request->duracion_min;
                   $filmOriginal->categoria = $request->categoria;
                   //$obra->fecha_finalizacion = $request->fecha_finalizacion;

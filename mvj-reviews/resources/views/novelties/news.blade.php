@@ -15,8 +15,11 @@
   @foreach ($noticias as $noticia)
         <div class="">
           <p>
-            <b>{{$noticia['titulo']}}</b>
+
+            <b>{{$noticia['id']}} : {{$noticia['titulo']}}</b>
             {{$noticia['cuerpo']}}
+            {{$noticia['portada']}}
+            <img src="{{$noticia['portada']}}" alt="">
           </p>
           <br>
         </div>

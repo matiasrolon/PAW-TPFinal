@@ -14,6 +14,25 @@ Novelties.startNovelties = function (contenedorHTML) {
 
 Novelties.buttonFunctions = function(){
 
+  /*  //Cuando se carga una imagen, se mostrara su vista previa.
+    let inputPoster = document.querySelector(".form.news form .field.poster label input");
+    inputPoster.addEventListener("change",function(){
+        let file = document.forms['news']['portada'].files[0];
+        Novelties.setPosterPreview(file);
+    });
+
+  //  boton de enviar > envia AJAX para crear la novedad
+    let btnSendNews = document.querySelector('form .btnSendNews');
+    btnSendNews.addEventListener("click", function(){
+      Novelties.createNoveltiesRequest('news');
+    });
+
+    let btnSendAward = document.querySelector('form .btnSendAward');
+    btnSendAward.addEventListener("click", function(){
+      Novelties.createNoveltiesRequest('award');
+    });
+  */
+
     //boton letra grande
     var btnBig = document.querySelector('.edit-panel .option.big');
     btnBig.addEventListener('click',function(){ Novelties.alterContent("big");});
@@ -75,7 +94,7 @@ Novelties.addCategory = function(){
 
 
 Novelties.insertCategoryInContent = function(){
-  //si no hace click en Category por 10 seg desaparece el input para el nro de nominados
+  //si no hace click en Category por 10 seg desaparece el input para ingresar cant de nominados
   if (typeof intervalo !== 'undefined'){
     clearTimeout(intervalo);
   }
@@ -87,18 +106,19 @@ Novelties.insertCategoryInContent = function(){
         });
   }, 10000);
 
-  //inserta categoria en el div content
+  //inserta nueva categoria (para completar) en el div content
   var input = document.querySelector('.edit-panel .button-section.award .attribute-option.nominee input');
   console.log('inserta category en content con '+input.value+' nominados');
 
-  if (input.value>0){
+  if (input.value>0){//cant nominados > 0
     //clono category base del html
     var cloneNode = document.querySelector('.form.award form .field.content .category').cloneNode(true);
     cloneNode.classList.remove('no-visible');
     let nroCategory = document.querySelectorAll('.form.award form .field.content .category').length;
     cloneNode.setAttribute('nroCategory',nroCategory);
+    //la agrego al div content.
     document.querySelector('.form.award form .field.content').appendChild(cloneNode);
-    //inserto nominados
+    //inserto sus nominados
       for (var i = 1; i < input.value; i++) {
           console.log('insertando '+i+' nominado');
           let nomList = document.querySelector('.category[nroCategory="'+nroCategory+'"] .attribute.nominees-list');
@@ -125,32 +145,95 @@ Novelties.alterContent = function(accion){
   if (accion == "medium"){document.execCommand("fontsize",false,3)};
   if (accion == "big"){document.execCommand("fontsize",false,5)};
 
+  //actualizo el valor del input que representa el cuerpo (es de type HIDDEN)
+  let inputContent = document.querySelector('.form.news form input[name="cuerpo"]');
+  inputContent.value = divContent.innerHTML;
+
 }
-///PRUEBAS CON DIV PARA EDITAR texto
-/*Novelties.prueba = function(){
-  var texto = document.getElementById("texto");
-    var btn = document.getElementById("boton");
-    btn.addEventListener("click",function(){
-        var r   = document.createRange();
-        console.log(texto.selectionStart);
-        console.log(texto.selectionEnd);
 
-        var text = texto.value;
-        var inicio=text.slice(0,texto.selectionStart)
-        var medio =text.slice(texto.selectionStart,texto.selectionEnd);
-        var fin   =text.slice(texto.selectionEnd,text.length);
+//------------------------------------------------------------------------------------
+//AJAX funcionalidad
 
-        medio="<b><big>"+medio+"</big></b>"
+Novelties.createNoveltiesRequest = function(type){
+  //CREA solicitud AJAX
+  var request = new XMLHttpRequest();
+  request.onreadystatechange = function(){ // cuando la peticion cambia de estado.
+    console.log("estado de la peticion crear Novedad: " + this.status);
+    if (this.readyState==4 && this.status==200){ // si se recibe correctamente la respuesta.
+        if(type=="news"){Novelties.recieveNoveltiesResponse(this,'news');}
+        if(type=="award"){Novelties.recieveNoveltiesResponse(this,'award');}
+    };
+  }
+// crea un objecto parametro para la solicitud segun el tipo de novedad.
+  let noveltie = '';
+  if (type=="news"){ noveltie = Novelties.createNewsObjectRequest();}
+  if (type=="award"){ noveltie = Novelties.createAwardObjectRequest();}
+//envia
+  var object = JSON.stringify(noveltie);
+  console.log("se va a enviar a "+ object);
+  request.open("POST", "/admin/novelties/create-noveltie", true);
+  request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+  request.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'));
+  request.send("object="+object);
+}
 
-        texto.innerHTML = inicio+medio+fin;
 
-        let par = document.createElement('div');
-        par.setAttribute('contentEditable',true);
-        par.innerHTML = inicio+medio+fin;
-        Noticias.contenedor.appendChild(par);
+//Recibe la respuesta de crear una Novedad, actualiza el formulario correspondiente. Puede
+// a. Mostrar los campos erroneos al crear la novedad
+// b. Redireccionar a la nueva novedad creada.
+Novelties.recieveNoveltiesResponse = function(response,type){
+  var resp = JSON.parse(response.responseText);
+  console.log("se recibio respuesta para crear Novedad ");
 
-        console.log(par.innerHTML); //texto html
-        console.log(par.textContent); // texto sin html
-      });
+  if (resp['state']=='OK'){
+   console.log("OK> "+resp['message']);
+   //document.getElementById("portada-news-preview").setAttribute('src',resp['portada']);
+   //console.log(img.size);
+ }else{ //marcar campos erroneos
+     console.log("ERROR en campos> "+resp['errors']);
 
-}*/
+  }
+
+}
+
+
+//crea un objecto para la request AJAX con atributos para  crear una Noticia
+Novelties.createNewsObjectRequest = function(){
+    console.log('creando objeto Noticia');
+    let queryBase= '.form.news form .field';
+
+    var news ={ // objeto a enviar
+      "type":"news",
+      'titulo': document.querySelector(queryBase+'.tittle label input').value,
+      'copete':document.querySelector(queryBase+'.description label input').value,
+      'portada':document.getElementById('portada-news-preview').getAttribute("src"),
+      'cuerpo':document.querySelector(queryBase+'.content').innerHTML,
+      'fuente':document.querySelector(queryBase+'.source label input').value,
+    };
+
+    return news;
+}
+
+ Novelties.setPosterPreview = function(file){
+   var reader = new FileReader();
+   reader.readAsDataURL(file);
+     reader.onload = function () {
+       console.log(reader.result);
+       var img =document.createElement('img');
+       img.setAttribute('src',reader.result);
+       img.classList.add('poster-preview')
+       img.setAttribute('id','portada-news-preview');
+       document.querySelector('.form.news form .field.poster').appendChild(img);
+     };
+ }
+
+
+
+//crea un objecto para la request AJAX con atributos para  crear un Premio
+Novelties.createAwardObjectRequest = function(){
+    console.log('creando objeto Premio');
+    var award ={ // objeto a enviar
+      "type":"award"
+    };
+    return award;
+}

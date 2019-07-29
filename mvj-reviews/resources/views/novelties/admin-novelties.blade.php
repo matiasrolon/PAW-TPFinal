@@ -10,6 +10,15 @@
 
 @section('content')
   <div class="admin">
+    @if ($errors)
+      <div class="alert alert-danger">
+          <ul>
+              @foreach ($errors->all() as $error)
+                  <li>{{ $error }}</li>
+              @endforeach
+          </ul>
+      </div>
+    @endif
 
     <div class="create-options secondary">
         <button type="button" class="option news">
@@ -44,26 +53,30 @@
         </div>
     </div>
     <div class="forms-novelties" >
-        <div class="form news no-visible">
-          <form action="/admin/create-news" method="POST" enctype="multipart/form-data">
-                <div class="field">
-                  <label for="titulo" class="tittle"> Titulo:
-                      <input type="text" name="titulo" required >*
+        <div class="form news">
+          <form action="/admin/novelties/create-news" name="news" method="POST" enctype="multipart/form-data">
+              @csrf
+
+                <div class="field tittle">
+                  <label for="titulo"> Titulo:
+                      <input type="text" name="titulo" required value="{{ old('titulo') }}">*
                   </label>
                 </div>
-                <div class="field" class="description">
+                <div class="field description">
                   <label for="copete"> Copete:
-                      <input type="text" name="copete" required >*
+                      <input type="text" name="copete" required value="{{ old('copete') }}">*
                   </label>
                 </div>
-                <div class="field" class="poster">
+                <div class="field poster">
                     <label for="portada" >Portada:
-                        <input name="portada" type="file" >
+                        <input name="portada" type="file" value="{{ old('portada') }}">
                     </label>
                 </div>
+                <input type="hidden" name="cuerpo" value="{{ old('cuerpo') }}">
                 <div class="field content" contentEditable="true">
-                      hola esto es una prueba a ver si funciona como tal, solo para verificar
+                      {!! old('cuerpo') !!}
                 </div>
+
                 <div class="field author">
                     <label for="autor">Autor:
                         <input name="autor" type="text" value="{{Auth::user()->nombre}}" disabled readonly>
@@ -71,15 +84,17 @@
                 </div>
                 <div class="field source">
                     <label for="fuente">Fuente:
-                        <input name="fuente" type="text" placeholder="MVJ Reviews" >*
+                        <input name="fuente" type="text" placeholder="MVJ Reviews" value="{{ old('fuente') }}" >*
                     </label>
                 </div>
-                <input class="btnEnviar" type="submit" name="Agregar">
+                <input class="btnSendNews" type="submit" name="AgregarNews">
                 <input  class="controls" type="reset" value="Resetear">
           </form>
         </div>
-        <div class="form award">
-          <form action="/admin/create-award" method="POST" enctype="multipart/form-data">
+
+        <div class="form award no-visible">
+          <form action="/admin/novelties/create-award" method="POST" enctype="multipart/form-data">
+              @csrf
                 <div class="field name">
                   <label for="nombre" class="name"> Nombre:
                       <input type="text" name="nombre" required >*
@@ -145,8 +160,9 @@
                         <input name="fuente" type="text" placeholder="MVJ Reviews" >*
                     </label>
                 </div>
-                <input class="btnEnviar" type="submit" name="Agregar">
+                <input class="btnSendAward" type="submit" name="AgregarAward">
                 <input  class="controls" type="reset" value="Resetear">
+
           </form>
         </div> <!--End div form award-->
     </div> <!--END div forms-novelties -->
