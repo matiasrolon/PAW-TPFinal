@@ -134,7 +134,7 @@ NavPrincipal.recibirResponseSearchFilm= function(response){ //imprime lista de r
           let d = document.createElement('div');
           img.src = "data:image/png;base64,"+resp[i].poster;
           item.classList.add('item-resultado');
-          p.innerHTML = resp[i].titulo + "("+resp[i].fecha_estreno+")";
+          p.innerHTML = resp[i].titulo + " ("+resp[i].fecha_estreno+")";
           let sin = resp[i].sinopsis;
           sin = (sin.length > 147)? sin.substring(0, 143) + "..." : sin;
           p2.innerHTML = sin;
