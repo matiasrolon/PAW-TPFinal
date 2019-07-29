@@ -23,6 +23,11 @@
     <link href="https://fonts.googleapis.com/css?family=Pridi&display=swap" rel="stylesheet">
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <!-- Icons -->
+    <!-- <link href="{{ asset('css/solid.css') }}" rel="stylesheet"> -->
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet">
+    <script type="text/javascript" src="{{ asset('fontawesome/js/solid.js') }}"> </script>
+    <script type="text/javascript" src="{{ asset('fontawesome/js/fontawesome.js') }}"> </script>
 </head>
 <body>
     <div id="app">
@@ -37,16 +42,20 @@
                 </button> -->
             </div>
             <div class="navseccion buscador">
-                    <input id="buscador" class="buscador" name="buscar" placeholder="buscar film">
+                    <input id="buscador" class="buscador fontAwesome" name="buscar" placeholder=" &#xf002; Buscar film">
             </div>
             <div class="navseccion autenticacion">
                         @guest
                           <ul class="opciones-guest">
-                                    <a class="" href="{{ route('login') }}">{{ __('Login') }}</a>
-                                  |
-                              @if (Route::has('register'))
-                                    <a class="" href="{{ route('register') }}">{{ __('Register') }}</a>
-                              @endif
+                            <li>
+                              <i class="fas fa-user"></i>
+                              <a class="fontAwesome login-item" href="{{ route('login') }}"> {{ __('Login') }}</a>
+                            </li>
+                            @if (Route::has('register'))
+                            <li>
+                              <i class="fas fa-child"></i>
+                              <a class="fontAwesome login-item" href="{{ route('register') }}">{{ __('Register') }}</a></li>
+                            @endif
                           </ul>
                         @else
                                 <li class="">
@@ -76,26 +85,41 @@
                         @endguest
             </div>
         </nav>
+        <div class="toggle-menu">
+          <div class="toggle-menu-hamburger">
+            <i class="fas fa-bars"></i>
+          </div>
 
-        <nav class="menus">
+          <nav class="menus no-visible-menu">
             <div class="seccion-menu">
-                  <a href="{{ route('home') }}">Home</a>
+              <i class="fas fa-home"></i>
+              <a href="{{ route('home') }}">Home</a>
             </div>
 
             <div class="seccion-menu">
-                  <a href="{{ route('ranking-films') }}">Ranking films</a>
+              <i class="fas fa-film"></i>
+              <a href="{{ route('ranking-films') }}">Ranking films</a>
             </div>
 
             <div class="seccion-menu">
-                  <a href="{{ route('ranking-users') }}">Ranking Criticos</a>
+              <i class="fas fa-chart-line"></i>
+              <a href="{{ route('ranking-users') }}">Ranking Criticos</a>
             </div>
 
             <div class="seccion-menu novedades">
+                  <i class="fas fa-newspaper"></i>
                   <a href=""> Novedades </a>
                   <ul class="submenu novedades no-visible">
-                    <li><a href="{{ route('awards') }}">Premios</a></li>
-                    <li><a href="{{ route('news') }}">Noticia del Dia</a></li>
-                    <li><a href="{{ route('premieres') }}">Estrenos</a></li>
+                    <li>
+                      <i class="fas fa-award"></i>
+                      <a href="{{ route('awards') }}">Premios</a>
+                    </li>
+                    <li>
+                      <i class="fas fa-surprise"></i>
+                      <a href="{{ route('news') }}">Noticia del Dia</a></li>
+                    <li>
+                      <i class="fas fa-fire-alt"></i>
+                      <a href="{{ route('premieres') }}">Estrenos</a></li>
                   </ul>
             </div>
             @auth
@@ -109,6 +133,7 @@
                   @endif
             @endauth
         </nav>
+        </div>
         <main id="content">
             @yield('content')
         </main>

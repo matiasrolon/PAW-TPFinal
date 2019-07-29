@@ -12,12 +12,154 @@ body {
   width: auto;
 }
 
+.login-item {
+  text-decoration: none;
+  color: black;
+}
+
+.fontAwesome {
+  font-family: 'Pridi', 'FontAwesome', sans-serif;
+}
+
+/* body {
+  font-size: medium;
+} */
+@media (min-width: 700px) {
+
+  .navseccion.buscador{
+    width: auto;
+    border-radius: 8px;
+    margin-top: 3%;
+    grid-area: a2;
+    padding: 2%;
+  }
+
+  .navseccion.icono a{
+    padding: 4% 0%;
+    font-size: xx-large;
+    white-space: wrap;
+  }
+
+  .navseccion.icono img {
+    height: 4.8vw;
+    width: auto;
+  }
+
+  body {font-size: large;}
+
+  .nav-principal{
+      grid-template-columns: 30% 1fr 30%;
+      grid-template-areas: "a1 a2 a3";
+  }
+
+  .menus{
+    display: flex;
+  }
+
+  .toggle-menu-hamburger {
+    display: none;
+   }
+
+  .toggle-menu {
+    display: inline-block;
+    flex: 1 100%;
+    background: #c9daf4;
+    width: 100%;
+  }
+
+  .seccion-menu{
+    height: 40px;
+    min-width: 200px;
+    color: black;
+    text-align: center;
+    padding-top: 0.5%;
+    border-color: grey;
+    border-radius: 2px 2px;
+  }
+
+  .seccion-menu path{
+    padding: 2%;
+  }
+}
+
+@media screen and (max-width: 700px) {
+
+  body {font-size: larger;}
+
+  .seccion-menu{
+    width: 100%;
+  }
+
+  .nav-principal{
+    grid-template-rows: 1fr 30%;
+    grid-template-columns: 1fr 50%;
+    grid-template-areas: "a1 a3"
+                         "a2 a2";
+  }
+
+  .navseccion.icono a{
+    font-size: x-large;
+    margin-top: 2%;
+  }
+
+  .navseccion.icono img {
+    height: 20vw;
+    width: auto;
+  }
+
+  .navseccion.buscador{
+    width: auto;
+    border-radius: 8px;
+    grid-area: a2;
+    padding: 0% 2% 3% 2%;
+    position:-webkit-sticky; 
+    position:sticky; 
+    top:0;
+  }
+
+  .no-visible-menu {
+    display: none !important;
+  }
+
+  .resultados-buscador div {
+    display: auto;
+    width: 100vw;
+  }
+
+  .toggle-menu {
+    display: flex;
+    flex: 1 100%;
+    background: #c9daf4;
+  }
+
+  .menus{
+    display: initial;
+  }
+
+  .toggle-menu-hamburger {
+    visibility: visible;
+    padding: 3% 4%;
+    color: #000000;
+  }
+
+  .seccion-menu {
+    display: flex;
+    width: auto;
+    flex: 1 100%;
+    border-radius: 2px 2px;
+  }
+
+  .seccion-menu svg{
+    padding: 4% 2% 2% 2%;
+  }
+
+}
 #app{
   color: black;
   margin: auto;
   display: flex;
-  align-content: stretch;
-  flex-flow: column wrap;
+  /* align-content: stretch; */
+  flex-flow: row wrap;
   margin-left: auto;
   margin-right:auto;
   height: auto;
@@ -30,7 +172,7 @@ body {
   1: 10%;
   /* margin-bottom: 2%; */
   display: grid;
-  grid-template-columns: 30% 1fr 30%;
+
   /* Sacar el webkit. usar solo center */
   text-align: -webkit-center;
   position: relative;
@@ -46,11 +188,7 @@ body {
   text-align: left;
 }
 
-.navseccion.buscador{
-  width: auto;
-  border-radius: 8px;
-  margin-top: 3%;
-}
+
 
 .navseccion.buscador input[type="text"] {
   font-family: 'Pridi', serif;
@@ -66,8 +204,14 @@ body {
 .navseccion.autenticacion{
   width: auto;
   text-align: right;
-  padding-right: 10px;
+  padding-left: 1em;
   list-style: none;
+  font-size: larger;
+  grid-area: a3;
+  }
+
+  .navseccion.autenticacion ul{
+    padding: 0%;
   }
 
 .resultados-buscador{
@@ -180,34 +324,16 @@ li.item-resultado:hover {
   float: right;
 }
 
+
 .menus{
-  background-color: rgba(120, 172, 252);
-  display: inline-block; */
+  background-color: rgb(201, 218, 244);
+  flex: 1 100%;
   width: auto;
+  flex-wrap: nowrap;
   height: 20;
   /* position: static; */
 }
 
-@media screen and (max-width: 600px) {
-  .seccion-menu{
-    width: 100%;
-  }
-}
-
-.seccion-menu{
-    display: inline-block;
-    height: 40px;
-    min-width: 150px;
-    color: black;
-    text-align: center;
-    /* padding-top: 0.5%; */
-    border-color: grey;
-    border-radius: 2px 2px;
-    /* vertical-align: middle; */
-    px; */
-    padding: 1% 0.2%;
-    /* background-color: inherit; */
-}
 
     .seccion-menu .submenu{
       background-color: rgba(120, 172, 252);
@@ -237,7 +363,7 @@ li.item-resultado:hover {
   background-color: white;
 }
 
-.seccion-menu:hover>a::before{
+.seccion-menu:hover > a::before{
   content: "# ";
 }
 
@@ -253,19 +379,19 @@ ul.resultados-buscador a {
   color: black;
   text-decoration: none;
   vertical-align: middle;
-  margin-top: 20px;
+  padding-top: 2%;
 }
 
 .navseccion.icono{
   display: flex;
+  grid-area: a1;
 }
 
 .navseccion.icono a{
   color: black;
   text-decoration: none;
-  font-size: 30px;
-  margin-top: 2%;
 }
+
 
 img.logo-st {
   width: 60px;

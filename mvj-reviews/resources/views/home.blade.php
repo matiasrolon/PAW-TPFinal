@@ -14,7 +14,7 @@
 @endsection
 
 @section('content')
-    <div class="content">
+     <div class="content">
         <ul class="generos">
           @foreach($generos as $genero)
             <li><div value="{{ $genero['id'] }}" onclick="PeliculaGenero.initialize({{ $genero['id'] }}, 'pelicula', 'container1')"><p>{{ $genero['nombre'] }}</p></div></li>
@@ -71,7 +71,6 @@
         </section>
 
         <section class="users-populares">
-          <!-- <div class="ranking tabla"> -->
           <div class="ranking-tabla">
             <h3> Ranking Usuarios</h3>
             <table>
@@ -83,11 +82,9 @@
               <tbody>
                 @foreach($users as $user)
                   <tr>
-                      <!-- <div class="tupla-user"> -->
-                          <td><a href="/users/{{$user['username']}}"> {{$user['username']}}</a></td>
-                          <td>{{ $user['cantReviews'] }}</td>
-                          <td>{{ number_format($user['puntos'], 2) }}</td>
-                      <!-- </div> -->
+                      <td><a href="/users/{{$user['username']}}"> {{$user['username']}}</a></td>
+                      <td>{{ $user['cantReviews'] }}</td>
+                      <td>{{ number_format($user['puntos'], 2) }}</td>
                   </tr>
                 @endforeach
               </tbody>
