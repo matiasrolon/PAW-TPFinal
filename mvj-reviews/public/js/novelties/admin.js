@@ -7,31 +7,47 @@ Novelties.startNovelties = function (contenedorHTML) {
   window.addEventListener("DOMContentLoaded", function () {
     console.log("Premios asocio JS con HTML.");
     Novelties.buttonFunctions();
-      //Novelties.cargarSolicitudAJAX();
+
+    let btnCreateNews = document.querySelector('.create-options .option.news');
+    btnCreateNews.addEventListener("click",function(){ Novelties.changeNoveltieCreate('news');});
+
+    let btnCreateAwards = document.querySelector('.create-options .option.award');
+    btnCreateAwards.addEventListener("click",function(){ Novelties.changeNoveltieCreate('award');});
   });
+}
+
+Novelties.changeNoveltieCreate = function(type){
+  let forms = document.querySelectorAll('.form');
+  forms.forEach(function(f){
+    if (!f.classList.contains('no-visible')){
+      f.classList.add('no-visible');
+    }
+  });
+  if (type=="news"){
+      let formNews = document.querySelector('.form.news');
+      if (formNews.classList.contains('no-visible')){
+        formNews.classList.remove('no-visible');
+      }
+  }
+
+  if (type=="award"){
+    let formAward = document.querySelector('.form.award');
+    if (formAward.classList.contains('no-visible')){
+      formAward.classList.remove('no-visible');
+    }
+  }
+
 }
 
 
 Novelties.buttonFunctions = function(){
 
-  /*  //Cuando se carga una imagen, se mostrara su vista previa.
-    let inputPoster = document.querySelector(".form.news form .field.poster label input");
-    inputPoster.addEventListener("change",function(){
-        let file = document.forms['news']['portada'].files[0];
-        Novelties.setPosterPreview(file);
+    //Cuando en el div content cambia algo actualizo valor del input(que es de type HIDDEN)
+    let divContent = document.querySelector('.form.news form .field.content');
+    divContent.addEventListener("keyup",function(){
+      let inputContent = document.querySelector('.form.news form input[name="cuerpo"]');
+      inputContent.value = this.innerHTML;
     });
-
-  //  boton de enviar > envia AJAX para crear la novedad
-    let btnSendNews = document.querySelector('form .btnSendNews');
-    btnSendNews.addEventListener("click", function(){
-      Novelties.createNoveltiesRequest('news');
-    });
-
-    let btnSendAward = document.querySelector('form .btnSendAward');
-    btnSendAward.addEventListener("click", function(){
-      Novelties.createNoveltiesRequest('award');
-    });
-  */
 
     //boton letra grande
     var btnBig = document.querySelector('.edit-panel .option.big');
@@ -118,11 +134,18 @@ Novelties.insertCategoryInContent = function(){
     cloneNode.setAttribute('nroCategory',nroCategory);
     //la agrego al div content.
     document.querySelector('.form.award form .field.content').appendChild(cloneNode);
+    /*let inputName = document.querySelectorAll('.form.award form .field.content .category[nroCategory="'+nroCategory+'"] .attribute.name label input');
+    let newName = inputName.getAttribute("name")+"."+nroCategory;
+    inputName.setAttribute("name",newName);
+    let inputDescrip = document.querySelectorAll('.form.award form .field.content .category .attribute.description label input');
+    let newDescrip = inputDescrip.getAttribute("name")+"."+nroCategory;
+    inputDescrip.setAttribute("name",newDescrip);*/
     //inserto sus nominados
-      for (var i = 1; i < input.value; i++) {
+      for (var i = 1; i <= input.value; i++) {
           console.log('insertando '+i+' nominado');
           let nomList = document.querySelector('.category[nroCategory="'+nroCategory+'"] .attribute.nominees-list');
-          let text = '<li class="nominee"> <div class="name"><label for="nominado" > <input name="nominado" type="text" placeholder="nombre"></label></div><div class="description"><label for="descripcion" >por<input name="descripcion" type="text" placeholder="pelicula"></label></div></li>'
+          let text = '<li class="nominee"> <div class="name"><label for="nominado.nombre" > <input name="nominado.nombre.'+nroCategory+'.'+i+'" type="text" placeholder="nombre"></label></div><div class="description"><label for="nominado.descripcion" >por<input name="nominado.descripcion"'+nroCategory+'.'+i+' type="text" placeholder="pelicula"></label></div></li>'
+          console.log(text);
           nomList.innerHTML = nomList.innerHTML+text;
       }
   }
@@ -145,14 +168,21 @@ Novelties.alterContent = function(accion){
   if (accion == "medium"){document.execCommand("fontsize",false,3)};
   if (accion == "big"){document.execCommand("fontsize",false,5)};
 
-  //actualizo el valor del input que representa el cuerpo (es de type HIDDEN)
   let inputContent = document.querySelector('.form.news form input[name="cuerpo"]');
   inputContent.value = divContent.innerHTML;
-
 }
 
+
+
+
+
+
+
+
+
 //------------------------------------------------------------------------------------
-//AJAX funcionalidad
+//AJAX funcionalidad: por ahora, no se usa con los forms.
+//------------------------------------------------------------------------------------
 
 Novelties.createNoveltiesRequest = function(type){
   //CREA solicitud AJAX

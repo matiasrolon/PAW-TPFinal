@@ -9,16 +9,20 @@
 @endsection
 
 @section('content')
-  <div class="admin">
-    @if ($errors)
-      <div class="alert alert-danger">
-          <ul>
-              @foreach ($errors->all() as $error)
-                  <li>{{ $error }}</li>
-              @endforeach
-          </ul>
-      </div>
-    @endif
+
+@if ($errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+            <h2>@error('portada')
+                <p>{{ $message }}</p>
+              @enderror
+            </h2>
+        </ul>
+    </div>
+@endif
 
     <div class="create-options secondary">
         <button type="button" class="option news">
@@ -121,31 +125,32 @@
                     </label>
                 </div>
 
-                <div class="field content" contentEditable="true">
+                <div class="field content" >
                     <div class="category no-visible" nroCategory=0>
                         <div class="attribute name">
-                            <label for="category" >Categoria:
-                               <input name="category" type="text" >
+                            <label for="categoria" >Categoria:
+                               <input name="categoria.nombre" type="text" >
                             </label>
                         </div>
                         <div class="attribute description">
-                            <label for="descripcion" >Descripcion:
-                               <input name="descripcion" type="text" >
+                            <label for="categoria.descripcion" >Descripcion:
+                               <input name="categoria.descripcion" type="text" >
                             </label>
                         </div>
                         <ul class="attribute nominees-list">Nominados
                             <li class="nominee">
                                 <div class="name">
-                                  <label for="nominado" >
-                                     <input name="nominado" type="text" placeholder="nombre">
+                                  <label for="nominado.nombre" >
+                                     <input name="nominado.nombre" type="text" placeholder="nombre">
                                   </label>
                                 </div>
                                 <div class="description">
-                                  <label for="descripcion" >por
-                                     <input name="descripcion" type="text" placeholder="pelicula">
+                                  <label for="nominado.descripcion" >por
+                                     <input name="nominado.descripcion" type="text" placeholder="pelicula">
                                   </label>
                                 </div>
                             </li>
+
                         </ul>
                     </div>
                 </div>
@@ -166,5 +171,5 @@
           </form>
         </div> <!--End div form award-->
     </div> <!--END div forms-novelties -->
-  </div>
+
 @endsection

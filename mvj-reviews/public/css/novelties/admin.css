@@ -7,6 +7,10 @@
   transform: scale(0,0);
 }
 
+#content{
+    width: 100%;
+}
+
 .admin{
   display: block;
   width: 100%;
@@ -48,7 +52,6 @@
   display: inline-block;
   text-align: center;
   width: 100%;
-  height: 100%;
 }
 
 /*panel para editar noticia / premio*/
@@ -99,3 +102,17 @@
   min-height: 60vh;
   overflow:hidden;
 }
+
+.category .attribute.name{
+  display: inline;
+}
+.category .attribute.description{
+  display: inline;
+}
+
+    .nominee .name{
+        display: inline;
+    }
+    .nominee .description{
+      display: inline;
+    }

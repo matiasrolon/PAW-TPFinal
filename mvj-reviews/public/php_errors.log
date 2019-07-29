@@ -1,0 +1,2 @@
+[29-Jul-2019 13:12:02 UTC] PHP Fatal error:  Trait 'App\Http\Controllers\FlashMessages' not found in C:\Users\NTK001\Documents\uni\programacion web\PAW-TPFinal\mvj-reviews\app\Http\Controllers\Controller.php on line 13
+[29-Jul-2019 13:14:04 UTC] PHP Fatal error:  Trait 'App\Http\Controllers\FlashMessages' not found in C:\Users\NTK001\Documents\uni\programacion web\PAW-TPFinal\mvj-reviews\app\Http\Controllers\Controller.php on line 13
