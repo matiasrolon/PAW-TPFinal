@@ -43,6 +43,9 @@
             </div>
             <div class="navseccion buscador">
                     <input id="buscador" class="buscador fontAwesome" name="buscar" placeholder=" &#xf002; Buscar film">
+                    <div class="toggle-menu-hamburger">
+                      <i class="fas fa-bars"></i>
+                    </div>
             </div>
             <div class="navseccion autenticacion">
                         @guest
@@ -59,6 +62,7 @@
                           </ul>
                         @else
                                 <li class="">
+                                    <i class="fas fa-user-circle"></i>
                                     <a class="" href="#">
                                         {{ Auth::user()->username }} <span class=""></span>
                                         <button class="boton-opciones-login" type="button" name="button"> > </button>
@@ -67,14 +71,14 @@
                                       <ul class="opciones-login no-visible">
                                           <li>
                                             <a class="" href="{{ route('user_profile', Auth::user()->username) }}">
-                                                {{ __('perfil') }}
+                                                Perfil
                                             </a>
                                           </li>
                                           <li>
                                                 <a class="" href="{{ route('logout') }}"
                                                    onclick="event.preventDefault();
                                                                  document.getElementById('logout-form').submit();">
-                                                    {{ __('Salir') }}
+                                                    Salir
                                                 </a>
                                                 <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                                                     @csrf
@@ -86,10 +90,6 @@
             </div>
         </nav>
         <div class="toggle-menu">
-          <div class="toggle-menu-hamburger">
-            <i class="fas fa-bars"></i>
-          </div>
-
           <nav class="menus no-visible-menu">
             <div class="seccion-menu">
               <i class="fas fa-home"></i>
@@ -125,9 +125,11 @@
             @auth
                 @if ( Auth::user()->hasRole('admin') )
                   <div class="seccion-menu">
+                      <i class="fas fa-tools"></i>
                       <a href="{{ route('admin-films') }}"> Admin Films </a>
                   </div>
                   <div class="seccion-menu">
+                      <i class="fas fa-heading"></i>
                       <a href="{{ route('admin-novelties') }}"> Admin Novedades </a>
                   </div>
                   @endif

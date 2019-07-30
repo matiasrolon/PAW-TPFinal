@@ -1,5 +1,5 @@
 /* para personalizar las scroll bar  */
-::-webkit-scrollbar {
+/* ::-webkit-scrollbar {
     width: 12px;
 }
 
@@ -11,7 +11,7 @@
 ::-webkit-scrollbar-thumb {
     border-radius: 10px;
     -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5);
-}
+} */
 /* ---  */
 
 @import url(https://fonts.googleapis.com/css?family=Nunito);
@@ -99,6 +99,16 @@ body {
   .seccion-menu path{
     padding: 2%;
   }
+
+  .seccion-menu .submenu{
+      width: 200px;
+      margin: 0.5% 0%;
+    }
+    
+  .opciones-login{
+    width: 100%;
+  }
+
 }
 
 @media screen and (max-width: 700px) {
@@ -134,7 +144,8 @@ body {
     width: auto;
     border-radius: 8px;
     grid-area: a2;
-    padding: 0% 2% 3% 2%;
+    padding: 0% 1% 2% 1%;
+    display: flex;
   }
 
   .no-visible-menu {
@@ -149,7 +160,10 @@ body {
   .toggle-menu {
     display: flex;
     flex: 1 100%;
-    background: #c9daf4;
+    background: #6498e8;
+    z-index: 9;
+    top: 19%;
+    position: sticky;
   }
 
   .menus{
@@ -158,19 +172,38 @@ body {
 
   .toggle-menu-hamburger {
     visibility: visible;
-    padding: 3% 4%;
+    padding: 0% 3%;
+    margin: auto;
     color: #000000;
   }
 
   .seccion-menu {
     display: flex;
-    width: auto;
+    /* width: auto; */
     flex: 1 100%;
     border-radius: 2px 2px;
+    padding: 2% 0%;
   }
 
   .seccion-menu svg{
-    padding: 4% 2% 2% 2%;
+    padding: 1% 3%;
+  }
+
+  
+  .seccion-menu .submenu{
+     /* flex: 1 100%; */
+  }
+  .seccion-menu .novedades a {
+    flex: 1 100%;
+  }
+
+  .submenu {
+    width: 100vw;
+    position:absolute;
+  }
+
+  .opciones-login{
+    width: 30%;
   }
 
 }
@@ -306,7 +339,7 @@ li.item-resultado:hover {
 }
 
 .opciones-login{
-    background-color:  darkgrey;
+    /* background-color: darkgrey; */
     list-style-position: inside;
     margin-top: 0px;
     position: absolute;
@@ -316,15 +349,18 @@ li.item-resultado:hover {
 
 .opciones-login > li{
   list-style: none;
-  background-color:rgba(120, 172, 252);
-  padding-left: 40%;
-  width: 60px;
-  padding-left: 8px;
-  border: solid 1px black;
+  background-color: rgb(192, 208, 232);
+  padding-left: 0%;
+  /* width: 60px; */
+  /* padding-left: 8px; */
+  /* border: solid 1px black; */
+  padding: 10% 15%;
+  margin-left: 0px;
 }
 
 .opciones-login > li > a{
   text-decoration: none;
+  /* margin-left: 0px; */
 }
 
 
@@ -351,25 +387,27 @@ li.item-resultado:hover {
   width: auto;
   flex-wrap: nowrap;
   height: 20;
-  /* position: static; */
+  position: static;
 }
 
 
-    .seccion-menu .submenu{
-      background-color: rgba(120, 172, 252);
-      border-radius: 2px 2px;
-      list-style: none;
-      position: absolute;
-      z-index: 2;
-      margin: 0%;
-      margin-top: 10px;
-      padding: 0%;
-    }
-          .submenu li{
-            margin: 0%;
-            padding: 10px 5px;
-            width: 150px;
-          }
+.seccion-menu .submenu{
+  background-color: rgb(201, 218, 244);
+  border-radius: 2px 2px;
+  list-style: none;
+  position: absolute;
+  z-index: 0;
+  padding: 0%;
+  /* width: 100%; */
+}
+
+.submenu li{
+  margin: 0%;
+  /* padding: 10px 5px; */
+  border-radius: 2px;
+  width: 100%;
+  flex: 1 100%;
+}
 
           .submenu li:hover{
             color: black;
@@ -399,7 +437,7 @@ ul.resultados-buscador a {
   color: black;
   text-decoration: none;
   vertical-align: middle;
-  padding-top: 2%;
+  /* padding-top: 2%; */
 }
 
 .navseccion.icono{

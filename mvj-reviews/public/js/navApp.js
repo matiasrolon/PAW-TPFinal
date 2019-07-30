@@ -22,7 +22,7 @@ NavPrincipal.iniciarNavPrincipal= function(contenedorHTML){
           sub.classList.add("no-visible");
       });
 
-      document.querySelector('.toggle-menu div')
+      document.querySelector('.toggle-menu-hamburger')
       .addEventListener("click",function(){
           var sub = document.querySelector('.menus');
           if (sub.classList.contains("no-visible-menu"))
