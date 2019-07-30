@@ -26,7 +26,8 @@ class NoveltiesController extends Controller
 
   public function admin_novelties(){
       if (Auth()->user()->hasRole('admin')){
-          return view('novelties/admin-novelties');
+          $countries = FilmController::getCountries();
+          return view('novelties/admin-novelties',compact('countries'));
       }else{
         return view('404'); //personalizar error (no posee los permisos necesarios)
       }
@@ -37,11 +38,13 @@ class NoveltiesController extends Controller
       $messages = [
         'required' => 'El campo :attribute es requerido.',
       ];
-      //validaciones
+      //validaciones (AGREGAR)
       $validator = Validator::make($request->input(), [
           'titulo' => 'required',
           'copete' => 'required',
           'cuerpo' => 'required',
+
+          'fuenteNews' => 'required',
       ],$messages);
 
       if ($validator->fails()) {
@@ -55,8 +58,8 @@ class NoveltiesController extends Controller
         $news->copete = $request->input('copete');
         $news->cuerpo = $request->input('cuerpo');
         $news->autor = Auth()->user()->nombre;
-        $news->fuente = $request->input('fuente');
-        $news->portada = file_get_contents($request->file('portada'));
+        $news->fuente = $request->input('fuenteNews');
+        $news->portada = file_get_contents($request->file('portadaNews'));
         $news->fecha = Carbon::today();
         $news->save();
 
@@ -70,13 +73,13 @@ class NoveltiesController extends Controller
       $messages = [
         'required' => 'El campo :attribute es requerido.',
       ];
-      //validaciones
+      //validaciones (AGREGAR)
       $validator = Validator::make($request->all(), [
           'nombre' => 'required',
           'fecha' => 'required',
           'pais' => 'required',
-          'fuente' => 'required',
-          'portada' => 'required',
+          'fuenteAward' => 'required',
+          'portadaAward' => 'required',
       ],$messages);
 
       if ($validator->fails()) {
@@ -92,8 +95,8 @@ class NoveltiesController extends Controller
         $award->fecha_realizacion = $request->input('fecha');
         $award->pais = $request->input('pais');
         $award->autor = Auth()->user()->nombre;
-        $award->fuente = $request->input('fuente');
-        $award->portada = file_get_contents($request->file('portada'));
+        $award->fuente = $request->input('fuenteAward');
+        $award->portada = file_get_contents($request->file('portadaAward'));
         $award->save();
 
         //guardo las categorias
@@ -143,7 +146,11 @@ class NoveltiesController extends Controller
  /* -----------------------------------------*/
   //noticias
   public function news(){
-    $noticias = News::all();
+    //MODIFICAR> Noticias de la ultima semana, y luego cargar las mas antiguas por scroll
+    $noticias = News::select('titulo','id','fecha','copete','autor',
+               \DB::raw('TO_BASE64(portada) as portada'))
+               ->orderBy('fecha','desc')
+               ->get();
     return view('novelties/news', compact('noticias'));
   }
 

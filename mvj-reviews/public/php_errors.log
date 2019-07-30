@@ -1,2 +1,4 @@
 [29-Jul-2019 13:12:02 UTC] PHP Fatal error:  Trait 'App\Http\Controllers\FlashMessages' not found in C:\Users\NTK001\Documents\uni\programacion web\PAW-TPFinal\mvj-reviews\app\Http\Controllers\Controller.php on line 13
 [29-Jul-2019 13:14:04 UTC] PHP Fatal error:  Trait 'App\Http\Controllers\FlashMessages' not found in C:\Users\NTK001\Documents\uni\programacion web\PAW-TPFinal\mvj-reviews\app\Http\Controllers\Controller.php on line 13
+[30-Jul-2019 15:29:12 UTC] PHP Fatal error:  Can't use function return value in write context in C:\Users\NTK001\Documents\uni\programacion web\PAW-TPFinal\mvj-reviews\storage\framework\views\f43ac8590afb23a3cd593de24cd910369e9667c1.php on line 44
+[30-Jul-2019 15:29:50 UTC] PHP Fatal error:  Can't use function return value in write context in C:\Users\NTK001\Documents\uni\programacion web\PAW-TPFinal\mvj-reviews\storage\framework\views\f43ac8590afb23a3cd593de24cd910369e9667c1.php on line 44

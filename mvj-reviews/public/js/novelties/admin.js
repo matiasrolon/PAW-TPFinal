@@ -14,6 +14,17 @@ Novelties.startNovelties = function (contenedorHTML) {
     let btnCreateAwards = document.querySelector('.create-options .option.award');
     btnCreateAwards.addEventListener("click",function(){ Novelties.changeNoveltieCreate('award');});
 
+    let btnCategories = document.querySelectorAll('.btnQuit');
+    if (btnCategories.length>0){
+      btnCategories.forEach(function(btn){
+        console.log(btn);
+        btn.addEventListener("click",function(){
+          console.log(btn.getAttribute('data-nro-category'));
+            Novelties.removeCategory(btn.getAttribute('data-nro-category'));
+        });
+      });
+    }
+
   });
 }
 
@@ -35,6 +46,7 @@ if (createOptions.classList.contains('initial')){
   });
 //Para luego visualizar el indicado.
   if (type=="news"){
+
       let formNews = document.querySelector('.form.news');
       if (formNews.classList.contains('no-visible')){
         formNews.classList.remove('no-visible');
@@ -46,10 +58,12 @@ if (createOptions.classList.contains('initial')){
   }
 
   if (type=="award"){
+
     let formAward = document.querySelector('.form.award');
     if (formAward.classList.contains('no-visible')){
       formAward.classList.remove('no-visible');
     }
+
     //muestro las categorias solo si el que esta visible es el form award
     let categories = document.querySelectorAll('.category');
     categories.forEach(function(c){
@@ -189,9 +203,9 @@ Novelties.insertCategoryInContent = function(){
     let btnQuit = document.createElement('button');
     btnQuit.innerHTML='X';
     btnQuit.classList.add('btnQuit');
+    btnQuit.dataset.nroCategory = nroCategory;
     btnQuit.addEventListener("click",function(){
-        category.classList.add('removed');
-        category.addEventListener('transitionend', function() {this.remove();});
+      Novelties.removeCategory(nroCategory);
     });
     //agrega secciones finales.
     category.appendChild(btnQuit);
@@ -229,7 +243,11 @@ Novelties.alterContent = function(accion){
 }
 
 
-
+Novelties.removeCategory = function(nroCategory){
+  categoryQuit = document.querySelector('.category[data-nro-category="'+nroCategory+'"]');
+  categoryQuit.classList.add('removed');
+  categoryQuit.addEventListener('transitionend', function() {this.remove();});
+}
 
 
 

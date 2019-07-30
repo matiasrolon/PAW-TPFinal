@@ -116,7 +116,7 @@
                     </li>
                     <li>
                       <i class="fas fa-surprise"></i>
-                      <a href="{{ route('news') }}">Noticia del Dia</a></li>
+                      <a href="{{ route('news') }}">Noticias</a></li>
                     <li>
                       <i class="fas fa-fire-alt"></i>
                       <a href="{{ route('premieres') }}">Estrenos</a></li>

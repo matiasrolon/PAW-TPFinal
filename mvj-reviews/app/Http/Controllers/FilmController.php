@@ -34,6 +34,46 @@ class FilmController extends Controller
       return $obj;
     }
 
+
+    /**
+    * obtiene la lista de paises desde el archivo api.countries.
+    */
+    static public function getCountries(){
+        $paises = array();
+        $archivo = Storage::get('api.countries.es.json');
+        $contenido = json_decode($archivo);
+        $i = 0;
+        while ($i < sizeof($contenido)) {
+            // Error raro sino pongo el isset()
+            if (isset($contenido[$i]->spanish_name)) {
+                // Agrego el pais al arreglo
+                $paises[] =  $contenido[$i]->spanish_name;
+            }
+            $i++;
+        }
+        sort($paises);
+        return $paises;
+    }
+
+    /**
+    * obtiene la lista de generos de film desde el archivo api.genres.
+    */
+    static public function getGenres(){
+        $generos = array();
+        $archivo = Storage::get('api.genres.es.json');
+        $contenido = json_decode($archivo);
+        $i = 0;
+        while ($i < sizeof($contenido)) {
+            if (isset($contenido[$i]->name)) {
+                $generos[] =  $contenido[$i]->name;
+            }
+            $i++;
+        }
+        sort($generos);
+        return $generos;
+    }
+
+
     public function ranking(){
       $films = Film::orderBy('puntaje','desc')->take(100)->get();
       return view('ranking-films',compact('films'));
@@ -159,7 +199,6 @@ class FilmController extends Controller
     }
 
 
-
     /**
      * Para saber si la version que recupero de la API fue actualizada.
      * @param Film $filmAntiguo es el Film que tengo almacenado en la BD
@@ -192,31 +231,8 @@ class FilmController extends Controller
                                 ->get();
 
       // Hago una lista de los paises disponibles
-      $paises = array();
-      $archivo = Storage::get('api.countries.es.json');
-      $contenido = json_decode($archivo);
-      $i = 0;
-      while ($i < sizeof($contenido)) {
-          // Error raro sino pongo el isset()
-          if (isset($contenido[$i]->spanish_name)) {
-              // Agrego el pais al arreglo
-              $paises[] =  $contenido[$i]->spanish_name;
-          }
-          $i++;
-      }
-      sort($paises);
-
-      $generos = array();
-      $archivo = Storage::get('api.genres.es.json');
-      $contenido = json_decode($archivo);
-      $i = 0;
-      while ($i < sizeof($contenido)) {
-          if (isset($contenido[$i]->name)) {
-              $generos[] =  $contenido[$i]->name;
-          }
-          $i++;
-      }
-      sort($generos);
+      $paises = $this->getCountries();
+      $generos = $this->getGenres();
 
       return view('admin_films',compact('searches', 'paises', 'generos'));
     }
@@ -286,7 +302,7 @@ class FilmController extends Controller
                   $filmOriginal->categoria = $request->categoria;
                   //$obra->fecha_finalizacion = $request->fecha_finalizacion;
                   $filmOriginal->save();
-                  
+
                   // QUEDO SIN PROBARRRRRRRRRRRRRRRRRRRRRRRRRRRRRR
                   // Reviso si cambiaron los generos
                   $generosActuales = $filmOriginal->genres()->get();

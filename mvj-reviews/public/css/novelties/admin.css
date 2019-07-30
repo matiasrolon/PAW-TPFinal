@@ -37,14 +37,17 @@
   text-align: center;
   width: 100%;
   height: 80vh;
-  margin-top: 2%;
+  margin-top: 2%;.
 }
+
 
 .create-options.secondary{
   background-color: rgba(121, 226, 79, 0.7);
   display: inline-block;
   text-align: center;
   width: 100%;
+  height: 5%;
+  transition: width 1s, height 1s, margin 1s;
 }
 
     .create-options.initial .option{
@@ -59,15 +62,11 @@
       width: 20%;
     }
 
-    .create-options .option{
+    .create-options.secondary .option{
       background-color: rgba(179, 179, 179, 0.77);
       border: solid 1px black;
-      /* display: inline-block; */
       font-size: 80%;
       vertical-align: middle;
-      /* height: 90%; */
-      /* width: 20%; */
-      margin: 8px;
     }
     .create-options .option:hover{
         background-color: rgba(17, 158, 27, 0.66);
