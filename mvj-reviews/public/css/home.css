@@ -19,10 +19,6 @@
   flex: auto;
 }
 
-#content {
-  flex: 1 100%;
-}
-
 @media screen and (min-width: 700px) {
   .content {
       display: grid;
