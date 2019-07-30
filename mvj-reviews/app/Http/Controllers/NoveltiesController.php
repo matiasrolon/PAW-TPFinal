@@ -59,19 +59,88 @@ class NoveltiesController extends Controller
         $news->portada = file_get_contents($request->file('portada'));
         $news->fecha = Carbon::today();
         $news->save();
+
         return redirect()->route('news-profile', ['news_id' => $news->id]);
       };
   }//end create_news
 
 
   public function create_award(Request $request){
-    var_dump($request->input());
-  }
+    //mensajes en caso de fallar cada validacion
+      $messages = [
+        'required' => 'El campo :attribute es requerido.',
+      ];
+      //validaciones
+      $validator = Validator::make($request->all(), [
+          'nombre' => 'required',
+          'fecha' => 'required',
+          'pais' => 'required',
+          'fuente' => 'required',
+          'portada' => 'required',
+      ],$messages);
 
+      if ($validator->fails()) {
+          return redirect()
+                 ->back()
+                 ->withInput()
+                 ->withErrors($validator);
+      }else{
+        //Si no hay errores, guardo el premio
+        $award = new Award();
+        $award->nombre = $request->input('nombre');
+        $award->descripcion = $request->input('descripcion');
+        $award->fecha_realizacion = $request->input('fecha');
+        $award->pais = $request->input('pais');
+        $award->autor = Auth()->user()->nombre;
+        $award->fuente = $request->input('fuente');
+        $award->portada = file_get_contents($request->file('portada'));
+        $award->save();
 
+        //guardo las categorias
+        $nroCategory = 1;
+        $finish1 = false;
+        // saldra cuando el nro de categoria a buscar no exista en ningun name de un input
+        while (!$finish1){
+            $fieldNombre = 'categoria_nombre_' . $nroCategory;//nombre del input
+            $fieldDescripcion = 'categoria_descripcion_' . $nroCategory;
+            if($request->has($fieldNombre)){//si la categoria a buscar existe.
+              $category = new Category();
+              $category->nombre = $request->input($fieldNombre);
+              $category->descripcion = $request->input($fieldDescripcion);
+              $category->award_id = $award->id;
+              $category->save();
+                  //inserto nominados para esa categoria
+                  $nroNominee = 1;
+                  $finish2 = false;
+                  while (!$finish2){
+                    $fieldNombre = 'nominado_nombre_' . $nroCategory . '_' . $nroNominee;//nombre del input
+                    $fieldDescripcion = 'nominado_descripcion_' . $nroCategory . '_' . $nroNominee;
+                    if ($request->has($fieldNombre)){//si ese numero de nominado existe.
+                      $nominee = new Nominee();
+                      $nominee->nombre = $request->input($fieldNombre);
+                      $nominee->descripcion = $request->input($fieldDescripcion);
+                      //AGREGAR > CAMPO INPUT RESULTADO.
+                      $nominee->resultado = "nominado";
+                      $nominee->category_id = $category->id;
+                      $nominee->save();
+                    }else{
+                      $finish2=true;
+                    }
+                    $nroNominee++;
+                  }// end while finish2
+            }else{//si esa categoria no existe
+              $finish1 = true;
+            }
+            $nroCategory++;//paso a la siguiente categoria si existe ($finish=false).
+        }
+        //var_dump($request->input());
+        return redirect()->route('award-profile', ['award_id' =>$award->id]);
+    }//end ELSE VALIDATOR->FAILS()
+}
 
+   /* -----------------------------------------*/
   /* --------------   VISTAS   ---------------*/
-
+ /* -----------------------------------------*/
   //noticias
   public function news(){
     $noticias = News::all();
@@ -98,9 +167,12 @@ class NoveltiesController extends Controller
 
 //info de premio en especifico, cuando se entra a el.
   public function award_profile($award_id){
-    $award = Award::find($award_id);
+    $award = Award::where('id',$award_id)
+                    ->select('id','nombre','descripcion','pais','fecha_realizacion',
+                             \DB::raw('TO_BASE64(portada) as portada'),'autor','fuente')
+                    ->first();
     $categories = Category::where('award_id',$award->id)->get();
-    foreach ($categories as $cat ) {
+    foreach ($categories as $cat ) {//uno cada categoria con sus nominaciones
        $cat->nominees = Nominee::where('category_id',$cat->id)->get();
     }
     return view('novelties/award_profile', compact('award','categories'));

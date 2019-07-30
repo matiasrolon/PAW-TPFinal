@@ -10,7 +10,6 @@ $factory->define(Category::class, function (Faker $faker) {
     return [
       'nombre'=> $faker->sentence(3, false),
       'descripcion'=> $faker->sentence(10, false),
-      'realizada'=>false,
       'award_id'=> Award::all()->random()->id
     ];
 });

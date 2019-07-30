@@ -18,8 +18,8 @@ class CreateCategoriesTable extends Migration
             $table->timestamps();
             $table->bigInteger('award_id')->unsigned();
             $table->string('nombre',100);
+            //  $table->boolean('realizada');
             $table->string('descripcion',500)->nullable();
-            $table->boolean('realizada');
             //foreign keys
             $table->foreign('award_id')->references('id')->on('award');
         });

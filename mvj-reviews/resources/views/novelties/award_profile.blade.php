@@ -8,8 +8,10 @@
 
 @section('content')
       <div class="award">
-          <p> Evento:{{$award['nombre']}}</p>
-          <p></p>
+          <h2> Evento:{{$award['nombre']}}</h2>
+          <p> Fecha: {{$award['fecha_realizacion']}}</p>
+          <p>{{$award['descripcion']}}</p>
+          <img src="data:image/png;base64, {{$award['portada']}}" alt="">
       </div>
     <ul>
       @foreach ($categories as $category)

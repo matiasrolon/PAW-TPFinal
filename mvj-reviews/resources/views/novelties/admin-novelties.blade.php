@@ -10,6 +10,7 @@
 
 @section('content')
 
+<!--
 @if ($errors->any())
     <div class="alert alert-danger">
         <ul>
@@ -23,7 +24,7 @@
         </ul>
     </div>
 @endif
-
+-->
     <div class="create-options secondary">
         <button type="button" class="option news">
             CREAR NOTICIA
@@ -64,6 +65,7 @@
                 <div class="field tittle">
                   <label for="titulo"> Titulo:
                       <input type="text" name="titulo" required value="{{ old('titulo') }}">*
+                      <p class="errorField">@error('titulo'){{ $message }} @enderror</p>
                   </label>
                 </div>
                 <div class="field description">
@@ -101,22 +103,22 @@
               @csrf
                 <div class="field name">
                   <label for="nombre" class="name"> Nombre:
-                      <input type="text" name="nombre" required >*
+                      <input type="text" name="nombre" required value="{{ old('nombre') }}">*
                   </label>
                 </div>
                 <div class="field description">
                   <label for="descripcion"> descripcion:
-                      <input type="text" name="descripcion" required >*
+                      <input type="text" name="descripcion" value="{{ old('descripcion') }}">*
                   </label>
                 </div>
                 <div class="field country">
                   <label for="pais"> Pais:
-                      <input type="text" name="pais" required >*
+                      <input type="text" name="pais" required value="{{ old('pais') }}">*
                   </label>
                 </div>
                 <div class="field date">
                   <label for="fecha"> Fecha:
-                      <input type="date" name="fecha" required >*
+                      <input type="date" name="fecha" required value="{{ old('fecha') }}">*
                   </label>
                 </div>
                 <div class="field poster">
@@ -125,34 +127,9 @@
                     </label>
                 </div>
 
+                <input type="hidden" name="cuerpo" value="{{ old('cuerpo') }}">
                 <div class="field content" >
-                    <div class="category no-visible" nroCategory=0>
-                        <div class="attribute name">
-                            <label for="categoria" >Categoria:
-                               <input name="categoria.nombre" type="text" >
-                            </label>
-                        </div>
-                        <div class="attribute description">
-                            <label for="categoria.descripcion" >Descripcion:
-                               <input name="categoria.descripcion" type="text" >
-                            </label>
-                        </div>
-                        <ul class="attribute nominees-list">Nominados
-                            <li class="nominee">
-                                <div class="name">
-                                  <label for="nominado.nombre" >
-                                     <input name="nominado.nombre" type="text" placeholder="nombre">
-                                  </label>
-                                </div>
-                                <div class="description">
-                                  <label for="nominado.descripcion" >por
-                                     <input name="nominado.descripcion" type="text" placeholder="pelicula">
-                                  </label>
-                                </div>
-                            </li>
-
-                        </ul>
-                    </div>
+                    {!! old('cuerpo') !!}
                 </div>
 
                 <div class="field author">
@@ -162,8 +139,8 @@
                 </div>
                 <div class="field source">
                     <label for="fuente">Fuente:
-                        <input name="fuente" type="text" placeholder="MVJ Reviews" >*
-                    </label>
+                        <input name="fuente" type="text" placeholder="MVJ Reviews" value="{{ old('fuente') }}">*
+                    </label>@error('fuente'){{ $message }} @enderror
                 </div>
                 <input class="btnSendAward" type="submit" name="AgregarAward">
                 <input  class="controls" type="reset" value="Resetear">

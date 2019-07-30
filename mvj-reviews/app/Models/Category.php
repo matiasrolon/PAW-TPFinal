@@ -8,7 +8,7 @@ class Category extends Model
 {
   protected $table = 'Category';
 
-  protected $fillable = ['nombre','descripcion','realizada','award_id'];
+  protected $fillable = ['nombre','descripcion','award_id'];
 
   public function nominees(){
        return $this->hasMany('App\Models\Nominee');

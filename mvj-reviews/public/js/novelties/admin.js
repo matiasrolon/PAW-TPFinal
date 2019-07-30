@@ -127,27 +127,51 @@ Novelties.insertCategoryInContent = function(){
   console.log('inserta category en content con '+input.value+' nominados');
 
   if (input.value>0){//cant nominados > 0
-    //clono category base del html
-    var cloneNode = document.querySelector('.form.award form .field.content .category').cloneNode(true);
-    cloneNode.classList.remove('no-visible');
-    let nroCategory = document.querySelectorAll('.form.award form .field.content .category').length;
-    cloneNode.setAttribute('nroCategory',nroCategory);
+    let category = document.createElement('div');
+    let nroCategory = document.querySelectorAll('.form.award form .field.content .category').length+1;
+    category.classList.add('category');
+    category.dataset.nroCategory = nroCategory;
+        //field NAME. (DIV->LABEL->INPUT)
+        let divName = document.createElement('div');
+        divName.classList.add('attribute','name');
+            let labelName = document.createElement('label');
+            labelName.setAttribute('for','categoria.nombre.'+nroCategory);
+            labelName.innerHTML = 'Cateoria';
+                let inputName = document.createElement('input');
+                inputName.setAttribute('name','categoria.nombre.'+nroCategory);
+                inputName.setAttribute('type','text');
+            labelName.appendChild(inputName);
+        divName.appendChild(labelName);
+        //field DESCRIPTION (DIV->LABEL->INPUT)
+            let divDescrip = document.createElement('div');
+            divDescrip.classList.add('attribute','description');
+            let labelDescrip = document.createElement('label');
+            labelDescrip.setAttribute('for','categoria.descripcion.'+nroCategory);
+            labelDescrip.innerHTML = 'Descripcion';
+                let inputDescrip = document.createElement('input');
+                inputDescrip.setAttribute('name','categoria.descripcion.'+nroCategory);
+                inputDescrip.setAttribute('type','text');
+            labelDescrip.appendChild(inputDescrip);
+        divDescrip.appendChild(labelDescrip);
+        //Field Nominees List
+        let ulNominees = document.createElement('ul');
+        ulNominees.classList.add('attribute','nominees-list');
+        //inserto sus items nominados
+        for (var i = 1; i <= input.value; i++) {
+              console.log('insertando '+i+' nominado');
+              let text = '<li class="nominee"> <div class="name"><label for="nominado.nombre" > <input name="nominado.nombre.'+nroCategory+'.'+i+'" type="text" placeholder="nombre"></label></div><div class="description"><label for="nominado.descripcion" >por<input name="nominado.descripcion.'+nroCategory+'.'+i+'" type="text" placeholder="pelicula"></label></div></li>'
+              ulNominees.innerHTML =ulNominees.innerHTML + text;
+          }
+
+    category.appendChild(divName);
+    category.appendChild(divDescrip);
+    category.appendChild(ulNominees);
     //la agrego al div content.
-    document.querySelector('.form.award form .field.content').appendChild(cloneNode);
-    /*let inputName = document.querySelectorAll('.form.award form .field.content .category[nroCategory="'+nroCategory+'"] .attribute.name label input');
-    let newName = inputName.getAttribute("name")+"."+nroCategory;
-    inputName.setAttribute("name",newName);
-    let inputDescrip = document.querySelectorAll('.form.award form .field.content .category .attribute.description label input');
-    let newDescrip = inputDescrip.getAttribute("name")+"."+nroCategory;
-    inputDescrip.setAttribute("name",newDescrip);*/
-    //inserto sus nominados
-      for (var i = 1; i <= input.value; i++) {
-          console.log('insertando '+i+' nominado');
-          let nomList = document.querySelector('.category[nroCategory="'+nroCategory+'"] .attribute.nominees-list');
-          let text = '<li class="nominee"> <div class="name"><label for="nominado.nombre" > <input name="nominado.nombre.'+nroCategory+'.'+i+'" type="text" placeholder="nombre"></label></div><div class="description"><label for="nominado.descripcion" >por<input name="nominado.descripcion"'+nroCategory+'.'+i+' type="text" placeholder="pelicula"></label></div></li>'
-          console.log(text);
-          nomList.innerHTML = nomList.innerHTML+text;
-      }
+    let divContent = document.querySelector('.form.award form .field.content');
+    divContent.appendChild(category);
+    //actualizo el input con el codigo html de categorys (para back()->withInput() en php)
+    let inputContent = document.querySelector('.form.award form input[name="cuerpo"]');
+    inputContent.value = divContent.innerHTML;
   }
 
 };
@@ -183,7 +207,7 @@ Novelties.alterContent = function(accion){
 //------------------------------------------------------------------------------------
 //AJAX funcionalidad: por ahora, no se usa con los forms.
 //------------------------------------------------------------------------------------
-
+/*
 Novelties.createNoveltiesRequest = function(type){
   //CREA solicitud AJAX
   var request = new XMLHttpRequest();
@@ -266,4 +290,4 @@ Novelties.createAwardObjectRequest = function(){
       "type":"award"
     };
     return award;
-}
+}*/
