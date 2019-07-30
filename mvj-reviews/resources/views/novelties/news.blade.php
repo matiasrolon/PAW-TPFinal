@@ -9,19 +9,17 @@
 @endsection
 
 @section('content')
-<p></p>
-<textarea id="texto" name="name" rows="8" cols="80"></textarea>
-<button id="boton" type="button" name="button" > SELECCIONAR TEXTO </button>
-  @foreach ($noticias as $noticia)
-        <div class="">
-          <p>
-
-            <b>{{$noticia['id']}} : {{$noticia['titulo']}}</b>
-            {{$noticia['cuerpo']}}
-            {{$noticia['portada']}}
-            <img src="{{$noticia['portada']}}" alt="">
-          </p>
-          <br>
-        </div>
-  @endforeach
+  <h2> Noticias </h2>
+    <div class="list-news">
+        @foreach ($noticias as $noticia)
+              <div class="news">
+                            <a href="/novelties/news/{{ $noticia['id'] }}">
+                      <p>{{$noticia['fecha']}}</p>
+                      <img class="portada" src="data:image/png;base64,{{$noticia['portada']}}" alt="">
+                      <b>{{$noticia['titulo']}}</b>
+                      <p>{{$noticia['copete']}}</p>
+                                  </a>
+              </div>
+        @endforeach
+    </div>
 @endsection
