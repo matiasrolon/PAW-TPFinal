@@ -6,7 +6,7 @@
 
 body {
   display: contents;
-  background-color: #F6CAAC;
+  background-color: #fbe3c3;
   font-family: 'Pridi', serif;
   margin: auto;
   width: auto;
@@ -50,6 +50,9 @@ body {
   .nav-principal{
       grid-template-columns: 30% 1fr 30%;
       grid-template-areas: "a1 a2 a3";
+      position: sticky;
+      top: 0;
+      z-index: 10;
   }
 
   .menus{
@@ -95,6 +98,10 @@ body {
     grid-template-columns: 1fr 50%;
     grid-template-areas: "a1 a3"
                          "a2 a2";
+    position:-webkit-sticky;
+    position:sticky;
+    top:0;
+    z-index: 10;
   }
 
   .navseccion.icono a{
@@ -112,9 +119,6 @@ body {
     border-radius: 8px;
     grid-area: a2;
     padding: 0% 2% 3% 2%;
-    position:-webkit-sticky; 
-    position:sticky; 
-    top:0;
   }
 
   .no-visible-menu {
@@ -175,7 +179,7 @@ body {
 
   /* Sacar el webkit. usar solo center */
   text-align: -webkit-center;
-  position: relative;
+  /* position: relative; */
   flex: 1 100%;
 }
 
@@ -215,8 +219,8 @@ body {
   }
 
 .resultados-buscador{
-  width: 40.5%;
-  left: 30%;
+  width: 39%;
+  /* left: 30%; */
   text-align: left;
   list-style-position: inside;
   background: darkgrey;
@@ -257,7 +261,7 @@ li.item-resultado:hover {
 }
 
 .resultados-buscador div {
-  width: 400px;
+  width: auto;
   display: table-column;
 }
 
@@ -271,8 +275,8 @@ li.item-resultado:hover {
 }
 
 .resultados-buscador li h4{
-  padding: 2%;
-  margin: 1% 1%;
+  padding: 2px 0px 2px 10px;
+  margin: 1% 0%;
   color: black;
   display: block;
   border-radius: 5px 5px;
@@ -372,7 +376,7 @@ ul.resultados-buscador a {
 }
 
 .resultados-buscador li{
-  width: 100%;
+  width: auto;
 }
 
 .seccion-menu a{

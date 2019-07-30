@@ -15,11 +15,15 @@
 
 @section('content')
      <div class="content">
-        <ul class="generos">
-          @foreach($generos as $genero)
-            <li><div value="{{ $genero['id'] }}" onclick="PeliculaGenero.initialize({{ $genero['id'] }}, 'pelicula', 'container1')"><p>{{ $genero['nombre'] }}</p></div></li>
-          @endforeach
-        </ul>
+       <div class="generos-container">
+          <i class="fas fa-angle-left icon-angle"></i>
+          <ul class="generos">
+            @foreach($generos as $genero)
+              <li><div value="{{ $genero['id'] }}" onclick="PeliculaGenero.initialize({{ $genero['id'] }}, 'pelicula', 'container1')"><p>{{ $genero['nombre'] }}</p></div></li>
+            @endforeach
+          </ul>
+          <i class="fas fa-angle-right icon-angle"></i>
+        </div>
 
         <section id="container1" class="films-populares">
 
