@@ -13,20 +13,35 @@ Novelties.startNovelties = function (contenedorHTML) {
 
     let btnCreateAwards = document.querySelector('.create-options .option.award');
     btnCreateAwards.addEventListener("click",function(){ Novelties.changeNoveltieCreate('award');});
+
   });
 }
 
+//funcion para visualizar un formulario u otro segun donde se haya hecho click
 Novelties.changeNoveltieCreate = function(type){
+//primero achico el menu inicial de create-options
+let createOptions = document.querySelector('.create-options');
+if (createOptions.classList.contains('initial')){
+  createOptions.classList.remove('initial');
+  createOptions.classList.add('secondary');
+}
+
+//Invisiviliza todos los forms
   let forms = document.querySelectorAll('.form');
   forms.forEach(function(f){
     if (!f.classList.contains('no-visible')){
       f.classList.add('no-visible');
     }
   });
+//Para luego visualizar el indicado.
   if (type=="news"){
       let formNews = document.querySelector('.form.news');
       if (formNews.classList.contains('no-visible')){
         formNews.classList.remove('no-visible');
+        let categories = document.querySelectorAll('.category');
+        categories.forEach(function(c){
+            c.classList.add('no-visible');
+        });
       }
   }
 
@@ -35,6 +50,13 @@ Novelties.changeNoveltieCreate = function(type){
     if (formAward.classList.contains('no-visible')){
       formAward.classList.remove('no-visible');
     }
+    //muestro las categorias solo si el que esta visible es el form award
+    let categories = document.querySelectorAll('.category');
+    categories.forEach(function(c){
+        if (c.classList.contains('no-visible')){
+          c.classList.remove('no-visible');
+        }
+    });
   }
 
 }
@@ -155,6 +177,7 @@ Novelties.insertCategoryInContent = function(){
         divDescrip.appendChild(labelDescrip);
         //Field Nominees List
         let ulNominees = document.createElement('ul');
+        ulNominees.innerHTML = "Nominados:";
         ulNominees.classList.add('attribute','nominees-list');
         //inserto sus items nominados
         for (var i = 1; i <= input.value; i++) {
@@ -162,7 +185,16 @@ Novelties.insertCategoryInContent = function(){
               let text = '<li class="nominee"> <div class="name"><label for="nominado.nombre" > <input name="nominado.nombre.'+nroCategory+'.'+i+'" type="text" placeholder="nombre"></label></div><div class="description"><label for="nominado.descripcion" >por<input name="nominado.descripcion.'+nroCategory+'.'+i+'" type="text" placeholder="pelicula"></label></div></li>'
               ulNominees.innerHTML =ulNominees.innerHTML + text;
           }
-
+    //boton para eliminar esa categoria si se desea.
+    let btnQuit = document.createElement('button');
+    btnQuit.innerHTML='X';
+    btnQuit.classList.add('btnQuit');
+    btnQuit.addEventListener("click",function(){
+        category.classList.add('removed');
+        category.addEventListener('transitionend', function() {this.remove();});
+    });
+    //agrega secciones finales.
+    category.appendChild(btnQuit);
     category.appendChild(divName);
     category.appendChild(divDescrip);
     category.appendChild(ulNominees);

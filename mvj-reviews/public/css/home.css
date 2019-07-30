@@ -1,3 +1,4 @@
+
 /*-------- HOME -------- */
 .users-populares{
   /* width: 22%; */
@@ -38,7 +39,7 @@
     height: 600px;
     background-color: #e4d1b7;
   }
-  
+
   .icon-angle {
     display: none;
   }
@@ -76,7 +77,7 @@
   .generos, .ultimas-reviews-container, .ranking-tabla  {
     width: auto;
   }
-  
+
   .generos-container {
     margin: 0%;
     display: flex;
@@ -216,6 +217,7 @@ ul.generos li:hover p::before{
 .generos li:hover{
   background-color: #3140B8;
   color: white;
+  cursor: pointer;
 }
 
 
@@ -240,7 +242,9 @@ ul.generos li:hover p::before{
   margin: auto;
   width: auto;
   overflow: scroll;
+  overflow-x:hidden;
 }
+
 
 .series{
     display: inline-grid;

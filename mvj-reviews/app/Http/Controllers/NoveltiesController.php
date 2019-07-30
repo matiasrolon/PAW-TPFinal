@@ -81,7 +81,7 @@ class NoveltiesController extends Controller
 
       if ($validator->fails()) {
           return redirect()
-                 ->back()
+                 ->route('admin-novelties')
                  ->withInput()
                  ->withErrors($validator);
       }else{

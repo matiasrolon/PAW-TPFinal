@@ -17,9 +17,17 @@
   height: 100%;
 }
 
+.btnQuit{
+  background-color: rgb(242, 130, 115);
+  display: inline-block;
+  width: 5%;
+  float: right;
+}
+
 .forms-novelties{
   display: inline-block;
   width: 70%;
+  margin-left: 17%;
 }
 
 
@@ -28,9 +36,28 @@
   display: inline-block;
   text-align: center;
   width: 100%;
-  height: 100%;
-  vertical-align: middle;
+  height: 80vh;
+  margin-top: 2%;
 }
+
+.create-options.secondary{
+  background-color: rgba(121, 226, 79, 0.7);
+  display: inline-block;
+  text-align: center;
+  width: 100%;
+}
+
+    .create-options.initial .option{
+      background-color: rgba(179, 179, 179, 0.77);
+      border: solid 1px black;
+      border-radius: 10px;
+      display: inline-block;
+      font-size: 80%;
+      height: 50%;
+      margin: 8px;
+      margin-top: 10%;
+      width: 20%;
+    }
 
     .create-options .option{
       background-color: rgba(179, 179, 179, 0.77);
@@ -47,17 +74,13 @@
         cursor: pointer;
     }
 
-.create-options.secondary{
-  background-color: rgba(121, 226, 79, 0.7);
-  display: inline-block;
-  text-align: center;
-  width: 100%;
-}
-
 /*panel para editar noticia / premio*/
 .edit-panel{
-  border-right: solid 1px black;
+  border: solid 1px black;
+  padding: 5px;
+  border-radius: 12px;
   display: inline-block;
+  position: fixed;
   width: 15%;
   vertical-align: top;
   text-align: -webkit-center;
@@ -92,6 +115,11 @@
               width: 25%;
           }
 
+.errorField{
+  display: inline;
+  background-color: rgba(233, 68, 63, 0.9);
+}
+
 .form.news .field.content{
   background-color: white;
   height: 70vh;
@@ -101,6 +129,12 @@
 .form.award .field.content{
   min-height: 60vh;
   overflow:hidden;
+}
+
+.category{
+  border: solid 1px black;
+  padding: 2%;
+  border-radius: 12px;
 }
 
 .category .attribute.name{
@@ -116,3 +150,4 @@
     .nominee .description{
       display: inline;
     }
+ }
