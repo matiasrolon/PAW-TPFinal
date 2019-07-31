@@ -29,7 +29,7 @@ class FilmController extends Controller
     public function searchLocalFilm($filmname){
       $obj = Film::where('titulo', 'like','%' . $filmname .'%')
                    ->select('id','titulo','sinopsis','fecha_estreno','duracion_min','fecha_finalizacion',
-                            'pais','puntaje','categoria', \DB::raw('TO_BASE64(poster) as poster'))
+                            'pais','trailer','puntaje','categoria', \DB::raw('TO_BASE64(poster) as poster'))
                    ->get();
       return $obj;
     }
@@ -307,6 +307,7 @@ class FilmController extends Controller
                   // Reviso si cambiaron los generos
                   $generosActuales = $filmOriginal->genres()->get();
                   $generosEnviados = $request->genero;
+                  // Aca es donde compara string con PK. ARREGLARRRRRRRRRRRRRRRR
                   if ( !$generosActuales->diff($generosEnviados) ) {
                     // Si no son iguales, borro los viejos y agrego los nuevos.
                     $filmOriginal->genres()->delete();
@@ -325,7 +326,8 @@ class FilmController extends Controller
                         //$obra->duracion_min = $request->duracion_min;
                         $obra->duracion_min = $request->duracion_min;
                         $obra->categoria = $request->categoria;
-                        //$obra->fecha_finalizacion = $request->fecha_finalizacion;
+                        $obra->fecha_finalizacion = $request->fecha_finalizacion;
+                        $obra->trailer = $request->trailer;
                         $obra->id_themoviedb = $request->id_themoviedb;
                         $obra->save();
 

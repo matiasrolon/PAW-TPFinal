@@ -15,10 +15,13 @@
                     <div class="detalles-pelicula">
                       <ul>
                         <h2>{{ $film['titulo'] }} </h2>
-                        <li> <strong>Estreno:</strong> {{ $film['fecha_estreno'] }} </li>
-                        <li> <strong>Pais:</strong> {{ $film['pais'] }} </li>
-                        <li> <strong>Sinopsis:</strong> {{ $film['sinopsis'] }} </li>
                         <li> <strong>Categoria:</strong> {{ $film['categoria'] }} </li>
+                        <li> <strong>Sinopsis:</strong> {{ $film['sinopsis'] }} </li>
+                        <li> <strong>Fecha de estreno:</strong> {{ $film['fecha_estreno'] }} </li>
+                        @if ( ($film['fecha_finalizacion']) )
+                          <li> <strong>Fecha de finalizacion:</strong> {{ $film['fecha_finalizacion'] }} </li>
+                        @endif
+                        <li> <strong>Pais:</strong> {{ $film['pais'] }} </li>
                         <li> <strong>Genero:</strong> 
                           @if ( count($generos) > 0 )
                             {{-- Lo mismo que hacer un forEach a mano --}}

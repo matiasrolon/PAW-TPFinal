@@ -41,6 +41,9 @@
 - [ ] **Siete:**
   En admin films, cuando recupera el film de la BD nuestra no trae los generos. Falta hacer un join ahi.
 
+- [ ] **Ocho:**
+  En admin films, al querer modificar una pelicula en nuestra BD da error. Creo que tiene que ver con el chequeo de los generos que agregue.
+
 ## TO-DO (funcional)
 
 ### DB
@@ -107,9 +110,16 @@
 
 ### Views - por orden de importancia
 
+#### Admin Films
+
+- [ ] Decidir campos obligatorios e indicarlos mediante CSS.
+  - [ ] Debe corregirse la validacion del lado del servidor al agregar un film.
+- [ ] Permitir agregar un film sin necesidad de buscarlo en la API.
+  - [ ] Requiere poder subir una foto manualmente.
+
 - [ ] HOME
 - [ ] INFO PELICULA -------> (en esa misma pagina tendra todas sus reviews, paginadas)
-  - [ ] MOSTRAR GENEROS ---> Mostrar los generos de la pelicula.
+  - [x] MOSTRAR GENEROS ---> Mostrar los generos de la pelicula.
   - [ ] HACER REVIEW -----> (Si presiona "Hacer Review" -> form, cuando se envian los datos redirecciona de nuevo a Info pelicula)
   - [ ] VOTAR PELICULA ----> (Te devuelve la misma pagina con un mensaje abajo de las estrellitas que diga 'voto registrado').
   - [ ] VOTAR REVIEW ------> Un icono se pondra rojo o verde, el voto se enviara mediante ajax.

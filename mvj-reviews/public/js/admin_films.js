@@ -25,6 +25,9 @@ AdminFilms.iniciarPagina = function (contenedorHTML) {
               });
             }
 
+            // Oculto la seccion de resutado seleccionado
+            AdminFilms.mostrarResultadoSeleccionado(false);
+
             //Se podria seleccionar acorde a lo que haya filtrado en el select de busqueda. Se deja generico por ahora.
             AdminFilms.enviarRequestSearchFilmsAdmin('API');
             AdminFilms.enviarRequestSearchFilmsAdmin('DB');
@@ -171,13 +174,14 @@ AdminFilms.cargarFuncionalidadABM = function(){
 AdminFilms.getListaGeneros = function() {
   var lista = document.querySelector('.resultado-seleccionado .info .campo .genero');
   lista = lista.getElementsByTagName('li');
-  // console.log('Lista de generos:');
+  console.log('Lista de generos:');
   var resp = Array();
   for (var i=0; i < lista.length; i++) {
     // console.log("item: " + lista[i]);
     // console.log("innerText: " + lista[i].innerText);
     resp[i] = lista[i].innerText;
   }
+  console.log(resp);
   return resp;
 }
 
@@ -194,11 +198,13 @@ AdminFilms.enviarRequestStoreFilm = function(request){
     "sinopsis": document.querySelector(info+'.sinopsis').value,
     "categoria": document.querySelector(info+'.categoria').value,
     "fecha_estreno": document.querySelector(info+'.fecha-estreno').value,
+    "fecha_finalizacion": document.querySelector(info + '.fecha-finalizacion').value,
     "poster": document.querySelector('.resultado-seleccionado .poster img').getAttribute('path'),
     // "genero": document.querySelector(info+'.genero').value,
     "genero": AdminFilms.getListaGeneros(),
     "pais": document.querySelector(info+'.pais').value,
     "duracion_min": document.querySelector(info+'.duracion-min').value,
+    "trailer": document.querySelector(info + '.trailer-url').value,
     // Tomo la id de la variable global.
     "id_themoviedb": idTheMovieDb
   };
@@ -278,8 +284,11 @@ AdminFilms.enviarRequestSearchFilmsAdmin = function (origen) {
     }
     //envio la request
     console.log("se va a enviar a '" + AdminFilms.buscador.value + "' a "+origen);
-    if (origen=='API'){  request.open("GET", "/admin/searchFilms/API/" + AdminFilms.buscador.value, true);
-    }else{ request.open("GET", "/admin/searchFilms/DB/" + AdminFilms.buscador.value, true);}
+    if (origen=='API'){  
+        request.open("GET", "/admin/searchFilms/API/" + AdminFilms.buscador.value, true);
+    } else { 
+        request.open("GET", "/admin/searchFilms/DB/" + AdminFilms.buscador.value, true);
+    }
     request.send();
   }
 }
@@ -333,7 +342,7 @@ AdminFilms.recibirResponseSearchFilmsAdmin = function (response,origen) {
         resultado.classList.add(origen);//para distinguir via CSS las que vienen de API de las que vienen de BD
         //cargo los datos en el cuadro principal de ABM al hacer click sobre la imagen
         resultado.addEventListener("click",function(){
-            AdminFilms.mostrarResultadoSeleccionado();
+            AdminFilms.mostrarResultadoSeleccionado(true);
             AdminFilms.establecerResultadoSeleccionado(value,origen,base64);
         });
         resultado.classList.add(clase_resultado_obtenido);
@@ -344,10 +353,16 @@ AdminFilms.recibirResponseSearchFilmsAdmin = function (response,origen) {
     }  
 }
 
-
-AdminFilms.mostrarResultadoSeleccionado = function() {
+/**
+ * @param $switch si es true lo muestra. Si es false lo oculta.
+ */
+AdminFilms.mostrarResultadoSeleccionado = function($switch) {
   var resultado = document.querySelector('.resultado-seleccionado');
-  resultado.classList.remove('resultado-seleccionado-oculto');
+  if ($switch) {
+    resultado.classList.remove('resultado-seleccionado-oculto');
+  } else {
+    resultado.classList.add('resultado-seleccionado-oculto');
+  }
 }
 
 /**
@@ -369,6 +384,8 @@ AdminFilms.agregarGenero = function(genero) {
     // cruz.style.display = 'none';
 
     li.innerHTML = genero; // Deberia ser un string
+    // Agrego clases que se usan para identificar los li en AdminFilms.getListaGeneros()
+    // li.classList.add('.resultado-seleccionado .info .campo .genero');
     li.appendChild(cruz);
     lista.appendChild(li);
   }
@@ -401,20 +418,31 @@ AdminFilms.establecerResultadoSeleccionado = function(resultado,origen,base64){
 
         var textarea = document.querySelector(info + ' .titulo');
         textarea.innerHTML = resultado['titulo'];
-        var textarea = document.querySelector(info + ' .sinopsis');
+
+        textarea = document.querySelector(info + ' .sinopsis');
         textarea.innerHTML = resultado['sinopsis'];
-        var textarea = document.querySelector(info + ' .categoria');
+
+        textarea = document.querySelector(info + ' .categoria');
         textarea.innerHTML = resultado['categoria'];
+
         // var textarea = document.querySelector(info + ' .pais');
         // textarea.innerHTML = resultado['pais'];
         var select = document.querySelector(info + ' .pais');
         select.value = resultado['pais'];
-        var textarea = document.querySelector(info + ' .fecha-estreno');
-        textarea.innerHTML = resultado['fecha_estreno'];
-        var textarea = document.querySelector(info + ' .duracion-min');
-          textarea.innerHTML = resultado['duracion_min'];
-        var textarea = document.querySelector(info + ' .genero');
 
+        textarea = document.querySelector(info + ' .fecha-estreno');
+        textarea.innerHTML = resultado['fecha_estreno'];
+
+        textarea = document.querySelector(info + ' .fecha-finalizacion');
+        textarea.innerHTML = resultado['fecha_finalizacion'];
+
+        textarea = document.querySelector(info + ' .duracion-min');
+        textarea.innerHTML = resultado['duracion_min'];
+
+        if (resultado['trailer'] != undefined) {
+          textarea = document.querySelector(info + ' .trailer-url');
+          textarea.innerHTML = resultado['trailer'];
+        }
 
         // Testingggggg
         // Carga la lista UL con los generos

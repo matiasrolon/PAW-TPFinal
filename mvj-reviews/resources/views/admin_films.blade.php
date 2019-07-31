@@ -63,6 +63,11 @@
                   </div>
 
                   <div class="campo">
+                      <label for="">Fecha de finalizacion:</label>
+                          <textarea class="editable fecha-finalizacion"  name="name" rows=1 disabled></textarea>
+                  </div>
+
+                  <div class="campo">
                       <label for="" >Genero:</label>
                       <ul class="editable genero" disabled>
                       </ul>
@@ -86,8 +91,13 @@
                   </div>
 
                   <div class="campo">
-                      <label for="">Duracion:</label>
+                      <label for="">Duracion (en minutos):</label>
                           <textarea class="editable duracion-min"  name="name" rows=1 disabled></textarea>
+                  </div>
+
+                  <div class="campo">
+                      <label for="">Trailer URL:</label>
+                          <textarea class="editable trailer-url"  name="name" rows=2 disabled></textarea>
                   </div>
 
                   <div class="opciones">
