@@ -61,7 +61,8 @@
                                   <img class="poster" src="data:image/png;base64,{{$review['poster']}}">
                                   <div class="info-review-user">
                                     <label class="info-review" for=""> <b> Review: </b> {{ $review['titulo'] }}</label>
-                                    <label class="info-review" for=""> <b> Puntos: </b> {{ $review['puntaje_total'] }} </label>
+                                    <!-- <label class="info-review" for=""> <b> Puntos: </b> {{ $review['puntaje_total'] }} </label> -->
+                                    <label class="info-review" for=""> <b> Likes: </b> {{ $review['puntaje_total'] }} </label>
                                     <!-- <label class="info-review" for=""> <b> Pelicula: </b> {{ $review['pelicula'] }}</label> -->
                                   </div>
                                 </a>
