@@ -80,9 +80,5 @@ class GenreTableSeeder extends Seeder
       $genre = new Genre();
       $genre->nombre = 'Western';
       $genre->save();
-
-      $genre = new Genre();
-      $genre->nombre = 'Familia';
-      $genre->save();
     }
 }
