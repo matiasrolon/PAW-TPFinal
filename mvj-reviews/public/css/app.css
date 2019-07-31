@@ -66,9 +66,9 @@ body {
   .nav-principal{
       grid-template-columns: 30% 1fr 30%;
       grid-template-areas: "a1 a2 a3";
-      position: sticky;
-      top: 0;
-      z-index: 10;
+/*       position: sticky; */
+/*       top: 0; */
+/*       z-index: 10; */
   }
 
   .menus{
@@ -118,64 +118,12 @@ body {
   .login-card-header {
     margin-left: 30%;
   }
+  
+  .resultados-buscador{
+     width: 39%;|
+  }
 
 }
-
-
-  .login-card{
-    background-color: #cfcccc;
-    border-radius: 2px;
-    border: 2px solid black;
-    display: block;
-    flex: 1 100%;
-/*     width: 20%; */
-
-    align-items: stretch;
-    flex-flow: row wrap;
-    justify-content: space-around;
-  }
-
-  .login-card  div{
-    padding: 2% 1%;
-    height: auto;
-    flex: 1 100%;
-/*     display: flex; */
-    padding-right: 3%;
-    align-items: flex-end;
-    align-content: start;
-  }
-
-.login-btn-cnt {
-    padding: 0;
-    margin: 0;
-    list-style: none;
-    height: 20px;
-
-    -ms-box-orient: horizontal;
-    display: -webkit-box;
-    display: -moz-box;
-    display: -ms-flexbox;
-    display: -moz-flex;
-    display: -webkit-flex;
-    display: flex;
-
-    -webkit-justify-content: space-around;
-    justify-content: space-around;
-    -webkit-flex-flow: row wrap;
-    flex-flow: row wrap;
-    -webkit-align-items: stretch;
-    align-items: stretch;
-  }
-
-  .login-btn-cnt * {
-    flex: 1 100%;
-  }
-
-
-  .login-card input {
-    border-radius: 50px;
-  }
-
 
 @media screen and (max-width: 700px) {
 
@@ -190,10 +138,10 @@ body {
     grid-template-columns: 1fr 50%;
     grid-template-areas: "a1 a3"
                          "a2 a2";
-    position:-webkit-sticky;
+    /*     position:-webkit-sticky;
     position:sticky;
     top:0;
-    z-index: 10;
+    z-index: 10; */
   }
 
   .navseccion.icono a{
@@ -228,8 +176,8 @@ body {
     flex: 1 100%;
     background: #6498e8;
     z-index: 9;
-    top: 19%;
-    position: sticky;
+/*     top: 19%; */
+/*     position: sticky; */
   }
 
   .menus{
@@ -265,9 +213,14 @@ body {
 
   .submenu {
     width: 100vw;
-    position:absolute;
+/*     display: flex; */
+    /* position:absolute; */
   }
-
+  .submenu li{
+    flex: 1 100%;
+    flex-flow: row wrap;
+    align-items: stretch;
+  }
   .opciones-login{
     width: 30%;
   }
@@ -293,7 +246,16 @@ body {
   .login-card-header {
     margin-left: 25%;
   }
+  
+  .resultados-buscador{
+    margin-top: 10%;
+  }
 
+  .header-menu-mvj{
+    position:sticky;
+    top:0;
+    z-index: 10;
+  }
 }
 
 #app{
@@ -358,12 +320,9 @@ body {
   }
 
 .resultados-buscador{
-  width: 39%;
-  /* left: 30%; */
   text-align: left;
   list-style-position: inside;
   background: darkgrey;
-  margin-top: 0%;
   margin-bottom: 0%;
   position: absolute;
   list-style: none;
@@ -485,8 +444,8 @@ li.item-resultado:hover {
   background-color: rgb(201, 218, 244);
   border-radius: 2px 2px;
   list-style: none;
-  position: absolute;
-  z-index: 0;
+  /* position: absolute; */
+  z-index: 9;
   padding: 0%;
   /* width: 100%; */
 }
@@ -562,3 +521,59 @@ img.logo-st {
   /* width: 9%; */
   display: inline-block;
 }
+
+
+
+  .login-card{
+    background-color: #cfcccc;
+    border-radius: 2px;
+    border: 2px solid black;
+    display: block;
+    flex: 1 100%;
+/*     width: 20%; */
+
+    align-items: stretch;
+    flex-flow: row wrap;
+    justify-content: space-around;
+  }
+
+  .login-card  div{
+    padding: 2% 1%;
+    height: auto;
+    flex: 1 100%;
+/*     display: flex; */
+    padding-right: 3%;
+    align-items: flex-end;
+    align-content: start;
+  }
+
+.login-btn-cnt {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    height: 20px;
+
+    -ms-box-orient: horizontal;
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -moz-flex;
+    display: -webkit-flex;
+    display: flex;
+
+    -webkit-justify-content: space-around;
+    justify-content: space-around;
+    -webkit-flex-flow: row wrap;
+    flex-flow: row wrap;
+    -webkit-align-items: stretch;
+    align-items: stretch;
+  }
+
+  .login-btn-cnt * {
+    flex: 1 100%;
+  }
+
+
+  .login-card input {
+    border-radius: 50px;
+  }
