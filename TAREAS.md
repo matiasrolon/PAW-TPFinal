@@ -44,6 +44,12 @@
 - [ ] **Ocho:**
   En admin films, al querer modificar una pelicula en nuestra BD da error. Creo que tiene que ver con el chequeo de los generos que agregue.
 
+- [ ] **Nueve:**
+  - El usuario se puede dar "autolike" y/o "autodislike" en su review.
+
+- [ ] **Diez:**
+  - En admin films, los carteles "se actualizo el film con exito" y "error del servidor" se acumulan uno debajo de otro. Deberia aparecer uno solo
+
 ## TO-DO (funcional)
 
 ### DB
@@ -124,8 +130,13 @@
   - [ ] VOTAR PELICULA ----> (Te devuelve la misma pagina con un mensaje abajo de las estrellitas que diga 'voto registrado').
   - [ ] VOTAR REVIEW ------> Un icono se pondra rojo o verde, el voto se enviara mediante ajax.
 - [ ] BUSQUEDA PELICULAS -------> (resultados paginados ---> redirecciona a la INFO PELICULA que se abra)
+
+#### Perfil de usuario
+
+- [ ] Mostrar la cantidad de reviews que hizo el usuario
 - [ ] PERFIL PUBLICO DE USUARIO -----> (Si el perfil visto coincide con el usuario logeado -> mostrar boton para EDITAR la info)
   - [ ] EDITAR DATOS PERFIL ----> (Cuando se presione EDITAR, a traves de javascript los divs de datos se reemplazan por inputs -> redirecciona al mismo perfil)  
+
 - [ ] RANKING PELICULAS ----> (Solo mostrar resultado de la query, para agregar funcionalidad cada tupla puede direccionar a la Info pelicula)
 - [ ] RANKING USUARIOS ----> (Solo mostrar resultado de la query, para agregar funcionalidad cada tupla puede direccionar al perfil publico de usuario).
 - [ ] ABM PELICULA (para admins) ---> Forms.

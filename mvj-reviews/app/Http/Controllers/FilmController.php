@@ -13,6 +13,7 @@ use App\Models\PendentSearch;
 use GuzzleHttp\Client;
 use function GuzzleHttp\json_decode;
 use Illuminate\Validation\Validator;
+use Illuminate\Support\Collection;
 
 use Storage;
 
@@ -302,18 +303,28 @@ class FilmController extends Controller
                   $filmOriginal->categoria = $request->categoria;
                   //$obra->fecha_finalizacion = $request->fecha_finalizacion;
                   $filmOriginal->save();
+                  
+                  // *** Reviso si cambiaron los generos ***
 
-                  // QUEDO SIN PROBARRRRRRRRRRRRRRRRRRRRRRRRRRRRRR
-                  // Reviso si cambiaron los generos
-                  $generosActuales = $filmOriginal->genres()->get();
-                  $generosEnviados = $request->genero;
-                  // Aca es donde compara string con PK. ARREGLARRRRRRRRRRRRRRRR
-                  if ( !$generosActuales->diff($generosEnviados) ) {
-                    // Si no son iguales, borro los viejos y agrego los nuevos.
-                    $filmOriginal->genres()->delete();
-                    $filmOriginal->genres()->attach($generosEnviados);
+                  $generosActuales = $filmOriginal->genres()->select('nombre')->get();
+                  // Paso el array recibido a un Tipo Coleccion.
+                  $generosEnviados = Genre::all()->whereIn('nombre',$request->genero);
+
+                  // Quito los generos que ya no estan (Actuales - Nuevos(todos))
+                  $genABorrar = $generosActuales->diff($generosEnviados);
+                  if ($genABorrar) {
+                    // $filmOriginal->genres()->whereIn('genre_id',$genABorrar)->delete();
+                    // delete() es para borrar la tupla de la tabla genero
+                    // detach() es para borrar la relacion en la tabla intermedia.
+                    $filmOriginal->genres()->whereIn('genre_id',$genABorrar)->detach(); 
                   }
 
+                  // Agrego los generos nuevos (Nuevos(Todos) - Acutales)
+                  $genAAgregar = $generosEnviados->diff($generosActuales);
+                  if ($genAAgregar) {
+                    $filmOriginal->genres()->attach($genAAgregar);
+                  }
+                  
                   $request->estado ='OK';
                   $request->mensaje = 'Se actualizó el film con exito.';
                 }else{
