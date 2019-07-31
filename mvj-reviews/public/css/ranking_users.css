@@ -1,25 +1,19 @@
 #content {
-  margin: 15px;
+  margin: 3%;
 }
 
-
-.tabla{
-  padding: 5px 5px;
-  border-radius: 5px 5px;
-  border: solid 1px white;
-  width: 100%;
-  background: bisque;
-}
+ 
+.tabla{/* padding: 5px 5px; */border-radius: 5px 5px;border: solid 1px white;width: 100%;/* background: bisque; */overflow: scroll;}
 
 thead{
   padding: 0px 0px;
   margin: 0px;
   text-align: left;
-  text-transform: uppercase;
+/*   text-transform: uppercase; */
 }
 
 td, th {
-  padding: 5px 5px;
+  padding: 1%;
   margin: 0px;
-  width: 50px;
+  /* width: 50px; */
 }
