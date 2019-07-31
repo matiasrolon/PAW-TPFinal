@@ -114,6 +114,15 @@
   - [ ] Buscar Novedad mientras Scrolling (busca de a ~50)
   - [ ] Buscar Novedad ultimas novedades.
 
+#### Film Controller
+
+- [ ] Validacion en metodo store()
+- [ ] Cambiar el campo 'trailer' por 'trailer_url'.
+  - [ ] Cambiarlo tambien en admin_films.js
+  - [ ] Cambiarlo tambien en el Models\Film.php
+  - [ ] Cambiarlo tambien en Database\Migrations\Create_table_film
+- [ ] Actualizacion en metodo update()
+
 ### Views - por orden de importancia
 
 #### Admin Films
@@ -122,6 +131,9 @@
   - [ ] Debe corregirse la validacion del lado del servidor al agregar un film.
 - [ ] Permitir agregar un film sin necesidad de buscarlo en la API.
   - [ ] Requiere poder subir una foto manualmente.
+- [ ] El boton GUARDAR debe chequear que los campos requeridos esten completos.
+- [ ] El formulario no esta puesto como un formulario. Hay que reconstruirlo
+  - [ ] Por eso falla la validacion en FilmController@store
 
 - [ ] HOME
 - [ ] INFO PELICULA -------> (en esa misma pagina tendra todas sus reviews, paginadas)

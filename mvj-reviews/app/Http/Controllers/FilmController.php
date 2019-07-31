@@ -12,7 +12,11 @@ use App\Models\Score_Film;
 use App\Models\PendentSearch;
 use GuzzleHttp\Client;
 use function GuzzleHttp\json_decode;
-use Illuminate\Validation\Validator;
+// use Illuminate\Validation\Validator;
+// Este es el que esta en app/config/app.php
+use Illuminate\Support\Facades\Validator;
+// use \Validator;
+use Illuminate\Validation\Rule;
 use Illuminate\Support\Collection;
 
 use Storage;
@@ -260,6 +264,13 @@ class FilmController extends Controller
         return response()->json($filmsWithGenre);
     }
 
+    /**
+     * Metodo recomendado de laravel para actualizar
+     *  URL: https://laracasts.com/series/laravel-from-scratch-2018/episodes/12
+     */
+    public function update() {
+
+    }
 
 
     /**
@@ -274,21 +285,24 @@ class FilmController extends Controller
     public function store(){
         $request = json_decode($_POST['objeto']);
         //Validacion a la hora de crear un nuevo film. VALIDATOR TIRA ERROR, CORREGIR
-            /*$validator = Validator::make($request, [
-                'titulo' => 'required|max:150',
-                'fecha_estreno' => 'date',
-                'sinopsis' => 'required|max:500',
+        /*
+            $validator = Validator::make($request, [
+                'titulo' => 'required|max:100',
+                'fecha_estreno' => 'required|date',
+                'sinopsis' => 'required|max:1000',
                 'pais' => 'max:30',
-                'duracion_min' => 'regex:/[0-9]+/',
-                'categoria' => 'regex:/[0-9]{4}/',
-                'fecha_finalizacion' => 'date'
-            ]);*/
+                'duracion_min' => 'numeric|min:1|max:3600',
+                'categoria' => ['required', Rule::in(Film::$categorias)],
+                'fecha_finalizacion' => 'date',
+                'trailer' =>'max:300'
+            ]);
 
-            /*if ($validator->fails()) {
+            if ($validator->fails()) {
               $error = $validator->messages()->toJson();
               $request->estado ='FAILED';
               $request->mensaje = $error;
-            }else{*/
+            }else{
+              */
 
                 //Si es un film de la API, contendra ID=-1;         ??????
                 $filmOriginal = Film::where('id',$request->id)->first();
@@ -301,7 +315,16 @@ class FilmController extends Controller
                   // $filmOriginal->poster = $request->poster; //sin el file_get_contents porque ya esta en base64
                   $filmOriginal->duracion_min = $request->duracion_min;
                   $filmOriginal->categoria = $request->categoria;
-                  //$obra->fecha_finalizacion = $request->fecha_finalizacion;
+                  /*
+                  $asd =(". EMPTY: " . empty($request->fecha_finalizacion));
+                  $asd .=(". ISSET: " . isset($request->fecha_finalizacion));
+                  $asd .=(". =='': " . ($request->fecha_finalizacion == ''));
+                  return $asd;
+                  */
+                  if (!empty($request->fecha_finalizacion)) {
+                    // $filmOriginal->fecha_finalizacion = $request->fecha_finalizacion;
+                  }
+                  // $filmOriginal->trailer = $request->trailer;
                   $filmOriginal->save();
                   
                   // *** Reviso si cambiaron los generos ***
@@ -324,7 +347,7 @@ class FilmController extends Controller
                   if ($genAAgregar) {
                     $filmOriginal->genres()->attach($genAAgregar);
                   }
-                  
+
                   $request->estado ='OK';
                   $request->mensaje = 'Se actualizó el film con exito.';
                 }else{
@@ -337,7 +360,17 @@ class FilmController extends Controller
                         //$obra->duracion_min = $request->duracion_min;
                         $obra->duracion_min = $request->duracion_min;
                         $obra->categoria = $request->categoria;
-                        $obra->fecha_finalizacion = $request->fecha_finalizacion;
+
+                        $asd =(". EMPTY: " . empty($request->fecha_finalizacion));
+                  $asd .=(". ISSET: " . isset($request->fecha_finalizacion));
+                  $asd .=(". =='': " . ($request->fecha_finalizacion == ''));
+                  $asd .=(". FECHA ESTRENO: " . ($request->fecha_estreno));
+                  $asd .=(". FECHA FINALIZACION: " . ($request->fecha_finalizacion));
+                  // return $asd;
+
+                        if (!empty($obra->fecha_finalizacion)) {
+                          // $obra->fecha_finalizacion = $request->fecha_finalizacion;
+                        }
                         $obra->trailer = $request->trailer;
                         $obra->id_themoviedb = $request->id_themoviedb;
                         $obra->save();
@@ -357,7 +390,7 @@ class FilmController extends Controller
                         $request->estado ='OK';
                         $request->mensaje = 'Se guardo el film con exito.';
                 }//end IF id!=-1
-        //    }//end IF validator
+          //  } // end IF validator
       return response()->json($request);
     }//end store film
 

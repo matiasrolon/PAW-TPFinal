@@ -142,9 +142,9 @@ class ApiController extends Controller
             // Categoria
             if (isset($filmAPI['media_type'])) {
                 if ($filmAPI['media_type'] == 'movie') { // Pelicula
-                    $film['categoria'] = 'pelicula';
+                    $film['categoria'] = Film::PELICULA;
                 } elseif ($filmAPI['media_type'] == 'tv') { // Serie
-                    $film['categoria'] = 'serie';
+                    $film['categoria'] = Film::SERIE;
                 }
             } else {
                 $film['categoria'] = '';

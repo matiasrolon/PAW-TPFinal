@@ -6,6 +6,12 @@ use Illuminate\Database\Eloquent\Model;
 
 class Film extends Model
 {
+    // No tocar
+    const SERIE = 'Serie';
+    const PELICULA = 'Pelicula';
+    const CORTOMETRAJE = 'Cortometraje';
+    public static $categorias = [self::SERIE, self::PELICULA, self::CORTOMETRAJE];
+
     protected $table = 'film';
 
     protected $fillable = ['titulo','fecha_estreno','pais','sinopsis','duracion_min',
