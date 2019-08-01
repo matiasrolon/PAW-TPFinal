@@ -105,10 +105,12 @@ class FilmController extends Controller
         $film = Film::find($obj->film_id);
         if ((($obj->puntaje)>10) || (($obj->puntaje)<0)){
           $obj->estado = "FAILED";
+          $obj->tipoError = "rango_puntaje";
           $obj->mensaje = "El puntaje debe ser entre 1 y 10.";
         }else{
               if ($user==null){ //si no esta logeado -> no inserto nada en Score_Film
                 $obj->estado = "FAILED";
+                $obj->tipoError = "sesion_usuario";
                 $obj->mensaje = "Debes iniciar sesion primero.";
               }else{ // si esta logeado
                 $score_film = Score_Film::where('film_id',$film->id)
@@ -326,7 +328,7 @@ class FilmController extends Controller
                   }
                   // $filmOriginal->trailer = $request->trailer;
                   $filmOriginal->save();
-                  
+
                   // *** Reviso si cambiaron los generos ***
 
                   $generosActuales = $filmOriginal->genres()->select('nombre')->get();
@@ -339,7 +341,7 @@ class FilmController extends Controller
                     // $filmOriginal->genres()->whereIn('genre_id',$genABorrar)->delete();
                     // delete() es para borrar la tupla de la tabla genero
                     // detach() es para borrar la relacion en la tabla intermedia.
-                    $filmOriginal->genres()->whereIn('genre_id',$genABorrar)->detach(); 
+                    $filmOriginal->genres()->whereIn('genre_id',$genABorrar)->detach();
                   }
 
                   // Agrego los generos nuevos (Nuevos(Todos) - Acutales)
