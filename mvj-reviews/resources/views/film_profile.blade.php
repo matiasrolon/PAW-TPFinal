@@ -9,6 +9,13 @@
 @endsection
 
 @section('content')
+    @isset ($reviewIni)
+    <div class="">
+    <p>prueba de review inicial</p>
+    <p>{{ $reviewIni["titulo"] }}</p>
+      <p>{{ $reviewIni["descripcion"] }}</p>
+      </div>
+    @endisset
             <div id="page_info" class="content" film="{{ $film['id'] }}" user="@guest{{ -1 }}@else{{ Auth::user()->id }}@endguest">
                 <section class="info-film">
                     <img class="poster" src="data:image/png;base64,{{$film['poster']}}">

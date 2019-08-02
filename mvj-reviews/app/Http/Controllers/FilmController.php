@@ -84,17 +84,22 @@ class FilmController extends Controller
       return view('ranking-films',compact('films'));
     }
 
-    public function profile($film_id){
+//perfil de film
+    public function profile($film_id,$review_id=null){
+      $reviewIni = null;
       $film = Film::where('id','=',$film_id)->first();
       $film->poster = base64_encode($film->poster);
+      if ($review_id!=null){
+        $reviewIni = Review::where('id','=',$review_id)->first();
+      }
       $reviews = Review::where('film_id','=',$film_id)
                          ->join('users','review.user_id','=','users.id')
                          ->select('review.*','users.username')
                          ->get();
-  //var_dump($film->titulo);
-     //return $film->titulo;
       $generos = $film->genres()->get();
-      return view('film_profile',compact('film','reviews', 'generos'));
+
+        return view('film_profile',compact('film','reviews', 'generos','reviewIni'));
+
     }
 
 
