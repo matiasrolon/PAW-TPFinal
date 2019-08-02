@@ -9,6 +9,13 @@
 @endsection
 
 @section('content')
+    @isset ($reviewIni)
+    <div class="">
+    <p>prueba de review inicial</p>
+    <p>{{ $reviewIni["titulo"] }}</p>
+      <p>{{ $reviewIni["descripcion"] }}</p>
+      </div>
+    @endisset
             <div id="page_info" class="content" film="{{ $film['id'] }}" user="@guest{{ -1 }}@else{{ Auth::user()->id }}@endguest">
                 <section class="info-film">
                     <img class="poster" src="data:image/png;base64,{{$film['poster']}}">
@@ -22,7 +29,7 @@
                           <li> <strong>Fecha de finalizacion:</strong> {{ $film['fecha_finalizacion'] }} </li>
                         @endif
                         <li> <strong>Pais:</strong> {{ $film['pais'] }} </li>
-                        <li> <strong>Genero:</strong> 
+                        <li> <strong>Genero:</strong>
                           @if ( count($generos) > 0 )
                             {{-- Lo mismo que hacer un forEach a mano --}}
                             {{ $generos->pluck('nombre')->implode(', ') }}
@@ -38,13 +45,19 @@
 
                 <section class="opciones-film">
                       <div class="acciones">
-                          <!-- QUITAR ESTA PARTE, HACERLA CON JAVASCRIPT -->
-                          <!--para pruebas con AJAX por ahora el puntaje sera mandado mediante un input comun-->
-
-                            <input id="puntajeFilm" type="number" name="puntos" min=0 max=10 value="" placeholder="">
-                            <button id="enviarPuntaje" type="button" name="button"> Puntuar {{ $film['categoria'] }}</button>
+                            <div class="iconos-puntaje">
+                            	<div class="estrella"  data-value="1" >&#9733; <p>1</p></div>
+                            	<div class="estrella"  data-value="2" >&#9733;<p>2</p></div>
+                            	<div class="estrella"  data-value="3" >&#9733;<p>3</p></div>
+                            	<div class="estrella"  data-value="4" >&#9733;<p>4</p></div>
+                            	<div class="estrella"  data-value="5" >&#9733;<p>5</p></div>
+                              <div class="estrella"  data-value="6" >&#9733;<p>6</p></div>
+                              <div class="estrella"  data-value="7" >&#9733;<p>7</p></div>
+                              <div class="estrella"  data-value="8" >&#9733;<p>8</p></div>
+                              <div class="estrella"  data-value="9" >&#9733;<p>9</p></div>
+                              <div class="estrella"  data-value="10" >&#9733;<p>10</p></div>
+                            </div>
                             <label class="info-puntaje"> </label>
-                          <!-- ___________________________________________________________________________   -->
                       </div><!-- fin div acciones-film -->
 
                       <div class="container reviews-film-container">

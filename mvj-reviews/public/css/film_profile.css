@@ -1,9 +1,20 @@
 .no-visible{
   display: none;
+  transition: all 0.5s ease-out;
+  transform: scale(0,0);
+}
+.desaparece{
+    transition: all 0.5s ease-out;
+    transform: scale(0,0);
 }
 
 .opcion{
   display: none;
+}
+
+a{
+  color: black;
+  text-decoration: none;
 }
 
 .opcion.elegida{
@@ -22,7 +33,7 @@
 }
 
 .acciones{
-  width: 200px;
+  width: 250px;
   margin-left: 5%;
   position: relative;
 }
@@ -39,10 +50,10 @@
 }
 
 .poster{
-  width: 200px;
+  width: 220px;
   height: 300px;
   float: left;
-  margin-left: 5%;
+  margin-left: 6%;
 }
 
 div.detalles-pelicula ul{
@@ -51,8 +62,7 @@ div.detalles-pelicula ul{
 }
 
 div.detalles-pelicula{
-  margin-left: 5%;
-  margin-right: 5%;
+  margin-left: 7%;
   background: #e0e0e0;
   border-radius: 5px 5px;
   /* padding: 1% 1% 1% 5%; */
@@ -94,4 +104,103 @@ input.titulo-review {
   display: flex;
   height: 400px;
   height:;
+}
+
+.info-puntaje{
+  text-align: center;
+  display: inline-block;
+  border-radius: 10px;
+  padding: 2%;
+  width: 85%;
+}
+
+.info-puntaje.ok{
+  background-color: rgb(34, 181, 26);
+  border: solid 1px black;
+  transition: all 0.5s ease-out;
+}
+
+.info-puntaje.error{
+  background-color: rgb(255, 60, 60);
+  border: solid 1px black;
+  transition: all 0.5s ease-out;
+}
+
+.iconos-puntaje {
+    display: inline-block;
+    width: 230px;
+    margin-bottom: 5%;
+    border: ridge 1px grey;
+    border-radius: 10px;
+    padding-bottom: 3%;
+}
+.iconos-puntaje .estrella {
+	text-decoration: none;
+	display: inline-block;
+	font-size: 32px;
+	font-size: 3rem;
+	color: white;
+	-webkit-text-stroke: 2px black;
+	/* margin-top: 1%; */
+	/* margin-bottom: 0%; */
+	padding: %;
+	display: inline-block;
+	height: 9vh;
+}
+.iconos-puntaje > .estrella:hover ~ .estrella {
+	color: white;
+}
+
+.iconos-puntaje:hover .estrella{
+  color: #ff9c06;
+  cursor:pointer;
+}
+
+.estrella p{
+  display: inline;
+  font-size: 14px;
+  font-family: none;
+  color: black;
+  position: absolute;
+}
+.estrella[data-value="1"] p{
+  left: 20px;
+  top: 17px;
+}
+.estrella[data-value="2"] p{
+  left: 65px;
+  top: 17px;
+}
+.estrella[data-value="3"] p{
+  left: 111px;
+  top: 17px;
+}
+.estrella[data-value="4"] p{
+  left: 156px;
+  top: 17px;
+}
+.estrella[data-value="5"] p{
+  left: 202px;
+  top: 17px;
+}
+.estrella[data-value="6"] p{
+  left: 18px;
+  top: 78px;
+}
+.estrella[data-value="7"] p{
+  left: 65px;
+  top:  78px;
+}
+.estrella[data-value="8"] p{
+  left: 112px;
+  top:  78px;
+}
+.estrella[data-value="9"] p{
+  left: 157px;
+  top:  78px;
+}
+.estrella[data-value="10"] p{
+  left: 201px;
+  top:  80px;
+  font-size: 12px;
 }
