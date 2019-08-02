@@ -238,8 +238,9 @@ class FilmController extends Controller
       // Hago una lista de los paises disponibles
       $paises = $this->getCountries();
       $generos = $this->getGenres();
+      $categorias = Film::$categorias;
 
-      return view('admin_films',compact('searches', 'paises', 'generos'));
+      return view('admin_films',compact('searches', 'paises', 'generos', 'categorias'));
     }
 
     /**
@@ -282,116 +283,97 @@ class FilmController extends Controller
      * - Cambiar el campo 'trailer' por 'trailer_url'.
      *      'cant_temporadas' int
      */
-    public function store(){
-        $request = json_decode($_POST['objeto']);
-        //Validacion a la hora de crear un nuevo film. VALIDATOR TIRA ERROR, CORREGIR
-        /*
-            $validator = Validator::make($request, [
-                'titulo' => 'required|max:100',
-                'fecha_estreno' => 'required|date',
-                'sinopsis' => 'required|max:1000',
-                'pais' => 'max:30',
-                'duracion_min' => 'numeric|min:1|max:3600',
-                'categoria' => ['required', Rule::in(Film::$categorias)],
-                'fecha_finalizacion' => 'date',
-                'trailer' =>'max:300'
-            ]);
+    public function store(Request $request){
 
-            if ($validator->fails()) {
-              $error = $validator->messages()->toJson();
-              $request->estado ='FAILED';
-              $request->mensaje = $error;
-            }else{
-              */
+      // En el HTTP request debe ponerse 'Accept: application/json' en el header
+      // Para que te devuelva un JSON y un HTTP 422 si el validador falla
+      $request->validate([
+        'titulo' => 'required|max:100',
+        'fecha_estreno' => 'required|date',
+        'sinopsis' => 'required|max:1000',
+        'pais' => 'max:30',
+        'duracion_min' => 'nullable|numeric|min:1|max:3600', // Es necesario el nullable
+        'categoria' => ['required', Rule::in(Film::$categorias)],
+        'fecha_finalizacion' => 'nullable|date', // Aca tambien
+        'trailer' =>'max:300'
+      ]);
+      
+      // Los datos pasan la validacipn
+      // Si es un film de la API, contendra ID=-1;         ??????
+      $filmOriginal = Film::where('id',$request->id)->first();
+      if ($filmOriginal!=null){
+        $filmOriginal->titulo = $request->titulo;
+        $filmOriginal->fecha_estreno = $request->fecha_estreno;
+        $filmOriginal->sinopsis = $request->sinopsis;
+        $filmOriginal->pais = $request->pais;
+        // Lo deshabilito temporalmente, ya que no puedo actualizar el poster
+        // $filmOriginal->poster = $request->poster; //sin el file_get_contents porque ya esta en base64
+        $filmOriginal->duracion_min = $request->duracion_min;
+        $filmOriginal->categoria = $request->categoria;
+      
+        if (!empty($request->fecha_finalizacion)) {
+          $filmOriginal->fecha_finalizacion = $request->fecha_finalizacion;
+        }
+        $filmOriginal->trailer = $request->trailer;
+        $filmOriginal->save();
+        
+        // *** Reviso si cambiaron los generos ***
+        $generosActuales = $filmOriginal->genres()->select('nombre')->get();
+        // Paso el array recibido a un Tipo Coleccion.
+        $generosEnviados = Genre::all()->whereIn('nombre',$request->genero);
 
-                //Si es un film de la API, contendra ID=-1;         ??????
-                $filmOriginal = Film::where('id',$request->id)->first();
-                if ($filmOriginal!=null){
-                  $filmOriginal->titulo = $request->titulo;
-                  $filmOriginal->fecha_estreno = $request->fecha_estreno;
-                  $filmOriginal->sinopsis = $request->sinopsis;
-                  $filmOriginal->pais = $request->pais;
-                  // Lo deshabilito temporalmente
-                  // $filmOriginal->poster = $request->poster; //sin el file_get_contents porque ya esta en base64
-                  $filmOriginal->duracion_min = $request->duracion_min;
-                  $filmOriginal->categoria = $request->categoria;
-                  /*
-                  $asd =(". EMPTY: " . empty($request->fecha_finalizacion));
-                  $asd .=(". ISSET: " . isset($request->fecha_finalizacion));
-                  $asd .=(". =='': " . ($request->fecha_finalizacion == ''));
-                  return $asd;
-                  */
-                  if (!empty($request->fecha_finalizacion)) {
-                    // $filmOriginal->fecha_finalizacion = $request->fecha_finalizacion;
-                  }
-                  // $filmOriginal->trailer = $request->trailer;
-                  $filmOriginal->save();
-                  
-                  // *** Reviso si cambiaron los generos ***
+        // Quito los generos que ya no estan (Actuales - Nuevos(todos))
+        $genABorrar = $generosActuales->diff($generosEnviados);
+        if ($genABorrar) {
+          // $filmOriginal->genres()->whereIn('genre_id',$genABorrar)->delete();
+          // delete() es para borrar la tupla de la tabla genero
+          // detach() es para borrar la relacion en la tabla intermedia.
+          $filmOriginal->genres()->whereIn('genre_id',$genABorrar)->detach(); 
+        }
 
-                  $generosActuales = $filmOriginal->genres()->select('nombre')->get();
-                  // Paso el array recibido a un Tipo Coleccion.
-                  $generosEnviados = Genre::all()->whereIn('nombre',$request->genero);
+        // Agrego los generos nuevos (Nuevos(Todos) - Actuales)
+        $genAAgregar = $generosEnviados->diff($generosActuales);
+        if ($genAAgregar) {
+          $filmOriginal->genres()->attach($genAAgregar);
+        }
 
-                  // Quito los generos que ya no estan (Actuales - Nuevos(todos))
-                  $genABorrar = $generosActuales->diff($generosEnviados);
-                  if ($genABorrar) {
-                    // $filmOriginal->genres()->whereIn('genre_id',$genABorrar)->delete();
-                    // delete() es para borrar la tupla de la tabla genero
-                    // detach() es para borrar la relacion en la tabla intermedia.
-                    $filmOriginal->genres()->whereIn('genre_id',$genABorrar)->detach(); 
-                  }
+        // $request->estado ='OK';
+        $request['mensaje'] = 'Se actualizó el film con éxito.';
+      } else {
+        $obra = new Film;
+        $obra->titulo = $request->titulo;
+        $obra->fecha_estreno = $request->fecha_estreno;
+        $obra->sinopsis = $request->sinopsis;
+        $obra->pais = $request->pais;
+        // Ver que pasa si la pelicula no trae el poster.
+        $obra->poster = file_get_contents($request->poster);
+        $obra->duracion_min = $request->duracion_min;
+        $obra->categoria = $request->categoria;
 
-                  // Agrego los generos nuevos (Nuevos(Todos) - Acutales)
-                  $genAAgregar = $generosEnviados->diff($generosActuales);
-                  if ($genAAgregar) {
-                    $filmOriginal->genres()->attach($genAAgregar);
-                  }
+        if (!empty($obra->fecha_finalizacion)) {
+          $obra->fecha_finalizacion = $request->fecha_finalizacion;
+        }
+        $obra->trailer = $request->trailer;
+        $obra->id_themoviedb = $request->id_themoviedb;
+        $obra->save();
 
-                  $request->estado ='OK';
-                  $request->mensaje = 'Se actualizó el film con exito.';
-                }else{
-                        $obra = new Film;
-                        $obra->titulo = $request->titulo;
-                        $obra->fecha_estreno = $request->fecha_estreno;
-                        $obra->sinopsis = $request->sinopsis;
-                        $obra->pais = $request->pais;
-                        $obra->poster = file_get_contents($request->poster);
-                        //$obra->duracion_min = $request->duracion_min;
-                        $obra->duracion_min = $request->duracion_min;
-                        $obra->categoria = $request->categoria;
+        // Agrego los generos
+        $generosEnviados = $request->genero;
+        $coincidencias = Genre::all();
+        // Obtengo todos los modelos de los generos que coinciden con los nombres de los que me enviaron
+        $coincidencias = $coincidencias->intersect( Genre::whereIn('nombre', $generosEnviados)->get() );
 
-                        $asd =(". EMPTY: " . empty($request->fecha_finalizacion));
-                  $asd .=(". ISSET: " . isset($request->fecha_finalizacion));
-                  $asd .=(". =='': " . ($request->fecha_finalizacion == ''));
-                  $asd .=(". FECHA ESTRENO: " . ($request->fecha_estreno));
-                  $asd .=(". FECHA FINALIZACION: " . ($request->fecha_finalizacion));
-                  // return $asd;
+        // Hago la relacion en la tabla intermedia
+        foreach ($coincidencias as $coincidencia) {
+            $obra->genres()->attach($coincidencia);
+        }
 
-                        if (!empty($obra->fecha_finalizacion)) {
-                          // $obra->fecha_finalizacion = $request->fecha_finalizacion;
-                        }
-                        $obra->trailer = $request->trailer;
-                        $obra->id_themoviedb = $request->id_themoviedb;
-                        $obra->save();
+        $request['id'] = $obra->id;// actualizo con el nuevo id
+        // $request->estado ='OK'; // Esto no va
+        $request['mensaje'] = 'Se guardó el film con éxito.';
+      } // end IF id!=-1
 
-                        // Agrego los generos
-                        $generosEnviados = $request->genero;
-                        $coincidencias = Genre::all();
-                        // Obtengo todos los modelos de los generos que coinciden con los nombres de los que me enviaron
-                        $coincidencias = $coincidencias->intersect( Genre::whereIn('nombre', $generosEnviados)->get() );
-
-                        // Hago la relacion en la tabla intermedia
-                        foreach ($coincidencias as $coincidencia) {
-                            $obra->genres()->attach($coincidencia);
-                        }
-
-                        $request->id = $obra->id;// actualizo con el nuevo id
-                        $request->estado ='OK';
-                        $request->mensaje = 'Se guardo el film con exito.';
-                }//end IF id!=-1
-          //  } // end IF validator
       return response()->json($request);
-    }//end store film
+    } // end store film
 
-}//end controller
+} // end controller

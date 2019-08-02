@@ -2,8 +2,7 @@ var window = window || {},
   document = document || {},
   console = console || {},
   AdminFilms = AdminFilms || {};
-  idTheMovieDb = '',
-  vDebug = '';
+  idTheMovieDb = '';
 
 AdminFilms.iniciarPagina = function (contenedorHTML) {
   window.addEventListener("DOMContentLoaded", function () {
@@ -185,9 +184,11 @@ AdminFilms.getListaGeneros = function() {
   return resp;
 }
 
-/*
- Funcion: crea el objeto ajax que recibira la funcion store de FilmController
-*/
+
+/**
+ * Funcion: crea el objeto ajax que recibira la funcion store de FilmController
+ * Me costo un huevo encontrar como era: https://developer.mozilla.org/en-US/docs/Web/API/FormData/Using_FormData_Objects
+ */
 AdminFilms.enviarRequestStoreFilm = function(request){
   var info = '.resultado-seleccionado .info .campo ';
   //console.log(titulo);
@@ -210,11 +211,41 @@ AdminFilms.enviarRequestStoreFilm = function(request){
   };
 
   var objeto = JSON.stringify(film);
-  console.log("se va a enviar a "+ objeto);
+  // console.log("se va a enviar a "+ objeto);
   request.open("POST", "/storeFilm", true);
-  request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-  request.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'));
-  request.send("objeto="+objeto);
+  // request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+  request.setRequestHeader("Content-type", "application/json");
+  // Para que Laravel responda con un JSON y un HTTP 422 cuando algun campo es invalido
+  request.setRequestHeader('Accept', 'application/json');
+  request.setRequestHeader('X-CSRF-TOKEN', $('meta[name="csrf-token"]').attr('content'));
+  // request.send("objeto="+objeto);
+
+  /*
+  var formElement = document.getElementById('film-form');
+  var formData = new FormData();
+
+  // Esto se podria evitar haciendo FormData(formElement), pero formElement debe cumplir con ciertos requisitos.
+  formData.append('origen', document.querySelector('.resultado-seleccionado .info').getAttribute('origen'));
+  formData.append('id', document.querySelector('.resultado-seleccionado .info').getAttribute('id'));
+  formData.append('titulo', document.querySelector(info+'.titulo').value);
+  formData.append('sinopsis', document.querySelector(info+'.sinopsis').value);
+  formData.append('categoria', document.querySelector(info+'.categoria').value);
+  formData.append('fecha_estreno', document.querySelector(info+'.fecha-estreno').value);
+  formData.append('fecha_finalizacion', document.querySelector(info + '.fecha-finalizacion').value);
+  formData.append('poster', document.querySelector('.resultado-seleccionado .poster img').getAttribute('path'));
+  formData.append('genero', AdminFilms.getListaGeneros());
+  formData.append('pais', document.querySelector(info+'.pais').value);
+  formData.append('duracion_min', document.querySelector(info+'.duracion-min').value);
+  formData.append('trailer', document.querySelector(info + '.trailer-url').value);
+  formData.append('id_themoviedb', idTheMovieDb);
+
+  console.log("se va a enviar a "+ formData);
+  console.log('Length: ' + formData.values().length);
+  for (var myValue of formData.values()) {
+    console.log('formData: ' + myValue); 
+  }
+  */
+  request.send(objeto);
 }
 
 
@@ -224,8 +255,10 @@ Funcion: Recibe la respuesta de la operacion y muestra el resultado acorde en pa
 */
 AdminFilms.recibirResponseStoreFilm = function(response){
   console.log('recibi respuesta de ajax post store film. Status: ' + response.status);
-  let p = document.querySelector('.admin-resultados .resultado-seleccionado .poster');
-  let par = document.createElement('p');
+  let poster = document.querySelector('.admin-resultados .resultado-seleccionado .poster');
+  // var ulMensajes = document.querySelector('admin-resultados .resultado-seleccionado .poster ul');
+  AdminFilms.borrarMensajes();
+  var ulMensajes = document.getElementById('mensajes');
 
   // Cuando laravel genera un error, devuelve status = 500
   // console.log("response.status: " + response.status);
@@ -234,37 +267,107 @@ AdminFilms.recibirResponseStoreFilm = function(response){
   // console.log("RespType: " + respType);
   // Si respType es 'text/html; charset=UTF-8' es que hubo un error, ya que espero un 'application/json'
   if (response.responseText != null && response.status == 200) {
-    vDebug = response;
     console.log("Response: " + response.responseText);
     var resp = JSON.parse(response.responseText);
 
     console.log("se recibio respuesta> se grabo la peli con el id="+ resp['id']);
-
+    /*
     if (resp['estado']='OK'){
       par.classList.add('resultado-Ok');
       document.querySelector('.admin-resultados .resultado-seleccionado .info')
-      .setAttribute('id',resp['id']);
+        .setAttribute('id',resp['id']);
     }else{
       // Atrapa errores contemplados por el programador en FilmController
       par.classList.add('resultado-Failed');
       //con css mostrar algo en rojo, o campos erroneos (cuando ande validar en el back)
     }
-
+    
     par.innerText = resp['mensaje'];
     p.appendChild(par);
+    */
+
+    // par.classList.add('resultado-Ok');
+    document.querySelector('.admin-resultados .resultado-seleccionado .info')
+      .setAttribute('id',resp['id']);
+    var liMsj = document.createElement('li');
+    liMsj.classList.add('resultado-Ok');
+    liMsj.innerText = resp['mensaje'];
+    AdminFilms.borrarOnClick(liMsj);
+    ulMensajes.appendChild(liMsj);
+    
+
+  } else if (response.status == 422) {
+    // Status 422 = Error al validar algun campo
+    // par.classList.add('resultado-Failed');
+    // par.innerText = 'Error: ';
+    var resp = JSON.parse(response.responseText);
+    for (var campo in resp.errors) {
+      console.log('msj: ' + resp.errors[campo][0]); 
+      var liMsj = document.createElement('li');
+      liMsj.classList.add('resultado-Failed');
+      liMsj.innerText += resp.errors[campo][0];
+      AdminFilms.borrarOnClick(liMsj);
+      ulMensajes.appendChild(liMsj);
+    }
 
   } else {
+
     // Atrapa errores generados por laravel
     console.log('ERROR. Response: ' + response);  
-    vDebug = response;
     console.log("Response: " + response.responseText); 
 
-    par.innerText = 'Error del servidor.';
-    par.classList.add('resultado-Failed');
-    p.appendChild(par);
+    var liMsj = document.createElement('li');
+    liMsj.classList.add('resultado-Failed');
+    liMsj.innerText = 'Error del servidor.';
+    AdminFilms.borrarOnClick(liMsj);
+    ulMensajes.appendChild(liMsj);
+
+    // p.appendChild(par);
+  }
+
+  // Agrego el mensaje
+  poster.appendChild(ulMensajes);
+  // Borro el mensaje a los 5 segundos
+  /*
+  setTimeout(function() {
+    AdminFilms.borrarMensajes();
+  }, 5000);
+  */
+
+  // Reemplazarla x que se borre cada mensaje al hacerle click encima
+  /*
+  ulMensajes.addEventListener('click', function() {
+    AdminFilms.borrarMensajes();
+  });
+  */
+}
+
+/**
+ * Borra los mensajes de exito o error que aparecen bajo el poster
+ */
+AdminFilms.borrarMensajes = function() {
+  // var ulMensajes = document.querySelector('.admin-resultados .resultado-seleccionado .poster p');
+  var lis = document.getElementById('mensajes').getElementsByTagName('li');
+  if ( lis != null ) {
+    for (var index = 0; index < lis.length; index++) {
+      lis[index].remove();
+    }
+  } else {
+    console.log('no se encontraron li(s).');
   }
 }
 
+AdminFilms.borrarOnClick = function(elemento) {
+  if (elemento) {
+    elemento.addEventListener('click', function() {
+      this.classList.add('removed');
+      this.addEventListener('transitionend', function() {
+        // Este this esta en otro contexto
+        this.remove();
+      });
+    });
+  }
+}
 
 /*
 Funcion: Manda la request ajax para mostrar los films que coinciden con la busqueda diferenciando
@@ -319,6 +422,8 @@ AdminFilms.recibirResponseSearchFilmsAdmin = function (response,origen) {
   if (resp.length>0){
       resp.forEach(function (value, index) {
 
+        // console.log('FILM ' + index + ' POSTER --> ' + value['poster']);
+
         var resultado = document.createElement('div');
         resultado.classList.add('resultado-obtenido');
         resultado.id = "r" + index.toString();
@@ -333,7 +438,7 @@ AdminFilms.recibirResponseSearchFilmsAdmin = function (response,origen) {
         if (typeof value['poster'] !== 'undefined'){ //a veces no carga bien la imagen proveniente de la api
             poster.src = base64 + value['poster'];
         }else{//establece una por defecto
-            poster.src = window.location + '/images/noimage.jpg';
+            poster.src = '/images/noimage.jpg';
         }
 
         poster.alt = 'Poster';
@@ -363,6 +468,9 @@ AdminFilms.mostrarResultadoSeleccionado = function($switch) {
   } else {
     resultado.classList.add('resultado-seleccionado-oculto');
   }
+  
+  // Elimino el cartel del resultado de la ultima operacion
+  AdminFilms.borrarMensajes();
 }
 
 /**
@@ -397,95 +505,95 @@ AdminFilms.agregarGenero = function(genero) {
 AdminFilms.establecerResultadoSeleccionado = function(resultado,origen,base64){
   //a la seccion info le agrego datos importantes de la peli seleccionada que no se muestran en los textareas.
   //pero que despues se mandara en la request si es que el usuario realiza una accion sobre el (Agregar/modificar/etc)
-  var estadoResultAnt = document.querySelector('.resultado-Ok');
+  
+  /*var estadoResultAnt = document.querySelector('.resultado-Ok');
 
   if (estadoResultAnt!=null){
     var padre = document.querySelector('.resultado-seleccionado .poster');
       padre.removeChild(estadoResultAnt);
-  }
+  }*/
+  AdminFilms.borrarMensajes();
 
   var film_select = document.querySelector('.admin-resultados .resultado-seleccionado .info')
   film_select.setAttribute('origen',origen);
-  if (origen=='DB'){
+  if (origen=='DB') {
     film_select.setAttribute('id',resultado['id']);
-  }else{
+  } else {
     film_select.setAttribute('id',-1);
   }
-    var info = '.admin-resultados .resultado-seleccionado .info .campo';
 
-        // Guardo el id_themoviedb en una variable global
-        idTheMovieDb = resultado['id_themoviedb'];
+  var info = '.admin-resultados .resultado-seleccionado .info .campo';
+  // Guardo el id_themoviedb en una variable global
+  idTheMovieDb = resultado['id_themoviedb'];
 
-        var textarea = document.querySelector(info + ' .titulo');
-        textarea.innerHTML = resultado['titulo'];
+  var input = document.querySelector(info + ' .titulo');
+  input.value = resultado['titulo'] || '';
 
-        textarea = document.querySelector(info + ' .sinopsis');
-        textarea.innerHTML = resultado['sinopsis'];
+  input = document.querySelector(info + ' .sinopsis');
+  input.value = resultado['sinopsis'] || '';
 
-        textarea = document.querySelector(info + ' .categoria');
-        textarea.innerHTML = resultado['categoria'];
+  var select = document.querySelector(info + ' .categoria');
+  select.value = resultado['categoria'] || '';
 
-        // var textarea = document.querySelector(info + ' .pais');
-        // textarea.innerHTML = resultado['pais'];
-        var select = document.querySelector(info + ' .pais');
-        select.value = resultado['pais'];
+  // var textarea = document.querySelector(info + ' .pais');
+  // textarea.innerHTML = resultado['pais'];
+  select = document.querySelector(info + ' .pais');
+  select.value = resultado['pais'] || '';
 
-        textarea = document.querySelector(info + ' .fecha-estreno');
-        textarea.innerHTML = resultado['fecha_estreno'];
+  input = document.querySelector(info + ' .fecha-estreno');
+  input.value = resultado['fecha_estreno'] || '';
 
-        textarea = document.querySelector(info + ' .fecha-finalizacion');
-        textarea.innerHTML = resultado['fecha_finalizacion'];
+  input = document.querySelector(info + ' .fecha-finalizacion');
+  input.value = resultado['fecha_finalizacion'] || '';
 
-        textarea = document.querySelector(info + ' .duracion-min');
-        textarea.innerHTML = resultado['duracion_min'];
+  input = document.querySelector(info + ' .duracion-min');
+  input.value = resultado['duracion_min'] || '';
+ 
+  var textarea = document.querySelector(info + ' .trailer-url');
+  textarea.value = resultado['trailer'] || '';
 
-        if (resultado['trailer'] != undefined) {
-          textarea = document.querySelector(info + ' .trailer-url');
-          textarea.innerHTML = resultado['trailer'];
-        }
+  // Testingggggg
+  // Carga la lista UL con los generos
+  var lista = document.querySelector(info + ' .genero');
+  // Borro los generos del film anterior
+  lista.innerHTML = '';
+  if (resultado['genero'] != undefined){
+    resultado['genero'].forEach(AdminFilms.agregarGenero);
+  }
 
-        // Testingggggg
-        // Carga la lista UL con los generos
-        var lista = document.querySelector(info + ' .genero');
-        // Borro los generos del film anterior
-        lista.innerHTML = '';
-        if (resultado['genero'] != undefined){
-          resultado['genero'].forEach(AdminFilms.agregarGenero);
-        }
+  var poster = '.admin-resultados .resultado-seleccionado .poster img';
+  var poster = document.querySelector(poster);
+  poster.src = base64+resultado['poster'];
+  poster.setAttribute('path',resultado['poster']);
+  //habilito o desabilito botones
+  var btnGuardar = document.querySelector('.resultado-seleccionado .opciones .boton-guardar');
+  var btnModificar = document.querySelector('.resultado-seleccionado .opciones .boton-modificar');
+  var btnEliminar = document.querySelector('.resultado-seleccionado .opciones .boton-eliminar');
 
-    var poster = '.admin-resultados .resultado-seleccionado .poster img';
-    var poster = document.querySelector(poster);
-    poster.src = base64+resultado['poster'];
-    poster.setAttribute('path',resultado['poster']);
-    //habilito o desabilito botones
-    var btnGuardar = document.querySelector('.resultado-seleccionado .opciones .boton-guardar');
-    var btnModificar = document.querySelector('.resultado-seleccionado .opciones .boton-modificar');
-    var btnEliminar = document.querySelector('.resultado-seleccionado .opciones .boton-eliminar');
+  if (origen=='API'){
+      btnGuardar.setAttribute('enabled','true');
+      btnModificar.setAttribute('enabled','true');
 
-    if (origen=='API'){
-        btnGuardar.setAttribute('enabled','true');
-        btnModificar.setAttribute('enabled','true');
-
-        btnEliminar.setAttribute('disabled','true');
-    }else{
-      if (origen=='BD'){
-            btnGuardar.setAttribute('enabled','false');
-            btnModificar.setAttribute('enabled','true');
-            btnEliminar.setAttribute('enabled','true')
-      }
+      btnEliminar.setAttribute('disabled','true');
+  }else{
+    if (origen=='BD'){
+          btnGuardar.setAttribute('enabled','false');
+          btnModificar.setAttribute('enabled','true');
+          btnEliminar.setAttribute('enabled','true')
     }
-    //a todos los campos por defecto los traigo para no ser editados, una vez que clickea en el boton modificar
-    //se cambia a enabled.
-    // var campos  = document.querySelectorAll('.resultado-seleccionado .info .campo textarea');
-    var campos  = document.querySelectorAll('.resultado-seleccionado .info .campo .editable');
-    campos.forEach(function(campo){
-      campo.removeAttribute('enabled');
-      campo.setAttribute('disabled','true');
-    });
+  }
+  //a todos los campos por defecto los traigo para no ser editados, una vez que clickea en el boton modificar
+  //se cambia a enabled.
+  // var campos  = document.querySelectorAll('.resultado-seleccionado .info .campo textarea');
+  var campos  = document.querySelectorAll('.resultado-seleccionado .info .campo .editable');
+  campos.forEach(function(campo){
+    campo.removeAttribute('enabled');
+    campo.setAttribute('disabled','true');
+  });
 
-    // Caso especial: la cruz en cada genero
-    var cruces = document.querySelectorAll('.resultado-seleccionado .campo .cruz');
-    cruces.forEach(function(cruz) {
-      cruz.style.display = 'none';
-    });
+  // Caso especial: la cruz en cada genero
+  var cruces = document.querySelectorAll('.resultado-seleccionado .campo .cruz');
+  cruces.forEach(function(cruz) {
+    cruz.style.display = 'none';
+  });
 }
