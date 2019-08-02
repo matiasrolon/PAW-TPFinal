@@ -22,14 +22,23 @@ a{
 }
 
 .opciones-film .container .menu{
-  background-color: blue;
+  background-color: black;
+  padding: 1%;
+  margin-bottom: 3%;
+  border-radius: 10px;
+  display: inline-block;
+  width: 90%;
+
 }
 
 .container .menu .item{
   background: none;
-  border: solid black 3px;
+  border: solid white 3px;
   color: white;
   display: inline-block;
+  padding: 1%;
+  border-radius: 12px;
+  HEIGHT: 4vh;
 }
 
 .acciones{
@@ -62,9 +71,11 @@ div.detalles-pelicula ul{
 }
 
 div.detalles-pelicula{
-  margin-left: 7%;
+  margin-left: 6%;
   background: #e0e0e0;
   border-radius: 5px 5px;
+  display: inline-block;
+  width: 57%;
   /* padding: 1% 1% 1% 5%; */
   padding: 15px;
   border: 3px solid black;
@@ -76,7 +87,8 @@ div.detalles-pelicula{
 }
 
 .opciones-film .container .menu .item:hover{
-  background-color: violet;
+  border-color: yellow;
+  color: yellow;
   cursor: pointer;
 }
 
@@ -84,10 +96,15 @@ div.detalles-pelicula{
 display: block;
     border: solid 3px;
     margin-bottom: 5%;
+    display: inline-block;
+    width: 90%;
+}
+
+.review-user.inicial{
+    border: solid 5px rgb(145, 25, 170);
 }
 
 .descripcion-review-user{
-  background: lightblue;
   padding: 1%;
 }
 
@@ -96,8 +113,8 @@ input.titulo-review {
 }
 
 .info-review-user{
-  height: 400px;
-  /* color: grey; */
+  height: 10vh;
+  background: lightblue;
 }
 
 .form-agregar-review{

@@ -90,11 +90,17 @@ class FilmController extends Controller
       $film = Film::where('id','=',$film_id)->first();
       $film->poster = base64_encode($film->poster);
       if ($review_id!=null){
-        $reviewIni = Review::where('id','=',$review_id)->first();
+        $reviewIni = Review::where('review.id','=',$review_id)
+                            ->join('users','review.user_id','=','users.id')
+                            ->select('review.*','users.username')
+                            ->first();
       }
       $reviews = Review::where('film_id','=',$film_id)
                          ->join('users','review.user_id','=','users.id')
-                         ->select('review.*','users.username')
+                         ->select('review.id','titulo','descripcion','positivos','negativos',
+                         'review.created_at','user_id','film_id','users.username')
+                         ->skip(0)
+                         ->take(4)
                          ->get();
       $generos = $film->genres()->get();
 
@@ -304,7 +310,7 @@ class FilmController extends Controller
         'fecha_finalizacion' => 'nullable|date', // Aca tambien
         'trailer' =>'max:300'
       ]);
-      
+
       // Los datos pasan la validacipn
       // Si es un film de la API, contendra ID=-1;         ??????
       $filmOriginal = Film::where('id',$request->id)->first();
@@ -317,13 +323,13 @@ class FilmController extends Controller
         // $filmOriginal->poster = $request->poster; //sin el file_get_contents porque ya esta en base64
         $filmOriginal->duracion_min = $request->duracion_min;
         $filmOriginal->categoria = $request->categoria;
-      
+
         if (!empty($request->fecha_finalizacion)) {
           $filmOriginal->fecha_finalizacion = $request->fecha_finalizacion;
         }
         $filmOriginal->trailer = $request->trailer;
         $filmOriginal->save();
-        
+
         // *** Reviso si cambiaron los generos ***
         $generosActuales = $filmOriginal->genres()->select('nombre')->get();
         // Paso el array recibido a un Tipo Coleccion.
@@ -335,7 +341,7 @@ class FilmController extends Controller
           // $filmOriginal->genres()->whereIn('genre_id',$genABorrar)->delete();
           // delete() es para borrar la tupla de la tabla genero
           // detach() es para borrar la relacion en la tabla intermedia.
-          $filmOriginal->genres()->whereIn('genre_id',$genABorrar)->detach(); 
+          $filmOriginal->genres()->whereIn('genre_id',$genABorrar)->detach();
         }
 
         // Agrego los generos nuevos (Nuevos(Todos) - Actuales)

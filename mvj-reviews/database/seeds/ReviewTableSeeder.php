@@ -14,6 +14,9 @@ class ReviewTableSeeder extends Seeder
      */
     public function run()
     {
+
+      factory(Review::class, 50)->create();
+
         $user = User::find(4);
         $film = Film::find(3);
         $review = new Review();

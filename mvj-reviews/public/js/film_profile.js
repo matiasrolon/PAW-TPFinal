@@ -46,7 +46,7 @@ Pagina.ordenarElementos = function(){
   //console.log(botonTrailer);
   botonTrailer.addEventListener("click", function(){ Pagina.mostrarOpcion('trailer')});
 
-  Pagina.mostrarOpcion('agregarReview');
+  Pagina.mostrarOpcion('reviews');
 }
 
 

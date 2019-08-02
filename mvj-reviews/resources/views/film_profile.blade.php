@@ -9,13 +9,6 @@
 @endsection
 
 @section('content')
-    @isset ($reviewIni)
-    <div class="">
-    <p>prueba de review inicial</p>
-    <p>{{ $reviewIni["titulo"] }}</p>
-      <p>{{ $reviewIni["descripcion"] }}</p>
-      </div>
-    @endisset
             <div id="page_info" class="content" film="{{ $film['id'] }}" user="@guest{{ -1 }}@else{{ Auth::user()->id }}@endguest">
                 <section class="info-film">
                     <img class="poster" src="data:image/png;base64,{{$film['poster']}}">
@@ -74,6 +67,35 @@
                           </nav>
 
                           <div id='info-reviews' href="#" class="opcion reviews">
+                                  @isset ($reviewIni)
+                                  <div class="review-user inicial">
+                                      <section class="info-review-user">
+                                        <label>
+                                          usuario:  <a href="{{ route('user_profile', $reviewIni['username']) }}">{{ $reviewIni['username'] }}</a>
+                                        </label>
+                                        <label>
+                                          Fecha: {{ $reviewIni['created_at']->format('d-m-Y') }}
+                                        </label>
+                                        <label>
+                                          titulo: {{ $reviewIni['titulo'] }}
+                                        </label>
+                                        <label for=""> Likes: {{ $reviewIni['positivos'] }}
+                                            <button type="button" class="like-review" review="{{$reviewIni['id']}}" user="{{$reviewIni['user_id']}}" name="button">Like</button>
+                                        </label>
+                                        <label for=""> Dislikes: {{ $reviewIni['negativos'] }}
+                                            <button type="button" class="dislike-review" review="{{$reviewIni['id']}}" user="{{$reviewIni['user_id']}}" name="button">Dislike</button>
+                                        </label>
+                                        <div review="{{$reviewIni['id']}}" class="estado-puntaje-review">
+                                            <label class="descripcion"> </label>
+                                        </div>
+                                      </section>
+                                      <section class="descripcion-review-user">
+                                        <label>
+                                          descripcion: {{ $reviewIni['descripcion'] }}
+                                        <label>
+                                      </section>
+                                  </div>
+                                  @endisset <!-- fin primer review -->
                                   @if (count($reviews)>0)
                                     @foreach ($reviews as $review)
                                       <div class="review-user">
@@ -82,7 +104,7 @@
                                               usuario:  <a href="{{ route('user_profile', $review['username']) }}">{{ $review['username'] }}</a>
                                             </label>
                                             <label>
-                                              Fecha: {{ $review['created_at'] }}
+                                              Fecha: {{ $review['created_at']->format('d-m-Y') }}
                                             </label>
                                             <label>
                                               titulo: {{ $review['titulo'] }}
