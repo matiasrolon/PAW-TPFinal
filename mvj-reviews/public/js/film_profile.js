@@ -9,10 +9,15 @@ Pagina.iniciarPagina= function(contenedorHTML){
         console.log("Film_Profile asocio JS con HTML.");
         Pagina.page_info = document.getElementById('page_info');
 
-        Pagina.botonEnviarPuntajeFilm = document.getElementById('enviarPuntaje');
-        Pagina.botonEnviarPuntajeFilm.addEventListener("click", Pagina.enviarPuntajeFilm);
+        //cad avez que ticlee en una estrella, se enviara el puntaje por AJAX.
+        let estrellas = document.querySelectorAll('.iconos-puntaje .estrella');
+        estrellas.forEach(function(estrella){
+            estrella.addEventListener("click", function(){
+                Pagina.enviarPuntajeFilm(estrella.dataset.value);
+            });
+        });
 
-        Pagina.botonEnviarReview = document.getElementById('enviarReview');
+        Pagina.botonEnviarReview =document.getElementById('enviarReview');
         Pagina.botonEnviarReview.addEventListener("click", Pagina.enviarReview);
 
         Pagina.cargarBotonesReview();
@@ -41,7 +46,7 @@ Pagina.ordenarElementos = function(){
   //console.log(botonTrailer);
   botonTrailer.addEventListener("click", function(){ Pagina.mostrarOpcion('trailer')});
 
-  Pagina.mostrarOpcion('agregarReview');
+  Pagina.mostrarOpcion('reviews');
 }
 
 
@@ -67,7 +72,7 @@ Pagina.mostrarOpcion = function(opcionElegida){
 /*---- enviarPuntaje(opcionElegida) ------------------------------------------------------------------
        Descripcion:  Genera la peticion AJAX que es enviada al servidor para crear un Score_Film (Film, User, Puntaje)
 */
-Pagina.enviarPuntajeFilm = function(){
+Pagina.enviarPuntajeFilm = function(puntaje){
 
     var request = new XMLHttpRequest();
     request.onreadystatechange = function(){ // cuando la peticion cambia de estado.
@@ -76,16 +81,15 @@ Pagina.enviarPuntajeFilm = function(){
           Pagina.recibirResponsePuntajeFilm(this);
       };
     }
-    Pagina.enviarRequestPuntajeFilm(request);
+    Pagina.enviarRequestPuntajeFilm(request,puntaje);
 }
 
 
-Pagina.enviarRequestPuntajeFilm = function(request){
+Pagina.enviarRequestPuntajeFilm = function(request,puntaje){
     console.log(" Es el user "+Pagina.page_info.getAttribute('user')+
                 " en la peli "+Pagina.page_info.getAttribute('film'));
-    var inputPuntaje = document.getElementById("puntajeFilm");
     var score_film ={ // objeto a enviar
-      "puntaje":inputPuntaje.value,
+      "puntaje": puntaje,
       "user_id": Pagina.page_info.getAttribute('user'),
       "film_id": Pagina.page_info.getAttribute('film')
     };
@@ -103,13 +107,37 @@ Pagina.recibirResponsePuntajeFilm= function(response){
     var resp = JSON.parse(response.responseText);
     console.log("se recibio respuesta> "+ resp['mensaje']);
     var infoPuntaje = document.querySelector('.info-puntaje');
-
-    if (resp['estado']='OK'){
-      infoPuntaje.innerHTML = resp['mensaje'];
-        //y Pongo en verde el recuadro de puntaje
-    }else{
-      //Pongo en rojo el recuadro de puntaje
+    var respuesta = resp['mensaje'];
+    // si estaba oculta de alguna solicitd ajax anterior, la muestro nuevamente
+    if (infoPuntaje.classList.contains('desaparece')){
+      infoPuntaje.classList.remove('desaparece');
     }
+
+    if (resp['estado']=='OK'){// muestro mensaje con style de todo OK!
+      if(infoPuntaje.classList.contains('error')){
+        infoPuntaje.classList.remove('error');
+      }
+      if(!infoPuntaje.classList.contains('ok')){
+        infoPuntaje.classList.add('ok');
+      }
+
+    }else{ // muestro mensaje con style de error
+      if(infoPuntaje.classList.contains('ok')){
+        infoPuntaje.classList.remove('ok');
+      }
+      if(!infoPuntaje.classList.contains('error')){
+        infoPuntaje.classList.add('error');
+      }
+      //el mensaje tendra un link para ir al inicio de sesion
+      if (resp['tipoError']=='sesion_usuario'){
+        respuesta = '<a href="/login">' + respuesta + '</a>';
+      }
+    }
+
+    infoPuntaje.innerHTML = respuesta;
+    window.setInterval(function(){
+        infoPuntaje.classList.add('desaparece');
+    },7000);
 }
 
 Pagina.enviarReview = function(){

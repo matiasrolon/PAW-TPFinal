@@ -23,7 +23,7 @@
 
                     <h2 class="titulo">{{$user['username']}}</h2>
                       <div class="planilla-usuario" >
-                        
+
                         <br>
                         @if ($user['poster']==null)
                           <img class="avatar" src="{{asset('images/default_avatar.png')}}">
@@ -46,18 +46,18 @@
                             <label class="dato-favorito" for=""><b>Serie: </b>{{$user['serie_fav']}}</label>
                         </div>
                       </div>
-                      
-                      
+
+
                       <h2>Biografia</h2>
                       <p>{{ $user['biografia'] }}</p>
-                      
+
 
                       <h2>Reviews Recientes </h2>
                         @if (count($reviews)>0)
                           <div class="container-reviews">
                             @foreach ($reviews as $review)
                               <div class="review-user">
-                                <a href="/films/{{$review['film_id']}}">
+                                <a href="/films/{{$review['film_id']}}/{{$review['id']}}">
                                   <img class="poster" src="data:image/png;base64,{{$review['poster']}}">
                                   <div class="info-review-user">
                                     <label class="info-review" for=""> <b> Review: </b> {{ $review['titulo'] }}</label>

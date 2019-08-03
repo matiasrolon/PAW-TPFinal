@@ -40,13 +40,19 @@
 
                 <section class="opciones-film">
                       <div class="acciones">
-                          <!-- QUITAR ESTA PARTE, HACERLA CON JAVASCRIPT -->
-                          <!--para pruebas con AJAX por ahora el puntaje sera mandado mediante un input comun-->
-
-                            <input id="puntajeFilm" type="number" name="puntos" min=0 max=10 value="" placeholder="">
-                            <button id="enviarPuntaje" type="button" name="button"> Puntuar {{ $film['categoria'] }}</button>
+                            <div class="iconos-puntaje">
+                            	<div class="estrella"  data-value="1" >&#9733; <p>1</p></div>
+                            	<div class="estrella"  data-value="2" >&#9733;<p>2</p></div>
+                            	<div class="estrella"  data-value="3" >&#9733;<p>3</p></div>
+                            	<div class="estrella"  data-value="4" >&#9733;<p>4</p></div>
+                            	<div class="estrella"  data-value="5" >&#9733;<p>5</p></div>
+                              <div class="estrella"  data-value="6" >&#9733;<p>6</p></div>
+                              <div class="estrella"  data-value="7" >&#9733;<p>7</p></div>
+                              <div class="estrella"  data-value="8" >&#9733;<p>8</p></div>
+                              <div class="estrella"  data-value="9" >&#9733;<p>9</p></div>
+                              <div class="estrella"  data-value="10" >&#9733;<p>10</p></div>
+                            </div>
                             <label class="info-puntaje"> </label>
-                          <!-- ___________________________________________________________________________   -->
                       </div><!-- fin div acciones-film -->
 
                       <div class="container reviews-film-container">
@@ -63,6 +69,35 @@
                           </nav>
 
                           <div id='info-reviews' href="#" class="opcion reviews">
+                                  @isset ($reviewIni)
+                                  <div class="review-user inicial">
+                                      <section class="info-review-user">
+                                        <label>
+                                          usuario:  <a href="{{ route('user_profile', $reviewIni['username']) }}">{{ $reviewIni['username'] }}</a>
+                                        </label>
+                                        <label>
+                                          Fecha: {{ $reviewIni['created_at']->format('d-m-Y') }}
+                                        </label>
+                                        <label>
+                                          titulo: {{ $reviewIni['titulo'] }}
+                                        </label>
+                                        <label for=""> Likes: {{ $reviewIni['positivos'] }}
+                                            <button type="button" class="like-review" review="{{$reviewIni['id']}}" user="{{$reviewIni['user_id']}}" name="button">Like</button>
+                                        </label>
+                                        <label for=""> Dislikes: {{ $reviewIni['negativos'] }}
+                                            <button type="button" class="dislike-review" review="{{$reviewIni['id']}}" user="{{$reviewIni['user_id']}}" name="button">Dislike</button>
+                                        </label>
+                                        <div review="{{$reviewIni['id']}}" class="estado-puntaje-review">
+                                            <label class="descripcion"> </label>
+                                        </div>
+                                      </section>
+                                      <section class="descripcion-review-user">
+                                        <label>
+                                          descripcion: {{ $reviewIni['descripcion'] }}
+                                        <label>
+                                      </section>
+                                  </div>
+                                  @endisset <!-- fin primer review -->
                                   @if (count($reviews)>0)
                                     @foreach ($reviews as $review)
                                       <div class="review-user">
@@ -71,7 +106,7 @@
                                               usuario:  <a href="{{ route('user_profile', $review['username']) }}">{{ $review['username'] }}</a>
                                             </label>
                                             <label>
-                                              Fecha: {{ $review['created_at'] }}
+                                              Fecha: {{ $review['created_at']->format('d-m-Y') }}
                                             </label>
                                             <label>
                                               titulo: {{ $review['titulo'] }}

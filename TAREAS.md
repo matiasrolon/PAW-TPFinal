@@ -29,7 +29,7 @@
 - [ ] **Tres:**
   En la home, lo de girar las tarjetas de las peliculas no funciona en FIREFOX.
 
-- [ ] **Cuatro:**
+- [x] **Cuatro:**
   En admin films, sucede que una vez que modifique una descripcion de un film, todos los films que seleccione a continuacion tendran ESA descripcion. Incluso luego de recargar la pagina sigue pasando. No pude encontrar la causa.
 
 - [ ] **Cinco:**
@@ -38,17 +38,20 @@
 - [ ] **Seis:**
   En admin films, a veces no encuentra algunos resultados. Ej "Tron". Ademas deberia mostrar un cartel diciendo que no se encontro nada.
 
-- [ ] **Siete:**
+- [x] **Siete:**
   En admin films, cuando recupera el film de la BD nuestra no trae los generos. Falta hacer un join ahi.
 
-- [ ] **Ocho:**
+- [x] **Ocho:**
   En admin films, al querer modificar una pelicula en nuestra BD da error. Creo que tiene que ver con el chequeo de los generos que agregue.
 
 - [ ] **Nueve:**
   El usuario se puede dar "autolike" y/o "autodislike" en su review. (**En cualquier red social te podes dar autolike. No lo veo como un problema** @vic)
 
-- [ ] **Diez:**
-  - En admin films, los carteles "se actualizo el film con exito" y "error del servidor" se acumulan uno debajo de otro. Deberia aparecer uno solo
+- [x] **Diez:**
+  - En admin films, los carteles "se actualizo el film con exito" y "error del servidor" se acumulan uno debajo de otro. Deberia aparecer uno solo.
+
+- [ ] **Once:**
+  - En admin films, en algunas peliculas cuando las obtengo de nuestra BD, la respuesta contiene generos repetidos. Sin embargo en la BD no estan repetidos estos generos en esa pelicula, por lo que sospecho que es a funcion FilmController@searchLocalFilm
 
 ## TO-DO (funcional)
 
@@ -116,7 +119,7 @@
 
 #### Film Controller
 
-- [ ] Validacion en metodo store()
+- [x] Validacion en metodo store()
 - [ ] Cambiar el campo 'trailer' por 'trailer_url'.
   - [ ] Cambiarlo tambien en admin_films.js
   - [ ] Cambiarlo tambien en el Models\Film.php
@@ -127,13 +130,15 @@
 
 #### Admin Films
 
-- [ ] Decidir campos obligatorios e indicarlos mediante CSS.
-  - [ ] Debe corregirse la validacion del lado del servidor al agregar un film.
+- [x] El formulario no esta puesto como un formulario. Hay que reconstruirlo
+  - [x] Por eso falla la validacion en FilmController@store
+- [ ] Decidir campos obligatorios e indicarlos mediante CSS: titulo, fecha_estreno, sinopsis, categoria, trailer.
+- [ ] El boton GUARDAR debe chequear que los campos requeridos esten completos.
+  - [x] Debe corregirse la validacion del lado del servidor al agregar un film.
+  - [x] Mostrar los errores usando la forma de Laravel.
 - [ ] Permitir agregar un film sin necesidad de buscarlo en la API.
   - [ ] Requiere poder subir una foto manualmente.
-- [ ] El boton GUARDAR debe chequear que los campos requeridos esten completos.
-- [ ] El formulario no esta puesto como un formulario. Hay que reconstruirlo
-  - [ ] Por eso falla la validacion en FilmController@store
+- [ ] Funcionalidad del boton de Eliminar.
 
 - [ ] HOME
 - [ ] INFO PELICULA -------> (en esa misma pagina tendra todas sus reviews, paginadas)

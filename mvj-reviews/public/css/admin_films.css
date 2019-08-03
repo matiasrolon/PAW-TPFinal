@@ -74,7 +74,7 @@
 .removed {
   background-color: #5ce284;
   transition: all 0.5s ease-out;
-  transform: translateX(-500px);
+  transform: translateX(-1000px);
   /* opacity: 0; */
 }
 
@@ -193,7 +193,7 @@
   margin: 0% 0% 0% 2%;
 }
 
-textarea, select, .resultado-seleccionado li{
+.titulo, .fecha-estreno, .fecha-finalizacion, .duracion-min, textarea, select, .resultado-seleccionado .info li{
   opacity: 1;
   background-color: yellowgreen;
 }
@@ -367,19 +367,26 @@ input#buscadorFilms  {
   display: none;
 }
 
-.admin-resultados .resultado-seleccionado .poster p {
+#mensajes li {
   margin: 1% 6%;
   padding: 2%;
   border:2px solid azure;
   text-align: center;
-  border-radius: 50px;
+  border-radius: 15px;
 }
 
-p.resultado-Ok {
+#mensajes li:hover {
+    transform: scale(0.9);
+/*   animation-duration: 2s; */
+  transition: all 0.1s ease-out;
+  opacity: 0.5;
+}
+
+.resultado-Ok {
   background-color: #5ce284;
 }
 
-p.resultado-Failed {
+.resultado-Failed {
   background-color: #a8325e;
 }
 

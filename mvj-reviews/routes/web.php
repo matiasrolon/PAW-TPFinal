@@ -32,7 +32,7 @@ Route::get('/lastReviews','ReviewController@lastReviews');
 Route::post('/storeFilm', 'FilmController@store')->name('store-film');
 Route::get('/film-by-genre/{genro}/{category}/{offset}/{qty}', 'FilmController@searchByGenre')->name('film-by-genre');
 Route::get('/ranking-films', 'FilmController@ranking')->name('ranking-films');
-Route::get('/films/{id}', 'FilmController@profile')->name('film_profile');
+Route::get('/films/{film_id}/{review_id?}', 'FilmController@profile')->name('film_profile');
 Route::post('/scoreFilm','FilmController@scoreFilm')->name('scoreFilm');
 Route::get('/searchSuggestions/{filmname}','FilmController@searchSuggestions')->name('searchLocalFilm');
 Route::get('/search/{filmname}','FilmController@searchResults')->name('search');

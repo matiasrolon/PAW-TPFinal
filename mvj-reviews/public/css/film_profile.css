@@ -1,9 +1,20 @@
 .no-visible{
   display: none;
+  transition: all 0.5s ease-out;
+  transform: scale(0,0);
+}
+.desaparece{
+    transition: all 0.5s ease-out;
+    transform: scale(0,0);
 }
 
 .opcion{
   display: none;
+}
+
+a{
+  color: black;
+  text-decoration: none;
 }
 
 .opcion.elegida{
@@ -11,20 +22,27 @@
 }
 
 .opciones-film .container .menu{
-  background-color: #e0e0e0;
+  background-color: black;
+  padding: 1%;
+  margin-bottom: 3%;
+  border-radius: 10px;
+  display: inline-block;
+  width: 90%;
+
 }
 
 .container .menu .item{
   background: none;
-  border: solid black 2px;
-  color: black;
+  border: solid white 3px;
+  color: white;
   display: inline-block;
   padding: 1%;
-  border-radius: 10px;
+  border-radius: 12px;
+  HEIGHT: 4vh;
 }
 
 .acciones{
-  width: 200px;
+  width: 250px;
   margin-left: 5%;
   position: relative;
   grid-area: accion;
@@ -52,7 +70,7 @@
 
 .poster{
   float: left;
-  margin-left: 5%;
+  margin-left: 6%;
 }
 
 div.detalles-pelicula ul{
@@ -62,10 +80,11 @@ div.detalles-pelicula ul{
 }
 
 div.detalles-pelicula{
-  margin-left: 2%;
-  margin-right: 5%;
+  margin-left: 6%;
   background: #e0e0e0;
   border-radius: 5px 5px;
+  display: inline-block;
+  width: 57%;
   /* padding: 1% 1% 1% 5%; */
   /* padding: 15px; */
   /* border: 3px solid black; */
@@ -85,13 +104,18 @@ div.detalles-pelicula{
 }
 
 .review-user{
-  display: block;
-  border: solid 3px;
-  margin-bottom: 5%;
+display: block;
+    border: solid 3px;
+    margin-bottom: 5%;
+    display: inline-block;
+    width: 90%;
+}
+
+.review-user.inicial{
+    border: solid 5px rgb(145, 25, 170);
 }
 
 .descripcion-review-user{
-  background: lightblue;
   padding: 1%;
 }
 
@@ -100,8 +124,8 @@ input.titulo-review {
 }
 
 .info-review-user{
-  height: 400px;
-  /* color: grey; */
+  height: 10vh;
+  background: lightblue;
 }
 
 .form-agregar-review{
@@ -110,84 +134,101 @@ input.titulo-review {
   height:;
 }
 
-.resultado-seleccionado .poster{
-        display: inline-block;
-        /* background-color: #90908e; */
-        border-radius: 10px 10px;
-        width: auto;
-        float: left;
-        height: 100%;
-        grid-area: poster;
-}
-
-.resultado-seleccionado p {
-  background-color: yellowgreen;
-  padding: 2%;
-  border-radius: 10px;
-  border: 2px solid #8b9288;
-}
-
-.generos li {
-  border: 2px solid #858785;
-  border-radius: 15px;
-  padding: 0.5%;
-  margin: 0.5%;
-}
-
-ul.generos {
-  display: flex;
-}
-
-
-.resultado-seleccionado li{
-  opacity: 1;
-  /* padding: 1%; */
-  /* display: flex; */
-  /* flex: 1 100%; */
-}
-
-.resultado-seleccionado ul {
-  /* display: inline-block; */
-}
-
-
-.admin-resultados .resultado-seleccionado .poster img{
+.info-puntaje{
+  text-align: center;
   display: inline-block;
-  width: 90%;
-  margin: 5%;
-  border-radius: 10px 10px;
-  background-color: #90908e;
-  border: 5px solid #858785;
-}
-
-.puntuacion-pelicula {
-  display: flex;
-  border: 2px solid #9c9591;
   border-radius: 10px;
-  vertical-align: bottom;
-  width: auto;
-  height: 60px;
-  padding: 0.4%;
+  padding: 2%;
+  width: 85%;
+}
+
+.info-puntaje.ok{
+  background-color: rgb(34, 181, 26);
+  border: solid 1px black;
+  transition: all 0.5s ease-out;
+}
+
+.info-puntaje.error{
+  background-color: rgb(255, 60, 60);
+  border: solid 1px black;
+  transition: all 0.5s ease-out;
+}
+
+.iconos-puntaje {
+    display: inline-block;
+    width: 230px;
+    margin-bottom: 5%;
+    border: ridge 1px grey;
+    border-radius: 10px;
+    padding-bottom: 3%;
+}
+.iconos-puntaje .estrella {
+	text-decoration: none;
+	display: inline-block;
+	font-size: 32px;
+	font-size: 3rem;
+	color: white;
+	-webkit-text-stroke: 2px black;
+	/* margin-top: 1%; */
+	/* margin-bottom: 0%; */
+	padding: %;
+	display: inline-block;
+	height: 9vh;
+}
+.iconos-puntaje > .estrella:hover ~ .estrella {
+	color: white;
+}
+
+.iconos-puntaje:hover .estrella{
+  color: #ff9c06;
+  cursor:pointer;
+}
+
+.estrella p{
+  display: inline;
+  font-size: 14px;
+  font-family: none;
+  color: black;
   position: absolute;
-  top: 220px;
-  right: 100px;
 }
-
-.puntuacion-pelicula span{vertical-align: -webkit-baseline-middle;}
-
-.puntuacion-pelicula h4 {
-  display: initial;
-  margin: 0px;
-  font-size: 50px;
-  padding: %;
+.estrella[data-value="1"] p{
+  left: 20px;
+  top: 17px;
 }
-
-.detalles-pelicula h2 {
-  flex: 1 80%;
-  width: 80%;
-  /* margin-top: 0%; */
+.estrella[data-value="2"] p{
+  left: 65px;
+  top: 17px;
 }
-
-.content {
-    margin: 2% 5%
+.estrella[data-value="3"] p{
+  left: 111px;
+  top: 17px;
+}
+.estrella[data-value="4"] p{
+  left: 156px;
+  top: 17px;
+}
+.estrella[data-value="5"] p{
+  left: 202px;
+  top: 17px;
+}
+.estrella[data-value="6"] p{
+  left: 18px;
+  top: 78px;
+}
+.estrella[data-value="7"] p{
+  left: 65px;
+  top:  78px;
+}
+.estrella[data-value="8"] p{
+  left: 112px;
+  top:  78px;
+}
+.estrella[data-value="9"] p{
+  left: 157px;
+  top:  78px;
+}
+.estrella[data-value="10"] p{
+  left: 201px;
+  top:  80px;
+  font-size: 12px;
 }
