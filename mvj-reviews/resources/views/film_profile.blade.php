@@ -10,27 +10,29 @@
 
 @section('content')
             <div id="page_info" class="content" film="{{ $film['id'] }}" user="@guest{{ -1 }}@else{{ Auth::user()->id }}@endguest">
-                <section class="info-film">
+                <section class="resultado-seleccionado info-film">
                     <img class="poster" src="data:image/png;base64,{{$film['poster']}}">
                     <div class="detalles-pelicula">
                       <ul>
                         <h2>{{ $film['titulo'] }} </h2>
-                        <li> <strong>Categoria:</strong> {{ $film['categoria'] }} </li>
-                        <li> <strong>Sinopsis:</strong> {{ $film['sinopsis'] }} </li>
-                        <li> <strong>Fecha de estreno:</strong> {{ $film['fecha_estreno'] }} </li>
+                        <li class="puntuacion-pelicula"><h4>{{ number_format($film['puntaje'], 1) }}</h4><h2>/10</h2></li>
+                        <li> <label>Sinopsis:</label> <p>{{ $film['sinopsis'] }} </p> </li>
+                        <li> <label>Fecha de estreno:</label> <p>{{ $film['fecha_estreno'] }}</p> </li>
                         @if ( ($film['fecha_finalizacion']) )
-                          <li> <strong>Fecha de finalizacion:</strong> {{ $film['fecha_finalizacion'] }} </li>
+                          <li> <label>Fecha de finalizacion:</label>  <p>{{ $film['fecha_finalizacion'] }} </p> </li>
                         @endif
-                        <li> <strong>Pais:</strong> {{ $film['pais'] }} </li>
-                        <li> <strong>Genero:</strong> 
+                        <li> <label>Pais:</label> <p>{{ $film['pais'] }}</p> </li>
+                        <li>
+                          <ul class="generos">
                           @if ( count($generos) > 0 )
-                            {{-- Lo mismo que hacer un forEach a mano --}}
-                            {{ $generos->pluck('nombre')->implode(', ') }}
+                              @foreach ($generos as $genero)
+                              <li>{{ $genero['nombre'] }}</li>
+                              @endforeach
                           @else
                             No disponible
                           @endif
+                          </ul>
                         </li>
-                        <li> <strong>Puntaje:</strong> {{ $film['puntaje'] }} </li>
                       </ul>
                     </div>
                   <!-- AGREGAR MAS CAMPOS ;SI ES NECESARIO. -->

@@ -45,7 +45,7 @@
   En admin films, al querer modificar una pelicula en nuestra BD da error. Creo que tiene que ver con el chequeo de los generos que agregue.
 
 - [ ] **Nueve:**
-  - El usuario se puede dar "autolike" y/o "autodislike" en su review.
+  El usuario se puede dar "autolike" y/o "autodislike" en su review. (**En cualquier red social te podes dar autolike. No lo veo como un problema** @vic)
 
 - [ ] **Diez:**
   - En admin films, los carteles "se actualizo el film con exito" y "error del servidor" se acumulan uno debajo de otro. Deberia aparecer uno solo

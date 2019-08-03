@@ -11,36 +11,46 @@
 }
 
 .opciones-film .container .menu{
-  background-color: blue;
+  background-color: #e0e0e0;
 }
 
 .container .menu .item{
   background: none;
-  border: solid black 3px;
-  color: white;
+  border: solid black 2px;
+  color: black;
   display: inline-block;
+  padding: 1%;
+  border-radius: 10px;
 }
 
 .acciones{
   width: 200px;
   margin-left: 5%;
   position: relative;
+  grid-area: accion;
 }
 
 .opciones-film{
-  display: flex;
+  display: grid;
   margin: 2% 1%;
   height: 200px;
+  grid-template-areas: "accion opciones";
+  grid-template-columns: 35% 1fr;
 }
 
 .info-film {
-  display: flex;
+  display: grid;
   margin-top: 5%;
+  grid-template-areas: "poster info";
+  grid-template-columns: 35% 1fr;
+  background-color: #e0e0e0;
+  /* margin: 2% 5%; */
+  padding: 2%;
+  border: 2px solid black;
+  border-radius: 10px;
 }
 
 .poster{
-  width: 200px;
-  height: 300px;
   float: left;
   margin-left: 5%;
 }
@@ -48,32 +58,36 @@
 div.detalles-pelicula ul{
   list-style: none;
   padding-left: 0px;
+  /* display: inline-block; */
 }
 
 div.detalles-pelicula{
-  margin-left: 5%;
+  margin-left: 2%;
   margin-right: 5%;
   background: #e0e0e0;
   border-radius: 5px 5px;
   /* padding: 1% 1% 1% 5%; */
-  padding: 15px;
-  border: 3px solid black;
+  /* padding: 15px; */
+  /* border: 3px solid black; */
+  grid-area: info;
 }
 
 .reviews-film-container{
   float:right;
-  margin-left: 5%;
+  /* margin-left: 5%; */
+  grid-area: opciones;
 }
 
 .opciones-film .container .menu .item:hover{
-  background-color: violet;
+  background-color: yellowgreen;
   cursor: pointer;
+  color: white;
 }
 
 .review-user{
-display: block;
-    border: solid 3px;
-    margin-bottom: 5%;
+  display: block;
+  border: solid 3px;
+  margin-bottom: 5%;
 }
 
 .descripcion-review-user{
@@ -94,4 +108,86 @@ input.titulo-review {
   display: flex;
   height: 400px;
   height:;
+}
+
+.resultado-seleccionado .poster{
+        display: inline-block;
+        /* background-color: #90908e; */
+        border-radius: 10px 10px;
+        width: auto;
+        float: left;
+        height: 100%;
+        grid-area: poster;
+}
+
+.resultado-seleccionado p {
+  background-color: yellowgreen;
+  padding: 2%;
+  border-radius: 10px;
+  border: 2px solid #8b9288;
+}
+
+.generos li {
+  border: 2px solid #858785;
+  border-radius: 15px;
+  padding: 0.5%;
+  margin: 0.5%;
+}
+
+ul.generos {
+  display: flex;
+}
+
+
+.resultado-seleccionado li{
+  opacity: 1;
+  /* padding: 1%; */
+  /* display: flex; */
+  /* flex: 1 100%; */
+}
+
+.resultado-seleccionado ul {
+  /* display: inline-block; */
+}
+
+
+.admin-resultados .resultado-seleccionado .poster img{
+  display: inline-block;
+  width: 90%;
+  margin: 5%;
+  border-radius: 10px 10px;
+  background-color: #90908e;
+  border: 5px solid #858785;
+}
+
+.puntuacion-pelicula {
+  display: flex;
+  border: 2px solid #9c9591;
+  border-radius: 10px;
+  vertical-align: bottom;
+  width: auto;
+  height: 60px;
+  padding: 0.4%;
+  position: absolute;
+  top: 220px;
+  right: 100px;
+}
+
+.puntuacion-pelicula span{vertical-align: -webkit-baseline-middle;}
+
+.puntuacion-pelicula h4 {
+  display: initial;
+  margin: 0px;
+  font-size: 50px;
+  padding: %;
+}
+
+.detalles-pelicula h2 {
+  flex: 1 80%;
+  width: 80%;
+  /* margin-top: 0%; */
+}
+
+.content {
+    margin: 2% 5%
 }
