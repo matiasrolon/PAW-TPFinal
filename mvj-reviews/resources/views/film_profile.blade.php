@@ -11,7 +11,9 @@
 @section('content')
 <div id="page_info" class="content" film="{{ $film['id'] }}" user="@guest{{ -1 }}@else{{ Auth::user()->id }}@endguest">
   <section class="resultado-seleccionado info-film opciones-film">
-    <img class="poster" src="data:image/png;base64,{{$film['poster']}}">
+    <div class="poster-container">
+      <img class="poster" src="data:image/png;base64,{{$film['poster']}}">
+    </div>
     <div class="detalles-pelicula">
       <ul>
         <h2>{{ $film['titulo'] }} </h2>

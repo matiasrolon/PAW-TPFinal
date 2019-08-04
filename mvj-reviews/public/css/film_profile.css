@@ -4,8 +4,9 @@
   transform: scale(0,0);
 }
 .desaparece{
-    transition: all 0.5s ease-out;
+    /* transition: all 0.5s ease-out; */
     transform: scale(0,0);
+    display: none;
 }
 
 .opcion{
@@ -23,6 +24,12 @@ a{
   /* background-color: white; */
   /* border-radius: 0px 10px 10px 10px; */
   /* padding-top: 20px; */
+}
+
+.poster-container {
+	grid-area: poster;
+	overflow: hidden;
+	margin:0;
 }
 
 .opciones-film .container .menu{
@@ -47,7 +54,6 @@ a{
 
 .acciones{
   width: auto;
-  margin: 0% 6%;
   position: relative;
   grid-area: accion;
 }
@@ -60,24 +66,99 @@ a{
   /* grid-template-columns: 35% 1fr; */
 }
 
-.info-film {
-  display: grid;
-  /* margin-top: 5%; */
-  grid-template-areas: "poster info" "accion opciones";
-  grid-template-columns: 35% 1fr;
-  grid-template-rows: 550px;
-  /* background-color: #e0e0e0; */
-  /* margin: 2% 5%; */
-  padding: 2%;
-  grid-row-gap: 2%;
-  /* border: 2px solid black; */
-  border-radius: 10px;
+@media (min-width: 700px) {
+	.content {
+    	margin: 0% 5%;
+    	background: #e0e0e0;
+	}
+
+	.info-film {
+	  display: grid;
+	  /* margin-top: 5%; */
+	  grid-template-areas: "poster info" "accion opciones";
+	  grid-template-columns: 35% 1fr;
+	  grid-template-rows: 550px;
+	  /* background-color: #e0e0e0; */
+	  /* margin: 2% 5%; */
+	  padding: 2%;
+	  grid-row-gap: 2%;
+	  /* border: 2px solid black; */
+	  border-radius: 10px;
+	}
+
+	.poster{
+  		margin: 0% 6%;
+  		border-radius: 10px 10px;
+  		width: 380px;
+ }
+
+	.resultado-seleccionado .poster{
+        height: 100%;
+        /* width: auto; */
+  }
+
+ 	.iconos-puntaje .estrella {
+		font-size: 32px;
+	}
+
+ 	.acciones{
+ 		margin: 0% 6%;
+ 	}
+
+ 	.puntuacion-pelicula {
+  		top: 170px;
+  		right: 100px;
+	}
+	.detalles-pelicula h2 {
+	  flex: 1 80%;
+  	  width: 80%;
+	}
+
 }
 
-.poster{
-  float: left;
-  margin: 0% 6%;
+@media (max-width: 700px) {
+
+	.info-film {
+	  display: grid;
+	  grid-template-areas: "poster" "info"  "accion" "opciones";
+	  /* grid-template-columns: 100%; */
+	  grid-template-rows: 150px 1fr;
+	  grid-row-gap: 1px;
+	  width: 100vw;
+	  /* margin: 2% 0%; */
+	}
+
+	.resultado-seleccionado .poster{
+		height: 600px;
+		margin: -60% 0;
+		width: auto;
+	}
+
+	.iconos-puntaje .estrella {
+		font-size: 28px;
+		margin: 2%;
+	}
+
+	.acciones{
+ 		margin: 2% 2%;
+ 	}
+ 	
+	.puntuacion-pelicula {
+  		top: 310px;
+  		right: 20px;
+  }
+
+	div.detalles-pelicula{
+		padding: 0% 5%;
+	}
+	.detalles-pelicula h2 {
+	  flex: 1 40%;
+	  width: 50%;
+	  /* width: 4%; */
+	}
+
 }
+
 
 div.detalles-pelicula ul{
   list-style: none;
@@ -86,7 +167,7 @@ div.detalles-pelicula ul{
 }
 
 div.detalles-pelicula{
-  /* margin-left: 6%; */
+/*   margin-left: 6%; */
   background: #e0e0e0;
   border-radius: 5px 5px;
   display: inline-block;
@@ -147,7 +228,7 @@ input.titulo-review {
 
 .info-puntaje{
   text-align: center;
-  display: inline-block;
+  display: block;
   border-radius: 10px;
   padding: 2%;
   width: 90%;
@@ -169,18 +250,14 @@ input.titulo-review {
 .iconos-puntaje {
     display: grid;
     width: auto;
-    /* margin: 4% 0%; */
-    /* border: solid 2px black; */
     border-radius: 10px;
-    /* padding-bottom: 3%; */
     grid-template-columns: repeat(10, 10%);
     background-color: #e0e0e0;
-    height: 61px;
 }
+
 .iconos-puntaje .estrella {
 	text-decoration: none;
 	/* display: inline-block; */
-	font-size: 32px;
 	/* font-size: 3rem; */
 	color: white;
 	stroke: black;
@@ -222,11 +299,10 @@ input.titulo-review {
 .resultado-seleccionado .poster{
         display: inline-block;
         /* background-color: #90908e; */
-        border-radius: 10px 10px;
-        width: auto;
+        /* border-radius: 10px 10px; */
+        /* width: auto; */
         /* float: left; */
-        height: 100%;
-        grid-area: poster;
+        /* grid-area: poster; */
 }
 
 .resultado-seleccionado p {
@@ -287,9 +363,7 @@ ul.generos {
   height: 60px;
   padding: 0.4%;
   position: absolute;
-  top: 170px;
   background-color: #9acd32;
-  right: 100px;
 }
 
 .puntuacion-pelicula span{vertical-align: -webkit-baseline-middle;}
@@ -298,19 +372,9 @@ ul.generos {
   display: initial;
   margin: 0px;
   font-size: 50px;
-  padding: %;
+  padding: 2%;
 }
 
-.detalles-pelicula h2 {
-  flex: 1 80%;
-  width: 80%;
-  /* margin-top: 0%; */
-}
-
-.content {
-    margin: 0% 5%;
-    background: #e0e0e0;
-}
 
 p.no-reviews {
 	background-color:#a8a6a6;
