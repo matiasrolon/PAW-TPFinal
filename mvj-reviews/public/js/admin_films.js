@@ -25,9 +25,15 @@ AdminFilms.iniciarPagina = function (contenedorHTML) {
             // Oculto la seccion de resutado seleccionado
             AdminFilms.mostrarResultadoSeleccionado(false);
 
-            //Se podria seleccionar acorde a lo que haya filtrado en el select de busqueda. Se deja generico por ahora.
-            AdminFilms.enviarRequestSearchFilmsAdmin('API');
-            AdminFilms.enviarRequestSearchFilmsAdmin('DB');
+            // Selector del motor de busqueda
+            var select = document.getElementById('src-selector');
+            console.log('src-selector: ' + select.value);
+            if (select.value == 'TheMovieDB' || select.value == 'Ambos') {
+              AdminFilms.enviarRequestSearchFilmsAdmin('API');  
+            }
+            if (select.value == 'MVJ Reviews' || select.value == 'Ambos') {
+              AdminFilms.enviarRequestSearchFilmsAdmin('DB');
+            }
     });
 
     AdminFilms.cargarFuncionalidadABM();
@@ -153,6 +159,11 @@ AdminFilms.cargarFuncionalidadABM = function(){
           };
         }
         AdminFilms.enviarRequestStoreFilm(request);
+  });
+
+  var btnEliminar = document.querySelector('.resultado-seleccionado .opciones .boton-eliminar');
+  btnEliminar.addEventListener('click', function() {
+    alert('FALTA LA FUNCION DE ELIMINAR');
   });
 
   // Boton de agregar genero
