@@ -16,10 +16,8 @@ AdminFilms.iniciarPagina = function (contenedorHTML) {
       // Primero elimino los resultados de la busqueda anterior.
             var seccionResultados = document.querySelector('.resultados-obtenidos');
             var resultadosAnt = document.querySelectorAll('.resultados-obtenidos .resultado-obtenido');
-            console.log(resultadosAnt);
             if (resultadosAnt.length > 0){
               resultadosAnt.forEach(function (resultAnt) {
-                console.log(resultAnt);
                 seccionResultados.removeChild(resultAnt);
               });
             }
@@ -377,20 +375,24 @@ AdminFilms.enviarRequestSearchFilmsAdmin = function (origen) {
   if (AdminFilms.buscador.value != "") {
     var request = new XMLHttpRequest();
     request.onreadystatechange = function () { // cuando la peticion cambia de estado.
-
+      console.log('Recibi respuesta de la ' + origen + '. Estado: ' + this.status);
       //console.log("readystate buscar admin resultado: " + this.readyState);
       if (this.readyState == 4 && this.status == 200) { // si se recibe correctamente la respuesta.
         AdminFilms.recibirResponseSearchFilmsAdmin(this,origen);
-        console.log("estado de la peticion buscar admin resultado: " + this.status);
+        // console.log("estado de la peticion buscar admin resultado: " + this.status);
 
-      };
+      } else {
+        // console.log('Error: Recibi respuesta de la '+ origen +'. Estado: '+ this.status + '. ReadyState: '+ this.readyState);
+      }
     }
-    //envio la request
-    console.log("se va a enviar a '" + AdminFilms.buscador.value + "' a "+origen);
+
     if (origen=='API'){  
         request.open("GET", "/admin/searchFilms/API/" + AdminFilms.buscador.value, true);
+            //envio la request
+        console.log("Enviada request" + AdminFilms.buscador.value + " a la API.");
     } else { 
         request.open("GET", "/admin/searchFilms/DB/" + AdminFilms.buscador.value, true);
+        console.log("Enviada request" + AdminFilms.buscador.value + " a la DB");
     }
     request.send();
   }
@@ -404,6 +406,7 @@ AdminFilms.enviarRequestSearchFilmsAdmin = function (origen) {
 */
 AdminFilms.recibirResponseSearchFilmsAdmin = function (response,origen) {
   var resp = JSON.parse(response.responseText);
+  console.log('RESP(' + ') = ' + resp);
   console.log("se recibio respuesta de searchLocalFilm. ");
   // resp es un arreglo de objetos
   var divResultados = document.getElementsByClassName('resultados-obtenidos')[0];
@@ -418,8 +421,10 @@ AdminFilms.recibirResponseSearchFilmsAdmin = function (response,origen) {
     clase_resultado_obtenido = 'externo';
   }
 
-      // Agrego cada resultado al contenedor
+  console.log('resp.length (' + origen +') = ' + resp.length);
+  // Agrego cada resultado al contenedor
   if (resp.length>0){
+      console.log('Cargo respuesta de ' + origen);
       resp.forEach(function (value, index) {
 
         // console.log('FILM ' + index + ' POSTER --> ' + value['poster']);
@@ -454,6 +459,7 @@ AdminFilms.recibirResponseSearchFilmsAdmin = function (response,origen) {
 
         // Lo agrego al contenedor
         divResultados.appendChild(resultado);
+        console.log('Agrego resultado: ' + value['titulo']);
       });
     }  
 }

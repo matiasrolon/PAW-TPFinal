@@ -308,13 +308,7 @@ class ApiController extends Controller
                         if ($results[$i]['media_type'] != 'person') { //por ahora no buscamos personas
                             $tmp = $this->parseFilm($results[$i]);
                             if ($tmp != false) {
-                                // Reviso que no este en la BD y si esta, no la agrego.
-                                // NO SE POR QUE CARAJOS NO ANDA.
-                                $colBd = $fc->searchByApiId($tmp->id_themoviedb);
-                                if ($colBd == null) {
-                                    // Agrego film al arreglo
-                                    $films[$i] = $tmp;
-                                }
+                                $films[] = $tmp;
                             }
                         }
                     }

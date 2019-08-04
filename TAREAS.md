@@ -13,7 +13,7 @@
 
 ## Errores - PROBLEMAS
 
-- [ ] **Uno:**
+- [x] **Uno:**
   1. agregue dos peliculas de el padrino mediante la API.
   2. Voy a admin films y busco en TheMovieDB "el padrino"
   3. Me carga solo las dos que tengo guardadas en la BD. y se ve el siguiente error en la consola de JS
@@ -35,7 +35,7 @@
 - [ ] **Cinco:**
   En admin films la fecha se muestra en ingles (asi la trae la API y asi se almacena), pero deberia estar en castellano.
 
-- [ ] **Seis:**
+- [x] **Seis:**
   En admin films, a veces no encuentra algunos resultados. Ej "Tron". Ademas deberia mostrar un cartel diciendo que no se encontro nada.
 
 - [x] **Siete:**
@@ -48,10 +48,13 @@
   El usuario se puede dar "autolike" y/o "autodislike" en su review. (**En cualquier red social te podes dar autolike. No lo veo como un problema** @vic)
 
 - [x] **Diez:**
-  - En admin films, los carteles "se actualizo el film con exito" y "error del servidor" se acumulan uno debajo de otro. Deberia aparecer uno solo.
+   En admin films, los carteles "se actualizo el film con exito" y "error del servidor" se acumulan uno debajo de otro. Deberia aparecer uno solo.
 
 - [ ] **Once:**
-  - En admin films, en algunas peliculas cuando las obtengo de nuestra BD, la respuesta contiene generos repetidos. Sin embargo en la BD no estan repetidos estos generos en esa pelicula, por lo que sospecho que es a funcion FilmController@searchLocalFilm
+  En admin films, en algunas peliculas cuando las obtengo de nuestra BD, la respuesta contiene generos repetidos. Sin embargo en la BD no estan repetidos estos generos en esa pelicula, por lo que sospecho que es a funcion FilmController@searchLocalFilm
+
+- [ ] **Doce:**
+  En el perfil de pelicula, cuando le das like a una review, no actualiza en ese momento el contador de likes. Tambien falta mostrar el trailer (un iframe con el enlace de youtube).
 
 ## TO-DO (funcional)
 
