@@ -6,7 +6,7 @@
 <link href="{{ asset('css/admin_films.css') }}" rel="stylesheet">
 <meta name="csrf-token" content="{{ csrf_token() }}"/>
 <script src="{{ asset('js/admin_films.js') }}"></script>
-<script src="{{ asset('js/customSelect.js') }}"></script>
+<!-- <script src="{{ asset('js/customSelect.js') }}"></script> -->
 <script>
     AdminFilms.iniciarPagina("content");
 </script>
@@ -31,13 +31,13 @@
     <div class="administrador-films-barra-busqueda">
         <input class="button1" id="buscadorFilms" type="text" name="" value="" placeholder="Buscar Film...(ej. Star Wars Episode III)">
         <label for="">¿D&oacute;nde?</label>
-        <div class="custom-select">
-            <select>
-                <option value="value1">TheMovieDB</option>
-                <option value="value2">MVJ Reviews</option>
-                <option value="value3" selected>Ambos</option>
+        <!-- <div class="custom-select"> -->
+            <select id="src-selector">
+                <option value="TheMovieDB">TheMovieDB</option>
+                <option value="MVJ Reviews">MVJ Reviews</option>
+                <option value="Ambos" selected>Ambos</option>
             </select>
-        </div>
+        <!-- </div> -->
         <button class="button1" type="button" name="button" id="btnBuscadorFilms">Buscar</button>
     </div>
 
