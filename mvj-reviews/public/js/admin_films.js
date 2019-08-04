@@ -9,7 +9,6 @@ AdminFilms.iniciarPagina = function (contenedorHTML) {
     console.log("Film_Profile asocio JS con HTML.");
 
     AdminFilms.buscador = document.getElementById('buscadorFilms');
-
     AdminFilms.btnBuscador = document.getElementById('btnBuscadorFilms');
     AdminFilms.btnBuscador.addEventListener("click", function(){
 
@@ -39,6 +38,7 @@ AdminFilms.iniciarPagina = function (contenedorHTML) {
     AdminFilms.cargarFuncionalidadABM();
     AdminFilms.cargarFuncionalidadPendentSearches();
 
+    window.scrollTo(0,0);
   });
 }
 
@@ -353,6 +353,7 @@ AdminFilms.recibirResponseStoreFilm = function(response){
 
 /**
  * Borra los mensajes de exito o error que aparecen bajo el poster
+ * Nuevo: borra los mensajes de que no hubo coincidencias.
  */
 AdminFilms.borrarMensajes = function() {
   // var ulMensajes = document.querySelector('.admin-resultados .resultado-seleccionado .poster p');
@@ -363,6 +364,14 @@ AdminFilms.borrarMensajes = function() {
     }
   } else {
     console.log('no se encontraron li(s).');
+  }
+
+  // Borra mensajes de que no hubo coincidencias
+  var msjs = document.querySelectorAll('.sin-resultados');
+  console.log('msjs: ' + msjs);
+  var i = 0;
+  for (i=0; i < msjs.length; i++) {
+    msjs[i].remove();
   }
 }
 
@@ -472,7 +481,21 @@ AdminFilms.recibirResponseSearchFilmsAdmin = function (response,origen) {
         divResultados.appendChild(resultado);
         console.log('Agrego resultado: ' + value['titulo']);
       });
-    }  
+    } else {
+      // No se encontraron resultados
+      var h2 = document.createElement('h2');
+      var lugarBusqueda = '';
+      if (origen == 'DB') {
+        lugarBusqueda = 'MVJ Reviews'
+      } else if (origen == 'API') {
+        lugarBusqueda = 'TheMovieDB';
+      }
+      h2.innerHTML = 'No se encontraron coincidencias en ' + lugarBusqueda + '.';
+      h2.classList.add('sin-resultados');
+      var contenedor = document.querySelector('.administrador-films .admin-resultados');
+      // Lo inserta en la posicion 2: Despues del form, antes del resto de los resultados
+      contenedor.insertBefore(h2, contenedor.childNodes[1]);
+    } 
 }
 
 /**

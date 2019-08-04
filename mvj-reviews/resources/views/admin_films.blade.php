@@ -18,11 +18,11 @@
     <h2>Busquedas sin resultados</h2>
     @foreach ($searches as $search)
     <div text="{{ $search['busqueda'] }}" class="busqueda">
-        <div class="info-busqueda">
-            <p><b>Buscado {{$search['cant_busquedas']}} veces</b></p>
+        <!-- <div class="info-busqueda"> -->
+            <button class="button1" class="resolver-busqueda" type="button" name="button">&#10004;</button>
+            <h3> Buscado {{$search['cant_busquedas']}} veces</h3>
             <p>{{ $search['busqueda'] }}</p>
-        </div>
-        <button class="button1" class="resolver-busqueda" type="button" name="button">Resuelto</button>
+        <!-- </div> -->
     </div>
     @endforeach
 </div>
