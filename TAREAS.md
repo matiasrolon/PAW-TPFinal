@@ -50,7 +50,7 @@
 - [x] **Diez:**
    En admin films, los carteles "se actualizo el film con exito" y "error del servidor" se acumulan uno debajo de otro. Deberia aparecer uno solo.
 
-- [ ] **Once:**
+- [x] **Once:**
   En admin films, en algunas peliculas cuando las obtengo de nuestra BD, la respuesta contiene generos repetidos. Sin embargo en la BD no estan repetidos estos generos en esa pelicula, por lo que sospecho que es a funcion FilmController@searchLocalFilm
 
 - [ ] **Doce:**
