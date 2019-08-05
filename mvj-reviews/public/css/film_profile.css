@@ -120,6 +120,11 @@ a{
 	}
 
 
+	.titulo-pelicula-head{
+		display: grid;
+		grid-template-columns: 1fr 15%;
+	}
+
 }
 
 @media (max-width: 700px) {
@@ -150,21 +155,38 @@ a{
  	}
 
 	.puntuacion-pelicula {
-  		top: 310px;
-  		right: 20px;
+  		/* top: 310px; */
+  		/* right: 20px; */
   }
 
 	div.detalles-pelicula{
 		padding: 0% 5%;
 	}
 	.detalles-pelicula h2 {
-	  flex: 1 40%;
-	  width: 50%;
+	  /* flex: 1 40%; */
+	  /* width: 50%; */
 	  /* width: 4%; */
+	  margin: 0%;
 	}
 
 	.resultado-seleccionado p {
 		height: fit-content;
+	}
+
+	.titulo-pelicula-head{
+		display: grid;
+		grid-template-columns: 60% 1fr;
+	}
+
+
+	.puntuacion-pelicula h2 {
+		padding-top: 20%;
+		vertical-align:bottom;
+	}
+
+	
+	.detalles-pelicula ul li{
+	  margin-top: 5%;
 	}
 
 }
@@ -173,6 +195,7 @@ a{
 div.detalles-pelicula ul{
   list-style: none;
   padding-left: 0px;
+  /* margin: 2% 0%; */
   /* display: inline-block; */
 }
 
@@ -344,10 +367,6 @@ ul.generos {
 
 .resultado-seleccionado li{
   opacity: 1;
-  /* display: inline-flex; */
-  /* padding: 1%; */
-  /* display: flex; */
-  /* flex: 1 100%; */
 }
 
 .resultado-seleccionado ul {
@@ -370,9 +389,9 @@ ul.generos {
   border-radius: 10px;
   vertical-align: bottom;
   width: auto;
-  height: 60px;
-  padding: 0.4%;
-  position: absolute;
+  /* height: 60px; */
+  padding: 0.4% 3%;
+  /* position: absolute; */
   background-color: #9acd32;
 }
 

@@ -16,8 +16,10 @@
     </div>
     <div class="detalles-pelicula">
       <ul>
-        <h2>{{ $film['titulo'] }} </h2>
-        <li class="puntuacion-pelicula"><h4>{{ number_format($film['puntaje'], 1) }}</h4><h2>/10</h2></li>
+        <li class="titulo-pelicula-head">
+          <h2>{{ $film['titulo'] }} </h2>
+          <span class="puntuacion-pelicula"><h4>{{ number_format($film['puntaje'], 1) }}</h4><h2>/10</h2></span>
+        </li>
         <li> <label>Sinopsis:</label> <p>{{ $film['sinopsis'] }} </p> </li>
         <li class="extra-data">
           <i class="fas fa-tag"></i>
