@@ -18,8 +18,9 @@ use Illuminate\Support\Facades\Validator;
 // use \Validator;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Collection;
-
+use Illuminate\Support\Facades\Log;
 use Storage;
+use Symfony\Component\HttpKernel\Log\Logger;
 
 class FilmController extends Controller
 {
@@ -360,7 +361,7 @@ class FilmController extends Controller
         }
 
         // $request->estado ='OK';
-        $request['mensaje'] = 'Se actualizó el film con éxito.';
+        $request['mensaje'] = 'Actualización exitosa.';
       } else {
         $obra = new Film;
         $obra->titulo = $request->titulo;
@@ -392,10 +393,33 @@ class FilmController extends Controller
 
         $request['id'] = $obra->id;// actualizo con el nuevo id
         // $request->estado ='OK'; // Esto no va
-        $request['mensaje'] = 'Se guardó el film con éxito.';
+        $request['mensaje'] = 'Guardado exitoso.';
       } // end IF id!=-1
 
       return response()->json($request);
     } // end store film
+
+    /**
+     * Elimina un film de la BD por la ID.
+     */
+    public function destroy($id) {
+      $film = Film::find($id);
+      if ($film != null) {
+        // Las FKs se eliminan por cascada
+        $aux = $film;
+        try {
+          if ($film->delete()){
+            $aux['mensaje'] = 'Eliminado exitoso.';
+            return response()->json($aux);
+          }
+        } catch (\Illuminate\Database\QueryException $e) {
+          // SQL 23000: Constraint Violation xq tiene alguna FK puesta en NO ACTION
+          Log::error('Error en FilmController@destroy: ' . $e->getMessage());
+          return response('Error al intentar borrar el film: ' . $film->titulo, 409);
+        }
+      }
+      // Else: id inexistente
+      return response('Not found',404);
+    }
 
 } // end controller

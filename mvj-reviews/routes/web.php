@@ -1,4 +1,5 @@
 <?php
+
 /* Esto lo puso automaticamente el VS Code cuando escribi Route */
 //use Symfony\Component\Routing\Annotation\Route;
 
@@ -37,6 +38,8 @@ Route::get('/films/{film_id}/{review_id?}', 'FilmController@profile')->name('fil
 Route::post('/scoreFilm','FilmController@scoreFilm')->name('scoreFilm');
 Route::get('/searchSuggestions/{filmname}','FilmController@searchSuggestions')->name('searchLocalFilm');
 Route::get('/search/{filmname}','FilmController@searchResults')->name('search');
+
+Route::get('/delete/{id}', 'FilmController@destroy')->name('delete');
 
 //novelties
 Route::get('/admin/novelties','NoveltiesController@admin_novelties')->name('admin-novelties');

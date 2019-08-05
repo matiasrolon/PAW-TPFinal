@@ -39,10 +39,12 @@
 }
 
 .editable.trailer-url{
-  height: 3.5vh;
+/*   height: 3.5vh; */
+  max-height: 23px;
   overflow-y: hidden;
 }
-.editable.genero{
+
+.editable.genero {
   display: inline;
 }
 
@@ -410,6 +412,7 @@ input#buscadorFilms  {
   border:2px solid azure;
   text-align: center;
   border-radius: 15px;
+  width: 86%;
 }
 
 #mensajes li:hover {
@@ -468,6 +471,8 @@ input#buscadorFilms  {
 }
 .campo.duracion_min{
   width: 25%;
+  min-width: 130px;
+  margin-right: 5px;
 }
 .campo.trailer{
   width: 70%;

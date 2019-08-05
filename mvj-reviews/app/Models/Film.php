@@ -25,8 +25,18 @@ class Film extends Model
       return $this->belongsToMany('App\Models\Genre', 'genre_film', 'film_id', 'genre_id');
     }
 
-    public function artistsFunction(){
+    public function artists(){
+      // Creo que es belongsToMany
       return $this->hasMany('App\Models\Film_Artist', 'film_id', 'id');
+    }
+
+    public function reviews(){
+      return $this->hasMany('App\Models\Review', 'film_id', 'id');
+    }
+
+    // Puntaje que le dieron los usuarios al film
+    public function userRatings() {
+      return $this->hasMany('App\Models\Score_Film', 'film_id', 'id');
     }
 
     public static function boot()
