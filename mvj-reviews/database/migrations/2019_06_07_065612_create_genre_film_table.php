@@ -19,8 +19,9 @@ class CreateGenreFilmTable extends Migration
             $table->primary(['genre_id', 'film_id']);
 
             // Foreign Keys
-            $table->foreign('genre_id')->references('id')->on('genre');
-            $table->foreign('film_id')->references('id')->on('film');
+            // Si se borra el film o el genero, se elimina la asociacion film-genero
+            $table->foreign('genre_id')->references('id')->on('genre')->onDelete('cascade');
+            $table->foreign('film_id')->references('id')->on('film')->onDelete('cascade');
 
             $table->timestamps();
         });

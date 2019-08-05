@@ -19,8 +19,9 @@ class CreateTagFilmTable extends Migration
             $table->primary(['film_id', 'tag_id']);
 
             // Foregin Keys
-            $table->foreign('film_id')->references('id')->on('film');
-            $table->foreign('tag_id')->references('nombre')->on('tag');
+            // Si se eliminar el film o el tag, se elimina la relacion entre ellos
+            $table->foreign('film_id')->references('id')->on('film')->onDelete('cascade');
+            $table->foreign('tag_id')->references('nombre')->on('tag')->onDelete('cascade');
 
             // $table->timestamps();
         });

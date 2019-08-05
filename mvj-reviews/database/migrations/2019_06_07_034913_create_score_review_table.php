@@ -21,8 +21,9 @@ class CreateScoreReviewTable extends Migration
             $table->timestamps(); // Fecha de creacion y actualizacion
 
             //foreign keys
-            $table->foreign('user_id')->references('id')->on('users');
-            $table->foreign('review_id')->references('id')->on('review');
+            // Si se borra el usuario o la review, esto tambien se borra.
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('review_id')->references('id')->on('review')->onDelete('cascade');
         });
     }
 

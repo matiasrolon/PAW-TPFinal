@@ -26,8 +26,9 @@ class CreateReviewsTable extends Migration
             $table->BigInteger('film_id')->unsigned();
 
             //foreign keys
-            $table->foreign('user_id')->references('id')->on('users');
-            $table->foreign('film_id')->references('id')->on('film');
+            // Si se borra el film o el usuario que hizo la review, la review tambien se borra.
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('film_id')->references('id')->on('film')->onDelete('cascade');
 
             //Otra forma de declarar foreignkey
             /*

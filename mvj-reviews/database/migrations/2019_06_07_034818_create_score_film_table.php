@@ -23,8 +23,9 @@ class CreateScoreFilmTable extends Migration
           $table->timestamps(); //Fecha de alta y actualizacion
 
           //foreign keys
-          $table->foreign('user_id')->references('id')->on('users');
-          $table->foreign('film_id')->references('id')->on('film');
+          // Si se borra el film o el usuario, la puntuacion tambien se borra.
+          $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+          $table->foreign('film_id')->references('id')->on('film')->onDelete('cascade');
         });
     }
 
