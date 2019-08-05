@@ -109,7 +109,7 @@
 
               <div class="seccion-menu novedades">
                     <i class="fas fa-newspaper"></i>
-                    <a href=""> Novedades </a>
+                    <a href="#"> Novedades </a>
                     <ul class="submenu novedades no-visible">
                       <li>
                         <i class="fas fa-award"></i>

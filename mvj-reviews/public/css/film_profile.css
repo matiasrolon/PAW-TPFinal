@@ -114,6 +114,12 @@ a{
   	  width: 80%;
 	}
 
+	
+	.resultado-seleccionado p {
+		max-height: 130px;
+	}
+
+
 }
 
 @media (max-width: 700px) {
@@ -157,6 +163,10 @@ a{
 	  /* width: 4%; */
 	}
 
+	.resultado-seleccionado p {
+		height: fit-content;
+	}
+
 }
 
 
@@ -182,7 +192,7 @@ div.detalles-pelicula{
   float:right;
   /* margin: 0% 4%; */
   grid-area: opciones;
-  height: auto;
+  height: fit-content;
 }
 
 .opciones-film .container .menu .item:hover{
@@ -303,22 +313,16 @@ input.titulo-review {
 }
 
 .resultado-seleccionado .poster{
-        display: inline-block;
-        /* background-color: #90908e; */
-        /* border-radius: 10px 10px; */
-        /* width: auto; */
-        /* float: left; */
-        /* grid-area: poster; */
+  display: inline-block;
 }
 
 .resultado-seleccionado p {
   background-color: yellowgreen;
   padding: 2%;
   border-radius: 10px;
-  /* border: 2px solid #8b9288; */
-  min-width: 200px;
-  height: fit-content;
+  overflow: scroll;
 }
+
 
 .detalles-pelicula .generos li {
   border: 2px solid #858785;
