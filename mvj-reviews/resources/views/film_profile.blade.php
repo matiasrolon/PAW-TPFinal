@@ -9,7 +9,7 @@
 @endsection
 
 @section('content')
-<div id="page_info" class="content" film="{{ $film['id'] }}" user="@guest{{ -1 }}@else{{ Auth::user()->id }}@endguest">
+<div id="page_info" class="content" data-film="{{ $film['id'] }}">
   <section class="resultado-seleccionado info-film opciones-film">
     <div class="poster-container">
       <img class="poster" src="data:image/png;base64,{{$film['poster']}}">
@@ -97,23 +97,22 @@
             <label class="info-review-titulo">
               {{ $reviewIni['titulo'] }}
             </label>
-            <label for=""> Likes: {{ $reviewIni['positivos'] }}
-              <button type="button" class="like-review" review="{{$reviewIni['id']}}" user="{{$reviewIni['user_id']}}" name="button">Like</button>
+            <label  class="like-review" data-review="{{$reviewIni['id']}}" for=""> Likes: {{ $reviewIni['positivos'] }}
+                <i class="fas fa-thumbs-up"></i> {{ $reviewIni['positivos'] }}
             </label>
-            <label for=""> Dislikes: {{ $reviewIni['negativos'] }}
-              <button type="button" class="dislike-review" review="{{$reviewIni['id']}}" user="{{$reviewIni['user_id']}}" name="button">Dislike</button>
+            <label class="dislike-review" data-review="{{$reviewIni['id']}}" for=""> Dislikes: {{ $reviewIni['negativos'] }}
+                <i class="fas fa-thumbs-down"></i> {{ $reviewIni['negativos'] }}
             </label>
-            <div review="{{$reviewIni['id']}}" class="estado-puntaje-review">
+            <div data-review="{{$reviewIni['id']}}" class="estado-puntaje-review">
               <label class="descripcion"> </label>
             </div>
           </section>
           <section class="descripcion-review-user">
-            <label>
-              descripcion: {{ $reviewIni['descripcion'] }}
-              <label>
-              </section>
-            </div>
+              <label> descripcion: {{ $reviewIni['descripcion'] }} <label>
+          </section>
+      </div>
             @endisset <!-- fin primer review -->
+
             @if (count($reviews)>0)
             @foreach ($reviews as $review)
             <div class="review-user">
@@ -133,12 +132,15 @@
                 <label class="info-review-descrip">
                   {{ $review['descripcion'] }}
                 </label>
-                <label for=""> <i class="fas fa-thumbs-up"></i> {{ $review['positivos'] }}
-                  <button type="button" class="like-review" review="{{$review['id']}}" user="{{$review['user_id']}}" name="button">Like</button>
+                <label class="like-review" data-review="{{$review['id']}}" for="">
+                    <i class="fas fa-thumbs-up"></i> <p>{{ $review['positivos'] }}</p>
                 </label>
-                <label for=""> <i class="fas fa-thumbs-down"></i> {{ $review['negativos'] }}
-                  <button type="button" class="dislike-review" review="{{$review['id']}}" user="{{$review['user_id']}}" name="button">Dislike</button>
+                <label class="dislike-review" data-review="{{$review['id']}}"  for="">
+                    <i class="fas fa-thumbs-down"></i> <p>{{ $review['negativos'] }}</p>
                 </label>
+                <div data-review="{{$review['id']}}" class="estado-puntaje-review">
+                  <label class="descripcion"> </label>
+                </div>
               </section>
               </div>
                 @endforeach
@@ -155,6 +157,7 @@
                   <textarea type="text" class="titulo-review" placeholder="Titulo"></textarea>
                   <label for="descripcion-review"> Review: </label>
                   <textarea type="text" class="descripcion-review" placeholder="Ingrese review aqui"></textarea>
+                  <br>
                   <input id="enviarReview" type="button" name="button" value="Enviar Review">
                 </form>
                 <div class="estado">

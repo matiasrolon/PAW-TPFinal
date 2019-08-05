@@ -31,6 +31,7 @@ Route::get('/lastReviews','ReviewController@lastReviews');
 //films
 Route::post('/storeFilm', 'FilmController@store')->name('store-film');
 Route::get('/film-by-genre/{genro}/{category}/{offset}/{qty}', 'FilmController@searchByGenre')->name('film-by-genre');
+Route::get('/film-on-demand/{film}/{offset}/{q}', 'ReviewController@searchOnDemand')->name('film-on-demand');
 Route::get('/ranking-films', 'FilmController@ranking')->name('ranking-films');
 Route::get('/films/{film_id}/{review_id?}', 'FilmController@profile')->name('film_profile');
 Route::post('/scoreFilm','FilmController@scoreFilm')->name('scoreFilm');

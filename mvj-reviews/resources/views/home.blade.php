@@ -39,7 +39,7 @@
                       </div>
                       <a style="display:block" href="/films/{{$pelicula['id']}}">
                         <div class="flip-card-back">
-                          <p>{{ $pelicula['fecha_estreno']}}</p>
+                          <p>{{ $pelicula['fecha_estreno'] }}</p>
                           <p class="titulo-film">{{ $pelicula['titulo']}}</p>
                           <p>{{ str_limit($pelicula['sinopsis'], $limit = 150, $end = '...') }}</p>
                         </div>

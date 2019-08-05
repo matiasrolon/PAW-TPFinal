@@ -34,30 +34,24 @@ class ReviewController extends Controller
 
     public function addReview(){
         $obj = json_decode($_POST["objeto"]);
-        $user = User::find($obj->user_id);
         $film = Film::find($obj->film_id);
-        if ($user==null){ //si no esta logeado -> no inserto nada en Review
+        if (Auth()->user()==null){ //si no esta logeado -> no inserto nada en Review
           $obj->estado = "FAILED";
           $obj->mensaje = "Debes iniciar sesion primero.";
         }else{ // si esta logeado
           $newReview = new Review();
-          $newReview->user_id = $user->id;
+          $newReview->user_id = Auth()->user()->id;
           $newReview->film_id = $film->id;
           $newReview->titulo = $obj->titulo;
           $newReview->descripcion = $obj->descripcion;
           $newReview->save();
 
-          //recupero la misma review con los datos adicionales que se insertan en los triggers.
-          $reviewRec = Review::where('user_id',$newReview->user_id)
-                              ->where('film_id',$newReview->film_id)
-                              ->orderBy('created_at','desc')
-                              ->first();
           //cargo algunos datos que serviran para la vista, a partir de la review recien creada.
-          $obj->review_id = $reviewRec->id;
-          $obj->username =  $user->username;
-          $obj->created_at =$reviewRec->created_at;
-          $obj->positivos =$reviewRec->positivos;
-          $obj->negativos =$reviewRec->negativos;
+          $obj->review_id = $newReview->id;
+          $obj->username =   Auth()->user()->username;
+          $obj->created_at =date("d/m/Y", strtotime($newReview->created_at));
+          $obj->positivos =$newReview->positivos;
+          $obj->negativos =$newReview->negativos;
           //seteo estado y mensaje que vera el usuario.
           $obj->estado = "OK";
           $obj->mensaje = "Se añadio tu review!";
@@ -68,17 +62,16 @@ class ReviewController extends Controller
 
     public function addScoreReview(){
       $obj = json_decode($_POST["objeto"]);
-      $user = User::find($obj->user_id);
       $review = Review::find($obj->review_id);
-      if ($user==null){ //si no esta logeado -> no inserto nada en Review
+      if (Auth()->user()==null){ //si no esta logeado -> no inserto nada en Review
         $obj->estado = "FAILED";
         $obj->mensaje = "Debes iniciar sesion primero.";
       }else{ // si esta logeado
           $score_review = Score_Review::where('review_id',$obj->review_id)
-                                      ->where('user_id',$obj->user_id)
+                                      ->where('user_id',Auth()->user()->id)
                                       ->first();
           $newScore_review = new Score_Review();
-          $newScore_review->user_id = $obj->user_id;
+          $newScore_review->user_id = Auth()->user()->id;
           $newScore_review->review_id = $obj->review_id;
           $newScore_review->voto = $obj->voto;
 
@@ -94,6 +87,25 @@ class ReviewController extends Controller
           }
       }
         echo json_encode($obj);
+  }
+
+  /**
+  * Busca peliculas o series a medida que el cliente las vaya pidiendo
+  * En este caso, al ir haciendo scroll sobre el final de la pagina.
+  * @var film  {PELICULA / SERIE}
+  * @var offset     Comienza desde X registro
+  * @var q       Cantidad de tuplas que retorna.
+  */
+  public function searchOnDemand($film, $offset, $q) {
+    $films = Review::where('film_id',$film)
+                 ->join('users','review.user_id','=','users.id')
+                 ->select('review.*','review.id as review_id','users.username')
+                 ->skip($offset)
+                 ->take($q)
+                 ->get();
+
+    return response()->json($films);
+
   }
 
 

@@ -118,7 +118,7 @@ body {
   .login-card-header {
     margin-left: 30%;
   }
-  
+
   .resultados-buscador{
      width: 39%;
   }
@@ -255,7 +255,7 @@ body {
   .login-card-header {
     margin-left: 25%;
   }
-  
+
   .resultados-buscador{
     margin-top: 10%;
   }
@@ -587,4 +587,10 @@ img.logo-st {
 
   .login-card input {
     border-radius: 50px;
+  }
+
+  footer{
+    background-color: blue;
+    display: block;
+    width: 100%;
   }

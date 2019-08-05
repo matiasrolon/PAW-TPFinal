@@ -112,32 +112,31 @@ class FilmController extends Controller
 
     public function scoreFilm(){
         $obj = json_decode($_POST["objeto"]);
-        $user = User::find($obj->user_id);
         $film = Film::find($obj->film_id);
         if ((($obj->puntaje)>10) || (($obj->puntaje)<0)){
           $obj->estado = "FAILED";
           $obj->tipoError = "rango_puntaje";
           $obj->mensaje = "El puntaje debe ser entre 1 y 10.";
         }else{
-              if ($user==null){ //si no esta logeado -> no inserto nada en Score_Film
+              if (Auth()->user()==null){ //si no esta logeado -> no inserto nada en Score_Film
                 $obj->estado = "FAILED";
                 $obj->tipoError = "sesion_usuario";
                 $obj->mensaje = "Debes iniciar sesion primero.";
               }else{ // si esta logeado
                 $score_film = Score_Film::where('film_id',$film->id)
-                                          ->where('user_id',$user->id)
+                                          ->where('user_id',Auth()->user()->id)
                                           ->first();
                 if ($score_film==null){// si no existe ese puntaje del usuario para esa pelicula, lo creo
                     $newScore_Film = new Score_Film();
                     $newScore_Film->puntaje = $obj->puntaje;
-                    $newScore_Film->user_id = $user->id;
+                    $newScore_Film->user_id = Auth()->user()->id;
                     $newScore_Film->film_id = $film->id;
                     $newScore_Film->save();
                     $obj->estado = "OK";
                     $obj->mensaje = "Se añadio tu puntaje!";
                 }else{ //el usuario ya punteo esta pelicula alguna vez, actualizo puntaje
                     $f = Score_Film::where('film_id',$film->id)
-                                    ->where('user_id',$user->id)
+                                    ->where('user_id',Auth()->user()->id)
                                     ->first();
                     $f->puntaje = $obj->puntaje;
                     $f->save();
@@ -182,19 +181,6 @@ class FilmController extends Controller
         return view('search',compact('results','searchText'));
     }
 
-    public function solvePendentFilm() {
-      $searchText = json_decode( $_POST['objeto'], true )['searchText'];
-      // return 'PHP: ' . $searchText;
-      $search = PendentSearch::where('busqueda', $searchText)->first();
-      if ($search != null) {
-          $search->estado = 'Resuelta';
-          $search->save();
-          return response('OK');
-      } else {
-        return response('No se encontro una busqueda con ese nombre', 404);
-      }
-    }
-
     /**
     * Busca peliculas o series de un genero especifico ordenadas por puntaje. (De a pedazos de data)
     * @var genero     Id del Genero
@@ -214,6 +200,24 @@ class FilmController extends Controller
       // $peliculas = Film::select('id','titulo','fecha_estreno','pais','sinopsis','sinopsis', \DB::raw('TO_BASE64(poster) as poster')
       //               ->get();
       echo json_encode($peliculas);
+    }
+
+
+    /**
+     * Marca como "RESUELTA" la busqueda pendiente indicada por el usuario.
+     * De esta forma ya no aoarecera mas en Admin_Films
+    */
+    public function solvePendentFilm() {
+      $searchText = json_decode( $_POST['objeto'], true )['searchText'];
+      // return 'PHP: ' . $searchText;
+      $search = PendentSearch::where('busqueda', $searchText)->first();
+      if ($search != null) {
+          $search->estado = 'Resuelta';
+          $search->save();
+          return response('OK');
+      } else {
+        return response('No se encontro una busqueda con ese nombre', 404);
+      }
     }
 
 
@@ -240,8 +244,10 @@ class FilmController extends Controller
     }
 
     /**
-     * Muestra la pagina admin films, con las busquedas que fueron realizadas
-     * por los usuarios del sitio.
+     * Muestra la pagina admin films, para interactuar con la Api
+     * pudiendo dar de alta, modificar o elimianr Films.
+     * Ademas, se muestran las busquedas que fueron realizadas por los usuarios
+     *  que no obtuvieron resultados, por orden de importancia.
      */
     public function admin_films(){
       $searches = PendentSearch::where('estado','pendiente')
@@ -255,6 +261,7 @@ class FilmController extends Controller
 
       return view('admin_films',compact('searches', 'paises', 'generos', 'categorias'));
     }
+
 
     /**
     * Devuelve las peliculas almacenadas en la BD que coinciden con la keyword

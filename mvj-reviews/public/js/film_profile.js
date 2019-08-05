@@ -5,11 +5,26 @@ var window = window || {},
 
 Pagina.iniciarPagina= function(contenedorHTML){
      window.addEventListener("DOMContentLoaded", function(){
+       //Cuando llega al final, carga las siguientes reviews
+       window.addEventListener("scroll", function(){
+              //var element = document.getElementById('app');
+              //console.log("Te has desplazado "+scrollY+" píxeles o más desde la parte superior del documento");
+              //if ((element.innerHeight + element.pageYOffset)>= document.body.offsetHeight){
+          if (scrollY>=500){
+            clearTimeout(Pagina.intervaloCargarFilms);
+            Pagina.intervaloCargarFilms = setTimeout(function(){
+                      console.log('llegamos al final.');
+                      Pagina.enviarRequestCargarReviews();
+            }, 1000);
+          }
+       }, false);
+
         Pagina.contenedor = document.getElementById(contenedorHTML);
         console.log("Film_Profile asocio JS con HTML.");
+        console.log(document.getElementById('app').scrollHeight);
         Pagina.page_info = document.getElementById('page_info');
 
-        //cad avez que ticlee en una estrella, se enviara el puntaje por AJAX.
+        //VOTAR FILM -> cada vez que ticlee en una estrella, se enviara el puntaje por AJAX.
         let estrellas = document.querySelectorAll('.iconos-puntaje .estrella');
         estrellas.forEach(function(estrella){
             estrella.addEventListener("click", function(){
@@ -20,7 +35,7 @@ Pagina.iniciarPagina= function(contenedorHTML){
         Pagina.botonEnviarReview =document.getElementById('enviarReview');
         Pagina.botonEnviarReview.addEventListener("click", Pagina.enviarReview);
 
-        Pagina.cargarBotonesReview();
+        Pagina.cargarBotonesReview(null);
 
         Pagina.ordenarElementos();
       //--> FUNCIONA PERO AL FINAL TIRA UNA EXCEPCION QUE NO TE DEJA SEGUIR DESPUES. ARRGLAR.
@@ -69,6 +84,38 @@ Pagina.mostrarOpcion = function(opcionElegida){
 }
 
 
+/*---- cargarBotonesReview ------------------------------------------------------------------
+       Descripcion:  Agrega funcionalidad a los botones likes-dislike
+                    Si review =  null, lo hace para todos los botones.
+                    Si no, solo para la review indicada
+*/
+Pagina.cargarBotonesReview = function(review){
+
+      let textLike ='.like-review';
+      let textDislike ='.dislike-review';
+
+      if (review!=null){
+          textLike +=  '[data-review="'+review+'"]';
+          textDislike += '[data-review="'+review+'"]';
+      }
+
+      var likes = document.querySelectorAll(textLike);
+      var dislikes = document.querySelectorAll(textDislike);
+
+      likes.forEach(like => {
+          like.addEventListener("click",function(){
+              Pagina.enviarPuntajeReview(like.dataset.review,true);
+          })
+      });
+      dislikes.forEach(dislike => {
+          dislike.addEventListener("click", function(){
+                Pagina.enviarPuntajeReview(dislike.dataset.review,false);
+          })
+      });
+
+
+}
+
 /*---- enviarPuntaje(opcionElegida) ------------------------------------------------------------------
        Descripcion:  Genera la peticion AJAX que es enviada al servidor para crear un Score_Film (Film, User, Puntaje)
 */
@@ -86,12 +133,10 @@ Pagina.enviarPuntajeFilm = function(puntaje){
 
 
 Pagina.enviarRequestPuntajeFilm = function(request,puntaje){
-    console.log(" Es el user "+Pagina.page_info.getAttribute('user')+
-                " en la peli "+Pagina.page_info.getAttribute('film'));
+    console.log(" Es la peli "+Pagina.page_info.dataset.film);
     var score_film ={ // objeto a enviar
       "puntaje": puntaje,
-      "user_id": Pagina.page_info.getAttribute('user'),
-      "film_id": Pagina.page_info.getAttribute('film')
+      "film_id": Pagina.page_info.dataset.film
     };
 
     var objeto = JSON.stringify(score_film);
@@ -153,13 +198,11 @@ Pagina.enviarReview = function(){
 
 
 Pagina.enviarRequestAgregarReview = function(request){
-    console.log(" Es el user "+Pagina.page_info.getAttribute('user')+
-                " en la peli "+Pagina.page_info.getAttribute('film'));
+    console.log("Review hecha a la peli "+Pagina.page_info.dataset.film);
     var tituloR = document.querySelector('.form-agregar-review .titulo-review');
     var descripR = document.querySelector('.form-agregar-review .descripcion-review');
     var review ={ // objeto a enviar
-      "user_id": Pagina.page_info.getAttribute('user'),
-      "film_id": Pagina.page_info.getAttribute('film'),
+      "film_id": Pagina.page_info.dataset.film,
       "titulo": tituloR.value,
       "descripcion": descripR.value
     };
@@ -180,68 +223,7 @@ Pagina.recibirResponseAgregarReview = function(response){
   if (resp['estado']=='OK'){
     estadoReview.innerHTML = resp['mensaje'];
     //CREO UN CUADRO DE REVIEWS COMO LAS QUE YA ESTAN EN LA PAGINA HASTA EL MOMENTO.
-    var seccionReviews = document.querySelector('.opcion.reviews');
-    var review = document.createElement('div');
-    review.classList.add('review-user');
-
-        var secInfoReview = document.createElement('section');
-        secInfoReview.classList.add('info-review-user');
-              var usuario = document.createElement('label');
-              usuario.innerHTML = " Usuario: ";
-                    var refPerfil = document.createElement('a');
-                    refPerfil.setAttribute('href',"/users/"+resp['username']),
-                    refPerfil.innerHTML =resp['username'];
-              usuario.appendChild(refPerfil);
-              var fecha = document.createElement('label');
-              fecha.innerHTML = " Fecha: "+ resp['created_at'];
-              var titulo = document.createElement('label');
-              titulo.innerHTML = " Titulo: "+ resp['titulo'];
-              var likes = document.createElement('label');
-              likes.innerHTML = " Likes: "+resp['positivos'];
-                    var botonLike = document.createElement('button');
-                    botonLike.classList.add('like-review');
-                    botonLike.setAttribute('user',resp['user_id']);
-                    botonLike.setAttribute('review',resp['review_id']);
-                    botonLike.innerHTML = "Like";
-                    botonLike.addEventListener("click",function(){
-                        Pagina.enviarPuntajeReview(resp['user_id'],resp['review_id'],true);
-                    })
-              likes.appendChild(botonLike);
-              var dislikes = document.createElement('label');
-              dislikes.innerHTML = " Dislikes: "+resp['negativos'];
-                    var botonDislike =document.createElement('button');
-                    botonDislike.classList.add('deslike-review');
-                    botonDislike.setAttribute('user',resp['user_id']);
-                    botonDislike.setAttribute('review',resp['review_id']);
-                    botonDislike.innerHTML = "Dislike";
-                    botonDislike.addEventListener("click",function(){
-                        Pagina.enviarPuntajeReview(resp['user_id'],resp['review_id'],false);
-                    })
-              dislikes.appendChild(botonDislike);
-              var estado = document.createElement('div');
-              estado.classList.add('estado-puntaje-review');
-              estado.setAttribute('review',resp['review_id']);
-                  var descripEstado = document.createElement('label');
-                  descripEstado.classList.add('descripcion');
-              estado.appendChild(descripEstado);
-
-        secInfoReview.appendChild(usuario);
-        secInfoReview.appendChild(fecha);
-        secInfoReview.appendChild(titulo);
-        secInfoReview.appendChild(likes);
-        secInfoReview.appendChild(dislikes);
-        secInfoReview.appendChild(estado);
-
-        var secDescripReview = document.createElement('section');
-        secDescripReview.classList.add('descripcion-review-user');
-            var descripcion = document.createElement('label');
-            descripcion.innerHTML = "descripcion: "+ resp['descripcion'];
-        secDescripReview.appendChild(descripcion);
-
-    review.appendChild(secInfoReview);
-    review.appendChild(secDescripReview);
-    //agregoo la review al la pagina.
-    seccionReviews.appendChild(review);
+    Pagina.agregarReview(resp);
 
     //Por ultimo pongo en verde el recuadro de mensaje del estado de la review
     var padre =document.querySelector('#info-reviews');
@@ -256,24 +238,24 @@ Pagina.recibirResponseAgregarReview = function(response){
   }
 }
 
+//Agrega review a partir de una respuesta que haya recibido por AJAX
+Pagina.agregarReview = function(resp){
+  var seccionReviews = document.querySelector('.opcion.reviews');
+  var review = document.createElement('div');
+  review.classList.add('review-user');
+  var codigo =
+  "<section class='info-review-user'><label class='info-review-user-placeholder'>@<a href='/users/'"+resp['username']+">"+resp['username']+"</a></label><label>"+resp['created_at']+"</label><label class='info-review-title'>"+resp['titulo']+"</label><label class='info-review-descrip'>"+resp['descripcion']+"</label><label class='like-review' data-review='"+resp['review_id']+"'><i class='fas fa-thumbs-up'></i>"+ resp['positivos']+"</label><label class='dislike-review' data-review='"+resp['review_id']+"'><i class='fas fa-thumbs-down'></i>"+resp['negativos']+"</label><div data-review='"+resp['review_id']+"' class='estado-puntaje-review'><label class='descripcion'> </label></div></section>";
 
-Pagina.cargarBotonesReview = function(){
-    var likes = document.querySelectorAll('.like-review');
-    var dislikes = document.querySelectorAll('.dislike-review');
-    likes.forEach(like => {
-        like.addEventListener("click",function(){
-            Pagina.enviarPuntajeReview(like.getAttribute('user'),like.getAttribute('review'),true);
-        })
-    });
-    dislikes.forEach(dislike => {
-        dislike.addEventListener("click", function(){
-              Pagina.enviarPuntajeReview(dislike.getAttribute('user'),dislike.getAttribute('review'),false);
-        })
-    });
+  review.innerHTML = codigo;
+  //agregoo la review al la pagina.
+  seccionReviews.appendChild(review);
+  Pagina.cargarBotonesReview(resp['review_id']);
+ //Cuando ya se cargo, agrego funcionalidad a sus botones de like-dislike
+
 
 }
 
-Pagina.enviarPuntajeReview = function(user, review,voto){
+Pagina.enviarPuntajeReview = function(review,voto){
   var request = new XMLHttpRequest();
   request.onreadystatechange = function(){ // cuando la peticion cambia de estado.
     console.log("estado de la peticion Review: " + this.status);
@@ -281,13 +263,12 @@ Pagina.enviarPuntajeReview = function(user, review,voto){
         Pagina.recibirResponsePuntajeReview(this);
     };
   }
-  Pagina.enviarRequestPuntajeReview(request, user,review,voto);
+  Pagina.enviarRequestPuntajeReview(request, review,voto);
 }
 
-Pagina.enviarRequestPuntajeReview = function(request, user, review, voto){
-  console.log('el usuario '+ Pagina.page_info.getAttribute('user') + ' voto la review '+review+' que fue hecha por el usuario'+user +'--> '+voto);
+Pagina.enviarRequestPuntajeReview = function(request, review, voto){
+  console.log('el usuario voto la review '+review+'--> '+voto);
   var score_review ={ // objeto a enviar
-    "user_id": Pagina.page_info.getAttribute('user'),
     "review_id": review,
     "voto": voto
   };
@@ -305,7 +286,7 @@ Pagina.recibirResponsePuntajeReview = function(response){
   var resp = JSON.parse(response.responseText);
   console.log("se recibio respuesta> "+ resp['mensaje']);
   //var estadoReview = document.querySelector('.opcion.agregarReview .estado .descripcion-estado');
-  var estadoPuntajeReview = document.querySelector(".estado-puntaje-review[review='"+resp['review_id']+"'] .descripcion");
+  var estadoPuntajeReview = document.querySelector(".estado-puntaje-review[data-review='"+resp['review_id']+"'] .descripcion");
   console.log(estadoPuntajeReview);
   estadoPuntajeReview.innerHTML = resp['mensaje'];
 
@@ -315,4 +296,33 @@ Pagina.recibirResponsePuntajeReview = function(response){
     //poner en verde icono
 
   }
+}
+
+/*------------------- CARGAR LAS REVIEWS POR DEMANDA -------------------*/
+
+Pagina.enviarRequestCargarReviews = function(){
+  var request = new XMLHttpRequest();
+  request.onreadystatechange = function(){ // cuando la peticion cambia de estado.
+    console.log("estado de la peticion Review: " + this.status);
+    if (this.readyState==4 && this.status==200){ // si se recibe correctamente la respuesta.
+        Pagina.recibirResponseCargarReviews(this);
+    };
+  }
+
+  var film = Pagina.page_info.dataset.film;
+  var offset = document.querySelectorAll('.review-user').length;
+  var qReviews = 5;
+  console.log('peli> '+ film + '. offset>'+offset);
+  request.open("GET", "/film-on-demand/"+film+"/"+offset+"/"+qReviews, true);
+  request.send();
+};
+
+
+//Carga la nueva tanda de reviews que se pidio al hacer scroll.
+Pagina.recibirResponseCargarReviews = function(response){
+  var resp = JSON.parse(response.responseText);
+//  console.log("se recibio respuesta> "+ resp[1]);
+  resp.forEach(function(r){
+      Pagina.agregarReview(r);
+  });
 }
