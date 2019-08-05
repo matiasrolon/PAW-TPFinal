@@ -271,8 +271,8 @@ class FilmController extends Controller
     {
         $DBFilms = $this->searchLocalFilm($filmname);
         // Agrego los generos a la respuesta
-        $filmsWithGenre = Array();
-        $genPorFilm = Array(); // Generos por film. Ya que el parse en el js espera recibir un arreglo
+        $filmsWithGenre = array();
+        $genPorFilm = array(); // Generos por film. Ya que el parse en el js espera recibir un arreglo
         foreach ($DBFilms as $film) {
           // Me devuelve un objeto genero. Me quedo solo con el nombre
           foreach ($film->genres()->get() as $genre) {
@@ -281,6 +281,8 @@ class FilmController extends Controller
           // Le saco la coma del final
           $film->genero = $genPorFilm;
           $filmsWithGenre[] = $film;
+          // Limpio la variable auxiliar
+          $genPorFilm = array();
         }
         return response()->json($filmsWithGenre);
     }
