@@ -18,11 +18,9 @@
     <h2>Busquedas sin resultados</h2>
     @foreach ($searches as $search)
     <div text="{{ $search['busqueda'] }}" class="busqueda">
-        <!-- <div class="info-busqueda"> -->
-            <button class="button1" class="resolver-busqueda" type="button" name="button">&#10004;</button>
-            <h3> Buscado {{$search['cant_busquedas']}} veces</h3>
-            <p>{{ $search['busqueda'] }}</p>
-        <!-- </div> -->
+        <button class="button1" class="resolver-busqueda" type="button" name="button">&#10004;</button>
+        <h3> Buscado {{$search['cant_busquedas']}} veces</h3>
+        <p>{{ $search['busqueda'] }}</p>
     </div>
     @endforeach
 </div>
@@ -51,14 +49,13 @@
             </div>
             <div class="info">
                 <div class="campo titulo">
-                    <label for="">Titulo:</label>
-                    <input type="text" required class="editable titulo" name="name" rows=1 cols=80 disabled>
+                    <label class="required" for="titulo">Titulo:</label>
+                    <input type="text" required class="editable titulo" name="titulo" rows=1 cols=80 disabled>
                 </div>
 
                 <div class="campo categoria">
-                    <label for="">Categoria:</label>
-                    <select required class="editable categoria" name="categoria" disabled>
-                        <!-- FIX MEEEEEEEEEEEEEE. FIX MY HEAD -->
+                    <label class="required" for="categorias">Categoria:</label>
+                    <select required class="editable categoria" name="categorias" disabled>
                         <option hidden selected>Elija una categoria</option>
                         @for ($i = 0; $i < count($categorias); $i++)
                             <option value="{{ $categorias[$i] }}">{{ $categorias[$i] }}</option>
@@ -67,12 +64,12 @@
                 </div>
 
                 <div class="campo sinopsis">
-                    <label for="">Sinopsis:</label>
-                    <textarea required class="editable sinopsis" name="name" rows=6 cols=80 disabled></textarea>
+                    <label class="required" for="sinopsis">Sinopsis:</label>
+                    <textarea required class="editable sinopsis" name="sinopsis" rows=6 cols=80 disabled></textarea>
                 </div>
                 
                 <div class="campo pais">
-                    <label for="">Pais:</label>
+                    <label for="paises">Pais:</label>
                     <select name="paises" id="paises" class='editable pais' disabled>
                         <option hidden selected>Elija un pais</option>
                         @for ($i = 0; $i < count($paises); $i++)
@@ -82,18 +79,17 @@
                 </div>
 
                 <div class="campo fecha-estreno">
-                    <label for="">Fecha estreno:</label>
-                    <input type="text" required class="editable fecha-estreno" name="name" rows=1 disabled>
+                    <label class="required" for="fecha-estreno">Fecha estreno:</label>
+                    <input type="text" required class="editable fecha-estreno" name="fecha-estreno" rows=1 disabled>
                 </div>
 
                 <div class="campo fecha-finalizacion">
-                    <label for="">Fecha finalizacion:</label>
-                    <input type="text" class="editable fecha-finalizacion" name="name" rows=1 disabled>
+                    <label for="fecha-finalizacion">Fecha finalizacion:</label>
+                    <input type="text" class="editable fecha-finalizacion" name="fecha-finalizacion" rows=1 disabled>
                 </div>
 
                 <div class="campo genero">
-                    <!-- REQUIRED -->
-                    <label for="">Genero:</label>
+                    <label class="required" for="generos">Genero:</label>
                     <ul class="editable genero" disabled>
                     </ul>
                     <select name="generos" id="generos" class="editable genero" disabled>
@@ -107,13 +103,13 @@
                 </div>
 
                 <div class="campo duracion_min">
-                    <label for="">Duracion (min):</label>
-                    <input type="text" class="editable duracion-min" name="name" rows=1 disabled>
+                    <label for="duracion">Duracion (min):</label>
+                    <input type="text" class="editable duracion-min" name="duracion" rows=1 disabled>
                 </div>
 
                 <div class="campo trailer">
-                    <label for="">Trailer URL:</label>
-                    <textarea class="editable trailer-url" name="name" rows=2 disabled></textarea>
+                    <label for="trailer-url">Trailer URL:</label>
+                    <textarea class="editable trailer-url" name="trailer-url" rows=2 disabled></textarea>
                 </div>
 
                 <div class="opciones">

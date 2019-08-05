@@ -3,6 +3,12 @@
   grid-template-columns: 22% 78%;
 }
 
+.required::after {
+  content: "*";
+  padding-left: 3px;
+  color: rgba(200,50,50,1);
+}
+
 .pendientes h2 {
   font-size: 1.2em;
 }
@@ -78,11 +84,6 @@
   margin-top: 2%;
 }
 
-.info-busqueda p{
-  margin: 2%;
-  display: block;
-}
-
 
 .busqueda button{
   margin: 2% 2%;
@@ -95,11 +96,6 @@
 .busqueda button:hover::after {
   content: 'Borrar';
   padding-left: 3px;
-}
-
-.info-busqueda{
-  display: inline-block;
-  width: 50%;
 }
 
 .resolver-busqueda{

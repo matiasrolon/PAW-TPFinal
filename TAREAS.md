@@ -44,7 +44,7 @@
 - [x] **Ocho:**
   En admin films, al querer modificar una pelicula en nuestra BD da error. Creo que tiene que ver con el chequeo de los generos que agregue.
 
-- [ ] **Nueve:**
+- [x] **Nueve:**
   El usuario se puede dar "autolike" y/o "autodislike" en su review. (**En cualquier red social te podes dar autolike. No lo veo como un problema** @vic)
 
 - [x] **Diez:**
@@ -142,6 +142,7 @@
 - [ ] Permitir agregar un film sin necesidad de buscarlo en la API.
   - [ ] Requiere poder subir una foto manualmente.
 - [ ] Funcionalidad del boton de Eliminar.
+  - [ ] Activarlo al seleccionar un film que provenga de nuestra BD.
 
 - [ ] HOME
 - [ ] INFO PELICULA -------> (en esa misma pagina tendra todas sus reviews, paginadas)
