@@ -4,7 +4,7 @@
   transform: scale(0,0);
 }
 .desaparece{
-    /* transition: all 0.5s ease-out; */
+     transition: all 0.5s ease-out;
     transform: scale(0,0);
     display: none;
 }
@@ -28,7 +28,6 @@ a{
 
 .poster-container {
 	grid-area: poster;
-	overflow: hidden;
 	margin:0;
 }
 
@@ -94,7 +93,7 @@ a{
 
 	.resultado-seleccionado .poster{
         height: 100%;
-        /* width: auto; */
+         width:100%;
   }
 
  	.iconos-puntaje .estrella {
@@ -114,7 +113,7 @@ a{
   	  width: 80%;
 	}
 
-	
+
 	.resultado-seleccionado p {
 		max-height: 130px;
 	}
@@ -139,9 +138,13 @@ a{
 	  /* margin: 2% 0%; */
 	}
 
+  .poster-container{
+    overflow: overlay;
+  }
+
 	.resultado-seleccionado .poster{
 		height: 600px;
-		margin: -60% 0;
+		margin: 0px;
 		width: auto;
 	}
 
@@ -184,7 +187,7 @@ a{
 		vertical-align:bottom;
 	}
 
-	
+
 	.detalles-pelicula ul li{
 	  margin-top: 5%;
 	}
@@ -209,6 +212,7 @@ div.detalles-pelicula{
   /* padding: 15px; */
   /* border: 3px solid black; */
   grid-area: info;
+  padding-left: 2%;
 }
 
 .reviews-film-container{
@@ -224,7 +228,13 @@ div.detalles-pelicula{
   color: white;
 }
 
-.review-user{display: block;/* border: solid 3px; *//* margin-bottom: 5%; *//* display: inline-block; *//* width: 90%; *//* background-color: white; */height: fit-content;/* border-radius: 0px 10px 10px 10px; *//* border: 1px solid; *//* padding: 1%; */}
+.review-user{
+    display: block;
+    height: fit-content;
+  /* border: solid 3px; *//* margin-bottom: 5%; *//* display: inline-block; *//* width: 90%; *//* background-color: white; */
+  /* border-radius: 0px 10px 10px 10px; *//* border: 1px solid; *//* padding: 1%; */
+  margin-bottom: 20px;
+}
 
 .review-user.inicial{
     border: solid 5px rgb(145, 25, 170);
@@ -337,6 +347,7 @@ input.titulo-review {
 
 .resultado-seleccionado .poster{
   display: inline-block;
+  margin: 0%;
 }
 
 .resultado-seleccionado p {
@@ -483,4 +494,32 @@ label.info-review-descrip {
 .dislike-review p{
   display: inline;
   background-color: white;
+}
+
+.estado-puntaje-review {
+
+}
+
+.estado-puntaje-review .descripcion.ok{
+  background-color: rgb(34, 181, 26);
+  /*border: solid 1px black;*/
+  border-radius: 12px;*/
+}
+
+.estado-puntaje-review .descripcion.failed{
+  background-color: tomato;
+  /*border: solid 1px black;*/
+  border-radius: 12px;
+}
+
+.estado-puntaje-review .descripcion{
+  display: inline-block;
+  float: right;
+  margin-right: 10%;
+  padding-right: 1%;
+  padding-left: 1%;
+}
+
+.fecha-review{
+  text-align: center;
 }

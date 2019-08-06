@@ -288,14 +288,33 @@ Pagina.recibirResponsePuntajeReview = function(response){
   //var estadoReview = document.querySelector('.opcion.agregarReview .estado .descripcion-estado');
   var estadoPuntajeReview = document.querySelector(".estado-puntaje-review[data-review='"+resp['review_id']+"'] .descripcion");
   console.log(estadoPuntajeReview);
-  estadoPuntajeReview.innerHTML = resp['mensaje'];
 
-  if (resp['estado']='OK'){
-    //poner en verde icono
-  }else{
-    //poner en verde icono
-
+  if (estadoPuntajeReview.classList.contains('desaparece')){
+    estadoPuntajeReview.classList.remove('desaparece');
   }
+
+  if (resp['estado']=='OK'){
+      if (estadoPuntajeReview.classList.contains('failed')){
+        estadoPuntajeReview.classList.remove('failed');
+      }
+      if (!estadoPuntajeReview.classList.contains('ok')){
+        estadoPuntajeReview.classList.add('ok');
+      }
+
+  }else{ // si estado = FAILED
+        if (estadoPuntajeReview.classList.contains('ok')){
+          estadoPuntajeReview.classList.remove('ok');
+        }
+        if (!estadoPuntajeReview.classList.contains('failed')){
+          estadoPuntajeReview.classList.add('failed');
+        }
+  }
+
+  estadoPuntajeReview.innerHTML = resp['mensaje'];
+  window.setInterval(function(){
+        estadoPuntajeReview.classList.add('desaparece');
+  },7000);
+
 }
 
 /*------------------- CARGAR LAS REVIEWS POR DEMANDA -------------------*/

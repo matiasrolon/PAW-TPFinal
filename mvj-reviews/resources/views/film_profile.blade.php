@@ -117,12 +117,15 @@
 
             @if (count($reviews)>0)
             @foreach ($reviews as $review)
+            <div data-review="{{$review['id']}}" class="estado-puntaje-review">
+              <label class="descripcion"> </label>
+            </div>
             <div class="review-user">
               <section class="info-review-user">
                 <label class="info-review-user-placeholder">
                   @<a href="{{ route('user_profile', $review['username']) }}">{{ $review['username'] }}</a>
                 </label>
-                <label>
+                <label class="fecha-review">
                   {{ $review['created_at']->format('d-m-Y') }}
                 </label>
 
@@ -140,9 +143,6 @@
                 <label class="dislike-review" data-review="{{$review['id']}}"  for="">
                     <i class="fas fa-thumbs-down"></i> <p>{{ $review['negativos'] }}</p>
                 </label>
-                <div data-review="{{$review['id']}}" class="estado-puntaje-review">
-                  <label class="descripcion"> </label>
-                </div>
               </section>
               </div>
                 @endforeach

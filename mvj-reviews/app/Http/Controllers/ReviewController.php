@@ -65,7 +65,7 @@ class ReviewController extends Controller
       $review = Review::find($obj->review_id);
       if (Auth()->user()==null){ //si no esta logeado -> no inserto nada en Review
         $obj->estado = "FAILED";
-        $obj->mensaje = "Debes iniciar sesion primero.";
+        $obj->mensaje = " Debes iniciar sesion. ";
       }else{ // si esta logeado
           $score_review = Score_Review::where('review_id',$obj->review_id)
                                       ->where('user_id',Auth()->user()->id)
@@ -78,12 +78,12 @@ class ReviewController extends Controller
           if ($score_review==null) {
             $newScore_review->save();
             $obj->estado = "OK";
-            $obj->mensaje = "Se añadio tu puntaje para esta review!";
+            $obj->mensaje = " Puntaje añadido! ";
           }else{
             $score_review->voto = $obj->voto;
             $score_review->save();
             $obj->estado = "OK";
-            $obj->mensaje = "Se actualizo tu puntaje para esta review!";
+            $obj->mensaje = " Puntaje actualizado! ";
           }
       }
         echo json_encode($obj);
