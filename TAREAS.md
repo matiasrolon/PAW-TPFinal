@@ -1,5 +1,24 @@
 # TAREAS
 
+## TO-DO (Semana - al 6/08/2019)
+### Matias
+- [ ] Funcionalidad EDITAR datos de perfil de usuario.
+- [ ] CSS de Premios (awards.blade) y Premio en particular (award_profile.blade) 
+### Juan
+- [ ] CSS de Admin novedades.
+  - Para el formulario de crear noticia se puede agregar un campo "importancia" y a partir de esa categoria decidir los tamaños de las noticias cuando aparescan en la pagina de Noticias (News.blade)
+  - No esta hecha la parte de EDITAR una novedad ya existente. Podria ser en esa misma pagina solo que con los parametros de input de esa noticia/premio pasados desde el php. 
+  - Si se considera necesario por una razon de funcionalidad, se puede eliminar la primer pantalla en donde aparece en grande las opciones de Crear Noticia o Crear Premio, directamente aparecer como menu achicado (su segunda version)
+
+### Victorio
+- [ ] CSS de Noticias (news.blade) y noticia en particular (news_profile.blade)
+  - Acordar botones de edicion y tamaño de las noticias a partir de items mencionados para Juan.
+  
+### Acordar
+- [ ] CSS de Estrenos (premieres.blade) y estreno en particular (premire_profile.blade)
+  - Al ser peliculas con la particularidad que su fecha de estreno es mayor a hoy, podria hacerse un apartado por mes, mencionando cuales se estrenan en ese mes. Deberian aparecer arriba de todo los de esta semana/mes actual.
+- [ ] Mejorar CSS de login y registrer para que este acorde en estetica con las otras paginas.
+
 ## TO-DO (General)
 
 - [ ] Revisar funcion FilmController\store()
@@ -65,18 +84,6 @@
  cuales son de la api y cuales de nuestra bd, queda mejor si directamente las filtramos.4
   - **Hecho a medias: logre que se guarde le id_themoviedb pero no consigo lograr que NO se muestre como resultado. Tambien se guardan la duracion (que no se por que estaba comentada).**
 
-### VIEW
-
-- [x] Agregar posibilidad de agregar varios generos, parseados por comas cuando los ingrese el usuario. En el back se vera si ese genero ya esta ingresado en base, si no esta lo creara.
-  - **Resuelto mas elegantemente.**
-- [] Los resultados dados de la API podrian aparecer en carrusel (si da el tiempo)
-
-### AJAX
-
-- [] Primero cargar los datos de las peliculas, y que los resultados ya tengan el tamaño de div
-   que tendran cuando la imagen llegue (en una peticion aparte), y solo se inserte en el recuadro.
-   (actualmente varia segun el tamaño del contenido)
-
 ### MashUp - API
 
 - [x] Datos recuperados de la API que esten vacios, que queden asi. Actualmente cuando no hay nada, pone como valor "undefined" o "false";
@@ -102,24 +109,6 @@
 
 ### Controllers
 
-- [ ] Review Controller
-  - [ ] ABM (Metodos)
-- [ ] Obra Controller
-  - [ ] ABM (Metodos)
-  - [ ] Buscar Obras mientras Scrolling (busca de a ~50)
-  - [ ] Buscar Obra (por ID, Nombre, etc)
-  - [ ] Ver Raking Obras
-  - [ ] Integración con API de peliculas. (Utiliza metodos de Obras).
-- [ ] User Controller
-  - [ ] ABM (Metodos)
-  - [ ] Buscar User (por ID, Nombre, etc)
-  - [ ] Ver Raking Users
-- [ ] Novedad Controller
-  - [ ] ABM (Metodos)
-  - [ ] Buscar Novedad (Por Titulo, Copete, Descripción LIKE "...")
-  - [ ] Buscar Novedad mientras Scrolling (busca de a ~50)
-  - [ ] Buscar Novedad ultimas novedades.
-
 #### Film Controller
 
 - [x] Validacion en metodo store()
@@ -129,7 +118,7 @@
   - [ ] Cambiarlo tambien en Database\Migrations\Create_table_film
 - [ ] Actualizacion en metodo update()
 
-### Views - por orden de importancia
+### Views 
 
 #### Admin Films
 
@@ -144,26 +133,3 @@
 - [ ] Funcionalidad del boton de Eliminar.
   - [ ] Activarlo al seleccionar un film que provenga de nuestra BD.
 
-- [ ] HOME
-- [ ] INFO PELICULA -------> (en esa misma pagina tendra todas sus reviews, paginadas)
-  - [x] MOSTRAR GENEROS ---> Mostrar los generos de la pelicula.
-  - [ ] HACER REVIEW -----> (Si presiona "Hacer Review" -> form, cuando se envian los datos redirecciona de nuevo a Info pelicula)
-  - [ ] VOTAR PELICULA ----> (Te devuelve la misma pagina con un mensaje abajo de las estrellitas que diga 'voto registrado').
-  - [ ] VOTAR REVIEW ------> Un icono se pondra rojo o verde, el voto se enviara mediante ajax.
-- [ ] BUSQUEDA PELICULAS -------> (resultados paginados ---> redirecciona a la INFO PELICULA que se abra)
-
-#### Perfil de usuario
-
-- [ ] Mostrar la cantidad de reviews que hizo el usuario
-- [ ] PERFIL PUBLICO DE USUARIO -----> (Si el perfil visto coincide con el usuario logeado -> mostrar boton para EDITAR la info)
-  - [ ] EDITAR DATOS PERFIL ----> (Cuando se presione EDITAR, a traves de javascript los divs de datos se reemplazan por inputs -> redirecciona al mismo perfil)  
-
-- [ ] RANKING PELICULAS ----> (Solo mostrar resultado de la query, para agregar funcionalidad cada tupla puede direccionar a la Info pelicula)
-- [ ] RANKING USUARIOS ----> (Solo mostrar resultado de la query, para agregar funcionalidad cada tupla puede direccionar al perfil publico de usuario).
-- [ ] ABM PELICULA (para admins) ---> Forms.
-
-- [ ] ALTAS NOVEDAD (para admins) --->  Una sola, que deje seleccionar el tipo: estreno, nodedad del dia, premios.
-  - [ ] ESTRENOS ---------->  muestro todos, ordenados por fecha a modo de blog, paginados.
-  - [ ] NOVEDAD DEL DIA --->  muestro todos, ordenados por fecha a modo de blog, paginados.
-  - [ ] PREMIOS
-        - [ ] PREMIO ESPECIFICO ------>  toda la info en una pantalla individual para ese premio en el que se entro.
