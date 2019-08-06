@@ -411,7 +411,6 @@ AdminFilms.borrarMensajes = function() {
 
   // Borra mensajes de que no hubo coincidencias
   var msjs = document.querySelectorAll('.sin-resultados');
-  console.log('msjs: ' + msjs);
   var i = 0;
   for (i=0; i < msjs.length; i++) {
     msjs[i].remove();
@@ -653,18 +652,16 @@ AdminFilms.establecerResultadoSeleccionado = function(resultado,origen,base64){
   var btnModificar = document.querySelector('.resultado-seleccionado .opciones .boton-modificar');
   var btnEliminar = document.querySelector('.resultado-seleccionado .opciones .boton-eliminar');
 
-  if (origen=='API'){
-      btnGuardar.setAttribute('enabled','true');
-      btnModificar.setAttribute('enabled','true');
-      btnEliminar.setAttribute('enabled','false');
-      btnEliminar.setAttribute('disabled','true');
-  }else{
-    if (origen=='BD'){
-          btnGuardar.setAttribute('enabled','false');
-          btnModificar.setAttribute('enabled','true');
-          btnEliminar.setAttribute('enabled','true')
-          btnEliminar.setAttribute('disabled','false')
-    }
+  if (origen=='API') {
+    btnGuardar.setAttribute('enabled','true');
+    btnModificar.setAttribute('enabled','true');
+    btnEliminar.setAttribute('disabled','disabled');
+
+  } else if (origen=='DB') {
+    btnGuardar.setAttribute('enabled','false');
+    btnModificar.setAttribute('enabled','true');
+    btnEliminar.setAttribute('enabled','true');
+    btnEliminar.removeAttribute('disabled');
   }
   //a todos los campos por defecto los traigo para no ser editados, una vez que clickea en el boton modificar
   //se cambia a enabled.

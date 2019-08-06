@@ -421,7 +421,7 @@ class FilmController extends Controller
         } catch (\Illuminate\Database\QueryException $e) {
           // SQL 23000: Constraint Violation xq tiene alguna FK puesta en NO ACTION
           Log::error('Error en FilmController@destroy: ' . $e->getMessage());
-          return response('Error al intentar borrar el film: ' . $film->titulo, 409);
+          return response('Error al intentar borrar el film.', 409);
         }
       }
       // Else: id inexistente
