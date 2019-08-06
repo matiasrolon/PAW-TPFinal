@@ -163,7 +163,22 @@ AdminFilms.cargarFuncionalidadABM = function(){
 
   var btnEliminar = document.querySelector('.resultado-seleccionado .opciones .boton-eliminar');
   btnEliminar.addEventListener('click', function() {
-    alert('FALTA LA FUNCION DE ELIMINAR');
+    var request = new XMLHttpRequest();
+    request.onreadystatechange = function(){ // cuando la peticion cambia de estado.
+      console.log("estado del ajax post: " + this.status);
+      if (this.readyState==4) {
+          AdminFilms.recibirResponseDeleteFilm(this);
+      };
+    }
+    // Selecciono el id de la pelicula a borrar. Lo obtengo del div
+    var div = document.querySelector('.admin-resultados .resultado-seleccionado .info');
+    var filmID = div.getAttribute('id');
+    console.log('Se va a borrar el film con id=' + filmID);
+    
+    request.open('GET', '/delete/' + filmID);
+    request.setRequestHeader('X-CSRF-TOKEN', $('meta[name="csrf-token"]').attr('content'));
+    request.send();
+    
   });
 
   // Boton de agregar genero
@@ -258,6 +273,33 @@ AdminFilms.enviarRequestStoreFilm = function(request){
 }
 
 
+AdminFilms.recibirResponseDeleteFilm = function(response) {
+  console.log('recibi respuesta de ajax post delete film. Status: ' + response.status);
+  AdminFilms.borrarMensajes();
+  var ulMensajes = document.getElementById('mensajes');
+  var liMsj = document.createElement('li');
+
+  if (response.status == 200) {
+    // Este no se si andara
+    var resp = JSON.parse(response.responseText);
+    liMsj.classList.add('resultado-Ok');
+    liMsj.innerText = resp['mensaje'];
+
+  } else if (response.status == 409) {
+    liMsj.classList.add('resultado-Failed');
+    liMsj.innerText = response.responseText;
+
+  } else {
+    // Error desconocido
+    liMsj.classList.add('resultado-Failed');
+    liMsj.innerText = 'Error del servidor.';
+  }
+  AdminFilms.borrarOnClick(liMsj);
+  ulMensajes.appendChild(liMsj);
+
+  console.log("DELETE.responseText: " + response.responseText);
+}
+
 /*
 Funcion: Recibe la respuesta de la operacion y muestra el resultado acorde en pantalla
          Si la operacion fue exitosa, actualiza atributos de los elementos.
@@ -266,8 +308,9 @@ AdminFilms.recibirResponseStoreFilm = function(response){
   console.log('recibi respuesta de ajax post store film. Status: ' + response.status);
   let poster = document.querySelector('.admin-resultados .resultado-seleccionado .poster');
   // var ulMensajes = document.querySelector('admin-resultados .resultado-seleccionado .poster ul');
+  ulMensajes = document.getElementById('mensajes');
   AdminFilms.borrarMensajes();
-  var ulMensajes = document.getElementById('mensajes');
+  
 
   // Cuando laravel genera un error, devuelve status = 500
   // console.log("response.status: " + response.status);
@@ -554,7 +597,7 @@ AdminFilms.establecerResultadoSeleccionado = function(resultado,origen,base64){
   }*/
   AdminFilms.borrarMensajes();
 
-  var film_select = document.querySelector('.admin-resultados .resultado-seleccionado .info')
+  var film_select = document.querySelector('.admin-resultados .resultado-seleccionado .info');
   film_select.setAttribute('origen',origen);
   if (origen=='DB') {
     film_select.setAttribute('id',resultado['id']);
@@ -613,13 +656,14 @@ AdminFilms.establecerResultadoSeleccionado = function(resultado,origen,base64){
   if (origen=='API'){
       btnGuardar.setAttribute('enabled','true');
       btnModificar.setAttribute('enabled','true');
-
+      btnEliminar.setAttribute('enabled','false');
       btnEliminar.setAttribute('disabled','true');
   }else{
     if (origen=='BD'){
           btnGuardar.setAttribute('enabled','false');
           btnModificar.setAttribute('enabled','true');
           btnEliminar.setAttribute('enabled','true')
+          btnEliminar.setAttribute('disabled','false')
     }
   }
   //a todos los campos por defecto los traigo para no ser editados, una vez que clickea en el boton modificar

@@ -415,6 +415,7 @@ class FilmController extends Controller
         try {
           if ($film->delete()){
             $aux['mensaje'] = 'Eliminado exitoso.';
+            $aux->poster = ''; // Para que no tire error de UTF8 encondin al pasar a JSON
             return response()->json($aux);
           }
         } catch (\Illuminate\Database\QueryException $e) {
