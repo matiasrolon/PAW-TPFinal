@@ -9,22 +9,28 @@
 
 @section('content')
 <section class="rank">
-  <h2>Ranking de criticos de MVJ:</h2>
-  <table class="tabla-rank">
-    <thead>
-      <th>Titulo</th>
-      <th>Categoria</th>
-      <th>Estreno</th>
+  <h2>Ranking films de MVJ</h2>
+  <table class="table-rank">
+    <thead class="col-attributes">
+      <th class="position"></th>
+      <th class="filmname">Titulo</th>
+      <th class="category">Categoria</th>
+      <th class="date">Estreno</th>
       <th>Pais</th>
       <th>Puntaje</th>
     </thead>
     <tbody>
-      @foreach($films as $film)
-        <tr>
-            <!-- <div class="tupla-film"> -->
-          <td> <a href="{{ route('film_profile', $film['id']) }}"> {{ $film['titulo'] }} </a></td>
-          <td>{{ $film['categoria'] }}</td>
-          <td>{{ $film['fecha_estreno'] }}</td>
+      @foreach($films as $indexKey => $film)
+        <tr class="film-position">
+          <td class="position">{{$indexKey +1}}</td>
+          <td class="filmname">
+              <a href="{{ route('film_profile', $film['id']) }}" class="link-film">
+                <img src="data:image/png;base64,{{$film['poster64']}}" class="poster" alt="">
+                <div>{{ $film['titulo'] }}</div>
+              </a>
+          </td>
+          <td class="category">{{ $film['categoria'] }}</td>
+          <td class="date">{{ $film['fecha_estreno'] }}</td>
           <td>{{ $film['pais'] }}</td>
           <td>{{ number_format($film['puntaje'], 2) }}</td>
             <!-- </div> -->

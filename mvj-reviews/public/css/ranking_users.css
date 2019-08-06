@@ -1,19 +1,64 @@
 #content {
-  margin: 3%;
+  margin-top: 0%;
 }
 
- 
-.tabla{/* padding: 5px 5px; */border-radius: 5px 5px;border: solid 1px white;width: 100%;/* background: bisque; */overflow: scroll;}
+.rank{
+
+    margin-left: 10%;
+    margin-right: 10%;
+    padding-top: 2%;
+    padding-bottom: 2%;
+    text-align: center;
+    background-color: #e0e0e0;
+}
+
+.table-rank{
+  /* padding: 5px 5px; */
+  border-radius: 5px 5px;
+  border: solid 1px white;
+  border-collapse: collapse;
+   background-color: bisque;
+  overflow: scroll;
+  margin-left: 2%;
+  margin-right: 2%;
+  padding: 2%;
+  text-align: left;
+  width: 96%;
+}
 
 thead{
-  padding: 0px 0px;
+  padding: 2%;
   margin: 0px;
   text-align: left;
-/*   text-transform: uppercase; */
+  text-transform: uppercase;
 }
 
 td, th {
-  padding: 1%;
+  padding: 0%;
   margin: 0px;
-  /* width: 50px; */
+  width: auto;
+  border-bottom: solid 1px white;
+}
+
+h2{
+  margin-top: 0%;
+  margin-bottom: 1%;
+}
+
+.link-user{
+  text-decoration: none;
+}
+
+.user-position{
+  height: 40px;
+}
+
+.position{
+  border-right: solid 1px white;
+  text-align: center;
+  width: 30px;
+}
+
+.username{
+padding-left: 2%;
 }

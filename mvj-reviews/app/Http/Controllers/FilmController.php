@@ -81,7 +81,11 @@ class FilmController extends Controller
 
 
     public function ranking(){
-      $films = Film::orderBy('puntaje','desc')->take(100)->get();
+      $films = Film::orderBy('puntaje','desc')
+                    ->select('film.*',\DB::raw('TO_BASE64(film.poster) as poster64'))
+                    ->take(100)
+                    ->get();
+
       return view('ranking-films',compact('films'));
     }
 
@@ -194,7 +198,8 @@ class FilmController extends Controller
                    ->leftjoin('genre', 'genre.id', '=', 'genre_film.genre_id')
                    ->where('genre.id', '=', $genero)
                    ->where('film.categoria', '=', $categoria)
-                   ->select('film.id','film.titulo','film.fecha_estreno','film.pais','film.sinopsis', 'film.puntaje', \DB::raw('TO_BASE64(film.poster) as poster'))
+                   ->select('film.id','film.titulo','film.fecha_estreno','film.pais','film.sinopsis',
+                   'film.puntaje', \DB::raw('TO_BASE64(film.poster) as poster'))
                    ->orderBy('puntaje','desc')
                    ->skip($offset)->take($cant)
                    ->get();

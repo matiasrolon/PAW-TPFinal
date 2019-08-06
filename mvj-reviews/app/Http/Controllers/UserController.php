@@ -11,22 +11,22 @@ use App\Models\PendentSearch;
 class UserController extends Controller
 {
 
-  // TODO: HACER FUNCION PARA CONFIRMAR EL SIGN_UP
-  //       PROFILE()
-
-
   public function AuthRouteAPI(Request $request){
    return $request->user();
   }
 
     public function ranking(){
-      $users = User::join('range', 'users.range_id', '=', 'range.id')->orderBy('puntos','desc')->take(100)->select('users.*', 'range.id as rid', 'range.nombre as rnom')->get();
+      $users = User::join('range', 'users.range_id', '=', 'range.id')
+                    ->orderBy('puntos','desc')
+                    ->take(100)
+                    ->select('users.*', 'range.id as rid', 'range.nombre as rnom')
+                    ->get();
       /* SOLUCIONADO: ERA EL LARAVEL PIJA ESTE.
       CUANDO DOS TABLAS DISTINTAS TIENEN UN CAMPO CON EL MISMO NOMBRE Y HACES UN JOIN DE ESAS 2 TABLAS
       SOBREESCRIBE LOS CAMPOS CON EL MISMO NOMBRE.
       PARA EVITAR ESTO HAY QUE RENOMBRAR LOS CAMPOS QUE TIENEN EL MISMO NOMBRE. */
       // $cantReviews = User::join('review', 'users.id', '=', 'review.user_id')->count('review.user_id')->groupBy('users.id')->get();
-      
+
       // echo $users;
       foreach ($users as $user) {
         $user->avatar = base64_encode($user->avatar);
@@ -37,6 +37,7 @@ class UserController extends Controller
       }
       return view('ranking-users',compact('users'));
     }
+
 
     public function profile($username){
       $user = User::where('username',$username)->first();
