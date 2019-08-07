@@ -48,18 +48,24 @@ class UserController extends Controller
                     'range.nombre as rango','users.created_at','users.id',
                      \DB::raw('TO_BASE64(users.avatar) as avatar'))
                     ->first();
-      $user->avatar =  base64_decode($user->avatar);
-      $reviews = Review::join('film','film_id','=','film.id')
-                          ->where('review.user_id',$user->id)
-                          ->select('review.*','film.titulo as pelicula',
-                          \DB::raw('TO_BASE64(poster) as poster'))
-                          ->orderBy('review.created_at')
-                          ->take(4)
-                          ->get();
 
-      $user->cantReviews = count($reviews);
-      //var_dump(json_decode($reviews));
-      return view('user_profile',compact('user','reviews'));
+      if ($user != null) {
+        $user->avatar =  base64_decode($user->avatar);
+        $reviews = Review::join('film','film_id','=','film.id')
+                            ->where('review.user_id',$user->id)
+                            ->select('review.*','film.titulo as pelicula',
+                            \DB::raw('TO_BASE64(poster) as poster'))
+                            ->orderBy('review.created_at')
+                            ->take(4)
+                            ->get();
+
+        $user->cantReviews = count($reviews);
+        //var_dump(json_decode($reviews));
+        return view('user_profile',compact('user','reviews'));
+      } else {
+        abort(404, 'Not found.');
+      }
+      
     }
 
     public function update(Request $request){

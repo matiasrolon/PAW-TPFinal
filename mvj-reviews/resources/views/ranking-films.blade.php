@@ -26,7 +26,7 @@
           <td class="filmname">
               <a href="{{ route('film_profile', $film['id']) }}" class="link-film">
                 <img src="data:image/png;base64,{{$film['poster64']}}" class="poster" alt="">
-                <div>{{ $film['titulo'] }}</div>
+                <div>{{ str_limit($film['titulo'], $limit = 40, $end = '...')  }}</div>
               </a>
           </td>
           <td class="category">{{ $film['categoria'] }}</td>
