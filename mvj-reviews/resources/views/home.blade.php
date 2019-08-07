@@ -42,7 +42,7 @@
                       <div class="flip-card-back">
                         <p>{{ $pelicula['fecha_estreno'] }}</p>
                         <p class="titulo-film">{{ $pelicula['titulo']}}</p>
-                        <p>{{ str_limit($pelicula['sinopsis'], $limit = 150, $end = '...') }}</p>
+                        <p>{{ str_limit($pelicula['sinopsis'], $limit = 100, $end = '...') }}</p>
                       </div>
                       <!-- </a> -->
                     </div>

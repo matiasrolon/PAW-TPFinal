@@ -21,7 +21,7 @@
 }
 
 body {
-  display: contents;
+/*   display: contents; */
   background-color: #fbe3c3;
   font-family: 'Pridi', serif;
   margin: auto;
@@ -72,7 +72,9 @@ body {
   }
 
   .menus{
-    display: flex;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr) 40%;
+    width: 100vw;
   }
 
   .toggle-menu-hamburger {
@@ -83,16 +85,18 @@ body {
     display: inline-block;
     flex: 1 100%;
     background: #c9daf4;
-    width: 100%;
+    width: auto;
   }
 
   .seccion-menu{
     height: 40px;
-    min-width: 200px;
+    /* min-width: 150px; */
+    width: auto;
     color: black;
     text-align: center;
     padding-top: 0.5%;
     border-color: grey;
+    padding: 2%;
     border-radius: 2px 2px;
     /* display: flex; */
   }
@@ -128,7 +132,7 @@ body {
     position:sticky;
     top:0;
     z-index: 10;
-    width: 100%;
+    width: 100vw;
   }
   
   .seccion-menu .submenu{
@@ -272,6 +276,7 @@ body {
     top: 0;
     z-index: 100;
     padding-top: 0%;
+    width: 100vw;
     /* align-items: stretch; */
   }
 
@@ -459,7 +464,6 @@ li.item-resultado:hover {
 .menus{
   background-color: rgb(201, 218, 244);
   flex: 1 100%;
-  width: auto;
   flex-wrap: nowrap;
   height: 20;
   position: static;

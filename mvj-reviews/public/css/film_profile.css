@@ -213,18 +213,7 @@ div.detalles-pelicula ul{
   /* display: inline-block; */
 }
 
-div.detalles-pelicula{
-/*   margin-left: 6%; */
-  background: #e0e0e0;
-  border-radius: 5px 5px;
-  display: inline-block;
-  /* width: 57%; */
-  /* padding: 1% 1% 1% 5%; */
-  /* padding: 15px; */
-  /* border: 3px solid black; */
-  grid-area: info;
-  padding-left: 2%;
-}
+div.detalles-pelicula{/*   margin-left: 6%; */background: #e0e0e0;border-radius: 5px 5px;display: inline-block;/* width: 57%; *//* padding: 1% 1% 1% 5%; *//* padding: 15px; *//* border: 3px solid black; */grid-area: info;padding-left: 2%;/* width: auto; */}
 
 .reviews-film-container{
   float:right;

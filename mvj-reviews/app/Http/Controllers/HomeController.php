@@ -30,11 +30,11 @@ class HomeController extends Controller
     {
       //Cambiar consulta: Peliculas con mas puntos de la ultima semana o mes.
 
-        $peliculas = Film::where('categoria','Pelicula')->take(8)->orderBy('puntaje','desc')->get();
+        $peliculas = Film::where('categoria','Pelicula')->take(8)->orderBy('created_at','desc')->get();
         foreach ($peliculas as $pelicula) {
           $pelicula->portada = base64_encode($pelicula->poster);
         }
-        $series = Film::where('categoria','Serie')->get();
+        $series = Film::where('categoria','Serie')->take(8)->orderBy('created_at','desc')->get();
         foreach ($series as $serie) {
           $serie->portada = base64_encode($serie->poster);
         }
