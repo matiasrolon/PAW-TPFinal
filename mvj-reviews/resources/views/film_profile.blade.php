@@ -5,6 +5,9 @@
 @section('publics')
 <script src="{{ asset('js/film_profile.js') }}"></script>
 <script>Pagina.iniciarPagina("content");</script>
+<script type="application/ld+json">
+  {!! $jsonLD !!}
+</script>
 <link href="{{ asset('css/film_profile.css') }}" rel="stylesheet">
 @endsection
 
@@ -151,7 +154,11 @@
                 @endif
               </div> <!-- fin div info-reviews -->
               <div class="opcion trailer">
+                @if ($film['trailer'] != '')
                 <iframe src="{{ str_replace('watch?v=','embed/',$film['trailer']) }}" frameborder="0" allowfullscreen ng-show="showvideo"></iframe>
+                @else
+                <p class="no-reviews">Trailer no disponible.</p>
+                @endif
               </div><!-- fin div opcion trailer -->
               <div class="opcion agregarReview">
                 <form class="form-agregar-review" method="post">

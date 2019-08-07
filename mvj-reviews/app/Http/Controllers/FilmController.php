@@ -108,25 +108,48 @@ class FilmController extends Controller
                          ->take(4)
                          ->get();
       $generos = $film->genres()->get();
-
-        return view('film_profile',compact('film','reviews', 'generos','reviewIni'));
+      $jsonLD = $this->get_jsonld_film($film);
+      return view('film_profile',compact('film','reviews', 'generos','reviewIni', 'jsonLD'));
 
     }
 
+    private function get_jsonld_film($film){
+      $obj['@context'] = 'http://schema.org';
+      if ($film['categoria'] == 'Serie') {
+        $obj['@type'] = 'TVSeries';
+        $obj['startDate'] = $film['fecha_estreno']->format('c'); // FORMATO ISO 8601 -> http://en.wikipedia.org/wiki/ISO_8601;
+        $obj['endDate'] = $film['fecha_finalizacion']->format('c'); // FORMATO ISO 8601 -> http://en.wikipedia.org/wiki/ISO_8601;
+      } else {
+        $obj['@type'] = 'Movie';
+        $obj['description'] = $film['sinopsis'];
+        $obj['duration'] = 'PT' . $film['duracion_min'] . 'M'; // FORMATO ISO 8601 -> http://en.wikipedia.org/wiki/ISO_8601;
+      }
+      $obj['name'] = $film['titulo'];
+      $trailer['@type'] = 'VideoObject';
+      $trailer['contentUrl'] = $film['trailer'];
+      $obj['trailer'] = $trailer;
+      $country['@type'] = 'Country';
+      $country['name'] = $film['pais'];
+      $obj['countryOfOrigin'] = $country;
+      $rating['@type'] = 'AggregateRating';
+      $rating['bestRating'] = $film['puntaje'];
+      $obj['aggregateRating'] = $rating;
+      return json_encode($obj, JSON_HEX_QUOT | JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
+    }
 
 
     public function scoreFilm(){
-        $obj = json_decode($_POST["objeto"]);
+        $obj = json_decode($_POST['objeto']);
         $film = Film::find($obj->film_id);
         if ((($obj->puntaje)>10) || (($obj->puntaje)<0)){
-          $obj->estado = "FAILED";
-          $obj->tipoError = "rango_puntaje";
-          $obj->mensaje = "El puntaje debe ser entre 1 y 10.";
+          $obj->estado = 'FAILED';
+          $obj->tipoError = 'rango_puntaje';
+          $obj->mensaje = 'El puntaje debe ser entre 1 y 10.';
         }else{
               if (Auth()->user()==null){ //si no esta logeado -> no inserto nada en Score_Film
-                $obj->estado = "FAILED";
-                $obj->tipoError = "sesion_usuario";
-                $obj->mensaje = "Debes iniciar sesion primero.";
+                $obj->estado = 'FAILED';
+                $obj->tipoError = 'sesion_usuario';
+                $obj->mensaje = 'Debes iniciar sesion primero.';
               }else{ // si esta logeado
                 $score_film = Score_Film::where('film_id',$film->id)
                                           ->where('user_id',Auth()->user()->id)
@@ -137,16 +160,16 @@ class FilmController extends Controller
                     $newScore_Film->user_id = Auth()->user()->id;
                     $newScore_Film->film_id = $film->id;
                     $newScore_Film->save();
-                    $obj->estado = "OK";
-                    $obj->mensaje = "Se añadio tu puntaje!";
+                    $obj->estado = 'OK';
+                    $obj->mensaje = 'Se añadio tu puntaje!';
                 }else{ //el usuario ya punteo esta pelicula alguna vez, actualizo puntaje
                     $f = Score_Film::where('film_id',$film->id)
                                     ->where('user_id',Auth()->user()->id)
                                     ->first();
                     $f->puntaje = $obj->puntaje;
                     $f->save();
-                    $obj->estado = "OK";
-                    $obj->mensaje = "Se actualizo tu puntaje!";
+                    $obj->estado = 'OK';
+                    $obj->mensaje = 'Se actualizo tu puntaje!';
                 }
               }
         }
@@ -210,7 +233,7 @@ class FilmController extends Controller
 
 
     /**
-     * Marca como "RESUELTA" la busqueda pendiente indicada por el usuario.
+     * Marca como 'RESUELTA' la busqueda pendiente indicada por el usuario.
      * De esta forma ya no aoarecera mas en Admin_Films
     */
     public function solvePendentFilm() {
