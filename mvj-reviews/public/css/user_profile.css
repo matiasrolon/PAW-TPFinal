@@ -1,22 +1,28 @@
 .content {
   margin:15px;
+
 }
 
-.titulo {
-  color: white;
+.tittle-name {
+  color: black;
+  text-decoration: underline;
 }
 
-.planilla-usuario{
+.data-user{
   display: flex;
 }
 
-.planilla-usuario img{
+.data-user .field.avatar{
   width: 200px;
   height: 200px;
   margin-right: 10px;
 }
 
-.info-usuario,.info-favoritos {
+.info-avatar{
+  display: inline-block;
+}
+
+.info-personal,.info-favourites {
   min-width: 300px;
   border: 5px solid rgba(255,255,255, 0.3);
   border-radius: 5px;
@@ -25,17 +31,28 @@
   padding-left: 10px;
   padding-right: 10px;
   padding-bottom: 5px;
+  display: inline-block;
 }
 
-.titulo-info, .titulo-favoritos {
+.info-personal .tittle, .info-favourites .tittle {
   margin: 0px;
   border-bottom: 2px dashed rgba(255,255,255, 0.3);
 }
 
-.dato-usuario,.dato-favorito{
+.field.personal,.field.favourite{
   display: block;
   padding-top: 5px;
 }
+
+.editable{
+  display: inline-block;
+}
+
+.editable.avatar{
+  position: absolute;
+  float: left;
+}
+
 
 .container-reviews {
   display: flex;
@@ -71,5 +88,5 @@
 
 .review-user .info-review {
   display: block;
-  padding-left: 10px; 
+  padding-left: 10px;
 }

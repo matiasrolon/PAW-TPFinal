@@ -161,7 +161,7 @@ class NoveltiesController extends Controller
      return view('novelties/premieres', compact('premieres'));
   }
 
-//premios (general)
+//premios (general) -> Se filtran los que todavia no fueron llevados a cabo mediante la fecha.
   public function awards(){
     $date = new Carbon('first day of this year');
     $awards = Award::whereDate('fecha_realizacion','>=',$date)
