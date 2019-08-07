@@ -94,24 +94,28 @@ class FilmController extends Controller
     public function profile($film_id,$review_id=null){
       $reviewIni = null;
       $film = Film::where('id','=',$film_id)->first();
-      $film->poster = base64_encode($film->poster);
-      if ($review_id!=null){
+      if ($film != null) {
+        $film->poster = base64_encode($film->poster);
+        if ($review_id!=null){
         $reviewIni = Review::where('review.id','=',$review_id)
                             ->join('users','review.user_id','=','users.id')
                             ->select('review.*','users.username')
                             ->first();
+        }
+        $reviews = Review::where('film_id','=',$film_id)
+                            ->join('users','review.user_id','=','users.id')
+                            ->select('review.id','titulo','descripcion','positivos','negativos',
+                            'review.created_at','user_id','film_id','users.username')
+                            ->skip(0)
+                            ->take(4)
+                            ->get();
+        $generos = $film->genres()->get();
+        $jsonLD = $this->get_jsonld_film($film);
+        return view('film_profile',compact('film','reviews', 'generos','reviewIni', 'jsonLD'));
+      } else {
+        // return response('Not found.', 404);
+        abort(404, 'Not found.');
       }
-      $reviews = Review::where('film_id','=',$film_id)
-                         ->join('users','review.user_id','=','users.id')
-                         ->select('review.id','titulo','descripcion','positivos','negativos',
-                         'review.created_at','user_id','film_id','users.username')
-                         ->skip(0)
-                         ->take(4)
-                         ->get();
-      $generos = $film->genres()->get();
-      $jsonLD = $this->get_jsonld_film($film);
-      return view('film_profile',compact('film','reviews', 'generos','reviewIni', 'jsonLD'));
-
     }
 
     private function get_jsonld_film($film){
