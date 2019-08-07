@@ -124,6 +124,11 @@ a{
 		grid-template-columns: 1fr 15%;
 	}
 
+  iframe {
+	  height:600px;
+	  width:808px;
+  }
+
 }
 
 @media (max-width: 700px) {
@@ -191,6 +196,12 @@ a{
 	.detalles-pelicula ul li{
 	  margin-top: 5%;
 	}
+
+
+  iframe {
+  	height: 80vw;
+  	width: 100vw;
+  }
 
 }
 
