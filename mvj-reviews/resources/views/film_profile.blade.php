@@ -151,7 +151,7 @@
                 @endif
               </div> <!-- fin div info-reviews -->
               <div class="opcion trailer">
-
+                <iframe src="{{ str_replace('watch?v=','embed/',$film['trailer']) }}" frameborder="0" allowfullscreen ng-show="showvideo"></iframe>
               </div><!-- fin div opcion trailer -->
               <div class="opcion agregarReview">
                 <form class="form-agregar-review" method="post">
