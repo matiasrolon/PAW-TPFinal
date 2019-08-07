@@ -93,65 +93,67 @@
         @isset ($reviewIni)
         <div class="review-user inicial">
           <section class="info-review-user">
-            <label>
-              usuario:  <a href="{{ route('user_profile', $reviewIni['username']) }}">{{ $reviewIni['username'] }}</a>
+            <label class="info-review-user-placeholder">
+              @<a href="{{ route('user_profile', $reviewIni['username']) }}">{{ $reviewIni['username'] }}</a>
             </label>
-            <label>
-              Fecha: {{ $reviewIni['created_at']->format('d-m-Y') }}
+            <label class="fecha-review">
+              {{ $reviewIni['created_at']->format('d-m-Y') }}
             </label>
-            <label class="info-review-titulo">
+
+            <!-- <section class="descripcion-review-user info-review-descrip "> -->
+            <label class="info-review-title">
               {{ $reviewIni['titulo'] }}
             </label>
-            <label  class="like-review" data-review="{{$reviewIni['id']}}" for=""> Likes: {{ $reviewIni['positivos'] }}
-                <i class="fas fa-thumbs-up"></i> {{ $reviewIni['positivos'] }}
+            <!-- </section> -->
+            <label class="info-review-descrip">
+              {{ $reviewIni['descripcion'] }}
             </label>
-            <label class="dislike-review" data-review="{{$reviewIni['id']}}" for=""> Dislikes: {{ $reviewIni['negativos'] }}
-                <i class="fas fa-thumbs-down"></i> {{ $reviewIni['negativos'] }}
+            <label class="like-review" data-review="{{$reviewIni['id']}}" for="">
+                <i class="fas fa-thumbs-up"></i> <p>{{ $reviewIni['positivos'] }}</p>
             </label>
-            <div data-review="{{$reviewIni['id']}}" class="estado-puntaje-review">
-              <label class="descripcion"> </label>
-            </div>
+            <label class="dislike-review" data-review="{{$reviewIni['id']}}"  for="">
+                <i class="fas fa-thumbs-down"></i> <p>{{ $reviewIni['negativos'] }}</p>
+            </label>
           </section>
-          <section class="descripcion-review-user">
-              <label> descripcion: {{ $reviewIni['descripcion'] }} <label>
-          </section>
-      </div>
+        </div>
             @endisset <!-- fin primer review -->
 
             @if (count($reviews)>0)
             @foreach ($reviews as $review)
-            <div data-review="{{$review['id']}}" class="estado-puntaje-review">
-              <label class="descripcion"> </label>
-            </div>
-            <div class="review-user">
-              <section class="info-review-user">
-                <label class="info-review-user-placeholder">
-                  @<a href="{{ route('user_profile', $review['username']) }}">{{ $review['username'] }}</a>
-                </label>
-                <label class="fecha-review">
-                  {{ $review['created_at']->format('d-m-Y') }}
-                </label>
+                @if ($review['id']!=$reviewIni['id'])
+                  <div data-review="{{$review['id']}}" class="estado-puntaje-review">
+                    <label class="descripcion"> </label>
+                  </div>
+                  <div class="review-user">
+                    <section class="info-review-user">
+                      <label class="info-review-user-placeholder">
+                        @<a href="{{ route('user_profile', $review['username']) }}">{{ $review['username'] }}</a>
+                      </label>
+                      <label class="fecha-review">
+                        {{ $review['created_at']->format('d-m-Y') }}
+                      </label>
 
-                <!-- <section class="descripcion-review-user info-review-descrip "> -->
-                <label class="info-review-title">
-                  {{ $review['titulo'] }}
-                </label>
-                <!-- </section> -->
-                <label class="info-review-descrip">
-                  {{ $review['descripcion'] }}
-                </label>
-                <label class="like-review" data-review="{{$review['id']}}" for="">
-                    <i class="fas fa-thumbs-up"></i> <p>{{ $review['positivos'] }}</p>
-                </label>
-                <label class="dislike-review" data-review="{{$review['id']}}"  for="">
-                    <i class="fas fa-thumbs-down"></i> <p>{{ $review['negativos'] }}</p>
-                </label>
-              </section>
-              </div>
-                @endforeach
-                @else
+                      <!-- <section class="descripcion-review-user info-review-descrip "> -->
+                      <label class="info-review-title">
+                        {{ $review['titulo'] }}
+                      </label>
+                      <!-- </section> -->
+                      <label class="info-review-descrip">
+                        {{ $review['descripcion'] }}
+                      </label>
+                      <label class="like-review" data-review="{{$review['id']}}" for="">
+                          <i class="fas fa-thumbs-up"></i> <p>{{ $review['positivos'] }}</p>
+                      </label>
+                      <label class="dislike-review" data-review="{{$review['id']}}"  for="">
+                          <i class="fas fa-thumbs-down"></i> <p>{{ $review['negativos'] }}</p>
+                      </label>
+                    </section>
+                  </div>
+              @endif
+            @endforeach
+            @else
                 <p class="no-reviews">Aun no hay reviews hechas para este film. </p>
-                @endif
+              @endif
               </div> <!-- fin div info-reviews -->
               <div class="opcion trailer">
                 @if ($film['trailer'] != '')

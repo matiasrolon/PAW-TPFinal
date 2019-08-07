@@ -249,6 +249,7 @@ div.detalles-pelicula{
 
 .review-user.inicial{
     border: solid 5px rgb(145, 25, 170);
+    border-radius: 12px;
 }
 
 .descripcion-review-user{
@@ -422,7 +423,7 @@ ul.generos {
 .puntuacion-pelicula h4 {
   display: initial;
   margin: 0px;
-  font-size: 50px;
+  font-size: 45px;
   padding: 2%;
 }
 
