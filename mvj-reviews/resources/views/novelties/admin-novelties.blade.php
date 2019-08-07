@@ -10,16 +10,23 @@
 
 @section('content')
 
-    <div class="create-options initial">
+    <div class="create-options secondary">
         <button type="button" class="button1 option news">CREAR NOTICIA</button>
         <button  type="button" class="button1 option award">CREAR PREMIO</button>
     </div>
 
-    <div class="edit-panel">
+    <ul id='mensajes'>
+        @foreach ($errors->all() as $error)
+        <li class="resultado-Failed">{{ $error }}</li>
+        @endforeach
+    </ul>
+
+    <div id="toolbox" class="edit-panel no-visible">
+        <h3>Herramientas de edici&oacute;n</h3>
         <div class="button-section">
-          <button class="option big" type="button" name="button"><big>A</big></button>
+          <button class="option big" type="button" name="button">A</button>
           <button class="option medium" type="button" name="button">A</button>
-          <button class="option small" type="button" name="button"> <small>A</small></button>
+          <button class="option small" type="button" name="button">A</button>
         </div>
         <div class="button-section">
           <button class="option bold" type="button" name="button"> <b>B</b> </button>
@@ -27,8 +34,8 @@
           <button class="option underline" type="button" name="button"> <u>S</u></button>
         </div>
         <div class="button-section">
-          <button class="option list" type="button" name="button">List</button>
-          <button class="option image" type="button" name="button">IMG</button>
+          <button class="option list" type="button" name="button">Lista</button>
+          <button class="option image" type="button" name="button">Imagen</button>
         </div>
         <br>
         <div class="button-section award">
@@ -48,17 +55,23 @@
                 <div class="field tittle">
                     <label class='required' for="titulo">Titulo:</label>
                     <input type="text" name="titulo" required value="{{ old('titulo') }}">
-                    <p class="errorField">@error('titulo'){{ $message }} @enderror</p>
+                    @error('titulo')
+                    <p class="errorField">{{ $message }}</p>
+                    @enderror
                 </div>
                 <div class="field description">
                     <label class="required" for="copete">Copete:</label>
                     <input type="text" name="copete" required value="{{ old('copete') }}">
-                    <p class="errorField">@error('copete'){{ $message }} @enderror</p>
+                    @error('copete')
+                    <p class="errorField">{{ $message }}</p>
+                    @enderror
                 </div>
                 <div class="field poster">
                     <label for="portada" >Portada:</label>
                     <input name="portadaNews" type="file" value="{{ old('portada') }}">
-                    <p class="errorField">@error('portadaNews'){{ $message }} @enderror</p>
+                    @error('portadaNews')
+                    <p class="errorField">{{ $message }}</p>
+                    @enderror
                 </div>
                 <input type="hidden" name="cuerpo" value="{{ old('cuerpo') }}">
                 <div class="field content" contentEditable="true">
@@ -68,12 +81,16 @@
                 <div class="field author">
                     <label for="autor">Autor:</label>
                     <input name="autorNews" type="text" value="{{Auth::user()->nombre}}" disabled readonly>
-                    <p class="errorField">@error('autorNews'){{ $message }} @enderror</p>
+                    @error('autorNews')
+                    <p class="errorField">{{ $message }}</p>
+                    @enderror
                 </div>
                 <div class="field source">
                     <label class="required" for="fuente">Fuente:</label>
                     <input name="fuenteNews" type="text" placeholder="MVJ Reviews" value="{{ old('fuente') }}" >
-                    <p class="errorField">@error('fuenteNews'){{ $message }} @enderror</p>
+                    @error('fuenteNews')
+                    <p class="errorField">{{ $message }}</p>
+                    @enderror
                 </div>
                 <input class="button1 btnSendNews" type="submit" name="AgregarNews">
                 <input class="button1 controls" type="reset" value="Resetear">
@@ -87,17 +104,23 @@
                 <div class="field name">
                     <label class="required" for="nombre" class="name">Nombre:</label>
                     <input type="text" name="nombre" required value="{{ old('nombre') }}">
-                    <p class="errorField">@error('nombre'){{ $message }} @enderror</p>
+                    @error('nombre')
+                    <p class="errorField">{{ $message }}</p>
+                    @enderror
                 </div>
                 <div class="field description">
                     <label for="descripcion">Descripcion:</label>
                     <input type="text" name="descripcion" value="{{ old('descripcion') }}">
-                    <p class="errorField">@error('descripcion'){{ $message }} @enderror</p>
+                    @error('descripcion')
+                    <p class="errorField">{{ $message }}</p>
+                    @enderror
                 </div>
                 <div class="field country">
                     <label class="required" for="pais">Pais:</label>
                     <input list="countries" type="text" name="pais" required value="{{ old('pais') }}">
-                    <p class="errorField">@error('pais'){{ $message }} @enderror</p>
+                    @error('pais')
+                    <p class="errorField">{{ $message }}</p>
+                    @enderror
                     <datalist id="countries">
                         @foreach ($countries as $country)
                         <option value="{{ $country }}">
@@ -107,12 +130,16 @@
                 <div class="field date">
                     <label class="required" for="fecha">Fecha:</label>
                     <input type="date" name="fecha" required value="{{ old('fecha') }}">
-                    <p class="errorField">@error('fecha'){{ $message }} @enderror</p>
+                    @error('fecha')
+                    <p class="errorField">{{ $message }}</p>
+                    @enderror
                 </div>
                 <div class="field poster">
                     <label for="portada" >Portada:</label>
                     <input name="portadaAward" type="file" >
-                    <p class="errorField">@error('portadaAward'){{ $message }} @enderror</p>
+                    @error('portadaAward')
+                    <p class="errorField">{{ $message }}</p>
+                    @enderror
                 </div>
 
                 <input type="hidden" name="cuerpo" value="{{ old('cuerpo') }}">
@@ -123,12 +150,16 @@
                 <div class="field author">
                     <label for="autor">Autor:</label>
                     <input name="autorAward" type="text" value="{{Auth::user()->nombre}}" disabled readonly>
-                    <p class="errorField">@error('autorAward'){{ $message }} @enderror</p>
+                    @error('autorAward')
+                    <p class="errorField">{{ $message }}</p>
+                    @enderror
                 </div>
                 <div class="field source">
                     <label class="required" for="fuente">Fuente:</label>
                     <input name="fuenteAward" type="text" placeholder="MVJ Reviews" value="{{ old('fuente') }}">
-                    <p class="errorField">@error('fuenteAward'){{ $message }} @enderror</p>
+                    @error('fuenteAward')
+                    <p class="errorField">{{ $message }}</p>
+                    @enderror
                 </div>
                 <input class="button1 btnSendAward" type="submit" name="AgregarAward">
                 <input  class="button1 controls" type="reset" value="Resetear">
