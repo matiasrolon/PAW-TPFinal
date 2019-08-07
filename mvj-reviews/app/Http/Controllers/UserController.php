@@ -40,23 +40,47 @@ class UserController extends Controller
 
 
     public function profile($username){
-      $user = User::where('username',$username)->first();
+      $user = User::where('username',$username)
+                    ->join('range','users.range_id','=','range.id')
+                    ->select('users.username','users.nombre','users.email',
+                    'users.fecha_nacim','users.biografia','users.genero_fav',
+                    'users.pelicula_fav','users.serie_fav','users.puntos',
+                    'range.nombre as rango','users.created_at','users.id',
+                     \DB::raw('TO_BASE64(users.avatar) as avatar'))
+                    ->first();
       $user->avatar =  base64_decode($user->avatar);
       $reviews = Review::join('film','film_id','=','film.id')
                           ->where('review.user_id',$user->id)
-                            ->select('review.*','film.titulo as pelicula','film.poster')
-                              ->orderBy('review.created_at')
-                                ->get();
+                          ->select('review.*','film.titulo as pelicula',
+                          \DB::raw('TO_BASE64(poster) as poster'))
+                          ->orderBy('review.created_at')
+                          ->take(4)
+                          ->get();
 
-      foreach ($reviews as $re) {//convierte el poster para que despues pueda insertarse como imagen
-        $re->poster = base64_encode($re->poster);
-      }
       $user->cantReviews = count($reviews);
       //var_dump(json_decode($reviews));
-
       return view('user_profile',compact('user','reviews'));
     }
 
+    public function update(Request $request){
+
+        if (Auth()->user()){
+          $user = User::find(Auth()->user()->id);
+          $user->nombre = $request->input('name');
+          $user->email = $request->input('email');
+              $time = strtotime($request->input('birth_date'));
+          $user->fecha_nacim = date('Y-m-d',$time);
+          $user->biografia = $request->input('biography');
+          $user->genero_fav =$request->input('genre_fav');
+          $user->pelicula_fav = $request->input('movie_fav');
+          $user->serie_fav = $request->input('tvseries_fav');
+          $user->avatar = file_get_contents($_FILES['avatar']['tmp_name']);
+          $user->save();
+
+          return redirect()
+                ->route('user_profile',Auth()->user()->username);
+        }
+    }
 
 //PROCEDIMIENTOS INACTIVOS, YA QUE LA VALIDACION DE REGISTRO LA HACE Auth\RegistrerController
     public function store(Request $request)

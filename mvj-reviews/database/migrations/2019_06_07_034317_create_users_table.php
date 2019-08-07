@@ -26,16 +26,16 @@ class CreateUsersTable extends Migration
           $table->string('genero_fav', 50)->nullable();
           $table->string('pelicula_fav', 50)->nullable();
           $table->string('serie_fav', 50)->nullable();
-          $table->binary('avatar')->nullable(); // BLOB=
+          //$table->binary('avatar')->nullable(); // BLOB=
           $table->integer('puntos'); // calculado por triggers
           $table->bigInteger('range_id')->unsigned();
-         //$table->bigInteger('role_id')->unsigned()->nullable();
           $table->rememberToken();
           $table->timestamps();
           //foreign keys
           $table->foreign('range_id')->references('id')->on('range');
-          //$table->foreign('role_id')->references('id')->on('role');
         });
+
+        DB::statement("ALTER TABLE users ADD avatar MEDIUMBLOB");
     }
 
     /**

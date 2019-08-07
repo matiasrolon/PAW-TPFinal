@@ -4,55 +4,87 @@
 
 @section('publics')
   <link href="{{ asset('css/user_profile.css') }}" rel="stylesheet">
+  <script src="{{ asset('js/user_profile.js') }}" charset="utf-8"></script>
+  <script>
+    User.startProfile();
+  </script>
 @endsection
 
 @section('content')
             <div class="content">
-                <!-- <div class="title m-b-md"> -->
-                     {{-- @guest = persona no logeada en la pagina.  (Y asi se comenta en blade) --}}
 
-                    @guest
-                      <!-- <p> Estas en el perfil del usuario {{$user['username']}} </p> -->
-                    @else
-                        @if (Auth::user()->username == $user['username'])
-                          <button> EDITAR PERFIL</button>(SIN FUNCIONALIDAD)
-                        @else
-                          <!-- <p> Estas en el perfil del usuario {{$user['username']}} </p> -->
-                        @endif
-                    @endguest
-
-                    <h2 class="titulo">{{$user['username']}}</h2>
-                      <div class="planilla-usuario" >
-
+                    <h2 class="tittle-name">{{$user['username']}}</h2>
+                    {{-- @guest = persona no logeada en la pagina.  (Y asi se comenta en blade) --}}
+                   @guest
+                   @else
+                       @if (Auth::user()->username == $user['username'])
+                         <button class="EditProfile"> Editar Perfil</button>
+                       @else
+                       @endif
+                   @endguest
+                      <div class="data-user" >
                         <br>
-                        @if ($user['poster']==null)
-                          <img class="avatar" src="{{asset('images/default_avatar.png')}}">
-                        @else
-                          <img class="avatar" src="data:image/png;base64,{{$user['avatar']}}">
-                        @endif
-                        <div class="info-usuario">
-                            <h3 class="titulo-info">Informacion personal</h3>
-                            <!-- <label class="dato-usuario" for=""><b>Username: </b>{{$user['username']}}</label> -->
-                            <label class="dato-usuario" for=""><b>Nombre: </b>{{$user['nombre']}}</label>
-                            <label class="dato-usuario" for=""><b>Email: </b>{{$user['email']}}</label>
-                            <label class="dato-usuario" for=""><b>Rango: </b>{{$user['rango']}}</label>
-                            <label class="dato-usuario" for=""><b>Puntos: </b>{{$user['puntos']}}</label>
-                            <!-- <label class="dato-usuario" for=""><b>Bio:</b>{{$user['biografia']}}</label> -->
+  <form action="{{ route('updateUser',$user['username']) }}" name="updateUser" method="POST" enctype="multipart/form-data">
+        @csrf
+                        <div class="info-avatar">
+                            @if ($user['avatar']==null)
+                              <img class="field avatar" src="{{asset('images/default_avatar.png')}}">
+                            @else
+                              <img class="field avatar" src="data:image/png;base64,{{$user['avatar']}}">
+                            @endif
+                            <input name="avatar" class="editable avatar no-visible" data-input="" type="file">
                         </div>
-                        <div class="info-favoritos">
-                            <h3 class="titulo-favoritos">Favoritos</h3>
-                            <label class="dato-favorito" for=""><b>Genero: </b>{{$user['genero_fav']}}</label>
-                            <label class="dato-favorito" for=""><b>Pelicula: </b>{{$user['pelicula_fav']}}</label>
-                            <label class="dato-favorito" for=""><b>Serie: </b>{{$user['serie_fav']}}</label>
+                        <div class="info-personal">
+                            <h3 class="tittle">Informacion personal</h3>
+                            <!-- <label class="dato-usuario" for=""><b>Username: </b>{{$user['username']}}</label> -->
+                            <label class="field personal name" for=""><b>Nombre: </b>
+                                <div class="editable" data-input="name"> {{$user['nombre']}}</div>
+                                <input type="hidden" name="name" value="{{$user['nombre']}}">
+                            </label>
+                            <label class="field personal email" for=""><b>Email: </b>
+                                <div class="editable" data-input="email">{{$user['email']}}</div>
+                                <input type="hidden" name="email" value="{{$user['email']}}">
+                            </label>
+                            <label class="field personal birth_date" for=""><b>Fecha Nacimiento: </b>
+                                <div class="editable" data-input="birth_date">{{$user['fecha_nacim']}}</div>
+                                <input type="hidden" name="birth_date" value="{{$user['fecha_nacim']}}">
+                            </label>
+                        </div>
+                        <div class="info-favourites">
+                            <h3 class="tittle">Favoritos</h3>
+                            <label class="field favourite genre" for=""><b>Genero: </b>
+                                <div class="editable" data-input="genre_fav">{{$user['genero_fav']}}</div>
+                                <input type="hidden" name="genre_fav" value="{{$user['genero_fav']}}">
+                            </label>
+                            <label class="field favourite movie_fav" for=""><b>Pelicula: </b>
+                                <div class="editable" data-input="movie_fav">{{$user['pelicula_fav']}}</div>
+                                <input type="hidden" name="movie_fav" value="{{$user['pelicula_fav']}}">
+                            </label>
+                            <label class="field favourite tv-series" for=""><b>Serie: </b>
+                                <div class="editable" data-input="tvseries_fav">{{$user['serie_fav']}}</div>
+                                <input type="hidden" name="tvseries_fav" value="{{$user['serie_fav']}}">
+                            </label>
                         </div>
                       </div>
 
+                      <label class="field personal range" for=""><b>Rango: </b>
+                          {{$user['rango']}}
+                      </label>
+                      <label class="field personal score" for=""><b>Puntos: </b>
+                          {{$user['puntos']}}
+                      </label>
 
-                      <h2>Biografia</h2>
-                      <p>{{ $user['biografia'] }}</p>
+                      <label class="field personal biography" for=""><h3>Biografia</h3>
+                          <div class="editable" data-input="biography">{{ $user['biografia'] }}</div>
+                          <input type="hidden" name="biography" value="{{$user['biografia']}}">
+                      </label>
 
-
-                      <h2>Reviews Recientes </h2>
+                      <div class="edit-options">
+                        <input class="option btnSaveChanges no-visible" type="submit" value="Guardar" name="buttonSave">
+                        <input class="option btnCancelChanges no-visible" type="button" value="Cancelar" name="buttonCancel">
+                      </div>
+      </form>
+                      <h3>Reviews Recientes </h3>
                         @if (count($reviews)>0)
                           <div class="container-reviews">
                             @foreach ($reviews as $review)

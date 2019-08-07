@@ -81,7 +81,7 @@ class FilmTableSeeder extends Seeder
         $film1->pais = 'Estados Unidos';
         $film1->categoria = 'Pelicula';
         $film1->trailer ='https://www.youtube.com/watch?v=1bq0qff4iF8&ab_channel=MovieclipsClassicTrailers';
-        $film1->poster = file_get_contents ('http://bityouth.com/images/peliculas/2/4/5/7/9/8/groundhog_day-714116870-large.jpg');
+        $film1->poster = file_get_contents ('https://www.ecured.cu/images/0/0a/Atrapado_en_el_tiempo_%28Pel%C3%ADcula%29.jpg');
         $film1->duracion_min = 135;
         $film1->save();
         $film1->genres()->attach(Genre::inRandomOrder()->first());

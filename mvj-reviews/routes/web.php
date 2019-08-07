@@ -23,6 +23,7 @@ Route::get('/home', 'HomeController@index')->name('home'); //---> EMPEZADA.
 //usuarios
 Route::get('/ranking-users', 'UserController@ranking')->name('ranking-users'); //-->SIN ESTILO.
 Route::get('/users/{username}', 'UserController@profile')->name('user_profile');
+Route::post('/users/update/{username}', 'UserController@update')->name('updateUser');
 
 //reviews
 Route::post('/addReview','ReviewController@addReview')->name('addReview');
