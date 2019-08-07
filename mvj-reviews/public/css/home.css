@@ -299,7 +299,7 @@ ul.generos li:hover p::before{
 .puntuacion {
        float: right;
        position: fixed;
-       z-index: 1000;
+       /* z-index: 1000; */
        padding: 5px;
        color: #FFFFFF;
        font-weight: bold;

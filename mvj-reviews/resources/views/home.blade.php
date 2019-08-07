@@ -32,20 +32,22 @@
               <section class="peliculas">
                 @foreach($peliculas as $pelicula)
                 <div class="flip-card">
+                  <a style="display:block" href="/films/{{$pelicula['id']}}">
                     <div class="cuadro-film flip-card-inner">
                       <div class="flip-card-front">
                         <p class="puntuacion">{{number_format($pelicula['puntaje'],1)}}</p>
                         <img class="poster" src="data:image/png;base64,{{$pelicula['portada']}}">
                       </div>
-                      <a style="display:block" href="/films/{{$pelicula['id']}}">
-                        <div class="flip-card-back">
-                          <p>{{ $pelicula['fecha_estreno'] }}</p>
-                          <p class="titulo-film">{{ $pelicula['titulo']}}</p>
-                          <p>{{ str_limit($pelicula['sinopsis'], $limit = 150, $end = '...') }}</p>
-                        </div>
-                      </a>
+                      <!-- <a style="display:block" href="/films/{{$pelicula['id']}}"> -->
+                      <div class="flip-card-back">
+                        <p>{{ $pelicula['fecha_estreno'] }}</p>
+                        <p class="titulo-film">{{ $pelicula['titulo']}}</p>
+                        <p>{{ str_limit($pelicula['sinopsis'], $limit = 150, $end = '...') }}</p>
+                      </div>
+                      <!-- </a> -->
                     </div>
-                  </div>
+                  </a>
+                </div>
 
                 @endforeach
             </div>

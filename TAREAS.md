@@ -27,7 +27,7 @@
 
 ## TO-DO (General)
 
-- [ ] Revisar funcion FilmController\store()
+- [x] Revisar funcion FilmController\store()
 - Como devolver JSONs (interesante): [https://laravel.com/docs/5.8/responses#json-responses](https://laravel.com/docs/5.8/responses#json-responses)
 
 ## TO-DO (Presentacion)
@@ -51,7 +51,7 @@
 - [ ] **Dos:**
   Cuando hago una busqueda en el admin films que puede tener muchos resultados, por ejemplo "EL", se cuelga el server hasta que pasan 60 segundos y no responde a ninguna otra conexion. Esto es asi solo con el server de prueba de artisan o con XAMPP tambien?
 
-- [ ] **Tres:**
+- [x] **Tres:**
   En la home, lo de girar las tarjetas de las peliculas no funciona en FIREFOX.
 
 - [x] **Cuatro:**
@@ -124,7 +124,7 @@
   - [ ] Cambiarlo tambien en Database\Migrations\Create_table_film
 - [ ] Actualizacion en metodo update()
 
-### Views 
+### Views
 
 #### Admin Films
 
