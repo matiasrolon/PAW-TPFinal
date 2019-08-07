@@ -21,6 +21,7 @@ use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Log;
 use Storage;
 use Symfony\Component\HttpKernel\Log\Logger;
+use DateTime;
 
 class FilmController extends Controller
 {
@@ -117,8 +118,8 @@ class FilmController extends Controller
       $obj['@context'] = 'http://schema.org';
       if ($film['categoria'] == 'Serie') {
         $obj['@type'] = 'TVSeries';
-        $obj['startDate'] = $film['fecha_estreno']->format('c'); // FORMATO ISO 8601 -> http://en.wikipedia.org/wiki/ISO_8601;
-        $obj['endDate'] = $film['fecha_finalizacion']->format('c'); // FORMATO ISO 8601 -> http://en.wikipedia.org/wiki/ISO_8601;
+        $obj['startDate'] = (new \DateTime($film['fecha_estreno']))->format('c'); // FORMATO ISO 8601 -> http://en.wikipedia.org/wiki/ISO_8601;
+        $obj['endDate'] = (new \DateTime($film['fecha_finalizacion']))->format('c');
       } else {
         $obj['@type'] = 'Movie';
         $obj['description'] = $film['sinopsis'];
