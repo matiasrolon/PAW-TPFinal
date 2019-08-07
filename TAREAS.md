@@ -1,20 +1,26 @@
 # TAREAS
 
 ## TO-DO (Semana - al 6/08/2019)
+
 ### Matias
+
 - [ ] Funcionalidad EDITAR datos de perfil de usuario.
-- [ ] CSS de Premios (awards.blade) y Premio en particular (award_profile.blade) 
+- [ ] CSS de Premios (awards.blade) y Premio en particular (award_profile.blade)
+
 ### Juan
-- [ ] CSS de Admin novedades.
+
+- [x] CSS de Admin novedades.
   - Para el formulario de crear noticia se puede agregar un campo "importancia" y a partir de esa categoria decidir los tamaños de las noticias cuando aparescan en la pagina de Noticias (News.blade)
-  - No esta hecha la parte de EDITAR una novedad ya existente. Podria ser en esa misma pagina solo que con los parametros de input de esa noticia/premio pasados desde el php. 
+  - No esta hecha la parte de EDITAR una novedad ya existente. Podria ser en esa misma pagina solo que con los parametros de input de esa noticia/premio pasados desde el php.
   - Si se considera necesario por una razon de funcionalidad, se puede eliminar la primer pantalla en donde aparece en grande las opciones de Crear Noticia o Crear Premio, directamente aparecer como menu achicado (su segunda version)
 
 ### Victorio
+
 - [ ] CSS de Noticias (news.blade) y noticia en particular (news_profile.blade)
   - Acordar botones de edicion y tamaño de las noticias a partir de items mencionados para Juan.
   
 ### Acordar
+
 - [ ] CSS de Estrenos (premieres.blade) y estreno en particular (premire_profile.blade)
   - Al ser peliculas con la particularidad que su fecha de estreno es mayor a hoy, podria hacerse un apartado por mes, mencionando cuales se estrenan en ese mes. Deberian aparecer arriba de todo los de esta semana/mes actual.
 - [ ] Mejorar CSS de login y registrer para que este acorde en estetica con las otras paginas.
@@ -124,12 +130,11 @@
 
 - [x] El formulario no esta puesto como un formulario. Hay que reconstruirlo
   - [x] Por eso falla la validacion en FilmController@store
-- [ ] Decidir campos obligatorios e indicarlos mediante CSS: titulo, fecha_estreno, sinopsis, categoria, trailer.
+- [x] Decidir campos obligatorios e indicarlos mediante CSS: titulo, fecha_estreno, sinopsis, categoria, trailer.
 - [ ] El boton GUARDAR debe chequear que los campos requeridos esten completos.
   - [x] Debe corregirse la validacion del lado del servidor al agregar un film.
   - [x] Mostrar los errores usando la forma de Laravel.
 - [ ] Permitir agregar un film sin necesidad de buscarlo en la API.
   - [ ] Requiere poder subir una foto manualmente.
-- [ ] Funcionalidad del boton de Eliminar.
-  - [ ] Activarlo al seleccionar un film que provenga de nuestra BD.
-
+- [ x] Funcionalidad del boton de Eliminar.
+  - [x] Activarlo al seleccionar un film que provenga de nuestra BD.
