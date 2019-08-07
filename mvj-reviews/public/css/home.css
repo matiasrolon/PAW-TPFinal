@@ -251,8 +251,8 @@ ul.generos li:hover p::before{
 .container-peliculas-populares{
   margin: auto;
   width: auto;
-  overflow: scroll;
-  overflow-x:hidden;
+  /* overflow: scroll; */
+  /* overflow-x:hidden; */
 }
 
 
