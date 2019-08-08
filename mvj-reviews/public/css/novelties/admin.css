@@ -148,19 +148,24 @@
   font-size: 0.5em;
 }
 
+.button-section.award {
+  display: block;
+}
+
 .button-section.award .option.addCategory{
   display: block;
-  width: 70%;
+  width: 75%;
   text-align: center;
   margin: 0px auto;
 }
 
 .button-section.award .attribute-option.nominee{
-  width: 70%;
+  /* width: 70%; */
 }
 
-.button-section.award p{
-  display: inline;
+.button-section.award label{
+  /* display: inline; */
+  font-size: small;
 }
 
 .button-section.award input{
