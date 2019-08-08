@@ -1,4 +1,7 @@
 @extends('layouts.app')
+@section('publics')
+    <link href="{{ asset('css/login.css') }}" rel="stylesheet">
+@endsection
 
 @section('content')
 <div class="login-card">
@@ -9,7 +12,7 @@
             @csrf
 
             <div >
-                <label for="username" >{{ __('Usuario') }}</label>
+                <label class="field" for="username" >{{ __('Usuario') }}</label>
 
                 <div>
                     <input id="username" type="text" class="form-control @error('username') is-invalid @enderror" name="username" value="{{ old('username') }}" required autocomplete="username" autofocus>
@@ -23,7 +26,7 @@
             </div>
 
             <div >
-                <label for="password" >{{ __('Contraseña') }}</label>
+                <label class="field" for="password" >{{ __('Contraseña') }}</label>
 
                 <div>
                     <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
@@ -42,7 +45,7 @@
                         <input class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
 
                         <label class="form-check-label" for="remember">
-                            {{ __('Recordame') }}
+                            {{ __('Recordarme') }}
                         </label>
                     </div>
                 </div>
