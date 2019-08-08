@@ -245,4 +245,18 @@ main input[type='text'], main input[type='date'], .field {
 /*   background-color: yellowgreen; */
   margin: 5px 0px;
   border-radius: 5px;
+  min-width: 50%;
+}
+
+main input[type='date'] {
+  min-width: 12%;
+}
+
+.category input[type='text'], .category input[type='date'], .field {
+/*   background-color: yellowgreen; */
+  margin: 5px 0px;
+  border-radius: 5px;
+  min-width: 30%;
+  margin-left: 1%;
+  margin-right: 1%;
 }
