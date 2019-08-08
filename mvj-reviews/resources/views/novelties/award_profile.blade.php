@@ -3,25 +3,30 @@
 @section('title') Premio | MVJ Reviews @endsection
 
 @section('publics')
-
+<link href="{{ asset('css/novelties/awards.css') }}" rel="stylesheet">
 @endsection
 
 @section('content')
-      <div class="award">
-          <h2> Evento:{{$award['nombre']}}</h2>
-          <p> Fecha: {{$award['fecha_realizacion']}}</p>
-          <p>{{$award['descripcion']}}</p>
-          <img src="data:image/png;base64, {{$award['portada']}}" alt="">
-      </div>
-    <ul>
+<section class="awards">
+  <div class="encabezado">
+    <h2>Evento: {{$award['nombre']}}</h2>
+    <p> Fecha: {{ date('d-m-Y', strtotime( $award['fecha_realizacion'] ) ) }}</p>
+    <p>{{$award['descripcion']}}</p>
+    <img src="data:image/png;base64, {{$award['portada']}}" alt="">
+  </div>
+  <div class="cuerpo">
+    <ul class="categorias">
       @foreach ($categories as $category)
-          <li><p><b>Categoria: </b>{{$category['nombre']}}</p>
-              <ul>
-                  @foreach ($category['nominees'] as $nominee)
-                    <li>{{$nominee['nombre']}} - por {{$nominee['descripcion']}} </li>
-                  @endforeach
-            </ul>
-          </li>
+      <li>
+        <p><b>Categoria: </b>{{$category['nombre']}}</p>
+        <ul>
+          @foreach ($category['nominees'] as $nominee)
+          <li>{{$nominee['nombre']}} - por {{$nominee['descripcion']}} </li>
+          @endforeach
+        </ul>
+      </li>
       @endforeach
     </ul>
+  </div>
+</section>
 @endsection

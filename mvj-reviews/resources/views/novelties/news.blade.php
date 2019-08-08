@@ -9,17 +9,20 @@
 @endsection
 
 @section('content')
-  <h2> Noticias </h2>
+<section class="noticias">
+    <h1> Noticias </h1>
     <div class="list-news">
         @foreach ($noticias as $noticia)
-              <div class="news">
-                            <a href="/novelties/news/{{ $noticia['id'] }}">
-                      <p>{{$noticia['fecha']}}</p>
-                      <img class="portada" src="data:image/png;base64,{{$noticia['portada']}}" alt="">
-                      <b>{{$noticia['titulo']}}</b>
-                      <p>{{$noticia['copete']}}</p>
-                                  </a>
-              </div>
+            <div class="news">
+                <a href="/novelties/news/{{ $noticia['id'] }}">
+                    {{-- {{$noticia['fecha']}}  --}}    
+                    <h3>{{$noticia['titulo']}}</h3>
+                    <img class="portada" src="data:image/png;base64,{{$noticia['portada']}}" alt="">
+                    {{-- <b>{{$noticia['titulo']}}</b> --}}
+                    <p>{{$noticia['copete']}}</p>
+                </a>
+            </div>
         @endforeach
     </div>
+</section>
 @endsection

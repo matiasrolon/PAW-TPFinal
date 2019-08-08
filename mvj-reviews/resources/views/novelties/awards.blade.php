@@ -3,25 +3,27 @@
 @section('title') Premios | MVJ Reviews @endsection
 
 @section('publics')
-    <script src="{{ asset('js/novelties/awards.js') }}"></script>
-    <script>Awards.startAwards("content");</script>
-    <link href="{{ asset('css/novelties/awards.css') }}" rel="stylesheet">
+<script src="{{ asset('js/novelties/awards.js') }}"></script>
+<script>
+  Awards.startAwards("content");
+</script>
+<link href="{{ asset('css/novelties/awards.css') }}" rel="stylesheet">
 @endsection
 
 @section('content')
-<h3> Festibales y premios </h3>
-@foreach ($awards as $award)
-      <div class="award">
-        <a href="/novelties/awards/{{$award['award_id']}}">
-            <img class="portada" src="data:image/png;base64,{{$award['portada']}}">
-            <div class="data">
-              <p><b>{{$award['nombreAward']}}</b> </p>
-              <p>Fecha: {{$award['fecha_realizacion']}}</p>
-            </div>
-        </a>
-        <br>
+<section class="awards">
+  <h1> Festivales y premios </h1>
+  @foreach ($awards as $award)
+  <div class="award">
+    <a href="/novelties/awards/{{$award['award_id']}}">
+      <img class="portada" src="data:image/png;base64,{{$award['portada']}}">
+      <div class="data">
+        <h2>{{$award['nombreAward']}}</p>
+        <p>Fecha: {{ date('d-m-Y', strtotime( $award['fecha_realizacion'] ) ) }}</p>
       </div>
-@endforeach
+    </a>
+  </div>
+  @endforeach
 
-
+</section>
 @endsection

@@ -204,7 +204,7 @@ Novelties.insertCategoryInContent = function () {
     divName.classList.add('attribute', 'name');
     let labelName = document.createElement('label');
     labelName.setAttribute('for', 'categoria.nombre.' + nroCategory);
-    labelName.innerHTML = 'Cateoria';
+    labelName.innerHTML = 'Categoria:';
     let inputName = document.createElement('input');
     inputName.setAttribute('name', 'categoria.nombre.' + nroCategory);
     inputName.setAttribute('type', 'text');
@@ -215,7 +215,7 @@ Novelties.insertCategoryInContent = function () {
     divDescrip.classList.add('attribute', 'description');
     let labelDescrip = document.createElement('label');
     labelDescrip.setAttribute('for', 'categoria.descripcion.' + nroCategory);
-    labelDescrip.innerHTML = 'Descripcion';
+    labelDescrip.innerHTML = 'Descripcion:';
     let inputDescrip = document.createElement('input');
     inputDescrip.setAttribute('name', 'categoria.descripcion.' + nroCategory);
     inputDescrip.setAttribute('type', 'text');

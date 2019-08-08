@@ -284,16 +284,19 @@ class FilmController extends Controller
      *  que no obtuvieron resultados, por orden de importancia.
      */
     public function admin_films(){
-      $searches = PendentSearch::where('estado','pendiente')
-                                ->orderBy('cant_busquedas','desc')
-                                ->get();
+      if (Auth()->user()!=null){
+          if (Auth()->user()->hasRole('admin')){
+              $searches = PendentSearch::where('estado','pendiente')
+                                        ->orderBy('cant_busquedas','desc')
+                                        ->get();
+              // Hago una lista de los paises disponibles
+              $paises = $this->getCountries();
+              $generos = $this->getGenres();
+              $categorias = Film::$categorias;
 
-      // Hago una lista de los paises disponibles
-      $paises = $this->getCountries();
-      $generos = $this->getGenres();
-      $categorias = Film::$categorias;
-
-      return view('admin_films',compact('searches', 'paises', 'generos', 'categorias'));
+              return view('admin_films',compact('searches', 'paises', 'generos', 'categorias'));
+          }else{return response()->view('errors.403', [], 404);} //personalizar error (no posee los permisos necesarios)
+      }else{return response()->view('errors.403', [], 404);}
     }
 
 

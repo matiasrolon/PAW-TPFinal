@@ -115,15 +115,6 @@ body {
     width: 6%;
   }
 
-  .login-card{
-    width: 20%;
-    margin: 5% 40%;
-  }
-
-
-  .login-card-header {
-    margin-left: 30%;
-  }
 
   .resultados-buscador{
      width: 39%;
@@ -135,7 +126,7 @@ body {
     z-index: 10;
     width: 100vw;
   }
-  
+
   .seccion-menu .submenu{
     padding: 0%;
   }
@@ -246,27 +237,9 @@ body {
     width: 30%;
   }
 
-  .login-card{
-    background-color: #cfcccc;
-    border-radius: 2px;
-    border: 2px solid black;
-    display: block;
-    flex: 1 100%;
-    margin: 15%;
-  }
-
-  .login-card div {
-    padding: 2% 1%;
-  }
-
   .login-btn-cnt {
-    display: block;
   }
 
-
-  .login-card-header {
-    margin-left: 25%;
-  }
 
   .resultados-buscador{
     margin-top: 10%;
@@ -492,7 +465,7 @@ li.item-resultado:hover {
             color: black;
             background-color: white;
           }
-          
+
 .seccion-menu:hover{
   background-color: white;
 }
@@ -538,64 +511,19 @@ img.logo-st {
   border-radius: 10px 10px;
 }
 
-.btn-mvj {
-  background-color:#9acd32;
-  color: white;
-  padding: 1% 1%;
-  border-radius: 50px 50px;
-  /* width: 9%; */
-  display: inline-block;
-}
-
-
 
   .login-card{
-    background-color: #cfcccc;
-    border-radius: 2px;
-    border: 2px solid black;
-    display: block;
-    flex: 1 100%;
-/*     width: 20%; */
-
-    align-items: stretch;
-    flex-flow: row wrap;
-    justify-content: space-around;
+  width: 9;
   }
 
   .login-card  div{
-    padding: 2% 1%;
-    height: auto;
-    flex: 1 100%;
-/*     display: flex; */
-    padding-right: 3%;
-    align-items: flex-end;
-    align-content: start;
   }
 
 .login-btn-cnt {
-    padding: 0;
-    margin: 0;
-    list-style: none;
-    height: 20px;
-
-    -ms-box-orient: horizontal;
-    display: -webkit-box;
-    display: -moz-box;
-    display: -ms-flexbox;
-    display: -moz-flex;
-    display: -webkit-flex;
-    display: flex;
-
-    -webkit-justify-content: space-around;
-    justify-content: space-around;
-    -webkit-flex-flow: row wrap;
-    flex-flow: row wrap;
-    -webkit-align-items: stretch;
-    align-items: stretch;
   }
 
   .login-btn-cnt * {
-    flex: 1 100%;
+    flex: 1 60%;
   }
 
 
