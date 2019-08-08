@@ -13,7 +13,7 @@
 @section('content')
             <div class="content">
 
-                    <h2 class="tittle-name">{{$user['username']}}</h2>
+
                     {{-- @guest = persona no logeada en la pagina.  (Y asi se comenta en blade) --}}
                    @guest
                    @else
@@ -34,20 +34,32 @@
                             @endif
                             <input name="avatar" class="editable avatar no-visible" type="file">
                         </div>
-                        <div class="info-personal">
-                            <h3 class="tittle">Informacion personal</h3>
-                            <!-- <label class="dato-usuario" for=""><b>Username: </b>{{$user['username']}}</label> -->
-                            <label class="field personal name" for=""><b>Nombre: </b>
-                                <input readonly type="text" name="name" value="{{$user['nombre']}}" required>
-                            </label>
-                            <label class="field personal email" for=""><b>Email: </b>
-                                <input readonly type="text" name="email" value="{{$user['email']}}">
-                            </label>
-                            <label class="field personal birth_date" for=""><b>Fecha Nacimiento: </b>
-                                <input readonly type="text" name="birth_date" value="{{$user['fecha_nacim']}}">
-                            </label>
+                        <div class="card-box info-personal-main">
+                          <label class="field personal name" for="">
+                              <input readonly type="text" name="name" value="{{$user['nombre']}}" required>
+                              <h2 class="tittle-name">&#64;{{$user['username']}}</h2>
+                          </label>
+                          <label class="field personal range" for=""><b>Rango: </b>
+                              {{$user['rango']}}
+                          </label>
+                          <label class="field personal score" for=""><b>Puntos: </b>
+                              {{$user['puntos']}}
+                          </label>
                         </div>
-                        <div class="info-favourites">
+                        <div class="card-box info-personal">
+                          @guest
+                          @else
+                          @if (Auth::user()->username == $user['username'])
+                          <label class="field personal email" for=""><b>Email: </b>
+                              <input readonly type="text" name="email" value="{{$user['email']}}">
+                          </label>
+                          @endif
+                          @endguest
+                          <label class="field personal birth_date" for=""><b>Fecha Nacimiento: </b>
+                              <input readonly type="text" name="birth_date" value="{{$user['fecha_nacim']}}">
+                          </label>
+                        </div>
+                        <div class="card-box info-favourites">
                             <h3 class="tittle">Favoritos</h3>
                             <label class="field favourite genre" for=""><b>Genero: </b>
                                 <input readonly type="text" name="genre_fav" value="{{$user['genero_fav']}}">
@@ -59,19 +71,12 @@
                                 <input readonly type="text" name="tvseries_fav" value="{{$user['serie_fav']}}">
                             </label>
                         </div>
+                        <div class="card-box">
+                          <label class="field personal biography" for=""><h3>Biografia</h3>
+                              <textarea readonly type="text" name="biography" value="{{$user['biografia']}}"></textarea>
+                          </label>
+                        </div>
                       </div>
-
-                      <label class="field personal range" for=""><b>Rango: </b>
-                          {{$user['rango']}}
-                      </label>
-                      <label class="field personal score" for=""><b>Puntos: </b>
-                          {{$user['puntos']}}
-                      </label>
-
-                      <label class="field personal biography" for=""><h3>Biografia</h3>
-                          <input readonly type="text" name="biography" value="{{$user['biografia']}}">
-                      </label>
-
                       <div class="edit-options">
                         <input class="option btnSaveChanges no-visible" type="submit" value="Guardar" name="buttonSave">
                         <input class="option btnCancelChanges no-visible" type="button" value="Cancelar" name="buttonCancel">

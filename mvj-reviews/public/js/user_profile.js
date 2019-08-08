@@ -16,11 +16,13 @@ User.startProfile= function(){
 User.startButtons = function(){
   //funcionalidad boton EDITAR PERFIL
   let btnEditProfile = document.querySelector('.EditProfile');
-  btnEditProfile.addEventListener("click",function(){
-      User.saveOldData();
-      User.convertProfileDataToEditable();
-      this.disabled = true;
-  })
+  if (btnEditProfile != null) {
+    btnEditProfile.addEventListener("click",function(){
+        User.saveOldData();
+        User.convertProfileDataToEditable();
+        this.disabled = true;
+    });
+  }
 
   //funcionalidad boton CANCELAR
   let btnCancelChanges = document.querySelector('.option.btnCancelChanges');
