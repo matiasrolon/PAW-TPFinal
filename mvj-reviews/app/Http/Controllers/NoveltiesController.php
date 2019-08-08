@@ -25,12 +25,14 @@ class NoveltiesController extends Controller
   }
 
   public function admin_novelties(){
-      if (Auth()->user()->hasRole('admin')){
-          $countries = FilmController::getCountries();
-          return view('novelties/admin-novelties',compact('countries'));
-      }else{
-        return view('404'); //personalizar error (no posee los permisos necesarios)
-      }
+
+      if (Auth()->user()!=null){
+          if (Auth()->user()->hasRole('admin')){
+              $countries = FilmController::getCountries();
+              return view('novelties/admin-novelties',compact('countries'));
+
+          }else{return response()->view('errors.403', [], 404);} //personalizar error (no posee los permisos necesarios)
+      }else{return response()->view('errors.403', [], 404);}
   }
 
   public function create_news(Request $request){

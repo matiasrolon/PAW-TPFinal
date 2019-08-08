@@ -1,6 +1,5 @@
 .content {
-  margin:15px;
-
+  margin-left: 15px;
 }
 
 .tittle-name {
@@ -16,7 +15,10 @@
   width: 200px;
   height: 200px;
   margin-right: 10px;
+  border-radius: 50%;
 }
+
+input.avatar{width: 16%;color: azure;}
 
 .info-avatar{
   display: inline-block;
@@ -44,6 +46,18 @@
   padding-top: 5px;
 }
 
+.field input{
+  display: inline-block;
+  background-color: transparent;
+  border: 0;
+  font-size: large;
+  font-family: 'Pridi', serif;
+}
+
+.field input[name="biography"]{
+  width: 50%;
+}
+
 .editable{
   display: inline-block;
 }
@@ -53,6 +67,8 @@
   float: left;
 }
 
+
+/* ---- REVIEWS RECIENTES ----*/
 
 .container-reviews {
   display: flex;

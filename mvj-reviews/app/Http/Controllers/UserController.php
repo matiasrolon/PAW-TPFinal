@@ -40,13 +40,13 @@ class UserController extends Controller
 
 
     public function profile($username){
-      $user = User::where('username',$username)
-                    ->join('range','users.range_id','=','range.id')
+      $user = User::join('range','users.range_id','=','range.id')
+                    ->where('username',$username)
                     ->select('users.username','users.nombre','users.email',
                     'users.fecha_nacim','users.biografia','users.genero_fav',
                     'users.pelicula_fav','users.serie_fav','users.puntos',
                     'range.nombre as rango','users.created_at','users.id',
-                     \DB::raw('TO_BASE64(users.avatar) as avatar'))
+                     \DB::raw('TO_BASE64(avatar) as avatar'))
                     ->first();
 
       if ($user != null) {
@@ -65,7 +65,7 @@ class UserController extends Controller
       } else {
         abort(404, 'Not found.');
       }
-      
+
     }
 
     public function update(Request $request){
@@ -80,7 +80,9 @@ class UserController extends Controller
           $user->genero_fav =$request->input('genre_fav');
           $user->pelicula_fav = $request->input('movie_fav');
           $user->serie_fav = $request->input('tvseries_fav');
-          $user->avatar = file_get_contents($_FILES['avatar']['tmp_name']);
+          if (null!=($_FILES['avatar']['tmp_name'])){
+            $user->avatar = file_get_contents($_FILES['avatar']['tmp_name']);
+          }
           $user->save();
 
           return redirect()
