@@ -12,7 +12,6 @@
 
 @section('content')
             <div class="content">
-
                     <h2 class="tittle-name">{{$user['username']}}</h2>
                     {{-- @guest = persona no logeada en la pagina.  (Y asi se comenta en blade) --}}
                    @guest

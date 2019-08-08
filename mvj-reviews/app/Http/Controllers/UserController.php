@@ -46,7 +46,7 @@ class UserController extends Controller
                     'users.fecha_nacim','users.biografia','users.genero_fav',
                     'users.pelicula_fav','users.serie_fav','users.puntos',
                     'range.nombre as rango','users.created_at','users.id',
-                     \DB::raw('TO_BASE64(users.avatar) as avatar'))
+                     \DB::raw('TO_BASE64(avatar) as avatar'))
                     ->first();
 
       if ($user != null) {
@@ -65,7 +65,7 @@ class UserController extends Controller
       } else {
         abort(404, 'Not found.');
       }
-      
+
     }
 
     public function update(Request $request){
