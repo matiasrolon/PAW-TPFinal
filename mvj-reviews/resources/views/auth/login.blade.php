@@ -4,6 +4,29 @@
 @endsection
 
 @section('content')
+<div class="welcome-card">
+    <h2 class="tittle">
+        BIENVENIDO A MVJ REVIEWS
+    </h2>
+
+    <p class="description"> Sitio especializado en criticas de contenido audiovisual.</p>
+    <p> Aqui podras ver lo mas destacado en la actualidad sobre: </p>
+    <ul>
+        <li>Peliculas, series, cortometrajes, etc.</li>
+        <li>Estrenos</li>
+        <li>Noticias del ambiente</li>
+        <li>Premios y Festibales</li>
+        <li>Las mejroes criticas amateurs</li>
+    </ul>
+    <div class="register-link-desktop">
+        ¿Todavia no sos un critico?
+        <a class="btn btn-link" href="{{ route('register') }}">
+          <button class="btn-mvj register" type="button" name="button">
+              Crear Cuenta
+          </button>
+        </a>
+    </div>
+</div>
 <div class="login-card">
     <div class="login-card-header">{{ __('Iniciar Sesión') }}</div>
 
@@ -11,8 +34,8 @@
         <form method="POST" action="{{ route('login') }}">
             @csrf
 
-            <div >
-                <label class="field" for="username" >{{ __('Usuario') }}</label>
+            <div class="field">
+                <label for="username" >{{ __('Usuario') }}</label>
 
                 <div>
                     <input id="username" type="text" class="form-control @error('username') is-invalid @enderror" name="username" value="{{ old('username') }}" required autocomplete="username" autofocus>
@@ -25,8 +48,8 @@
                 </div>
             </div>
 
-            <div >
-                <label class="field" for="password" >{{ __('Contraseña') }}</label>
+            <div class="field">
+                <label for="password" >{{ __('Contraseña') }}</label>
 
                 <div>
                     <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
@@ -39,21 +62,17 @@
                 </div>
             </div>
 
-            <div>
-                <div >
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
 
-                        <label class="form-check-label" for="remember">
-                            {{ __('Recordarme') }}
-                        </label>
-                    </div>
-                </div>
+                <label class="form-check-label" for="remember">
+                    {{ __('Recordarme') }}
+                </label>
             </div>
 
             <div >
                 <div class="login-btn-cnt" >
-                    <button type="submit" class="btn-mvj">
+                    <button type="submit" class="btn-mvj login">
                         {{ __('Login') }}
                     </button>
 
@@ -62,6 +81,14 @@
                             {{ __('¿Olvidaste tu contraseña?') }}
                         </a>
                     @endif
+                </div>
+                <div class="register-link-mobile">
+                    ¿Todavia no sos un critico?
+                    <a class="btn btn-link" href="{{ route('register') }}">
+                      <button class="btn-mvj register" type="button" name="button">
+                          Crear Cuenta
+                      </button>
+                    </a>
                 </div>
             </div>
         </form>
