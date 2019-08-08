@@ -10,7 +10,7 @@
 
 @section('content')
 <section class="noticias">
-    <h2> Noticias </h2>
+    <h1> Noticias </h1>
     <div class="list-news">
         @foreach ($noticias as $noticia)
             <div class="news">

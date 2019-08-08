@@ -15,7 +15,7 @@
 }
 
 .news:hover {
-  background-color: rgba(255,255,255,0.5);
+  background-color: #fbe3c3;
 }
 
 .noticias {
@@ -39,7 +39,8 @@
   display: inline-block;
 /*   width: 100%; */
 /*   text-align: center; */
-  height: 40vh;
+  max-height: 40vh;
+  max-width: 100%;
 }
 
 @media (min-width: 700px) {
