@@ -138,3 +138,11 @@
   - [ ] Requiere poder subir una foto manualmente.
 - [ x] Funcionalidad del boton de Eliminar.
   - [x] Activarlo al seleccionar un film que provenga de nuestra BD.
+
+#### Estrenos
+
+- [x] Usar plantila de la home
+  - [ ] En el perfil de pelicula no se podra escribir reviews hasta que se estrene. Solo se podra ver el trailer.
+- [x] Lista de estrenos (films que se estrenan desde hoy en adelante)
+- [x] Ordenadas por mes a venir
+- [ ] Mostrar unas 4 pelis de cada mes y un boton que permita expandir para ver todas.
