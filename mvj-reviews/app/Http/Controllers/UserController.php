@@ -50,7 +50,7 @@ class UserController extends Controller
                     ->first();
 
       if ($user != null) {
-        $user->avatar =  base64_decode($user->avatar);
+        // $user->avatar =  base64_decode($user->avatar);
         $reviews = Review::join('film','film_id','=','film.id')
                             ->where('review.user_id',$user->id)
                             ->select('review.*','film.titulo as pelicula',
