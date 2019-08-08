@@ -39,10 +39,10 @@
         </div>
         <br>
         <div class="button-section award">
-          <button class="option addCategory" type="button" name="button">Add Category</button>
+          <button class="option addCategory" type="button" name="button">Agregar categoria</button>
           <div class="attribute-option nominee no-visible">
-              <input type="number" name="" value="2">
-              <p>Nominados</p>
+            <label for="nominados">Nº Nominados</label>    
+            <input type="number" name="nominados" value="2">
           </div>
         </div>
     </div>
