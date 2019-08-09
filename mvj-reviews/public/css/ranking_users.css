@@ -1,11 +1,39 @@
+@media screen and (min-width: 700px) {
+  .rank{
+    margin: 0% 10%;
+  }
+
+}
+
+@media screen and (max-width: 700px) {
+  .desde {
+    display: none;
+  }
+  
+  .rank{
+    margin: 0% 5%;
+  }
+}
+
+
+@media screen and (max-width: 550px) {
+  .rango {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 380px) {
+  .reviews-cant {
+    display: none;
+  }
+
+}
+
 #content {
   margin-top: 0%;
 }
 
 .rank{
-
-    margin-left: 10%;
-    margin-right: 10%;
     padding-top: 2%;
     padding-bottom: 2%;
     text-align: center;
@@ -50,7 +78,8 @@ h2{
 }
 
 .user-position{
-  height: 40px;
+
+  height: 40px;
 }
 
 .position{
@@ -60,5 +89,6 @@ h2{
 }
 
 .username{
-padding-left: 2%;
+
+padding-left: 2%;
 }

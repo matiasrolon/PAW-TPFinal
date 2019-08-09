@@ -13,9 +13,9 @@
         <thead>
             <th class="position"></th>
             <th class="username">Usuario</th>
-            <th>Desde</th>
-            <th>Rango</th>
-            <th>Reviews</th>
+            <th class="desde">Desde</th>
+            <th class="rango">Rango</th>
+            <th class="reviews-cant">Reviews</th>
             <th>Puntos</th>
         </thead>
         <tbody>
@@ -26,9 +26,9 @@
                     <p>@<a href="{{route('user_profile',$user['username']) }}" class="link-user">{{$user['username']}}
                     </a></p>
                 </td>
-                <td>{{$user['created_at']->format('d-m-Y')}}</td>
-                <td>{{$user['rnom']}}</td>
-                <td>{{ $user['cantReviews'] }}</td>
+                <td class="desde">{{$user['created_at']->format('d-m-Y')}}</td>
+                <td class="rango">{{$user['rnom']}}</td>
+                <td class="reviews-cant">{{ $user['cantReviews'] }}</td>
                 <!--aca irian las reviews totales del user-->
                 <td>{{ number_format($user['puntos'], 2) }}</td>
                 <!-- </div> -->

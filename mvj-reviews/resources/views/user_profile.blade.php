@@ -23,9 +23,8 @@
                        @endif
                    @endguest
                       <div class="data-user" >
-                        <br>
-  <form action="{{ route('updateUser',$user['username']) }}" name="updateUser" method="POST" enctype="multipart/form-data">
-        @csrf
+                      <form class="data-user-form" action="{{ route('updateUser',$user['username']) }}" name="updateUser" method="POST" enctype="multipart/form-data">
+                      @csrf
                         <div class="info-avatar">
                             @if ($user['avatar']==null)
                               <img class="field avatar" src="{{asset('images/default_avatar.png')}}">
@@ -36,9 +35,9 @@
                         </div>
                         <div class="card-box info-personal-main">
                           <label class="field personal name" for="">
-                              <input readonly type="text" name="name" value="{{$user['nombre']}}" required>
-                              <h2 class="tittle-name">&#64;{{$user['username']}}</h2>
+                              <input class="field-blocked" readonly type="text" name="name" value="{{$user['nombre']}}" required>
                           </label>
+                          <label class="field">&#64;{{$user['username']}}</label>
                           <label class="field personal range" for=""><b>Rango: </b>
                               {{$user['rango']}}
                           </label>
@@ -47,42 +46,43 @@
                           </label>
                         </div>
                         <div class="card-box info-personal">
+                          <h3 class="tittle">Datos Personales:</h3>
                           @guest
                           @else
                           @if (Auth::user()->username == $user['username'])
-                          <label class="field personal email" for=""><b>Email: </b>
-                              <input readonly type="text" name="email" value="{{$user['email']}}">
+                          <label class="field personal email field-blocked" for=""><b>Email: </b>
+                              <input class="field-blocked" readonly type="text" name="email" value="{{$user['email']}}">
                           </label>
                           @endif
                           @endguest
-                          <label class="field personal birth_date" for=""><b>Fecha Nacimiento: </b>
-                              <input readonly type="text" name="birth_date" value="{{$user['fecha_nacim']}}">
+                          <label class="field personal birth_date field-blocked" for=""><b>Nacimiento: </b>
+                              <input class="field-blocked" readonly type="text" name="birth_date" value="{{$user['fecha_nacim']}}">
                           </label>
                         </div>
                         <div class="card-box info-favourites">
                             <h3 class="tittle">Favoritos</h3>
-                            <label class="field favourite genre" for=""><b>Genero: </b>
-                                <input readonly type="text" name="genre_fav" value="{{$user['genero_fav']}}">
+                            <label class="field favourite genre field-blocked" for=""><b>Genero: </b>
+                                <input class="field-blocked" readonly type="text" name="genre_fav" value="{{$user['genero_fav']}}">
                             </label>
-                            <label class="field favourite movie_fav" for=""><b>Pelicula: </b>
-                                <input readonly type="text" name="movie_fav" value="{{$user['pelicula_fav']}}">
+                            <label class="field favourite movie_fav field-blocked" for=""><b>Pelicula: </b>
+                                <input class="field-blocked" readonly type="text" name="movie_fav" value="{{$user['pelicula_fav']}}">
                             </label>
-                            <label class="field favourite tv-series" for=""><b>Serie: </b>
-                                <input readonly type="text" name="tvseries_fav" value="{{$user['serie_fav']}}">
+                            <label class="field favourite tv-series field-blocked" for=""><b>Serie: </b>
+                                <input class="field-blocked" readonly type="text" name="tvseries_fav" value="{{$user['serie_fav']}}">
                             </label>
                         </div>
-                        <div class="card-box">
-                          <label class="field personal biography" for=""><h3>Biografia</h3>
-                              <textarea readonly type="text" name="biography" value="{{$user['biografia']}}"></textarea>
+                        <div class="card-box info-bio">
+                          <label class="field biography field-blocked" for=""><h3>Biografia</h3>
+                              <textarea class="field-blocked" readonly type="text" name="biography" value="">{{$user['biografia']}}</textarea>
                           </label>
                         </div>
+                        <div class="edit-options">
+                          <input class="option btnSaveChanges no-visible" type="submit" value="Guardar" name="buttonSave">
+                          <input class="option btnCancelChanges no-visible" type="button" value="Cancelar" name="buttonCancel">
+                        </div>
                       </div>
-                      <div class="edit-options">
-                        <input class="option btnSaveChanges no-visible" type="submit" value="Guardar" name="buttonSave">
-                        <input class="option btnCancelChanges no-visible" type="button" value="Cancelar" name="buttonCancel">
-                      </div>
-      </form>
-                      <h3>Reviews Recientes </h3>
+                    </form>
+                      <h3 class="tittle">Reviews Recientes </h3>
                         @if (count($reviews)>0)
                           <div class="container-reviews">
                             @foreach ($reviews as $review)

@@ -277,13 +277,13 @@ body {
 }
 
 .nav-principal{
-  background-color: rgba(100, 152, 232, 1);
+  background-color: #729925;
   width: auto;
   /* margin-bottom: 2%; */
   display: grid;
 
   /* Sacar el webkit. usar solo center */
-/*   text-align: -webkit-center; */
+  /*   text-align: -webkit-center; */
   /* position: sticky; */
   flex: 1 100%;
   /* top: 0; */

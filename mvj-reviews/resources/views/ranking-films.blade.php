@@ -16,7 +16,7 @@
       <th class="filmname">Titulo</th>
       <th class="category">Categoria</th>
       <th class="date">Estreno</th>
-      <th>Pais</th>
+      <th class="pais">Pais</th>
       <th>Puntaje</th>
     </thead>
     <tbody>
@@ -31,7 +31,7 @@
           </td>
           <td class="category">{{ $film['categoria'] }}</td>
           <td class="date">{{ $film['fecha_estreno'] }}</td>
-          <td>{{ $film['pais'] }}</td>
+          <td class="pais">{{ $film['pais'] }}</td>
           <td>{{ number_format($film['puntaje'], 2) }}</td>
             <!-- </div> -->
         </tr>
