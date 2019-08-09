@@ -1,18 +1,10 @@
-/* para personalizar las scroll bar  */
-/* ::-webkit-scrollbar {
-    width: 12px;
+
+:root {
+  --menu-principal:#79EB39;
+  --fondo:#CBD5B7;
+  --sector:#79EB39;
 }
 
-::-webkit-scrollbar-track {
-    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
-    border-radius: 10px;
-}
-
-::-webkit-scrollbar-thumb {
-    border-radius: 10px;
-    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5);
-} */
-/* ---  */
 
 @import url(https://fonts.googleapis.com/css?family=Nunito);
 
@@ -320,11 +312,11 @@ body {
   height: auto;
   width: auto;
   /* flex: 1 100%; */
-  background-color: #CBD5B7;
+  background-color: var(--fondo);
 }
 
 .nav-principal{
-  background-color: #9acd32;
+  background-color:var(--menu-principal);
   width: auto;
   /* margin-bottom: 2%; */
   display: grid;
@@ -828,3 +820,19 @@ img.logo-st {
     }
 
   }
+
+  /* para personalizar las scroll bar  */
+  /* ::-webkit-scrollbar {
+      width: 12px;
+  }
+
+  ::-webkit-scrollbar-track {
+      -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+      border-radius: 10px;
+  }
+
+  ::-webkit-scrollbar-thumb {
+      border-radius: 10px;
+      -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5);
+  } */
+  /* ---  */

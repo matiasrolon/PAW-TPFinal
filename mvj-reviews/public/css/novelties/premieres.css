@@ -17,8 +17,9 @@
 }
 
 .mes h2 {
-  color: white;
-  background-color: black;
+  color: black;
+  background-color: var(--menu-principal);
+  border-left: solid 5px;
   padding-left: 1%;
 }
 
@@ -29,18 +30,18 @@
 .estrenos{
   width: auto;
   margin: 0% 10%;
-  background-color: gray;
-/*   display: inline-block; */
-/*   position: relative; */
+  background-color: #e0e0e0;
+  /*   display: inline-block; */
+  /*   position: relative; */
   /* margin: auto !important; */
   /* background: #6498e8; */
-/*   grid-area: movies; */
+  /*   grid-area: movies; */
   /* flex-flow: column wrap; */
 }
 
 .estrenos h1{
-  /* padding: 1% 5%; */
-  margin: 1% 1%;
+  padding: 1% 5% 0% 1%;
+  margin: 0% 1%;
   text-align: center;
   padding: auto;
   width: auto;
@@ -160,7 +161,7 @@
       height: 80vh;
 
    }
-   
+
    .flip-card {
      padding: 1% 0%;
      margin: 0%;
