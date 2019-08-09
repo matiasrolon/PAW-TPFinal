@@ -2,7 +2,7 @@
   .data-user-form {
     display: grid;
     grid-template-columns: repeat(10, 1fr);
-    grid-template-rows: 1fr 30% 1fr 10%;
+    grid-template-rows: 40% 30% 1fr 10%;
     column-gap: 0.5%;
     row-gap: 1%;
     /* padding: 2%; */
@@ -16,7 +16,7 @@
   }
 
   .info-avatar{
-    padding: 10%;
+    padding: 2%;
     height: min-content;
     grid-column: span 1;
     /* grid-row-start: 2; */
@@ -83,6 +83,10 @@
   .EditProfile {
     margin: 1% 0% 1% 75%;
   }
+  
+  .data-user{
+    margin-bottom: 15%;
+  }
 
 }
 
@@ -108,12 +112,12 @@
 .data-user{
   display: flex;
   width: auto;
-  margin-bottom: 15%;
+
 }
 
 .data-user .field.avatar{
   width: auto;
-  height: 134px;
+  height: auto;
   /* margin-right: 10px; */
   border-radius: 50%;
 }

@@ -73,6 +73,12 @@ User.restoreOldData = function(){
   document.querySelector(queryBefore+'genre_fav'+queryAfter).value = Fields.genre_fav;
   document.querySelector('textarea[name="biography"]').value = Fields.biography;
   document.querySelector('.field.avatar').src = Fields.avatar;
+  let editables = document.querySelectorAll('.field input,.field textarea');
+    editables.forEach(function(e){
+      e.setAttribute('readonly', '');
+      e.classList.remove('editable-field');
+      e.classList.add('field-blocked');
+    });
 }
 
 
