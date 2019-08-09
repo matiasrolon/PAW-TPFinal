@@ -175,7 +175,7 @@
                   <input id="enviarReview" type="button" name="button" value="Enviar Review">
                 </form>
                 <div class="estado">
-                  <label class="descripcion-estado"> </label>
+                  <label class="descripcion-estado no-visible"> </label>
                 </div>
               </div><!-- fin div opcion agregarReview -->
             </div>  <!-- fin div container -->
