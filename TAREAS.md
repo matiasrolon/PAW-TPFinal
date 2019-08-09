@@ -5,7 +5,7 @@
 ### Matias
 
 - [ ] Funcionalidad EDITAR datos de perfil de usuario.
-- [ ] CSS de Premios (awards.blade) y Premio en particular (award_profile.blade)
+- [x] CSS de Premios (awards.blade) y Premio en particular (award_profile.blade)
 
 ### Juan
 
@@ -21,9 +21,9 @@
   
 ### Acordar
 
-- [ ] CSS de Estrenos (premieres.blade) y estreno en particular (premire_profile.blade)
+- [x] CSS de Estrenos (premieres.blade) y estreno en particular (premire_profile.blade)
   - Al ser peliculas con la particularidad que su fecha de estreno es mayor a hoy, podria hacerse un apartado por mes, mencionando cuales se estrenan en ese mes. Deberian aparecer arriba de todo los de esta semana/mes actual.
-- [ ] Mejorar CSS de login y registrer para que este acorde en estetica con las otras paginas.
+- [x] Mejorar CSS de login y registrer para que este acorde en estetica con las otras paginas.
 
 ## TO-DO (General)
 
@@ -57,7 +57,7 @@
 - [x] **Cuatro:**
   En admin films, sucede que una vez que modifique una descripcion de un film, todos los films que seleccione a continuacion tendran ESA descripcion. Incluso luego de recargar la pagina sigue pasando. No pude encontrar la causa.
 
-- [ ] **Cinco:**
+- [x] **Cinco:**
   En admin films la fecha se muestra en ingles (asi la trae la API y asi se almacena), pero deberia estar en castellano.
 
 - [x] **Seis:**
@@ -109,7 +109,7 @@
 - [x] Problema: paises de origen en la API estan en ingles. **Pasados a castellano**
 - [x] Dropdown list de paises en Admin films. **Se admite solo un pais actualmente**
 - [x] Dropdown list de generos en Admin films.
-  - [ ] Revisar que hay generos compuestos. EJ: "Accion y Aventura" seguna la API.
+  - [x] Revisar que hay generos compuestos. EJ: "Accion y Aventura" seguna la API.
 - [x] Que agregue la relacion genero-pelicula en la BD.
 - [ ] Definir la manera en que el server devuelve al cliente la lista de generos de films.
 
