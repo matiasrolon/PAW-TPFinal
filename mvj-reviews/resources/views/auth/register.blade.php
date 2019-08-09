@@ -15,7 +15,6 @@
                             <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Nombre') }}</label>
                             <div class="value">
                                 <input id="name" type="text" class="form-control @error('nombre') is-invalid @enderror" name="nombre" value="{{ old('nombre') }}" required autocomplete="nombre" autofocus>
-
                                 @error('nombre')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -35,10 +34,9 @@
                             <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('Email') }}</label>
                             <div class="value">
                                 <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email">
-
                                 @error('email')
                                     <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
+                                        <strong> {{ $message }}</strong>
                                     </span>
                                 @enderror
                             </div>
@@ -48,12 +46,6 @@
                             <label for="password" >{{ __('Contraseña') }}</label>
                             <div class="value">
                                 <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
-
-                                @error('password')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
                             </div>
                         </div>
 
@@ -62,24 +54,30 @@
 
                             <div class="value">
                                 <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
+                                @error('password')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
                             </div>
                         </div>
 
-                        <div>
+                        <div class="btn-register">
                               <button type="submit" class="btn-mvj register">
-                                  {{ __('Register') }}
+                                  {{ __('Registrarme') }}
                               </button>
                         </div>
+
                     </form>
                 </div>
             </div>
 
             <div class="welcome-card">
                 <h2 class="tittle">
-                    ¿Porque unirte a esta Comunidad?
+                    ¿Porque unirse a esta Comunidad?
                 </h2>
 
-                <p class="description"> La reputacion de un film la hacemos entre todos, no solo una elite</p>
+                <p class="description"> La reputacion de una obra la hacemos entre todos, no solo una elite</p>
                 <div class="images">
                           <img class="field avatar" src="{{asset('images/votar-review.png')}}">
                           <img class="field avatar" src="{{asset('images/votar-film.png')}}">

@@ -36,18 +36,20 @@ PeliculaGenero.buildGrid = function (response) {
 
     let l = PeliculaGenero.crearElemento("p", ["titulo-film"], resp[ii]['titulo']);
     let sin = resp[ii]['sinopsis'];
-    sin = (sin.length > 150)? sin.substring(0, 147) + "..." : sin;
+    sin = (sin.length > 90)? sin.substring(0, 89) + "..." : sin;
     let m = PeliculaGenero.crearElemento("p", [], sin);
     i.setAttribute("href", "/films/"+ resp[ii]['id']);
+    
+    // Corregido para que ande tambien en firefox
     f.appendChild(g);
     f.appendChild(h);
     j.appendChild(k);
     j.appendChild(l);
     j.appendChild(m);
-    i.appendChild(j);
-    e.appendChild(i);
-    e.appendChild(f);
-    d.appendChild(e);
+    e.appendChild(f)
+    e.appendChild(j);
+    i.appendChild(e);
+    d.appendChild(i);
     PeliculaGenero.containerCards.append(d);
   }
 
@@ -78,7 +80,7 @@ PeliculaGenero.initialize = function (genre, category, container) {
   let a = PeliculaGenero.crearElemento("h3", [], "Top de Peliculas de "+nom+": ");
   PeliculaGenero.container.appendChild(a);
   let b = PeliculaGenero.crearElemento("div", ["container-peliculas-populares"]);
-  PeliculaGenero.containerCards = PeliculaGenero.crearElemento("section", ["peliculas-genero"]);
+  PeliculaGenero.containerCards = PeliculaGenero.crearElemento("section", ["peliculas"]);
   PeliculaGenero.containerCards.setAttribute("onscroll","PeliculaGenero.getNextChunckScroll()");
   b.appendChild(PeliculaGenero.containerCards);
   PeliculaGenero.container.appendChild(b);

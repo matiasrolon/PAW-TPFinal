@@ -142,7 +142,10 @@
 #### Estrenos
 
 - [x] Usar plantila de la home
-  - [ ] En el perfil de pelicula no se podra escribir reviews hasta que se estrene. Solo se podra ver el trailer.
+  - [x] En el perfil de pelicula no se podra escribir reviews hasta que se estrene. Solo se podra ver el trailer.
 - [x] Lista de estrenos (films que se estrenan desde hoy en adelante)
 - [x] Ordenadas por mes a venir
 - [ ] Mostrar unas 4 pelis de cada mes y un boton que permita expandir para ver todas.
+- [ ] Acomodar colores CSS
+- [ ] En inicio no deben aparecer los estrenos.
+- [ ] Poner las fechas en castellano.

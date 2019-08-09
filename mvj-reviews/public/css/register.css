@@ -1,3 +1,9 @@
+.invalid-feedback{
+  color: red;
+  font-size: 12px;
+  display: block;
+}
+
 .register-card{
   background-color: #CBD5B7;
   border-radius: 12px 0px 0px 12px;
@@ -8,7 +14,7 @@
   top: 20%;
   left: 5%;
   width: 40%;
-  height: 70%;
+  height: 72%;
   align-items: stretch;
   flex-flow: row wrap;
   justify-content: space-around;
@@ -30,6 +36,8 @@
 .field{padding: 2% 1%;text-align: right;}
 .field label{
   display: inline-block;
+  width: 24%;
+  text-align: left;
 }
 .field .value{
   display: inline-block;
@@ -60,13 +68,13 @@
   padding: 1% 1%;
   border-radius: 50px 50px;
   display: inline-block;
-  margin-bottom: 5%;
 }
       .btn-mvj.register{
         background-color:#9acd32;
         color: white;
         width: 30%;
-        margin-top: 5%;
+        margin-top: 2%;
+        margin-bottom: 2%;
         height: 6vh;
       }
 
@@ -74,7 +82,7 @@
 .welcome-card{
     position: absolute;
     width: 50%;
-    height: 70%;
+    height: 72%;
     top: 20%;
     left: 45%;
     background: white;
@@ -99,3 +107,51 @@
   text-decoration: overline;
 
 }
+
+/*----------------------------------------------------*/
+/*--------------------- MOBILE ---------------------*/
+/*------------------------------------------------*/
+
+@media screen and (max-width: 700px) {
+  .errors{
+    text-align: center;
+  }
+  .invalid-feedback{
+    margin-top: 5%;
+  }
+
+  .welcome-card{
+    display: none;
+  }
+
+  .register-card{
+    border-radius: 12px 12px 12px 12px;
+    display: inline-block;
+    flex: 1 100%;
+    width: 90%;
+    height: 75%;
+    /* right: 10%; */
+    left: 0%;
+    text-align: left;
+    margin-left: 5%;
+    margin-right: 5%;
+  }
+
+  .register-card-header {
+    border-radius: 12px 12px 0px 0px;
+    text-align: -webkit-center;
+    height: 10%;
+  }
+
+  .register-card-body{
+    margin-top: 10%;
+  }
+
+  .btn-register{
+    text-align: center;
+    margin-top: 5%;
+    margin-bottom: 5%;
+  }
+
+}
+/*-------------------------------------------------------*/
