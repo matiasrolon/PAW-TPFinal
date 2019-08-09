@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Models\Film;
 use App\Models\User;
@@ -30,7 +31,9 @@ class HomeController extends Controller
     {
       //Cambiar consulta: Peliculas con mas puntos de la ultima semana o mes.
 
-        $peliculas = Film::where('categoria','Pelicula')->take(8)->orderBy('created_at','desc')->get();
+        $peliculas = Film::where('categoria','Pelicula')
+        ->whereDate('fecha_estreno', '<=', Carbon::today())
+        ->take(8)->orderBy('created_at','desc')->get();
         foreach ($peliculas as $pelicula) {
           $pelicula->portada = base64_encode($pelicula->poster);
         }

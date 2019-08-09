@@ -15,7 +15,7 @@
         @foreach ($noticias as $noticia)
             <div class="news">
                 <a href="/novelties/news/{{ $noticia['id'] }}">
-                    {{-- {{$noticia['fecha']}}  --}}    
+                    <span class="fecha">{{ date('d-m-Y', strtotime($noticia['fecha'])) }}</span>
                     <h3>{{$noticia['titulo']}}</h3>
                     <img class="portada" src="data:image/png;base64,{{$noticia['portada']}}" alt="">
                     {{-- <b>{{$noticia['titulo']}}</b> --}}

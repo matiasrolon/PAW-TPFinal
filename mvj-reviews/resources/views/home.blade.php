@@ -40,7 +40,7 @@
                       </div>
                       <!-- <a style="display:block" href="/films/{{$pelicula['id']}}"> -->
                       <div class="flip-card-back">
-                        <p>{{ $pelicula['fecha_estreno'] }}</p>
+                        <p>{{ date('d-m-Y', strtotime($pelicula['fecha_estreno'])) }}</p>
                         <p class="titulo-film">{{ $pelicula['titulo']}}</p>
                         <p>{{ str_limit($pelicula['sinopsis'], $limit = 100, $end = '...') }}</p>
                       </div>
@@ -52,7 +52,7 @@
                 @endforeach
             </div>
             <br>
-            <h3> Series Populares</h3>
+            <h3>Series Populares</h3>
             <div class="container-peliculas-populares">
               <section class="peliculas">
                     @foreach($series as $serie)
@@ -63,13 +63,11 @@
                             <p class="puntuacion">{{ number_format($serie['puntuacion'], 1)}}</p>
                             <img class="poster" src="data:image/png;base64,{{$serie['portada']}}">
                           </div>
-                          <!-- <a style="display:block" href="/films/{{$serie['id']}}"> -->
                           <div class="flip-card-back">
-                            <p>{{ $serie['fecha_estreno']}}</p>
+                            <p>{{ date('d-m-Y', strtotime($serie['fecha_estreno'])) }}</p>
                             <p class="titulo-film">{{ $serie['titulo']}}</p>
                             <p>{{ str_limit($serie['sinopsis'], $limit = 150, $end = '...') }}</p>
                           </div>
-                          <!-- </a> -->
                         </div>
                       </a>
                     </div>

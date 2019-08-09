@@ -227,7 +227,7 @@ class NoveltiesController extends Controller
 //info de noticia en especifico, cuando se entra a el y/o cuando se la crea.
     public function news_profile($news_id){
       $news = News::where('id',$news_id)
-              ->select('titulo','copete','cuerpo',\DB::raw('TO_BASE64(portada) as portada'),
+              ->select('titulo','copete','cuerpo', 'fecha',\DB::raw('TO_BASE64(portada) as portada'),
                       'autor','fuente')
               ->first();
 
