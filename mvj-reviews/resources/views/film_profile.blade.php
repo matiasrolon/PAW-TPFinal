@@ -79,14 +79,17 @@
           <i class="fas fa-film"></i>
           <span>Trailer</span>
         </div>
-        <div class="item reviews">
-          <i class="fas fa-newspaper"></i>
-          <span>Reviews</span>
-        </div>
-        <div class="item agregarReview flotante">
-          <i class="fas fa-plus-square"></i>
-          <span> Agregar Review</span>
-        </div>
+        {{-- Solo permito reviews para los films que ya se estrenaron --}}
+        @if ($film['fecha_estreno'] <= \Carbon\Carbon::today())
+          <div class="item reviews">
+            <i class="fas fa-newspaper"></i>
+            <span>Reviews</span>
+          </div>
+          <div class="item agregarReview flotante">
+            <i class="fas fa-plus-square"></i>
+            <span> Agregar Review</span>
+          </div>
+        @endif
       </nav>
 
       <div id='info-reviews' href="#" class="opcion reviews">

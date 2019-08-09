@@ -51,17 +51,23 @@ Pagina.ordenarElementos = function(){
 
   botonAgregarReview = document.querySelector('.opciones-film .container .menu .item.agregarReview');
   //console.log(botonAgregarReview);
-  botonAgregarReview.addEventListener("click", function(){ Pagina.mostrarOpcion('agregarReview')});
+  if (botonAgregarReview != null) {
+    botonAgregarReview.addEventListener("click", function(){ Pagina.mostrarOpcion('agregarReview')});
+  }
 
   botonReviews = document.querySelector('.opciones-film .container .menu .item.reviews');
   //console.log(botonReviews);
-  botonReviews.addEventListener("click", function(){ Pagina.mostrarOpcion('reviews')});
+  if (botonReviews != null) {
+    botonReviews.addEventListener("click", function(){ Pagina.mostrarOpcion('reviews')});
+  }
 
   botonTrailer = document.querySelector('.opciones-film .container .menu .item.trailer');
   //console.log(botonTrailer);
-  botonTrailer.addEventListener("click", function(){ Pagina.mostrarOpcion('trailer')});
+  if (botonTrailer) {
+    botonTrailer.addEventListener("click", function(){ Pagina.mostrarOpcion('trailer')});
+  }
 
-  Pagina.mostrarOpcion('reviews');
+  Pagina.mostrarOpcion('trailer');
 }
 
 
