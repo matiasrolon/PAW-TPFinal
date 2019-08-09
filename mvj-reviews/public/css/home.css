@@ -379,7 +379,7 @@ ul.generos li:hover p::before{
 }
 
 .flip-card-back {
-  background-color: #bbb;
+  background-color: #FFD05A;
   color: black;
   transform: rotateY(180deg);
   border-radius: 10px;

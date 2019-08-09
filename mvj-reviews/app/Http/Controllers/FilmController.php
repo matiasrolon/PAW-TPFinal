@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use Carbon\Carbon;
 use App\Models\User;
 use App\Models\Film;
 use App\Models\Review;
@@ -149,32 +150,39 @@ class FilmController extends Controller
         if ((($obj->puntaje)>10) || (($obj->puntaje)<0)){
           $obj->estado = 'FAILED';
           $obj->tipoError = 'rango_puntaje';
-          $obj->mensaje = 'El puntaje debe ser entre 1 y 10.';
+          $obj->mensaje = 'Puntaje permitido de 1 a 10.';
         }else{
               if (Auth()->user()==null){ //si no esta logeado -> no inserto nada en Score_Film
                 $obj->estado = 'FAILED';
                 $obj->tipoError = 'sesion_usuario';
-                $obj->mensaje = 'Debes iniciar sesion primero.';
+                $obj->mensaje = 'Debes iniciar sesion.';
               }else{ // si esta logeado
-                $score_film = Score_Film::where('film_id',$film->id)
+                  $hoy = Carbon::today();
+                if ($film->fecha_estreno > $hoy){ //Si todavia no se estreno
+                  $obj->estado = 'FAILED';
+                  $obj->tipoError = 'es_estreno';
+                  $obj->mensaje = 'El film no se estreno todavia.';
+                }else{
+                      $score_film = Score_Film::where('film_id',$film->id)
+                                                ->where('user_id',Auth()->user()->id)
+                                                ->first();
+                      if ($score_film==null){// si no existe ese puntaje del usuario para esa pelicula, lo creo
+                          $newScore_Film = new Score_Film();
+                          $newScore_Film->puntaje = $obj->puntaje;
+                          $newScore_Film->user_id = Auth()->user()->id;
+                          $newScore_Film->film_id = $film->id;
+                          $newScore_Film->save();
+                          $obj->estado = 'OK';
+                          $obj->mensaje = 'Puntaje añadido!';
+                      }else{ //el usuario ya punteo esta pelicula alguna vez, actualizo puntaje
+                          $f = Score_Film::where('film_id',$film->id)
                                           ->where('user_id',Auth()->user()->id)
                                           ->first();
-                if ($score_film==null){// si no existe ese puntaje del usuario para esa pelicula, lo creo
-                    $newScore_Film = new Score_Film();
-                    $newScore_Film->puntaje = $obj->puntaje;
-                    $newScore_Film->user_id = Auth()->user()->id;
-                    $newScore_Film->film_id = $film->id;
-                    $newScore_Film->save();
-                    $obj->estado = 'OK';
-                    $obj->mensaje = 'Se añadio tu puntaje!';
-                }else{ //el usuario ya punteo esta pelicula alguna vez, actualizo puntaje
-                    $f = Score_Film::where('film_id',$film->id)
-                                    ->where('user_id',Auth()->user()->id)
-                                    ->first();
-                    $f->puntaje = $obj->puntaje;
-                    $f->save();
-                    $obj->estado = 'OK';
-                    $obj->mensaje = 'Se actualizo tu puntaje!';
+                          $f->puntaje = $obj->puntaje;
+                          $f->save();
+                          $obj->estado = 'OK';
+                          $obj->mensaje = 'Puntaje actualizado!';
+                      }
                 }
               }
         }

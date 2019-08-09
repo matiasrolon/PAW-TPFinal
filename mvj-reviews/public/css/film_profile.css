@@ -352,7 +352,7 @@ input.titulo-review {
 }
 
 .resultado-seleccionado p {
-  background-color: yellowgreen;
+  background-color: var(--menu-principal);
   padding: 2%;
   border-radius: 10px;
   overflow: scroll;
@@ -404,7 +404,7 @@ ul.generos {
   /* height: 60px; */
   padding: 0.4% 3%;
   /* position: absolute; */
-  background-color: #9acd32;
+  background-color: var(--menu-principal);;
 }
 
 .puntuacion-pelicula span{vertical-align: -webkit-baseline-middle;}
