@@ -1,4 +1,6 @@
-var PeliculaGenero = PeliculaGenero || {};
+var PeliculaGenero = PeliculaGenero || {},
+    document = document || {},
+    window = window || {};
 
 
 PeliculaGenero.getData = function (request) {
@@ -20,8 +22,8 @@ PeliculaGenero.crearElemento = function (e, clss, inner){
 }
 
 PeliculaGenero.buildGrid = function (response) {
-  console.log(response);
   var resp = JSON.parse(response.responseText);
+  console.log(resp);
   for (var ii in resp) {
     let puntaje = (resp[ii]['puntaje']).toFixed(1);
     let d = PeliculaGenero.crearElemento("div", ["flip-card"]);
@@ -56,6 +58,7 @@ PeliculaGenero.buildGrid = function (response) {
 }
 
 PeliculaGenero.getNextChunck = function(){
+  console.log("Nuevo Peticion.");
   var request = new XMLHttpRequest();
   request.onreadystatechange = function(){ // cuando la peticion cambia de estado.
       if (this.readyState==4 && this.status==200){ // si se recibe correctamente la respuesta.
@@ -65,8 +68,27 @@ PeliculaGenero.getNextChunck = function(){
   PeliculaGenero.getData(request);
 }
 
-PeliculaGenero.getNextChunckScroll = function(){
-  setTimeout(PeliculaGenero.getNextChunck, 400);
+PeliculaGenero.locked = false;
+PeliculaGenero.scrollTop = 0;
+
+PeliculaGenero.getNextChunckScroll = function(event){
+  
+  if (PeliculaGenero.locked) return;
+  else {
+    var currScrTop = event.target.scrollingElement.scrollTop;
+    console.log(currScrTop, PeliculaGenero.scrollTop);
+    PeliculaGenero.locked = true;
+    
+    PeliculaGenero.lastCall = setTimeout(() => {
+      if (PeliculaGenero.scrollTop < currScrTop) {
+        PeliculaGenero.getNextChunck();
+        PeliculaGenero.scrollTop = currScrTop;
+      }
+      PeliculaGenero.locked = false;
+    }, 500);
+
+    
+   }
 }
 
 PeliculaGenero.initialize = function (genre, category, container) {
@@ -81,8 +103,10 @@ PeliculaGenero.initialize = function (genre, category, container) {
   PeliculaGenero.container.appendChild(a);
   let b = PeliculaGenero.crearElemento("div", ["container-peliculas-populares"]);
   PeliculaGenero.containerCards = PeliculaGenero.crearElemento("section", ["peliculas"]);
-  PeliculaGenero.containerCards.setAttribute("onscroll","PeliculaGenero.getNextChunckScroll()");
+
+  window.addEventListener("scroll",PeliculaGenero.getNextChunckScroll);
   b.appendChild(PeliculaGenero.containerCards);
   PeliculaGenero.container.appendChild(b);
+  PeliculaGenero.getNextChunck();
   PeliculaGenero.getNextChunck();
 }
