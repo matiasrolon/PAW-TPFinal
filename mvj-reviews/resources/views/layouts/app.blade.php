@@ -66,7 +66,9 @@
                                       <i class="fas fa-user-circle"></i>
                                       <a class="" href="#">
                                           {{ Auth::user()->username }} <span class=""></span>
-                                          <button class="boton-opciones-login" type="button" name="button"> > </button>
+                                          <button class="boton-opciones-login" type="button" name="button">
+                                            <i class="fas fa-angle-down"></i>
+                                          </button>
                                       </a>
 
                                         <ul class="opciones-login no-visible">
