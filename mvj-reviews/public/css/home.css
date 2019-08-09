@@ -15,7 +15,7 @@
 .content {
   display: flex;
   flex-direction: column;
-  width: 100vw;
+  width: 100%;
   flex: auto;
   overflow-y: hidden;
 }
@@ -26,15 +26,15 @@
       grid-template-columns: 200px 1fr 320px;
       /* height: 100vh; */
       grid-template-areas: "sidemenu movies ranking";
-      /* width: 100%; */
+      width: 100%;
       margin-top: 1%;
   }
 
   .generos-container{
     margin: 2% 2% 2% 2%;
-    width: auto;
-    height: 600px;
-    background-color: #e4d1b7;
+/*     width: auto; */
+/*     height: 600px; */
+/*     background-color: #e4d1b7; */
   }
 
   .icon-angle {
@@ -42,15 +42,18 @@
   }
 
   .generos {
-    margin: 2% 2% 2% 2%;
+/*     margin: 2% 2% 2% 2%; */
+    border-radius: 5px;
+/*     border: solid 2px black; */
+    margin: 0px;
     width: auto;
-    height: 600px;
+/*     height: 600px; */
     background-color: #e4d1b7;
   }
 
   .generos li{
     list-style: none;
-    padding: 5px 10px 0px 10px;
+    padding: 3px 10px 0px 10px;
     height: 5%;
     width: auto;
     /* margin: 0px 0px; */
@@ -168,7 +171,18 @@
 
 }
 
-.ranking-tabla{/* margin-top: 15px; */margin: 2%;/* padding-left: 5px; *//* padding-right: 65px; */padding: 2%;border-radius: 5px 5px;/* border: solid 1px white; */width: auto;background: #e4d1b7;grid-area: ranking;}
+.ranking-tabla{
+  /* margin-top: 15px; */
+  margin: 2%;
+  /* padding-left: 5px; */
+  /* padding-right: 65px; */
+  padding: 2%;
+  border-radius: 5px 5px;
+  /* border: solid 1px white; */
+  width: auto;
+  background: #e4d1b7;
+  grid-area: ranking;
+}
 
 .ranking-tabla h3{
   text-align: center;
@@ -233,14 +247,13 @@ div.comment{
   margin: 5% 0%;
   border-radius: 5px 5px;
   /* background: bisque; */
-  /* height: 600px; */
+/*   height: 600px; */
   padding: 0px;
-  px; */
-  display: flex;
+/*   display: block; */
   align-content: stretch;
   justify-content: stretch;
   /* grid-area: sidemenu; */
-  overflow: scroll;
+/*   overflow: scroll; */
 }
 
 ul.generos li:hover p::before{
