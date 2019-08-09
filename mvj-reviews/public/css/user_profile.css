@@ -44,7 +44,7 @@
      grid-column: span 2;
      grid-column-end: 7;
   }
-  
+
   .container-reviews {
     display: grid;
     grid-template-columns: repeat(auto-fill,minmax(250px, 1fr));
@@ -87,7 +87,7 @@
 }
 
 .editable-field {
-  background-color: #90b547;
+  background-color: #AEFF78;
   border-radius: 5px;
 }
 
@@ -131,7 +131,7 @@ input.avatar{width: fit-content;color: #000000;}
   /* padding-bottom: 5px; */
   border-radius: 10px;
   display: inline-block;
-  background: yellowgreen;
+  background: var(--menu-principal);
 }
 
 
@@ -191,7 +191,7 @@ input[type=button], input[type=submit], input[type=reset], .input-file-show, but
    font-size: large;
    font-family: 'Pridi', serif;
    width: -webkit-fill-available;
-   
+
 }
 
 .biography{

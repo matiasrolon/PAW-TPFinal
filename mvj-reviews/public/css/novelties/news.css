@@ -25,7 +25,7 @@ a:hover > img{
 }
 
 .news:hover {
-  background-color: #88FF7D;
+  background-color: var(--menu-principal);
 }
 
 .noticias {
