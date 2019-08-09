@@ -361,6 +361,7 @@ body {
 
 .navseccion.autenticacion a{
   text-decoration: none;
+  color: white;
 }
 
 .navseccion.autenticacion{
@@ -450,7 +451,7 @@ li.item-resultado:hover {
     position: absolute;
     right: 1%;
     border-radius: 10px;
-    padding: 0%;
+    padding: 1%;
 }
 
 .opciones-login > li{

@@ -51,7 +51,10 @@ NavPrincipal.iniciarNavPrincipal= function(contenedorHTML){
       if (bop!=null){
          bop.addEventListener("click",function(){
               var op = document.querySelector('.opciones-login')
-                  op.classList.remove('no-visible');
+              if (op.classList.contains('no-visible'))
+                op.classList.remove('no-visible');
+              else 
+                op.classList.add('no-visible');
          });
       }
 

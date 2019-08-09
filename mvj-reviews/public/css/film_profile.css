@@ -397,14 +397,11 @@ ul.generos {
 
 .puntuacion-pelicula {
   display: flex;
-  /* border: 2px solid #9c9591; */
   border-radius: 10px;
   vertical-align: bottom;
   width: auto;
-  /* height: 60px; */
   padding: 0.4% 3%;
-  /* position: absolute; */
-  background-color: var(--menu-principal);;
+  background-color: var(--menu-principal);
 }
 
 .puntuacion-pelicula span{vertical-align: -webkit-baseline-middle;}
