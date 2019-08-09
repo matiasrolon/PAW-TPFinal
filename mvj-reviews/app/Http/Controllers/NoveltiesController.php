@@ -159,8 +159,44 @@ class NoveltiesController extends Controller
 //estrenos
   public function premieres(){
     $hoy = Carbon::today();
-    $premieres = Film::whereDate('fecha_estreno', '>=', $hoy)->select('titulo','fecha_estreno','sinopsis')->get();
-     return view('novelties/premieres', compact('premieres'));
+    // Se traen tanto series como peliculas
+    // $premieres = Film::whereDate('fecha_estreno', '>=', $hoy)->select('titulo','fecha_estreno','sinopsis')->get();
+    /*
+    $premieres = Film::whereDate('fecha_estreno', '>=', $hoy)->orderBy('fecha_estreno', 'asc')->get();
+    foreach ($premieres as $premiere) {
+      $premiere->portada = base64_encode($premiere->poster);
+    }
+    */
+    
+    $premieres = array();
+    for ($i=0; $i <= 11; $i++) {
+      $premieres[$i] = '';
+      $premieres[$i] = Film::whereDate('fecha_estreno', '>=', $hoy)
+      ->whereMonth('fecha_estreno', $i+1)
+      ->orderBy('fecha_estreno', 'asc')
+      ->select('id', 'titulo', 'sinopsis', 'fecha_estreno', 'poster', 'puntaje')
+      ->get();
+
+      foreach ($premieres[$i] as $premiere) {
+        $premiere->portada = base64_encode($premiere->poster);
+      }
+    }
+    
+    $meses[0]= 'Enero';
+    $meses[1]= 'Febrero';
+    $meses[2]= 'Marzo';
+    $meses[3]= 'Abril';
+    $meses[4]= 'Mayo';
+    $meses[5]= 'Junio';
+    $meses[6]= 'Julio';
+    $meses[7]= 'Agosto';
+    $meses[8]= 'Septiembre';
+    $meses[9]= 'Octubre';
+    $meses[10]= 'Noviembre';
+    $meses[11]= 'Diciembre';
+    $mesActual = Carbon::today()->month;
+    $mesActual = $mesActual -1; // Factor de correccion para el indice
+    return view('novelties/premieres', compact('premieres', 'mesActual', 'meses'));
   }
 
 //premios (general) -> Se filtran los que todavia no fueron llevados a cabo mediante la fecha.

@@ -3,22 +3,45 @@
 @section('title') Estrenos | MVJ Reviews @endsection
 
 @section('publics')
-    <script src="{{ asset('js/novelties/premieres.js') }}"></script>
-    <script>Premieres.startPremieres("content");</script>
-    <link href="{{ asset('css/novelties/premieres.css') }}" rel="stylesheet">
+<script src="{{ asset('js/novelties/premieres.js') }}"></script>
+<script>
+  Premieres.startPremieres("content");
+</script>
+<link href="{{ asset('css/novelties/premieres.css') }}" rel="stylesheet">
 @endsection
 
 @section('content')
 
-@foreach ($premieres as $premiere)
-      <div class="">
-        <p>
-          <b>{{$premiere['titulo']}}</b>
-          {{$premiere['fecha_estreno']}}
-        </p>
-        <br>
+<section id="container1" class="estrenos">
+  <h1>Pr&oacute;ximos estrenos</h1>
+  
+  @for ($i = 0; $i <= 11; $i++) 
+    <section class="mes">
+      <h2>{{ $meses[ ($mesActual + $i) % 12 ] }}</h2>
+      <div class="pelicula">
+        @if ( $premieres[($mesActual + $i) % 12]->isEmpty() )
+          <h3>No hay estrenos</h3>
+        @else
+          @foreach($premieres[($mesActual + $i) % 12] as $premiere)
+          <div class="flip-card">
+            <a style="display:block" href="/films/{{$premiere['id']}}">
+              <div class="cuadro-film flip-card-inner">
+                <div class="flip-card-front">
+                  <img class="poster" src="data:image/png;base64,{{$premiere['portada']}}">
+                </div>
+                <div class="flip-card-back">
+                  <p>{{ $premiere['fecha_estreno'] }}</p>
+                  <p class="titulo-film">{{ $premiere['titulo']}}</p>
+                  <p>{{ str_limit($premiere['sinopsis'], $limit = 90, $end = '...') }}</p>
+                </div>
+              </div>
+            </a>
+          </div>
+          @endforeach
+        @endif
       </div>
-@endforeach
-
+    </section>
+  @endfor
+</section>
 
 @endsection
