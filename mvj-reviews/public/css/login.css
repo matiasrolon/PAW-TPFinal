@@ -95,7 +95,8 @@ input[id="password"]{
       color: white;
       width: 60%;
       height: 5vh;
-      margin-left: 20%;
+      margin-right: 12%;
+      margin-left: 12%;
     }
     .btn-mvj.register{
       background-color:#3270cd;
@@ -175,7 +176,7 @@ input[id="password"]{
       height: 7vh;
       width: 50vw;
     }
-    
+
     .register-link-mobile{
       display: inline-block;
     }

@@ -1,0 +1,101 @@
+.register-card{
+  background-color: #CBD5B7;
+  border-radius: 12px 0px 0px 12px;
+  border: 2px solid black;
+  display: inline-block;
+  position: absolute;
+  flex: 1 100%;
+  top: 20%;
+  left: 5%;
+  width: 40%;
+  height: 70%;
+  align-items: stretch;
+  flex-flow: row wrap;
+  justify-content: space-around;
+  text-align: center;
+}
+
+.register-card-header {
+  background: black;
+  color: white;
+  border-radius: 12px 0px 0px 0px;
+  text-align: -webkit-center;
+  height: 10%;
+}
+
+.register-card-body{
+  margin-top: 1%;
+}
+
+.field{padding: 2% 1%;text-align: right;}
+.field label{
+  display: inline-block;
+}
+.field .value{
+  display: inline-block;
+  width: 70%;
+  text-align: center;
+}
+
+.field input{
+  width: 70%;
+  height: 4vh;
+  display: inline-block;
+}
+
+.field input[id="name"]{
+  margin-left: 0;
+}
+.field input[id="email"]{
+}
+.field input[id="username"]{
+}
+.field input[id="password"]{
+  margin-left: 0;
+}
+.field input[id="password-confirm"]{
+}
+
+.btn-mvj{
+  padding: 1% 1%;
+  border-radius: 50px 50px;
+  display: inline-block;
+  margin-bottom: 5%;
+}
+      .btn-mvj.register{
+        background-color:#9acd32;
+        color: white;
+        width: 30%;
+        margin-top: 5%;
+        height: 6vh;
+      }
+
+/*--------------------- WELCOME CARD ---------------------*/
+.welcome-card{
+    position: absolute;
+    width: 50%;
+    height: 70%;
+    top: 20%;
+    left: 45%;
+    background: white;
+    border: solid 2px black;
+    border-radius: 0px 12px 12px 0px;
+    text-align: center;
+}
+
+.welcome-card .images img{
+  width: 30%;
+  height: 40%;
+  border: solid 1px black;
+  float:;
+}
+
+.example{
+  display: block;
+}
+
+.final-msj{
+  color: blue;
+  text-decoration: overline;
+
+}
