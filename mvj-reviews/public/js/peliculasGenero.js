@@ -63,6 +63,7 @@ PeliculaGenero.getNextChunck = function(){
   request.onreadystatechange = function(){ // cuando la peticion cambia de estado.
       if (this.readyState==4 && this.status==200){ // si se recibe correctamente la respuesta.
           PeliculaGenero.buildGrid(this);
+          FilmCardData.modificarPuntajeClase();
       };
   }
   PeliculaGenero.getData(request);

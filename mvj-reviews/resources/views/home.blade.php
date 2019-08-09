@@ -8,8 +8,10 @@
   <script src="{{ asset('js/filmCardData.js') }}" charset="utf-8"></script>
   <script src="{{ asset('js/home.js') }}" charset="utf-8"></script>
   <script>
-    FilmCardData.modificarPuntajeClase();
-    Home.iniciarPagina();
+    window.addEventListener("DOMContentLoaded", function(){
+      FilmCardData.modificarPuntajeClase();
+      Home.iniciarPagina();
+    });
   </script>
 @endsection
 

@@ -9,10 +9,8 @@ FilmCardData.getClasePuntaje = function(p) {
 }
 
 FilmCardData.modificarPuntajeClase = function() {
-  window.addEventListener("DOMContentLoaded", function(){
-    let array = document.querySelectorAll(".puntuacion");
-    for (let p of array) {
-      p.classList.add(FilmCardData.getClasePuntaje(p.innerHTML));
-    }
-  });
+  let array = document.querySelectorAll(".puntuacion");
+  for (let p of array) {
+    p.classList.add(FilmCardData.getClasePuntaje(p.innerHTML));
+  }
 }
