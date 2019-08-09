@@ -6,11 +6,14 @@
   top: 0%;
   /* float: right; */
 }
-/*
-.users-populares div, table{
-    display: inline-block;
+
+.users-populares table .username:hover{
+    border-radius: 12px;
+    background-color: black;
+    color: white;
 }
-*/
+.users-populares table .username:hover > a { color: white}
+
 
 .content {
   display: flex;
@@ -32,9 +35,7 @@
 
   .generos-container{
     margin: 2% 2% 2% 2%;
-/*     width: auto; */
-/*     height: 600px; */
-/*     background-color: #e4d1b7; */
+    background-color: var(--sector);
   }
 
   .icon-angle {
@@ -131,10 +132,6 @@
      /* vertical-align: middle; */
    }
 
-   .peliculas {
-
-   }
-
    .generos {
      width: auto;
      overflow-y: hidden;
@@ -172,15 +169,11 @@
 }
 
 .ranking-tabla{
-  /* margin-top: 15px; */
   margin: 2%;
-  /* padding-left: 5px; */
-  /* padding-right: 65px; */
   padding: 2%;
   border-radius: 5px 5px;
-  /* border: solid 1px white; */
   width: auto;
-  background: #e4d1b7;
+  background: var(--sector);
   grid-area: ranking;
 }
 
@@ -209,13 +202,12 @@ td, th {
   margin: 2%;
   border-radius: 5px 5px;
   /* border: 1px solid white; */
-  background: #e4dea1;
+  background: var(--sector);
   width: auto;
   list-style:none;
   height: 560px;
   padding: 2% 5%;
   overflow: scroll;
-  scroll-snap-type:;
   perspective: 1000px;
 }
 
@@ -240,16 +232,15 @@ div.comment{
     display: block;
     border-width: 30px 30px 0px 0px;
     border-color: #27040400 #ffffff;
-    background-color:#e4dea1;
+    color: black;
 }
 
 .generos{
   margin: 5% 0%;
   border-radius: 5px 5px;
-  /* background: bisque; */
-/*   height: 600px; */
+  background: var(--sector);
+  /* height: 600px; */
   padding: 0px;
-/*   display: block; */
   align-content: stretch;
   justify-content: stretch;
   /* grid-area: sidemenu; */
@@ -266,7 +257,7 @@ ul.generos li:hover p::before{
 }
 
 .generos li:hover{
-  background-color: #3140B8;
+  background-color: black;
   color: white;
   cursor: pointer;
 }
@@ -311,12 +302,6 @@ ul.generos li:hover p::before{
 .titulo-film{
   background: black;
   color: rgb(255, 255, 255);
-}
-
-.cuadro-film{
-  /* width: 150px; */
-  /* height: 300px; */
-  /* margin: 2% 2%; */
 }
 
 .poster{
