@@ -40,8 +40,8 @@
 }
 
 .estrenos h1{
-  padding: 1% 5% 0% 1%;
-  margin: 0% 1%;
+/*   padding: 1% 5%; */
+  margin: 0px 1%;
   text-align: center;
   padding: auto;
   width: auto;
@@ -50,12 +50,6 @@
 .titulo-film{
   background: black;
   color: rgb(255, 255, 255);
-}
-
-.cuadro-film{
-  /* width: 150px; */
-  /* height: 300px; */
-  /* margin: 2% 2%; */
 }
 
 .poster{
@@ -157,7 +151,7 @@
    }
 
    .flip-card-inner {
-      width: 100vw;
+/*       width: 100vw; */
       height: 80vh;
 
    }
@@ -175,6 +169,7 @@
 
   .pelicula{
     grid-template-columns: 1fr;
+    grid-gap: 3vh 0px;
     display: grid;
     overflow-x: auto;
     overflow-y: hidden;

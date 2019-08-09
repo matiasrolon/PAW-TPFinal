@@ -136,7 +136,7 @@
   - [x] Mostrar los errores usando la forma de Laravel.
 - [ ] Permitir agregar un film sin necesidad de buscarlo en la API.
   - [ ] Requiere poder subir una foto manualmente.
-- [ x] Funcionalidad del boton de Eliminar.
+- [x] Funcionalidad del boton de Eliminar.
   - [x] Activarlo al seleccionar un film que provenga de nuestra BD.
 
 #### Estrenos
