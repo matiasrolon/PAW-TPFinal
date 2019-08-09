@@ -3,7 +3,7 @@
 @section('title') {{ $searchText }} | MVJ Reviews @endsection
 
 @section('publics')
-  <link href="{{ asset('css/home.css') }}" rel="stylesheet">
+  <link href="{{ asset('css/home.css',true) }}" rel="stylesheet">
 @endsection
 
 @section('content')

@@ -3,11 +3,11 @@
 @section('title') Premios | MVJ Reviews @endsection
 
 @section('publics')
-<script src="{{ asset('js/novelties/awards.js') }}"></script>
+<script src="{{ asset('js/novelties/awards.js',true) }}"></script>
 <script>
   Awards.startAwards("content");
 </script>
-<link href="{{ asset('css/novelties/awards.css') }}" rel="stylesheet">
+<link href="{{ asset('css/novelties/awards.css',true) }}" rel="stylesheet">
 @endsection
 
 @section('content')

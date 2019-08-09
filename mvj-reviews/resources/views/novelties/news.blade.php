@@ -3,9 +3,9 @@
 @section('title') Noticia del Dia | MVJ Reviews @endsection
 
 @section('publics')
-    <script src="{{ asset('js/novelties/news.js') }}"></script>
+    <script src="{{ asset('js/novelties/news.js',true) }}"></script>
     <script>Noticias.iniciarNoticias("content");</script>
-    <link href="{{ asset('css/novelties/news.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/novelties/news.css',true) }}" rel="stylesheet">
 @endsection
 
 @section('content')

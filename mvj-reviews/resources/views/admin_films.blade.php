@@ -3,9 +3,9 @@
 @section('title') Admin Films | MVJ Reviews @endsection
 
 @section('publics')
-<link href="{{ asset('css/admin_films.css') }}" rel="stylesheet">
+<link href="{{ asset('css/admin_films.css',true) }}" rel="stylesheet">
 <meta name="csrf-token" content="{{ csrf_token() }}"/>
-<script src="{{ asset('js/admin_films.js') }}"></script>
+<script src="{{ asset('js/admin_films.js',true) }}"></script>
 <script>
     AdminFilms.iniciarPagina("content");
 </script>
@@ -64,7 +64,7 @@
                     <label class="required" for="sinopsis">Sinopsis:</label>
                     <textarea required class="editable sinopsis" name="sinopsis" rows=6 cols=80 disabled></textarea>
                 </div>
-                
+
                 <div class="campo pais">
                     <label for="paises">Pais:</label>
                     <select name="paises" id="paises" class='editable pais' disabled>

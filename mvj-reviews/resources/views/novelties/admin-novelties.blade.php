@@ -3,9 +3,9 @@
 @section('title') Admin novedades | MVJ Reviews @endsection
 
 @section('publics')
-    <script src="{{ asset('js/novelties/admin.js') }}"></script>
+    <script src="{{ asset('js/novelties/admin.js',true) }}"></script>
     <script>Novelties.startNovelties("content");</script>
-    <link href="{{ asset('css/novelties/admin.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/novelties/admin.css',true) }}" rel="stylesheet">
 @endsection
 
 @section('content')
@@ -41,7 +41,7 @@
         <div class="button-section award">
           <button class="option addCategory" type="button" name="button">Agregar categoria</button>
           <div class="attribute-option nominee no-visible">
-            <label for="nominados">Nº Nominados</label>    
+            <label for="nominados">Nº Nominados</label>
             <input type="number" name="nominados" value="2">
           </div>
         </div>

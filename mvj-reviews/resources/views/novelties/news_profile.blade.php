@@ -3,7 +3,7 @@
 @section('title') Noticia | MVJ Reviews @endsection
 
 @section('publics')
-    <link href="{{ asset('css/novelties/news.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/novelties/news.css',true) }}" rel="stylesheet">
 @endsection
 
 @section('content')

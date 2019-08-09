@@ -3,19 +3,19 @@
 @section('title') Estrenos | MVJ Reviews @endsection
 
 @section('publics')
-<script src="{{ asset('js/novelties/premieres.js') }}"></script>
+<script src="{{ asset('js/novelties/premieres.js',true) }}"></script>
 <script>
   Premieres.startPremieres("content");
 </script>
-<link href="{{ asset('css/novelties/premieres.css') }}" rel="stylesheet">
+<link href="{{ asset('css/novelties/premieres.css',true) }}" rel="stylesheet">
 @endsection
 
 @section('content')
 
 <section id="container1" class="estrenos">
   <h1>Pr&oacute;ximos estrenos</h1>
-  
-  @for ($i = 0; $i <= 11; $i++) 
+
+  @for ($i = 0; $i <= 11; $i++)
     <section class="mes">
       <h2>{{ $meses[ ($mesActual + $i) % 12 ] }}</h2>
       <div class="pelicula">

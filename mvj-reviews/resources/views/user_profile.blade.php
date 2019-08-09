@@ -3,8 +3,8 @@
 @section('title') {{$user['username']}} | MVJ Reviews @endsection
 
 @section('publics')
-  <link href="{{ asset('css/user_profile.css') }}" rel="stylesheet">
-  <script src="{{ asset('js/user_profile.js') }}" charset="utf-8"></script>
+  <link href="{{ asset('css/user_profile.css',true) }}" rel="stylesheet">
+  <script src="{{ asset('js/user_profile.js',true) }}" charset="utf-8"></script>
   <script>
     User.startProfile();
   </script>

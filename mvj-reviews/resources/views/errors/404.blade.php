@@ -3,7 +3,7 @@
 @section('title') 404 No encontrada | MVJ Reviews @endsection
 
 @section('publics')
-    <link href="{{ asset('css/errors.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/errors.css',true) }}" rel="stylesheet">
 @endsection
 
 @section('content')
