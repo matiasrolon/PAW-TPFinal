@@ -69,7 +69,7 @@ PeliculaGenero.getNextChunck = function(){
   PeliculaGenero.getData(request);
 }
 
-PeliculaGenero.locked = false;
+
 
 PeliculaGenero.getNextChunckScroll = function(event){
 
@@ -93,6 +93,7 @@ PeliculaGenero.initialize = function (genre, category, container) {
   PeliculaGenero.elementsPerChunck = 4;
   PeliculaGenero.offset = 0;
   PeliculaGenero.scrollTop = 0;
+  PeliculaGenero.locked = false;
   PeliculaGenero.genre = genre;
   PeliculaGenero.category = category;
   PeliculaGenero.container = document.getElementById(container);
