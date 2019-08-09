@@ -41,7 +41,7 @@ PeliculaGenero.buildGrid = function (response) {
     sin = (sin.length > 90)? sin.substring(0, 89) + "..." : sin;
     let m = PeliculaGenero.crearElemento("p", [], sin);
     i.setAttribute("href", "/films/"+ resp[ii]['id']);
-    
+
     // Corregido para que ande tambien en firefox
     f.appendChild(g);
     f.appendChild(h);
@@ -58,43 +58,41 @@ PeliculaGenero.buildGrid = function (response) {
 }
 
 PeliculaGenero.getNextChunck = function(){
-  console.log("Nuevo Peticion.");
   var request = new XMLHttpRequest();
   request.onreadystatechange = function(){ // cuando la peticion cambia de estado.
       if (this.readyState==4 && this.status==200){ // si se recibe correctamente la respuesta.
           PeliculaGenero.buildGrid(this);
           FilmCardData.modificarPuntajeClase();
+          PeliculaGenero.container.querySelector("#spinnerGenre").classList.add('no-visible');
       };
   }
   PeliculaGenero.getData(request);
 }
 
 PeliculaGenero.locked = false;
-PeliculaGenero.scrollTop = 0;
 
 PeliculaGenero.getNextChunckScroll = function(event){
-  
+
   if (PeliculaGenero.locked) return;
   else {
     var currScrTop = event.target.scrollingElement.scrollTop;
     console.log(currScrTop, PeliculaGenero.scrollTop);
     PeliculaGenero.locked = true;
-    
-    PeliculaGenero.lastCall = setTimeout(() => {
-      if (PeliculaGenero.scrollTop < currScrTop) {
+    if (PeliculaGenero.scrollTop < currScrTop) {
+      PeliculaGenero.container.querySelector("#spinnerGenre").classList.remove('no-visible');
+      PeliculaGenero.scrollTop = currScrTop;
+      PeliculaGenero.lastCall = setTimeout(() => {
         PeliculaGenero.getNextChunck();
-        PeliculaGenero.scrollTop = currScrTop;
-      }
-      PeliculaGenero.locked = false;
-    }, 500);
-
-    
-   }
+        PeliculaGenero.locked = false;
+      }, 600);
+    }
+ }
 }
 
 PeliculaGenero.initialize = function (genre, category, container) {
   PeliculaGenero.elementsPerChunck = 4;
   PeliculaGenero.offset = 0;
+  PeliculaGenero.scrollTop = 0;
   PeliculaGenero.genre = genre;
   PeliculaGenero.category = category;
   PeliculaGenero.container = document.getElementById(container);
@@ -103,11 +101,14 @@ PeliculaGenero.initialize = function (genre, category, container) {
   let a = PeliculaGenero.crearElemento("h3", [], "Top de Peliculas de "+nom+": ");
   PeliculaGenero.container.appendChild(a);
   let b = PeliculaGenero.crearElemento("div", ["container-peliculas-populares"]);
+  let c = PeliculaGenero.crearElemento("div", ["loading-spin","no-visible"]);
+  c.setAttribute('id','spinnerGenre');
   PeliculaGenero.containerCards = PeliculaGenero.crearElemento("section", ["peliculas"]);
 
   window.addEventListener("scroll",PeliculaGenero.getNextChunckScroll);
   b.appendChild(PeliculaGenero.containerCards);
   PeliculaGenero.container.appendChild(b);
+  PeliculaGenero.container.appendChild(c);
   PeliculaGenero.getNextChunck();
   PeliculaGenero.getNextChunck();
 }
