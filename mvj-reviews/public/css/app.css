@@ -20,7 +20,7 @@
 
 body {
 /*   display: contents; */
-  background-color: #fbe3c3;
+background-color: var(--fondo);
   font-family: 'Pridi', serif;
   margin: auto;
   width: auto;

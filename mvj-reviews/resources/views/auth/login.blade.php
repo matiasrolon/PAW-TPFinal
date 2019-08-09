@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('publics')
-    <link href="{{ asset('css/login.css',true) }}" rel="stylesheet">
+    <link href="{{ asset('css/login.css') }}" rel="stylesheet">
 @endsection
 
 @section('content')

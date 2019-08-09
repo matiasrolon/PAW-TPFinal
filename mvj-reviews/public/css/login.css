@@ -24,7 +24,7 @@
 /*-----------------* Login card ------------------*/
 
 .login-card{
-  background-color: #A7B3FA;
+  background-color:#C8E6B1;
   border-radius: 12px 0px 0px 12px;
   border: 2px solid black;
   display: inline-block;
@@ -60,6 +60,7 @@
 .field label{
   margin-left: 5%;
 }
+
 input[id="username"]{
   width: 80%;
   height: 4vh;

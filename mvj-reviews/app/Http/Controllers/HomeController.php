@@ -33,7 +33,7 @@ class HomeController extends Controller
 
         $peliculas = Film::where('categoria','Pelicula')
         ->whereDate('fecha_estreno', '<=', Carbon::today())
-        ->take(8)->orderBy('created_at','desc')->get();
+        ->take(8)->orderBy('puntaje','desc')->get();
         foreach ($peliculas as $pelicula) {
           $pelicula->portada = base64_encode($pelicula->poster);
         }
