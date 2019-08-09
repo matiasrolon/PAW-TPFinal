@@ -1,4 +1,6 @@
+
 @media (min-width: 700px) {
+
   .data-user-form {
     display: grid;
     grid-template-columns: repeat(10, 1fr);
@@ -51,8 +53,9 @@
   }
 
   .EditProfile {
-    flex: 1 100%;
-    margin: 1% 0% 1% 90%;
+        position: absolute;
+        flex: 1 100%;
+        margin: 0.8% 0% 1% 33%;
   }
 
 }
@@ -81,13 +84,18 @@
   }
 
   .EditProfile {
-    margin: 1% 0% 1% 75%;
+        margin: 0 8% 0% 0%;
+        position: absolute;
+        top: 19%;
   }
-  
+
   .data-user{
     margin-bottom: 15%;
   }
 
+  .data-user .field.avatar{
+    margin-left: 25%;
+  }
 }
 
 .editable-field {
@@ -116,8 +124,8 @@
 }
 
 .data-user .field.avatar{
-  width: auto;
-  height: auto;
+  width: 200px;
+  height: 200px;
   /* margin-right: 10px; */
   border-radius: 50%;
 }
@@ -174,6 +182,13 @@ input[type=button], input[type=submit], input[type=reset], .input-file-show, but
   cursor: pointer;
   border-radius: 10px;
   background-color:;
+}
+
+input[type=button]:hover,
+input[type=submit]:hover,
+input[type=reset]:hover,
+.input-file-show:hover, button.EditProfile:hover{
+  background-color: #3B3D38;
 }
 
 .biography textarea {
