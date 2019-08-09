@@ -226,8 +226,18 @@ Pagina.recibirResponseAgregarReview = function(response){
   var resp = JSON.parse(response.responseText);
   console.log("se recibio respuesta> "+ resp['mensaje']);
   var estadoReview = document.querySelector('.opcion.agregarReview .estado .descripcion-estado');
+  if (estadoReview.classList.contains('no-visible')){
+      estadoReview.classList.remove('no-visible');
+  }
+
   if (resp['estado']=='OK'){
     estadoReview.innerHTML = resp['mensaje'];
+    if (estadoReview.classList.contains('failed')){
+      estadoReview.classList.remove('failed');
+    }
+    if (!estadoReview.classList.contains('ok')){
+      estadoReview.classList.add('ok');
+    }
     //CREO UN CUADRO DE REVIEWS COMO LAS QUE YA ESTAN EN LA PAGINA HASTA EL MOMENTO.
     Pagina.agregarReview(resp);
 
@@ -238,10 +248,33 @@ Pagina.recibirResponseAgregarReview = function(response){
       padre.removeChild(mensajeNoReviews);
     }
 
-  }else{
-    estadoReview.innerHTML = resp['mensaje'];
-    //Pongo en rojo recuadro de la review
+    var tituloR = document.querySelector('.form-agregar-review .titulo-review');
+    var descripR = document.querySelector('.form-agregar-review .descripcion-review');
+    tituloR.value ="";
+    descripR.value="";
+
+  }else{ // es un mensaje de error
+        //Pongo en rojo recuadro de la review
+        if (estadoReview.classList.contains('ok')){
+          estadoReview.classList.remove('ok');
+        }
+        if (!estadoReview.classList.contains('failed')){
+          estadoReview.classList.add('failed');
+        }
+
+        let respuesta = resp['mensaje'];
+        if (resp['tipoError']=="sesion_usuario"){
+          respuesta = '<a href="/login">' + respuesta + '</a>';
+        }
+
+        estadoReview.innerHTML = respuesta;
   }
+
+  setTimeout(function(){
+        if (!estadoReview.classList.contains('no-visible')){
+            estadoReview.classList.add('no-visible');
+        }
+  },10000);
 }
 
 //Agrega review a partir de una respuesta que haya recibido por AJAX

@@ -37,26 +37,33 @@ class ReviewController extends Controller
         $film = Film::find($obj->film_id);
         if (Auth()->user()==null){ //si no esta logeado -> no inserto nada en Review
           $obj->estado = "FAILED";
-          $obj->mensaje = "Debes iniciar sesion primero.";
+          $obj->tipoError = "sesion_usuario";
+          $obj->mensaje = "Debes iniciar sesion.";
         }else{ // si esta logeado
-          $newReview = new Review();
-          $newReview->user_id = Auth()->user()->id;
-          $newReview->film_id = $film->id;
-          $newReview->titulo = $obj->titulo;
-          $newReview->descripcion = $obj->descripcion;
-          $newReview->save();
+          if ( (empty($obj->titulo)) || (empty($obj->descripcion)) ){//si esta vacia la review
+            $obj->estado = "FAILED";
+            $obj->tipoError = "review_vacia";
+            $obj->mensaje = "No se permite campos vacios";
+          }else{
+                $newReview = new Review();
+                $newReview->user_id = Auth()->user()->id;
+                $newReview->film_id = $film->id;
+                $newReview->titulo = $obj->titulo;
+                $newReview->descripcion = $obj->descripcion;
+                $newReview->save();
 
-          //cargo algunos datos que serviran para la vista, a partir de la review recien creada.
-          $obj->review_id = $newReview->id;
-          $obj->username =   Auth()->user()->username;
-          $obj->created_at =date("d/m/Y", strtotime($newReview->created_at));
-          $obj->positivos =$newReview->positivos;
-          $obj->negativos =$newReview->negativos;
-          //seteo estado y mensaje que vera el usuario.
-          $obj->estado = "OK";
-          $obj->mensaje = "Se añadio tu review!";
+                //cargo algunos datos que serviran para la vista, a partir de la review recien creada.
+                $obj->review_id = $newReview->id;
+                $obj->username =   Auth()->user()->username;
+                $obj->created_at =date("d/m/Y", strtotime($newReview->created_at));
+                $obj->positivos =$newReview->positivos;
+                $obj->negativos =$newReview->negativos;
+                //seteo estado y mensaje que vera el usuario.
+                $obj->estado = "OK";
+                $obj->mensaje = "Se añadio tu review!";
+          }
         }
-        echo json_encode($obj);
+        return response()->json($obj);
     }
 
 
