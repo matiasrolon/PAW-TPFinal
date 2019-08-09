@@ -9,7 +9,7 @@
   .desde {
     display: none;
   }
-  
+
   .rank{
     margin: 0% 5%;
   }
@@ -45,7 +45,7 @@
   border-radius: 5px 5px;
   border: solid 1px white;
   border-collapse: collapse;
-   background-color: bisque;
+   background-color: #CBD5B7;
   overflow: scroll;
   margin-left: 2%;
   margin-right: 2%;
@@ -59,6 +59,7 @@ thead{
   margin: 0px;
   text-align: left;
   text-transform: uppercase;
+    background: #0CE87E;
 }
 
 td, th {
