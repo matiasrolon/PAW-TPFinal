@@ -30,10 +30,10 @@
           <ul>
             @if ( ($film['fecha_estreno'] || $film['fecha_finalizacion'] || $film['pais']) )
               @if ( ($film['fecha_estreno']) )
-              <li><label>Fecha de estreno: {{ $film['fecha_estreno'] }}</label> </li>
+              <li><label>Fecha de estreno: {{ date('d-m-Y', strtotime($film['fecha_estreno'])) }}</label> </li>
               @endif
               @if ( ($film['fecha_finalizacion']) )
-              <li class="inline-data"> <label>Fecha de finalizacion: {{ $film['fecha_finalizacion'] }}</label></li>
+              <li class="inline-data"> <label>Fecha de finalizacion: {{ date('d-m-Y', strtotime($film['fecha_finalizacion'])) }}</label></li>
               @endif
               @if ( ( $film['pais'] ) )
               <li class="inline-data"> <label>Pais: {{ $film['pais'] }}</label> </li>

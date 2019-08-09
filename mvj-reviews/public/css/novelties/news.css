@@ -35,6 +35,11 @@
   text-align: center;
 }
 
+.news .fecha, .news h3 {
+  margin: 0px;
+  padding: 0px;
+}
+
 .news .portada{
   display: inline-block;
 /*   width: 100%; */

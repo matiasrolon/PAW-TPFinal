@@ -30,7 +30,7 @@
                   <img class="poster" src="data:image/png;base64,{{$premiere['portada']}}">
                 </div>
                 <div class="flip-card-back">
-                  <p>{{ $premiere['fecha_estreno'] }}</p>
+                  <p>{{ date('d-m-Y', strtotime($premiere['fecha_estreno'])) }}</p>
                   <p class="titulo-film">{{ $premiere['titulo']}}</p>
                   <p>{{ str_limit($premiere['sinopsis'], $limit = 90, $end = '...') }}</p>
                 </div>

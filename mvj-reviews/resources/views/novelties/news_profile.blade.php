@@ -10,7 +10,7 @@
 <section class="noticias">
       <div class="noticia">
           <h1>{{$news['titulo']}}</h1>
-          <h2>{{$news['copete']}}</h2>
+          <h2>{{ date('d-m-Y', strtotime($news['fecha'])) }} - {{$news['copete']}}</h2>
           <img src="data:image/png;base64, {{$news['portada']}}" alt="">
           <div class="content">
             {!! $news['cuerpo'] !!} <!-- EN HTML -->

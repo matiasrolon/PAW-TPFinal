@@ -68,7 +68,7 @@
                 <div class="campo pais">
                     <label for="paises">Pais:</label>
                     <select name="paises" id="paises" class='editable pais' disabled>
-                        <option hidden selected>Elija un pais</option>
+                        <!-- <option hidden selected>Elija un pais</option> -->
                         @for ($i = 0; $i < count($paises); $i++)
                         <option value="{{ $paises[$i] }}">{{ $paises[$i] }}</option>
                         @endfor
@@ -77,12 +77,12 @@
 
                 <div class="campo fecha-estreno">
                     <label class="required" for="fecha-estreno">Fecha estreno:</label>
-                    <input type="text" required class="editable fecha-estreno" name="fecha-estreno" rows=1 disabled>
+                    <input type="date" required class="editable fecha-estreno" name="fecha-estreno" disabled>
                 </div>
 
                 <div class="campo fecha-finalizacion">
                     <label for="fecha-finalizacion">Fecha finalizacion:</label>
-                    <input type="text" class="editable fecha-finalizacion" name="fecha-finalizacion" rows=1 disabled>
+                    <input type="date" class="editable fecha-finalizacion" name="fecha-finalizacion" rows=1 disabled>
                 </div>
 
                 <div class="campo genero">
@@ -90,7 +90,7 @@
                     <ul class="editable genero" disabled>
                     </ul>
                     <select name="generos" id="generos" class="editable genero" disabled>
-                        <option hidden selected>Elija un genero</option>
+                        <!-- <option hidden selected>Elija un genero</option> -->
                         @for ($i = 0; $i < count($generos); $i++)
                         <option value="{{ $generos[$i] }}">{{ $generos[$i] }}</option>
                         @endfor

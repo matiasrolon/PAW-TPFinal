@@ -56,7 +56,7 @@
                           @endif
                           @endguest
                           <label class="field personal birth_date field-blocked" for=""><b>Nacimiento: </b>
-                              <input class="field-blocked" readonly type="text" name="birth_date" value="{{$user['fecha_nacim']}}">
+                              <input class="field-blocked" readonly type="text" name="birth_date" value="{{ date('d-m-Y', strtotime($user['fecha_nacim'])) }}">
                           </label>
                         </div>
                         <div class="card-box info-favourites">

@@ -30,7 +30,7 @@
               </a>
           </td>
           <td class="category">{{ $film['categoria'] }}</td>
-          <td class="date">{{ $film['fecha_estreno'] }}</td>
+          <td class="date">{{ date('d-m-Y', strtotime($film['fecha_estreno'])) }}</td>
           <td class="pais">{{ $film['pais'] }}</td>
           <td>{{ number_format($film['puntaje'], 2) }}</td>
             <!-- </div> -->

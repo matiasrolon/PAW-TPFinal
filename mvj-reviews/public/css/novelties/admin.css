@@ -190,7 +190,7 @@ p.errorField:not([value='']) {
 }
 
 .form.award .field.content{
-  min-height: 60vh;
+/*   min-height: 60vh; */
   overflow:hidden;
 }
 

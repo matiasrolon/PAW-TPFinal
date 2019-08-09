@@ -148,4 +148,4 @@
 - [ ] Mostrar unas 4 pelis de cada mes y un boton que permita expandir para ver todas.
 - [ ] Acomodar colores CSS
 - [x] En inicio no deben aparecer los estrenos.
-- [ ] Poner las fechas en castellano.
+- [x] Poner las fechas en castellano.
