@@ -1,5 +1,103 @@
+@media (min-width: 700px) {
+  .data-user-form {
+    display: grid;
+    grid-template-columns: repeat(10, 1fr);
+    grid-template-rows: 1fr 30% 1fr 10%;
+    column-gap: 0.5%;
+    row-gap: 1%;
+    /* padding: 2%; */
+    flex: 1 100%;
+  }
+
+  .content {
+    margin: 0% 10%;
+    padding: 1% 2%;
+    /* width: 100vw; */
+  }
+
+  .info-avatar{
+    padding: 10%;
+    height: min-content;
+    grid-column: span 1;
+    /* grid-row-start: 2; */
+  }
+
+  .info-personal-main{
+    width: 2fr;
+    grid-column: span 4;
+  }
+
+  .info-personal{
+    grid-column: span 5;
+    grid-row: 2;
+  }
+  .info-favourites {
+    grid-column: span 5;
+    grid-row: 2;
+  }
+
+  .info-bio {
+    grid-column: span 10;
+  }
+
+  .edit-options {
+     grid-column: span 2;
+     grid-column-end: 7;
+  }
+  
+  .container-reviews {
+    display: grid;
+    grid-template-columns: repeat(auto-fill,minmax(250px, 1fr));
+  }
+
+  .EditProfile {
+    flex: 1 100%;
+    margin: 1% 0% 1% 90%;
+  }
+
+}
+
+@media (max-width: 700px) {
+
+  .data-user-form {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr;
+    column-gap: 0.5%;
+    row-gap: 1%;
+    /* padding: 2% 2% 5% 2%; */
+    flex: 1 100%;
+  }
+
+  .content {
+    display: block;
+    margin: 2%;
+    padding: 2%;
+  }
+
+  .container-reviews {
+    display: grid;
+    grid-template-columns: 1fr;
+  }
+
+  .EditProfile {
+    margin: 1% 0% 1% 75%;
+  }
+
+}
+
+.editable-field {
+  background-color: #90b547;
+  border-radius: 5px;
+}
+
+.title {
+  width: auto;
+  margin-top: 3%;
+}
+
 .content {
-  margin-left: 15px;
+   background: #CBD5B7;
 }
 
 .tittle-name {
@@ -9,36 +107,34 @@
 
 .data-user{
   display: flex;
+  width: auto;
+  margin-bottom: 15%;
 }
 
 .data-user .field.avatar{
-  width: 200px;
-  height: 200px;
-  margin-right: 10px;
+  width: auto;
+  height: 134px;
+  /* margin-right: 10px; */
   border-radius: 50%;
 }
 
-input.avatar{width: 16%;color: azure;}
+input.avatar{width: fit-content;color: #000000;}
 
-.info-avatar{
-  display: inline-block;
-}
+
 
 .card-box {
   border: 5px solid rgba(255,255,255, 0.3);
   background-color: rgba(255,255,255, 0.3);
-  margin-left: 15px;
+  /* margin-left: 15px; */
   padding-left: 10px;
   padding-right: 10px;
-  padding-bottom: 5px;
+  /* padding-bottom: 5px; */
   border-radius: 10px;
   display: inline-block;
+  background: yellowgreen;
 }
 
 
-.info-personal,.info-favourites{
-  min-width: 300px;  
-}
 
 .info-bio{
 
@@ -50,14 +146,56 @@ input.avatar{width: 16%;color: azure;}
 }
 
 .field.personal,.field.favourite{
-  display: block;
+  display: flex;
   padding-top: 5px;
 }
 
-.field *{display: inline-block;background-color: transparent;border: 0;font-size: large;font-family: 'Pridi', serif;}
+input[type=file] {
+  /* width: 16px; */
+  white-space: normal;
+  /* overflow: hidden; */
+  overflow: hidden;
+  /* position: absolute; */
+  /* z-index: -1; */
+}
+
+input[type=button], input[type=submit], input[type=reset], .input-file-show, button.EditProfile{
+  background-color: rgba(0, 0, 0, 0.2);
+  border: none;
+  color: white;
+  padding: 0.5rem;
+  font-size: inherit;
+  text-decoration: none;
+  /* margin: 4px 2px; */
+  cursor: pointer;
+  border-radius: 10px;
+  background-color:;
+}
+
+.biography textarea {
+  width: 100%;
+  max-height: 200px;
+}
+
+.field-blocked, .field-blocked {
+   background-color: transparent;
+}
+
+
+.field input {
+  margin-left: 1%;
+}
+.field input, .field textarea {
+   display: inline-block;
+   border: 0;
+   font-size: large;
+   font-family: 'Pridi', serif;
+   width: -webkit-fill-available;
+   
+}
 
 .biography{
-  display:block;
+  display: block;
 }
 
 .field input[name="biography"]{
@@ -68,31 +206,36 @@ input.avatar{width: 16%;color: azure;}
   display: inline-block;
 }
 
+.editable input{
+  background-color: antiquewhite;
+}
+
+
 .name input {
   font-size: x-large;
-  width: 50%;
+  width: 100%;
 }
 
 .editable.avatar{
-  position: absolute;
-  float: left;
+  /* position: absolute; */
+  /* float: left; */
+  width: 80%;
 }
 
 
 /* ---- REVIEWS RECIENTES ----*/
 
-.container-reviews {
-  display: flex;
-}
+
 
 .review-user{
   display: inline-block;
   background-color: rgba(255,255,255, 0.3);
-  width: 300px;
+  width: auto;
   border: solid 5px rgba(255,255,255, 0.3);
   border-radius: 5px;
-  padding: 5px;
-  margin-right: 15px;
+/*   padding: 5px; */
+  margin: 2%;
+  flex: 1 100%;
 }
 
 .review-user:hover {

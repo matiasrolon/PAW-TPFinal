@@ -57,7 +57,7 @@ User.saveOldData = function(){
   Fields.tvseries_fav =document.querySelector(queryBefore+'tvseries_fav'+queryAfter).value;
   Fields.movie_fav =document.querySelector(queryBefore+'movie_fav'+queryAfter).value;
   Fields.genre_fav =document.querySelector(queryBefore+'genre_fav'+queryAfter).value;
-  Fields.biography =document.querySelector(queryBefore+'biography'+queryAfter).value;
+  Fields.biography =document.querySelector('textarea[name="biography"]').value;
   Fields.avatar = document.querySelector('.field.avatar').src;
   console.log(Fields.biography);
 }
@@ -71,18 +71,19 @@ User.restoreOldData = function(){
   document.querySelector(queryBefore+'tvseries_fav'+queryAfter).value = Fields.tvseries_fav;
   document.querySelector(queryBefore+'movie_fav'+queryAfter).value = Fields.movie_fav;
   document.querySelector(queryBefore+'genre_fav'+queryAfter).value = Fields.genre_fav;
-  document.querySelector(queryBefore+'biography'+queryAfter).value = Fields.biography;
+  document.querySelector('textarea[name="biography"]').value = Fields.biography;
   document.querySelector('.field.avatar').src = Fields.avatar;
 }
 
 
 User.convertProfileDataToEditable = function(){
     // convierte en editables los campos (labels)
-    let editables = document.querySelectorAll('.field input');
+    let editables = document.querySelectorAll('.field input,.field textarea');
     editables.forEach(function(e){
       e.removeAttribute('readonly');
+      e.classList.add('editable-field');
+      e.classList.remove('field-blocked');
     });
-
     //hace visible editable del avatar
     let avatar = document.querySelector('.editable.avatar');
     if (avatar.classList.contains('no-visible')){
