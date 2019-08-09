@@ -1,18 +1,20 @@
 @extends('layouts.app')
+@section('publics')
+    <link href="{{ asset('css/register.css') }}" rel="stylesheet">
+@endsection
 
 @section('content')
-            <div class="login-card">
-                <div class="login-card-header">{{ __('Register') }}</div>
+            <div class="register-card">
+                <div class="register-card-header">{{ __('Registrarme') }}</div>
 
-                <div class="login-card-body">
+                <div class="register-card-body">
                     <form method="POST" action="{{ route('register') }}">
                         @csrf
 
-                        <div>
-                            <label for="nombre" class="col-md-4 col-form-label text-md-right">{{ __('Nombre') }}</label>
-
-                            <div>
-                                <input id="nombre" type="text" class="form-control @error('nombre') is-invalid @enderror" name="nombre" value="{{ old('nombre') }}" required autocomplete="nombre" autofocus>
+                        <div class="field">
+                            <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Nombre') }}</label>
+                            <div class="value">
+                                <input id="name" type="text" class="form-control @error('nombre') is-invalid @enderror" name="nombre" value="{{ old('nombre') }}" required autocomplete="nombre" autofocus>
 
                                 @error('nombre')
                                     <span class="invalid-feedback" role="alert">
@@ -22,18 +24,16 @@
                             </div>
                         </div>
 
-                        <div >
-                            <label for="username" class="col-md-4 col-form-label text-md-right">{{ __('Username') }}</label>
-
-                            <div>
+                        <div class="field">
+                            <label for="username" class="col-md-4 col-form-label text-md-right">{{ __('nickname') }}</label>
+                            <div class="value">
                                 <input id="username" type="text" class="form-control @error('username') is-invalid @enderror" name="username" value="{{ old('name') }}" required autocomplete="name" autofocus>
                             </div>
                         </div>
 
-                        <div>
-                            <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
-
-                            <div>
+                        <div class="field">
+                            <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('Email') }}</label>
+                            <div class="value">
                                 <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email">
 
                                 @error('email')
@@ -44,10 +44,9 @@
                             </div>
                         </div>
 
-                        <div >
-                            <label for="password" >{{ __('Password') }}</label>
-
-                            <div>
+                        <div  class="field">
+                            <label for="password" >{{ __('Contraseña') }}</label>
+                            <div class="value">
                                 <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
 
                                 @error('password')
@@ -58,22 +57,34 @@
                             </div>
                         </div>
 
-                        <div >
-                            <label for="password-confirm" >{{ __('Confirm Password') }}</label>
+                        <div class="field" >
+                            <label for="password-confirm" >{{ __('Confirmar contra') }}</label>
 
-                            <div >
+                            <div class="value">
                                 <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
                             </div>
                         </div>
 
                         <div>
-                            <div >
-                                <button type="submit" class="btn-mvj">
-                                    {{ __('Register') }}
-                                </button>
-                            </div>
+                              <button type="submit" class="btn-mvj register">
+                                  {{ __('Register') }}
+                              </button>
                         </div>
                     </form>
                 </div>
             </div>
+
+            <div class="welcome-card">
+                <h2 class="tittle">
+                    ¿Porque unirte a esta Comunidad?
+                </h2>
+
+                <p class="description"> La reputacion de un film la hacemos entre todos, no solo una elite</p>
+                <div class="images">
+                          <img class="field avatar" src="{{asset('images/votar-review.png')}}">
+                          <img class="field avatar" src="{{asset('images/votar-film.png')}}">
+                          <img class="field avatar" src="{{asset('images/buscador.png')}}">
+                </div>
+                <p>Puntua films, likea Reviews, encontra info de cualquier film</p>
+                <p class="final-msj"> Registrate y disfruta la mejor interaccion con el mundo cinefilo!</p>
 @endsection
