@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title') Home | MVJ Reviews @endsection
+@section('title') Home | MVJ Reviews Matias @endsection
 
 @section('publics')
   <link href="{{ asset('css/home.css', true) }}" rel="stylesheet">
