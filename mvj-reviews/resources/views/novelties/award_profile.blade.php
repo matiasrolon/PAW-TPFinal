@@ -3,7 +3,7 @@
 @section('title') Premio | MVJ Reviews @endsection
 
 @section('publics')
-<link href="{{ asset('css/novelties/awards.css',true) }}" rel="stylesheet">
+<link href="{{ asset('css/novelties/awards.css',false) }}" rel="stylesheet">
 @endsection
 
 @section('content')

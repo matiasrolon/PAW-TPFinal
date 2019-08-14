@@ -3,12 +3,12 @@
 @section('title') {{ $film['titulo'] }} | MVJ Reviews @endsection
 
 @section('publics')
-<script src="{{ asset('js/film_profile.js',true) }}"></script>
+<script src="{{ asset('js/film_profile.js',false) }}"></script>
 <script>Pagina.iniciarPagina("content");</script>
 <script type="application/ld+json">
   {!! $jsonLD !!}
 </script>
-<link href="{{ asset('css/film_profile.css',true) }}" rel="stylesheet">
+<link href="{{ asset('css/film_profile.css',false) }}" rel="stylesheet">
 @endsection
 
 @section('content')

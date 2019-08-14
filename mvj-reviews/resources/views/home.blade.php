@@ -3,10 +3,10 @@
 @section('title') Home | MVJ Reviews @endsection
 
 @section('publics')
-  <link href="{{ asset('css/home.css', true) }}" rel="stylesheet">
-  <script src="{{ asset('js/peliculasGenero.js', true) }}" charset="utf-8"></script>
-  <script src="{{ asset('js/filmCardData.js', true) }}" charset="utf-8"></script>
-  <script src="{{ asset('js/home.js', true) }}" charset="utf-8"></script>
+  <link href="{{ asset('css/home.css', false) }}" rel="stylesheet">
+  <script src="{{ asset('js/peliculasGenero.js', false) }}" charset="utf-8"></script>
+  <script src="{{ asset('js/filmCardData.js', false) }}" charset="utf-8"></script>
+  <script src="{{ asset('js/home.js', false) }}" charset="utf-8"></script>
   <script>
     window.addEventListener("DOMContentLoaded", function(){
       FilmCardData.modificarPuntajeClase();

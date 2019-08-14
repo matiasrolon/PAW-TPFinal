@@ -3,11 +3,11 @@
 @section('title') Estrenos | MVJ Reviews @endsection
 
 @section('publics')
-<script src="{{ asset('js/novelties/premieres.js',true) }}"></script>
+<script src="{{ asset('js/novelties/premieres.js',false) }}"></script>
 <script>
   Premieres.startPremieres("content");
 </script>
-<link href="{{ asset('css/novelties/premieres.css',true) }}" rel="stylesheet">
+<link href="{{ asset('css/novelties/premieres.css',false) }}" rel="stylesheet">
 @endsection
 
 @section('content')

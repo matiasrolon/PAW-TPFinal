@@ -12,7 +12,7 @@
 
 
     @yield('publics')
-    <link href="{{ asset('css/errors.css',true) }}" rel="stylesheet">
+    <link href="{{ asset('css/errors.css',false) }}" rel="stylesheet">
 
 </head>
 

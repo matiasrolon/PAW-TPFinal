@@ -14,27 +14,27 @@
     @yield('publics')
 
     <!-- Scripts -->
-    <script src="{{ asset('js/app.js',true) }}"></script>
-    <script src="{{ asset('js/navApp.js',true) }}"></script>
+    <script src="{{ asset('js/app.js',false) }}"></script>
+    <script src="{{ asset('js/navApp.js',false) }}"></script>
     <script>NavPrincipal.iniciarNavPrincipal("app");</script>
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <!-- <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet"> -->
     <link href="https://fonts.googleapis.com/css?family=Pridi&display=swap" rel="stylesheet">
     <!-- Styles -->
-    <link href="{{ asset('css/app.css',true) }}" rel="stylesheet">
+    <link href="{{ asset('css/app.css',false) }}" rel="stylesheet">
     <!-- Icons -->
     <!-- <link href="{{ asset('css/solid.css') }}" rel="stylesheet"> -->
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet">
-    <script type="text/javascript" src="{{ asset('fontawesome/js/solid.js',true) }}"> </script>
-    <script type="text/javascript" src="{{ asset('fontawesome/js/fontawesome.js',true) }}"> </script>
+    <script type="text/javascript" src="{{ asset('fontawesome/js/solid.js',false) }}"> </script>
+    <script type="text/javascript" src="{{ asset('fontawesome/js/fontawesome.js',false) }}"> </script>
 </head>
 <body>
     <div id="app">
         <div class="header-menu-mvj">
           <nav class="nav-principal">
               <div class="navseccion icono">
-                  <img class="logo-st" src="{{ asset('images/logo.svg',true) }}" alt="logo">
+                  <img class="logo-st" src="{{ asset('images/logo.svg',false) }}" alt="logo">
                   <a class="" href="{{ url('/') }}">
                     MVJ Reviews
                   </a>

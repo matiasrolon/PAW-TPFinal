@@ -4,7 +4,7 @@
 
 @section('publics')
   <!-- <link href="{{ asset('css/home.css') }}" rel="stylesheet"> -->
-  <link href="{{ asset('css/ranking_films.css',true) }}" rel="stylesheet">
+  <link href="{{ asset('css/ranking_films.css',false) }}" rel="stylesheet">
 @endsection
 
 @section('content')

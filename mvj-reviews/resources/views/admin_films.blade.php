@@ -3,9 +3,9 @@
 @section('title') Admin Films | MVJ Reviews @endsection
 
 @section('publics')
-<link href="{{ asset('css/admin_films.css',true) }}" rel="stylesheet">
+<link href="{{ asset('css/admin_films.css',false) }}" rel="stylesheet">
 <meta name="csrf-token" content="{{ csrf_token() }}"/>
-<script src="{{ asset('js/admin_films.js',true) }}"></script>
+<script src="{{ asset('js/admin_films.js',false) }}"></script>
 <script>
     AdminFilms.iniciarPagina("content");
 </script>
