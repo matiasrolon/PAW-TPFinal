@@ -7,12 +7,12 @@ Mas adelante podemos cambiar este archivo de ubicacion. El objetivo es llevar cu
 
 *Nota:* el SO utilizado en este caso es Windows 10 (64 bits).
 
-1. [XAMPP](https://www.apachefriends.org/es/index.html) (Apache, MySQL y PHP). O alternativamente:
+1. [XAMPP 7.3.2](https://www.apachefriends.org/es/index.html) (Apache, MySQL y PHP). O alternativamente:
    - [Apache HTTP Server](http://httpd.apache.org/)
-   - [MySQL](https://www.mysql.com/)
-   - [PHP](https://www.php.net/).
-1. [Composer](https://getcomposer.org/).
-1. [Laravel](https://laravel.com/). (version utilizada 5.8. No se recomienda utilizar versiones anteriores).
+   - [MySQL Server 5.7](https://www.mysql.com/)
+   - [PHP 7.3.2](https://www.php.net/).
+2. [Composer 1.8.4](https://getcomposer.org/).
+3. [Laravel 5.8](https://laravel.com/). (No se recomienda utilizar versiones anteriores).
    - Recomiendo instalarlo desde composer: `composer global require laravel/installer`.
    - Ejecutar `laravel artisan --version` en la consola del SO para ver la version instalada.
 
