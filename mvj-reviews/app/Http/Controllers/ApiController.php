@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers;
 
-// use Illuminate\Http\Request;
 use GuzzleHttp\Client;
+use GuzzleHttp\Exception\RequestException;
 use App\Models\Film;
-use Storage;
-use Mockery\Undefined;
+use Exception;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Log;
 
 // use function GuzzleHttp\json_decode;
 
@@ -322,10 +323,13 @@ class ApiController extends Controller
                 // Creo que aun puede mejorarse, pero hay otras prioridades.
                 usleep(333333);
             }
-
-            return response()->json($films);
-        } catch (Exception $e) {
+            /* Revisar este codigo */
+            /* FIXME: Aca lo correcto es devolver 500 */
+            return response()->json($films, $httpResponse->getStatusCode());
+        } catch (RequestException $e) {
+            // http://docs.guzzlephp.org/en/stable/quickstart.html#exceptions
             Log::error($e . ' --- Error en el metodo search() de ApiController.');
+            return response()->json('Error de TheMovieDB', $e->getResponse()->getStatusCode());
         }
     }
 }

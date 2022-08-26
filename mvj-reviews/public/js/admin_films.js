@@ -467,77 +467,84 @@ AdminFilms.enviarRequestSearchFilmsAdmin = function (origen) {
 * (Ejemplo: SRC del poster, clases para distingir una de otra via CSS,etc).
 */
 AdminFilms.recibirResponseSearchFilmsAdmin = function (response,origen) {
-  var resp = JSON.parse(response.responseText);
-  console.log('RESP(' + ') = ' + resp);
-  console.log("se recibio respuesta de searchLocalFilm. ");
-  // resp es un arreglo de objetos
-  var divResultados = document.getElementsByClassName('resultados-obtenidos')[0];
-  var base64 = "";
-  var clase_resultado_obtenido;
-  //Seteo parametros que seran asignados luego
-  if (origen=='DB'){
-    base64 = 'data:image/png;base64,';
-    clase_resultado_obtenido = 'interno';
-  }else{
-    base64="";
-    clase_resultado_obtenido = 'externo';
+  if (response.status !== 200) {
+    // TODO: Pregunto el codigo, o sencillamente manejo errores
+    
+  } else {
+    // HTTP 200 OK
+    var resp = JSON.parse(response.responseText);
+    console.log('RESP(' + ') = ' + resp);
+    console.log("se recibio respuesta de searchLocalFilm. ");
+    // resp es un arreglo de objetos
+    var divResultados = document.getElementsByClassName('resultados-obtenidos')[0];
+    var base64 = "";
+    var clase_resultado_obtenido;
+    //Seteo parametros que seran asignados luego
+    if (origen=='DB'){
+      base64 = 'data:image/png;base64,';
+      clase_resultado_obtenido = 'interno';
+    }else{
+      base64="";
+      clase_resultado_obtenido = 'externo';
+    }
+
+    console.log('resp.length (' + origen +') = ' + resp.length);
+    // Agrego cada resultado al contenedor
+    if (resp.length>0){
+        console.log('Cargo respuesta de ' + origen);
+        resp.forEach(function (value, index) {
+
+          // console.log('FILM ' + index + ' POSTER --> ' + value['poster']);
+
+          var resultado = document.createElement('div');
+          resultado.classList.add('resultado-obtenido');
+          resultado.id = "r" + index.toString();
+
+          if (index % 5 == 0 ){ //para las imagenes del principio de cada fila.
+              resultado.classList.add('ini-fila');
+          }
+          // Primero recupero el poster.
+          var poster = document.createElement('img');
+          poster.classList.add('poster');
+
+          if (typeof value['poster'] !== 'undefined'){ //a veces no carga bien la imagen proveniente de la api
+              poster.src = base64 + value['poster'];
+          }else{//establece una por defecto
+              poster.src = '/images/noimage.jpg';
+          }
+
+          poster.alt = 'Poster';
+          poster.setAttribute('path',value['poster']);
+          resultado.appendChild(poster);
+          resultado.classList.add(origen);//para distinguir via CSS las que vienen de API de las que vienen de BD
+          //cargo los datos en el cuadro principal de ABM al hacer click sobre la imagen
+          resultado.addEventListener("click",function(){
+              AdminFilms.mostrarResultadoSeleccionado(true);
+              AdminFilms.establecerResultadoSeleccionado(value,origen,base64);
+          });
+          resultado.classList.add(clase_resultado_obtenido);
+
+          // Lo agrego al contenedor
+          divResultados.appendChild(resultado);
+          console.log('Agrego resultado: ' + value['titulo']);
+        });
+      } else {
+        // No se encontraron resultados
+        var h2 = document.createElement('h2');
+        var lugarBusqueda = '';
+        if (origen == 'DB') {
+          lugarBusqueda = 'MVJ Reviews'
+        } else if (origen == 'API') {
+          lugarBusqueda = 'TheMovieDB';
+        }
+        h2.innerHTML = 'No se encontraron coincidencias en ' + lugarBusqueda + '.';
+        h2.classList.add('sin-resultados');
+        var contenedor = document.querySelector('.administrador-films .admin-resultados');
+        // Lo inserta en la posicion 2: Despues del form, antes del resto de los resultados
+        contenedor.insertBefore(h2, contenedor.childNodes[1]);
+      }
   }
 
-  console.log('resp.length (' + origen +') = ' + resp.length);
-  // Agrego cada resultado al contenedor
-  if (resp.length>0){
-      console.log('Cargo respuesta de ' + origen);
-      resp.forEach(function (value, index) {
-
-        // console.log('FILM ' + index + ' POSTER --> ' + value['poster']);
-
-        var resultado = document.createElement('div');
-        resultado.classList.add('resultado-obtenido');
-        resultado.id = "r" + index.toString();
-
-        if (index % 5 == 0 ){ //para las imagenes del principio de cada fila.
-            resultado.classList.add('ini-fila');
-        }
-        // Primero recupero el poster.
-        var poster = document.createElement('img');
-        poster.classList.add('poster');
-
-        if (typeof value['poster'] !== 'undefined'){ //a veces no carga bien la imagen proveniente de la api
-            poster.src = base64 + value['poster'];
-        }else{//establece una por defecto
-            poster.src = '/images/noimage.jpg';
-        }
-
-        poster.alt = 'Poster';
-        poster.setAttribute('path',value['poster']);
-        resultado.appendChild(poster);
-        resultado.classList.add(origen);//para distinguir via CSS las que vienen de API de las que vienen de BD
-        //cargo los datos en el cuadro principal de ABM al hacer click sobre la imagen
-        resultado.addEventListener("click",function(){
-            AdminFilms.mostrarResultadoSeleccionado(true);
-            AdminFilms.establecerResultadoSeleccionado(value,origen,base64);
-        });
-        resultado.classList.add(clase_resultado_obtenido);
-
-        // Lo agrego al contenedor
-        divResultados.appendChild(resultado);
-        console.log('Agrego resultado: ' + value['titulo']);
-      });
-    } else {
-      // No se encontraron resultados
-      var h2 = document.createElement('h2');
-      var lugarBusqueda = '';
-      if (origen == 'DB') {
-        lugarBusqueda = 'MVJ Reviews'
-      } else if (origen == 'API') {
-        lugarBusqueda = 'TheMovieDB';
-      }
-      h2.innerHTML = 'No se encontraron coincidencias en ' + lugarBusqueda + '.';
-      h2.classList.add('sin-resultados');
-      var contenedor = document.querySelector('.administrador-films .admin-resultados');
-      // Lo inserta en la posicion 2: Despues del form, antes del resto de los resultados
-      contenedor.insertBefore(h2, contenedor.childNodes[1]);
-    } 
 }
 
 /**
