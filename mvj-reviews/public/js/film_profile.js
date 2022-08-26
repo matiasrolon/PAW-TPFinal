@@ -3,6 +3,8 @@ var window = window || {},
   console = console || {},
   Pagina = Pagina || {};
 
+const HOME_URL = '/home';
+
 Pagina.iniciarPagina= function(contenedorHTML){
      window.addEventListener("DOMContentLoaded", function(){
        //Cuando llega al final, carga las siguientes reviews
@@ -383,4 +385,16 @@ Pagina.recibirResponseCargarReviews = function(response){
   resp.forEach(function(r){
       Pagina.agregarReview(r);
   });
+}
+
+Pagina.filterByGenre = (genreId) => {
+    if ('URLSearchParams' in window) {
+        var searchParams = new URLSearchParams(window.location.search);
+        // FIXME: Revisar que hago con esta constante que esta definida en el archivo peliculasGenero.js
+        searchParams.set(QUERY_PARAM_GENRE_ID, genreId);
+        window.location.replace(HOME_URL + searchParams.toString());
+    } else {
+        // Browser does not support "URLSearchParams"
+        console.error('Error al filtrar las peliculas por genero');
+    }
 }

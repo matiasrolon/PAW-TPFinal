@@ -2,6 +2,7 @@ var PeliculaGenero = PeliculaGenero || {},
     document = document || {},
     window = window || {};
 
+const QUERY_PARAM_GENRE_ID = 'genreId';
 
 PeliculaGenero.getData = function (request) {
   request.open("GET", "/film-by-genre/"+PeliculaGenero.genre+"/"+PeliculaGenero.category+"/"+PeliculaGenero.offset+"/"+PeliculaGenero.elementsPerChunck, true);
@@ -54,7 +55,6 @@ PeliculaGenero.buildGrid = function (response) {
     d.appendChild(i);
     PeliculaGenero.containerCards.append(d);
   }
-
 }
 
 PeliculaGenero.getNextChunck = function(){
@@ -89,27 +89,44 @@ PeliculaGenero.getNextChunckScroll = function(event){
  }
 }
 
-PeliculaGenero.initialize = function (genre, category, container) {
-  PeliculaGenero.elementsPerChunck = 4;
-  PeliculaGenero.offset = 0;
-  PeliculaGenero.scrollTop = 0;
-  PeliculaGenero.locked = false;
-  PeliculaGenero.genre = genre;
-  PeliculaGenero.category = category;
-  PeliculaGenero.container = document.getElementById(container);
-  PeliculaGenero.container.innerHTML = '';
-  let nom = document.querySelector(".generos li div[value='"+PeliculaGenero.genre+"']").innerText;
-  let a = PeliculaGenero.crearElemento("h3", [], "Top de Peliculas de "+nom+": ");
-  PeliculaGenero.container.appendChild(a);
-  let b = PeliculaGenero.crearElemento("div", ["container-peliculas-populares"]);
-  let c = PeliculaGenero.crearElemento("div", ["loading-spin","no-visible"]);
-  c.setAttribute('id','spinnerGenre');
-  PeliculaGenero.containerCards = PeliculaGenero.crearElemento("section", ["peliculas"]);
+PeliculaGenero.initialize = function (genreId, category, container) {
+    if (genreId != null) {
+        this.updateQueryString(QUERY_PARAM_GENRE_ID, genreId);
 
-  window.addEventListener("scroll",PeliculaGenero.getNextChunckScroll);
-  b.appendChild(PeliculaGenero.containerCards);
-  PeliculaGenero.container.appendChild(b);
-  PeliculaGenero.container.appendChild(c);
-  PeliculaGenero.getNextChunck();
-  PeliculaGenero.getNextChunck();
+        PeliculaGenero.elementsPerChunck = 4;
+        PeliculaGenero.offset = 0;
+        PeliculaGenero.scrollTop = 0;
+        PeliculaGenero.locked = false;
+        PeliculaGenero.genre = genreId;
+        PeliculaGenero.category = category;
+        PeliculaGenero.container = document.getElementById(container);
+        PeliculaGenero.container.innerHTML = '';
+        let nom = document.querySelector(".generos li[value='"+PeliculaGenero.genre+"']").innerText;
+        let a = PeliculaGenero.crearElemento("h3", [], "Top de Peliculas de "+nom+": ");
+        PeliculaGenero.container.appendChild(a);
+        let b = PeliculaGenero.crearElemento("div", ["container-peliculas-populares"]);
+        let c = PeliculaGenero.crearElemento("div", ["loading-spin","no-visible"]);
+        c.setAttribute('id','spinnerGenre');
+        PeliculaGenero.containerCards = PeliculaGenero.crearElemento("section", ["peliculas"]);
+
+        window.addEventListener("scroll",PeliculaGenero.getNextChunckScroll);
+        b.appendChild(PeliculaGenero.containerCards);
+        PeliculaGenero.container.appendChild(b);
+        PeliculaGenero.container.appendChild(c);
+        PeliculaGenero.getNextChunck();
+        PeliculaGenero.getNextChunck();
+    }
+}
+
+
+PeliculaGenero.updateQueryString = (key, value) => {
+    if ('URLSearchParams' in window) {
+        var searchParams = new URLSearchParams(window.location.search)
+        searchParams.set(key, value);
+        var newRelativePathQuery = window.location.pathname + '?' + searchParams.toString();
+        history.pushState(null, '', newRelativePathQuery);
+    } else {
+        // Browser does not support "URLSearchParams"
+        console.error('Error al filtrar las peliculas por genero');
+    }
 }

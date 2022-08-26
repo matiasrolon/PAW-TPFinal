@@ -13,9 +13,9 @@
   display: none;
 }
 
-a{
-  color: black;
-  text-decoration: none;
+a {
+    color: black;
+    text-decoration: none;
 }
 
 .opcion.elegida{
@@ -162,7 +162,8 @@ a{
       /* display: block; */
   }
   .opcion.agregarReview .estado .descripcion-estado{
-}
+
+}
 
 	.info-film {
 	  display: grid;
@@ -395,11 +396,13 @@ input.titulo-review {
   overflow: scroll;
 }
 
+.detalles-pelicula .generos li a {
+    padding: 10px;
+}
 
 .detalles-pelicula .generos li {
   border: 2px solid #858785;
   border-radius: 15px;
-  padding: 4px;
   margin: 0.5%;
   background-color: #a1d5ce;
 }

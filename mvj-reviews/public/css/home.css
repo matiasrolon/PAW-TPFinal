@@ -248,7 +248,7 @@ div.comment{
 /*   overflow: scroll; */
 }
 
-ul.generos li:hover p::before{
+ul.generos li:hover::before {
   content: "# ";
 }
 

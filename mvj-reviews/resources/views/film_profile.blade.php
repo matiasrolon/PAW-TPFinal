@@ -46,7 +46,9 @@
         <ul class="generos">
             @if ( count($generos) > 0 )
             @foreach ($generos as $genero)
-            <li>{{ $genero['nombre'] }}</li>
+            <li>
+                <a href="/home?genreId={{$genero['id']}}">{{ $genero['nombre'] }}</a>
+            </li>
             @endforeach
             @else
             No disponible
