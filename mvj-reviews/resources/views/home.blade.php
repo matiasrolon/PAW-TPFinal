@@ -13,11 +13,6 @@
         window.addEventListener("DOMContentLoaded", function() {
             FilmCardData.modificarPuntajeClase();
             Home.iniciarPagina();
-            PeliculaGenero.initialize(
-                new URLSearchParams(window.location.search).get("genreId"),
-                'pelicula',
-                'container1'
-            );
         });
     </script>
 @endsection
@@ -40,8 +35,11 @@
         </div>
 
         <section id="container1" class="films-populares">
-
-            <h3>Peliculas Populares</h3>
+            @if($genreId == null)
+                <h3>Peliculas Populares</h3>
+            @else
+                <h3>Top de Peliculas de {{ $generos[$genreId-1]->nombre }}</h3>
+            @endif
             <div class="container-peliculas-populares">
                 <section class="peliculas">
                     @foreach ($peliculas as $pelicula)
@@ -65,7 +63,11 @@
                     @endforeach
             </div>
             <br>
-            <h3>Series Populares</h3>
+            @if($genreId == null)
+                <h3>Series Populares</h3>
+            @else
+                <h3>Top de Series de {{ $generos[$genreId-1]->nombre }}</h3>
+            @endif
             <div class="container-peliculas-populares">
                 <section class="peliculas">
                     @foreach ($series as $serie)
