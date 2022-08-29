@@ -514,7 +514,6 @@ li.item-resultado:hover {
           .submenu li:hover{
             color: black;
             background-color: #CBD5B7;
-            border: solid 1px black;
           }
           .submenu li:hover > a{
             color: black;
@@ -523,7 +522,6 @@ li.item-resultado:hover {
 .seccion-menu:hover{
   background-color: #CBD5B7;
   color: black;
-  border: solid 1px black;
 }
 .seccion-menu:hover > a{
   color: black;
