@@ -1,13 +1,95 @@
-var PeliculaGenero = PeliculaGenero || {},
-    document = document || {},
+const QUERY_PARAM_GENRE_ID = 'genreId';
+const CATEGORY_MOVIES = 'Pelicula';
+const CATEGORY_SERIES = 'Serie';
+
+var document = document || {},
     window = window || {};
 
-const QUERY_PARAM_GENRE_ID = 'genreId';
+var PeliculaGenero = {
+    chunkSize: 8,
+    genreId: null,
+};
 
-PeliculaGenero.getData = function (request) {
-  request.open("GET", "/film-by-genre/"+PeliculaGenero.genre+"/"+PeliculaGenero.category+"/"+PeliculaGenero.offset+"/"+PeliculaGenero.elementsPerChunck, true);
-  request.send();
-  PeliculaGenero.offset += PeliculaGenero.elementsPerChunck;
+var movies = {
+    name: CATEGORY_MOVIES,
+    offset: 0,
+    hasMore: true,
+    container: 'section-peliculas'
+};
+
+var series = {
+    name: CATEGORY_SERIES,
+    offset: 0,
+    hasMore: true,
+    container: 'section-series'
+};
+
+
+/**
+ * Funcion de entrada.
+ * Inicializa variables.
+ * */
+PeliculaGenero.load =  function() {
+    var elements = document.querySelectorAll("#section-peliculas div.flip-card");
+    movies.offset = elements.length;
+    if (elements.length == 0)
+        document.getElementById('btn-fetch-movies').classList.add('no-visible');
+
+    elements = document.querySelectorAll("#section-series div.flip-card");
+    series.offset = elements.length;
+    if (elements.length == 0)
+        document.getElementById('btn-fetch-series').classList.add('no-visible');
+
+    if (PeliculaGenero.genreId == null) {
+        if ('URLSearchParams' in window) {
+            var searchParams = new URLSearchParams(window.location.search);
+            PeliculaGenero.genreId = searchParams.get(QUERY_PARAM_GENRE_ID);
+        } else {
+            // Browser does not support "URLSearchParams"
+            console.error('Actualice su navegador para utilizar este sitio');
+        }
+    }
+}
+
+/**
+ * Hace la request para cargar mas elemento y parsea la respuesta
+ * @param {String} category "Pelicula" o "Serie"
+ */
+PeliculaGenero.fetchFilms = function(category) {
+    var cat = category == CATEGORY_MOVIES ? movies : series;
+    PeliculaGenero.getNextChunk(cat);
+}
+
+PeliculaGenero.getNextChunk = (category) => {
+    var request = new XMLHttpRequest();
+    request.onreadystatechange = function() {
+        if (this.readyState==4 && this.status==200) {
+            var title = `Top de ${category.name}s de ${getGenreNameById(PeliculaGenero.genreId)}`;
+            PeliculaGenero.updateTitle(category.name, title);
+
+            if (category.name == CATEGORY_MOVIES) {
+                if (this.responseText == '[]')
+                    document.getElementById('btn-fetch-movies').classList.add('no-visible');
+                else
+                    document.getElementById('btn-fetch-movies').classList.remove('no-visible');
+            }
+            if (category.name == CATEGORY_SERIES) {
+                if (this.responseText == '[]')
+                    document.getElementById('btn-fetch-series').classList.add('no-visible');
+                else
+                    document.getElementById('btn-fetch-series').classList.remove('no-visible');
+            }
+            var container = document.getElementById(category.container);
+            PeliculaGenero.buildGrid(this, container);
+            FilmCardData.modificarPuntajeClase();
+            showSpinner(false);
+        };
+    }
+
+    showSpinner(true);
+    request.open("GET", "/film-by-genre/"+PeliculaGenero.genreId+"/"+category.name+"/"+category.offset+"/"+PeliculaGenero.chunkSize, true);
+    request.send();
+    category.offset += PeliculaGenero.chunkSize;
 }
 
 
@@ -22,7 +104,7 @@ PeliculaGenero.crearElemento = function (e, clss, inner){
   return p;
 }
 
-PeliculaGenero.buildGrid = function (response) {
+PeliculaGenero.buildGrid = function (response, container) {
   var resp = JSON.parse(response.responseText);
   console.log(resp);
   for (var ii in resp) {
@@ -53,73 +135,40 @@ PeliculaGenero.buildGrid = function (response) {
     e.appendChild(j);
     i.appendChild(e);
     d.appendChild(i);
-    PeliculaGenero.containerCards.append(d);
+    container.append(d);
   }
 }
 
-PeliculaGenero.getNextChunck = function(){
-  var request = new XMLHttpRequest();
-  request.onreadystatechange = function(){ // cuando la peticion cambia de estado.
-      if (this.readyState==4 && this.status==200){ // si se recibe correctamente la respuesta.
-          PeliculaGenero.buildGrid(this);
-          FilmCardData.modificarPuntajeClase();
-          PeliculaGenero.container.querySelector("#spinnerGenre").classList.add('no-visible');
-      };
-  }
-  PeliculaGenero.getData(request);
-}
 
-
-
-PeliculaGenero.getNextChunckScroll = function(event){
-
-  if (PeliculaGenero.locked) return;
-  else {
-    var currScrTop = event.target.scrollingElement.scrollTop;
-    console.log(currScrTop, PeliculaGenero.scrollTop);
-    PeliculaGenero.locked = true;
-    if (PeliculaGenero.scrollTop < currScrTop) {
-      PeliculaGenero.container.querySelector("#spinnerGenre").classList.remove('no-visible');
-      PeliculaGenero.scrollTop = currScrTop;
-      PeliculaGenero.lastCall = setTimeout(() => {
-        PeliculaGenero.getNextChunck();
-        PeliculaGenero.locked = false;
-      }, 600);
-    }
- }
-}
-
-PeliculaGenero.initialize = function (genreId, category, container) {
+/**
+ * Coloca el filtro elegido por el usuario y actualiza las peliculas/series
+ * @param {Number} genreId
+ */
+PeliculaGenero.setGenre = function (genreId) {
     if (genreId != null) {
-        this.updateQueryString(QUERY_PARAM_GENRE_ID, genreId);
+        document.getElementById('section-peliculas').innerHTML = '';
+        document.getElementById('section-series').innerHTML = '';
 
-        PeliculaGenero.elementsPerChunck = 4;
-        PeliculaGenero.offset = 0;
-        PeliculaGenero.scrollTop = 0;
-        PeliculaGenero.locked = false;
-        PeliculaGenero.genre = genreId;
-        PeliculaGenero.category = category;
-        PeliculaGenero.container = document.getElementById(container);
-        PeliculaGenero.container.innerHTML = '';
-        let nom = document.querySelector(".generos li[value='"+PeliculaGenero.genre+"']").innerText;
-        let a = PeliculaGenero.crearElemento("h3", [], "Top de Peliculas de "+nom+": ");
-        PeliculaGenero.container.appendChild(a);
-        let b = PeliculaGenero.crearElemento("div", ["container-peliculas-populares"]);
-        let c = PeliculaGenero.crearElemento("div", ["loading-spin","no-visible"]);
-        c.setAttribute('id','spinnerGenre');
-        PeliculaGenero.containerCards = PeliculaGenero.crearElemento("section", ["peliculas"]);
+        updateQueryString(QUERY_PARAM_GENRE_ID, genreId);
+        PeliculaGenero.genreId = genreId;
 
-        window.addEventListener("scroll",PeliculaGenero.getNextChunckScroll);
-        b.appendChild(PeliculaGenero.containerCards);
-        PeliculaGenero.container.appendChild(b);
-        PeliculaGenero.container.appendChild(c);
-        PeliculaGenero.getNextChunck();
-        PeliculaGenero.getNextChunck();
+        movies.offset = 0;
+        PeliculaGenero.fetchFilms(CATEGORY_MOVIES);
+        series.offset = 0;
+        PeliculaGenero.fetchFilms(CATEGORY_SERIES);
     }
 }
 
+PeliculaGenero.updateTitle = (category, text) => {
+    if (category === CATEGORY_MOVIES)
+        var title = document.getElementById('movies-title');
+    else
+        var title = document.getElementById('series-title');
 
-PeliculaGenero.updateQueryString = (key, value) => {
+    title.innerText = text;
+}
+
+function updateQueryString(key, value) {
     if ('URLSearchParams' in window) {
         var searchParams = new URLSearchParams(window.location.search)
         searchParams.set(key, value);
@@ -129,4 +178,15 @@ PeliculaGenero.updateQueryString = (key, value) => {
         // Browser does not support "URLSearchParams"
         console.error('Error al filtrar las peliculas por genero');
     }
+}
+
+function getGenreNameById(id) {
+    return document.querySelector(".generos li[value='"+id+"']").innerText;
+}
+
+function showSpinner(show) {
+    if (show)
+        document.getElementById("spinner-genre").classList.remove('no-visible');
+    else
+        document.getElementById("spinner-genre").classList.add('no-visible');
 }

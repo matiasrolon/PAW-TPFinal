@@ -270,7 +270,7 @@ ul.generos li:hover::before {
 }
 
 
-.container-peliculas-populares{
+.container-peliculas, .container-series {
   margin: auto;
   width: auto;
   /* overflow: scroll; */
@@ -278,6 +278,7 @@ ul.generos li:hover::before {
 }
 
 
+/* TODO: Revisar. Esto donde se usa? Sifue existiendo */
 .series{
     display: inline-grid;
     grid-template-columns: repeat(4,auto);
@@ -289,6 +290,7 @@ ul.generos li:hover::before {
   width: auto;
   display: inline-block;
   position: relative;
+  text-align: center;
   /* margin: auto !important; */
   /* background: #6498e8; */
   grid-area: movies;
@@ -296,13 +298,26 @@ ul.generos li:hover::before {
 }
 
 .films-populares h3{
-  padding: auto;
-  width: auto;
+    display: flex;
+    padding: auto;
+    width: auto;
 }
 
 .titulo-film{
   background: black;
   color: rgb(255, 255, 255);
+}
+
+.btn-fetch {
+    background-color: black;
+    color: white;
+    font: inherit;
+    border-radius: 5px;
+    margin-bottom: 2em;
+}
+
+.btn-fetch:hover {
+    background-color: var(--sector);
 }
 
 .poster{

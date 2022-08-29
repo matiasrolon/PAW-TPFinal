@@ -13,6 +13,7 @@
         window.addEventListener("DOMContentLoaded", function() {
             FilmCardData.modificarPuntajeClase();
             Home.iniciarPagina();
+            PeliculaGenero.load();
         });
     </script>
 @endsection
@@ -25,7 +26,7 @@
             <ul class="generos">
                 @foreach ($generos as $genero)
                     <li value="{{ $genero['id'] }}"
-                        onclick="PeliculaGenero.initialize({{ $genero['id'] }}, 'pelicula', 'container1')">
+                        onclick="PeliculaGenero.setGenre({{ $genero['id'] }})">
                         {{ $genero['nombre'] }}
                     </li>
                 @endforeach
@@ -35,13 +36,14 @@
         </div>
 
         <section id="container1" class="films-populares">
+            <div id="spinner-genre" class="loading-spin no-visible"></div>
             @if($genreId == null)
-                <h3>Peliculas Populares</h3>
+                <h3 id="movies-title">Peliculas Populares</h3>
             @else
-                <h3>Top de Peliculas de {{ $generos[$genreId-1]->nombre }}</h3>
+                <h3 id="movies-title">Top de Peliculas de {{ $generos[$genreId-1]->nombre }}</h3>
             @endif
-            <div class="container-peliculas-populares">
-                <section class="peliculas">
+            <div class="container-peliculas">
+                <section id="section-peliculas" class="peliculas">
                     @foreach ($peliculas as $pelicula)
                         <div class="flip-card">
                             <a style="display:block" href="/films/{{ $pelicula['id'] }}">
@@ -61,15 +63,19 @@
                             </a>
                         </div>
                     @endforeach
-            </div>
+                </div>
+                <button id="btn-fetch-movies" class="btn-fetch"
+                        onclick="PeliculaGenero.fetchFilms('Pelicula')">
+                    Cargar más
+                </button>
             <br>
             @if($genreId == null)
-                <h3>Series Populares</h3>
+                <h3 id="series-title">Series Populares</h3>
             @else
-                <h3>Top de Series de {{ $generos[$genreId-1]->nombre }}</h3>
+                <h3 id="series-title">Top de Series de {{ $generos[$genreId-1]->nombre }}</h3>
             @endif
-            <div class="container-peliculas-populares">
-                <section class="peliculas">
+            <div class="container-series">
+                <section id="section-series" class="peliculas">
                     @foreach ($series as $serie)
                         <div class="flip-card">
                             <a style="display:block" href="/films/{{ $serie['id'] }}">
@@ -88,12 +94,16 @@
                         </div>
                     @endforeach
                 </section>
+                <button id="btn-fetch-series" class="btn-fetch"
+                        onclick="PeliculaGenero.fetchFilms('Serie')">
+                    Cargar más
+                </button>
             </div>
         </section>
 
         <section class="users-populares">
             <div class="ranking-tabla">
-                <h3> Ranking Usuarios</h3>
+                <h3>Ranking Usuarios</h3>
                 <table>
                     <thead>
                         <th>Usuario</th>
