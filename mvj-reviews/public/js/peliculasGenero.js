@@ -32,18 +32,25 @@ var series = {
 PeliculaGenero.load =  function() {
     var elements = document.querySelectorAll("#section-peliculas div.flip-card");
     movies.offset = elements.length;
-    if (elements.length == 0)
+    if (elements.length == 0 || elements.length < PeliculaGenero.chunkSize)
         document.getElementById('btn-fetch-movies').classList.add('no-visible');
 
     elements = document.querySelectorAll("#section-series div.flip-card");
     series.offset = elements.length;
-    if (elements.length == 0)
+    if (elements.length == 0 || elements.length < PeliculaGenero.chunkSize)
         document.getElementById('btn-fetch-series').classList.add('no-visible');
 
     if (PeliculaGenero.genreId == null) {
         if ('URLSearchParams' in window) {
             var searchParams = new URLSearchParams(window.location.search);
-            PeliculaGenero.genreId = searchParams.get(QUERY_PARAM_GENRE_ID);
+            var genreId = searchParams.get(QUERY_PARAM_GENRE_ID);
+            if (genreId !== null)
+                PeliculaGenero.genreId = genreId;
+            else {
+                // Si no hay filtro por genero...
+                document.getElementById('btn-fetch-movies').classList.add('no-visible');
+                document.getElementById('btn-fetch-series').classList.add('no-visible');
+            }
         } else {
             // Browser does not support "URLSearchParams"
             console.error('Actualice su navegador para utilizar este sitio');
@@ -67,20 +74,21 @@ PeliculaGenero.getNextChunk = (category) => {
             var title = `Top de ${category.name}s de ${getGenreNameById(PeliculaGenero.genreId)}`;
             PeliculaGenero.updateTitle(category.name, title);
 
+            var response = JSON.parse(this.responseText);
             if (category.name == CATEGORY_MOVIES) {
-                if (this.responseText == '[]')
+                if (response.length < PeliculaGenero.chunkSize)
                     document.getElementById('btn-fetch-movies').classList.add('no-visible');
                 else
                     document.getElementById('btn-fetch-movies').classList.remove('no-visible');
             }
             if (category.name == CATEGORY_SERIES) {
-                if (this.responseText == '[]')
+                if (response.length < PeliculaGenero.chunkSize)
                     document.getElementById('btn-fetch-series').classList.add('no-visible');
                 else
                     document.getElementById('btn-fetch-series').classList.remove('no-visible');
             }
             var container = document.getElementById(category.container);
-            PeliculaGenero.buildGrid(this, container);
+            PeliculaGenero.buildGrid(response, container);
             FilmCardData.modificarPuntajeClase();
             showSpinner(false);
         };
@@ -105,25 +113,24 @@ PeliculaGenero.crearElemento = function (e, clss, inner){
 }
 
 PeliculaGenero.buildGrid = function (response, container) {
-  var resp = JSON.parse(response.responseText);
-  console.log(resp);
-  for (var ii in resp) {
-    let puntaje = (resp[ii]['puntaje']).toFixed(1);
+  console.log(response);
+  for (var ii in response) {
+    let puntaje = (response[ii]['puntaje']).toFixed(1);
     let d = PeliculaGenero.crearElemento("div", ["flip-card"]);
     let e = PeliculaGenero.crearElemento("div", ["cuadro-film","flip-card-inner"]);
     let f = PeliculaGenero.crearElemento("div", ["flip-card-front"]);
     let g = PeliculaGenero.crearElemento("p", ["puntuacion"], puntaje);
     let h = PeliculaGenero.crearElemento("img", ["poster"]);
-    h.setAttribute("src", "data:image/png;base64," + resp[ii]['poster']);
+    h.setAttribute("src", "data:image/png;base64," + response[ii]['poster']);
     let i = PeliculaGenero.crearElemento("a");
     let j = PeliculaGenero.crearElemento("div", ["flip-card-back"]);
-    let k = PeliculaGenero.crearElemento("p", [], resp[ii]['fecha_estreno']);
+    let k = PeliculaGenero.crearElemento("p", [], response[ii]['fecha_estreno']);
 
-    let l = PeliculaGenero.crearElemento("p", ["titulo-film"], resp[ii]['titulo']);
-    let sin = resp[ii]['sinopsis'];
+    let l = PeliculaGenero.crearElemento("p", ["titulo-film"], response[ii]['titulo']);
+    let sin = response[ii]['sinopsis'];
     sin = (sin.length > 90)? sin.substring(0, 89) + "..." : sin;
     let m = PeliculaGenero.crearElemento("p", [], sin);
-    i.setAttribute("href", "/films/"+ resp[ii]['id']);
+    i.setAttribute("href", "/films/"+ response[ii]['id']);
 
     // Corregido para que ande tambien en firefox
     f.appendChild(g);
