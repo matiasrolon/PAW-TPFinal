@@ -1,4 +1,4 @@
-# Instalacion
+# Instalacion & configuracion
 
 Aqui voy a documentar pasos que segui para instalar todo lo necesario y ejecutar el proyecto.
 Mas adelante podemos cambiar este archivo de ubicacion. El objetivo es llevar cuenta de lo que hice hasta ahora.
@@ -25,3 +25,18 @@ Mas adelante podemos cambiar este archivo de ubicacion. El objetivo es llevar cu
 5. En la terminal ejecutar:
   - `php artisan migrate --seed` para crear la estructura de la BD junto con un set de datos inicial.
   - `php artisan serve` para levantar un servidor php de prueba.
+
+
+## Configuraciones
+
+### Como cambiar el tamaño máximo permitido al subir archivos
+Esto se hace a través de una configuración de PHP, no de Laravel propiamente. Para ello, vamos a nuestra instalación de PHP, abrimos el archivo `php.ini` y editamos las siguientes lineas:
+```ini
+upload_max_filesize=2M      # Maximo tamaño de UN ARCHIVO
+post_max_size=8M            # Maximo tamaño del BODY del POST
+memory_limit=128M           # Maxima memoria que puede utilizar el server al procesar la request
+```
+
+Luego, en Laravel se debe usar un *Validator* para mostrar un mensaje de error amistoso en caso de que el tamaño del archivo supere el limite.
+
+**Nota:** se debe reiniciar el servidor para que tome los cambios hechos en el archivo `php.ini`.
