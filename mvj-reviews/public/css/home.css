@@ -339,6 +339,11 @@ ul.generos li:hover::before {
        backface-visibility: hidden;
     }
 
+.sin-puntuar {
+    background-color: #AAAAAA;
+    backface-visibility: hidden;
+}
+
 .puntuacion-mala {
   background-color: red;
   backface-visibility: hidden;
