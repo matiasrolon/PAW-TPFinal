@@ -367,13 +367,16 @@ input.titulo-review {
 	z-index: 100;
 }
 
+/* Selecciona TODOS los ".estrella." precedidos por un ".estrella:hover" */
+/* El important hace que pise el CSS del puntaje actual */
 .iconos-puntaje > .estrella:hover ~ .estrella {
-	color: white;
+	color: white !important;
 }
 
+/* Selecciona todas las estrella dentro de un ".iconos-puntaje" en hover */
 .iconos-puntaje:hover .estrella{
-  color: #ff9c06;
-  cursor:pointer;
+  color: #ff9c06 !important;
+  cursor: pointer !important;
 }
 
 .estrella p{

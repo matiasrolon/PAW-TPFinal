@@ -23,6 +23,7 @@ use Illuminate\Support\Facades\Log;
 use Storage;
 use Symfony\Component\HttpKernel\Log\Logger;
 use DateTime;
+use Illuminate\Support\Facades\Auth;
 
 class FilmController extends Controller
 {
@@ -141,6 +142,28 @@ class FilmController extends Controller
       $rating['bestRating'] = $film['puntaje'];
       $obj['aggregateRating'] = $rating;
       return json_encode($obj, JSON_HEX_QUOT | JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
+    }
+
+    /**
+     * Retorna el puntaje que el usuario le dio a la pelicula.
+     * Si nunca la puntuo devuelve null
+     * Si no esta logueado devuelve HTTP 401
+     */
+    public function filmScore($film_id) {
+        if (Auth()->user() == null) {
+            return response('Unauthorized', 401)
+                ->header('Content-Type', 'text/plain');
+        }
+
+        $filmScore = Score_Film::select('puntaje')
+            ->where('film_id', $film_id)
+            ->where('user_id', Auth()->user()->id)
+            ->first();
+
+        if ($filmScore == null)
+            return response(null, 204)->header('Content-Type', 'text/plain');
+        else
+            return response($filmScore->puntaje, 200)->header('Content-Type', 'text/plain');
     }
 
 

@@ -4,7 +4,6 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Film;
-use App\Models\Score_Film;
 
 class Score_Film extends Model
 {

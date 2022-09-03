@@ -31,6 +31,7 @@ Route::post('/addScoreReview','ReviewController@addScoreReview')->name('addScore
 Route::get('/lastReviews','ReviewController@lastReviews');
 
 //films
+Route::get('/films/{id}/score','FilmController@filmScore');
 Route::post('/storeFilm', 'FilmController@store')->name('store-film');
 Route::get('/film-by-genre/{genro}/{category}/{offset}/{qty}', 'FilmController@searchByGenre')->name('film-by-genre');
 Route::get('/film-on-demand/{film}/{offset}/{q}', 'ReviewController@searchOnDemand')->name('film-on-demand');
@@ -39,7 +40,6 @@ Route::get('/films/{film_id}/{review_id?}', 'FilmController@profile')->name('fil
 Route::post('/scoreFilm','FilmController@scoreFilm')->name('scoreFilm');
 Route::get('/searchSuggestions/{filmname}','FilmController@searchSuggestions')->name('searchLocalFilm');
 Route::get('/search/{filmname}','FilmController@searchResults')->name('search');
-
 Route::get('/delete/{id}', 'FilmController@destroy')->name('delete');
 
 //novelties

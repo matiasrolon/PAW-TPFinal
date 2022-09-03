@@ -4,6 +4,8 @@ var window = window || {},
   Pagina = Pagina || {};
 
 const HOME_URL = '/home';
+const FILM_SCORE_URL = '/films/{id}/score';
+const SESSION_COOKIE = 'laravel_session';
 
 Pagina.iniciarPagina= function(contenedorHTML){
      window.addEventListener("DOMContentLoaded", function(){
@@ -41,6 +43,8 @@ Pagina.iniciarPagina= function(contenedorHTML){
 
         Pagina.ordenarElementos();
       //--> FUNCIONA PERO AL FINAL TIRA UNA EXCEPCION QUE NO TE DEJA SEGUIR DESPUES. ARRGLAR.
+
+        Pagina.fetchFilmScore();
      });
 }
 
@@ -158,7 +162,6 @@ Pagina.enviarRequestPuntajeFilm = function(request,puntaje){
 
 Pagina.recibirResponsePuntajeFilm= function(response){
     var resp = JSON.parse(response.responseText);
-    console.log("se recibio respuesta> "+ resp['mensaje']);
     var infoPuntaje = document.querySelector('.info-puntaje');
     var respuesta = resp['mensaje'];
     // si estaba oculta de alguna solicitd ajax anterior, la muestro nuevamente
@@ -173,6 +176,8 @@ Pagina.recibirResponsePuntajeFilm= function(response){
       if(!infoPuntaje.classList.contains('ok')){
         infoPuntaje.classList.add('ok');
       }
+
+      Pagina.setFilmScore(resp.puntaje);
 
     }else{ // muestro mensaje con style de error
       if(infoPuntaje.classList.contains('ok')){
@@ -398,3 +403,34 @@ Pagina.filterByGenre = (genreId) => {
         console.error('Error al filtrar las peliculas por genero');
     }
 }
+
+
+/** Obtiene el puntaje que el usuario le dio */
+Pagina.fetchFilmScore = function () {
+    var request = new XMLHttpRequest();
+    request.onreadystatechange = function() {
+        if (this.readyState==4 && this.status==200){
+            Pagina.setFilmScore(this.responseText);
+        };
+    }
+
+    var filmId = window.location.pathname.split('/films/')[1];
+    request.open("GET", FILM_SCORE_URL.replace('{id}', filmId), true);
+    request.send();
+}
+
+Pagina.setFilmScore = (score) => {
+    if (score !== null) {
+        // Pinta TODAS las estrellas de amarillo
+        document.querySelectorAll('.iconos-puntaje .estrella')
+            .forEach((element) => {
+                element.style.color = '#ff9c06';
+            });
+
+        // Pinta de blanco las estrellas que estan delante del puntaje elegido
+        document.querySelectorAll(`.iconos-puntaje > .estrella[data-value="${score}"] ~ .estrella`)
+            .forEach((element) => {
+                element.style.color = 'white';
+            });
+    }
+};
