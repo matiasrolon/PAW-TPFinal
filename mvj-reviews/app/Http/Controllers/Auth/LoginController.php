@@ -29,11 +29,13 @@ class LoginController extends Controller
 
     /**
      * Create a new controller instance.
+     * Además seteo la URL de redirección, que luego es leida por AuthenticateUsers.sendLoginResponse()
      *
      * @return void
      */
     public function __construct()
     {
+        redirect()->setIntendedUrl(url()->previous());
         $this->middleware('guest')->except('logout');
     }
 

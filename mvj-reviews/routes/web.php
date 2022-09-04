@@ -14,6 +14,9 @@
 |
 */
 
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Route;
+
 Auth::routes(); // para Login, olvido su contraseña(no anda), y registrarse
 
 //home

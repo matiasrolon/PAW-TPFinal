@@ -37,6 +37,7 @@ class RegisterController extends Controller
      */
     public function __construct()
     {
+        redirect()->setIntendedUrl(url()->previous());
         $this->middleware('guest');
     }
 
