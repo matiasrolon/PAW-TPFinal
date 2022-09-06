@@ -28,7 +28,7 @@ AdminFilms.iniciarPagina = function (contenedorHTML) {
             var select = document.getElementById('src-selector');
             console.log('src-selector: ' + select.value);
             if (select.value == 'TheMovieDB' || select.value == 'Ambos') {
-              AdminFilms.enviarRequestSearchFilmsAdmin('API');  
+              AdminFilms.enviarRequestSearchFilmsAdmin('API');
             }
             if (select.value == 'MVJ Reviews' || select.value == 'Ambos') {
               AdminFilms.enviarRequestSearchFilmsAdmin('DB');
@@ -137,7 +137,7 @@ AdminFilms.cargarFuncionalidadABM = function(){
         campo.removeAttribute('disabled');
         campo.setAttribute('enabled','true');
       });
-      
+
       // Caso especial: la cruz en cada genero
       var cruces = document.querySelectorAll('.resultado-seleccionado .campo .cruz');
       cruces.forEach(function(cruz) {
@@ -174,11 +174,11 @@ AdminFilms.cargarFuncionalidadABM = function(){
     var div = document.querySelector('.admin-resultados .resultado-seleccionado .info');
     var filmID = div.getAttribute('id');
     console.log('Se va a borrar el film con id=' + filmID);
-    
+
     request.open('GET', '/delete/' + filmID);
     request.setRequestHeader('X-CSRF-TOKEN', $('meta[name="csrf-token"]').attr('content'));
     request.send();
-    
+
   });
 
   // Boton de agregar genero
@@ -266,7 +266,7 @@ AdminFilms.enviarRequestStoreFilm = function(request){
   console.log("se va a enviar a "+ formData);
   console.log('Length: ' + formData.values().length);
   for (var myValue of formData.values()) {
-    console.log('formData: ' + myValue); 
+    console.log('formData: ' + myValue);
   }
   */
   request.send(objeto);
@@ -310,7 +310,7 @@ AdminFilms.recibirResponseStoreFilm = function(response){
   // var ulMensajes = document.querySelector('admin-resultados .resultado-seleccionado .poster ul');
   ulMensajes = document.getElementById('mensajes');
   AdminFilms.borrarMensajes();
-  
+
 
   // Cuando laravel genera un error, devuelve status = 500
   // console.log("response.status: " + response.status);
@@ -333,7 +333,7 @@ AdminFilms.recibirResponseStoreFilm = function(response){
       par.classList.add('resultado-Failed');
       //con css mostrar algo en rojo, o campos erroneos (cuando ande validar en el back)
     }
-    
+
     par.innerText = resp['mensaje'];
     p.appendChild(par);
     */
@@ -346,7 +346,7 @@ AdminFilms.recibirResponseStoreFilm = function(response){
     liMsj.innerText = resp['mensaje'];
     AdminFilms.borrarOnClick(liMsj);
     ulMensajes.appendChild(liMsj);
-    
+
 
   } else if (response.status == 422) {
     // Status 422 = Error al validar algun campo
@@ -354,7 +354,7 @@ AdminFilms.recibirResponseStoreFilm = function(response){
     // par.innerText = 'Error: ';
     var resp = JSON.parse(response.responseText);
     for (var campo in resp.errors) {
-      console.log('msj: ' + resp.errors[campo][0]); 
+      console.log('msj: ' + resp.errors[campo][0]);
       var liMsj = document.createElement('li');
       liMsj.classList.add('resultado-Failed');
       liMsj.innerText += resp.errors[campo][0];
@@ -365,8 +365,8 @@ AdminFilms.recibirResponseStoreFilm = function(response){
   } else {
 
     // Atrapa errores generados por laravel
-    console.log('ERROR. Response: ' + response);  
-    console.log("Response: " + response.responseText); 
+    console.log('ERROR. Response: ' + response);
+    console.log("Response: " + response.responseText);
 
     var liMsj = document.createElement('li');
     liMsj.classList.add('resultado-Failed');
@@ -448,11 +448,11 @@ AdminFilms.enviarRequestSearchFilmsAdmin = function (origen) {
       }
     }
 
-    if (origen=='API'){  
+    if (origen=='API'){
         request.open("GET", "/admin/searchFilms/API/" + AdminFilms.buscador.value, true);
             //envio la request
         console.log("Enviada request" + AdminFilms.buscador.value + " a la API.");
-    } else { 
+    } else {
         request.open("GET", "/admin/searchFilms/DB/" + AdminFilms.buscador.value, true);
         console.log("Enviada request" + AdminFilms.buscador.value + " a la DB");
     }
@@ -469,7 +469,7 @@ AdminFilms.enviarRequestSearchFilmsAdmin = function (origen) {
 AdminFilms.recibirResponseSearchFilmsAdmin = function (response,origen) {
   if (response.status !== 200) {
     // TODO: Pregunto el codigo, o sencillamente manejo errores
-    
+
   } else {
     // HTTP 200 OK
     var resp = JSON.parse(response.responseText);
@@ -557,7 +557,7 @@ AdminFilms.mostrarResultadoSeleccionado = function($switch) {
   } else {
     resultado.classList.add('resultado-seleccionado-oculto');
   }
-  
+
   // Elimino el cartel del resultado de la ultima operacion
   AdminFilms.borrarMensajes();
 }
@@ -594,7 +594,7 @@ AdminFilms.agregarGenero = function(genero) {
 AdminFilms.establecerResultadoSeleccionado = function(resultado,origen,base64){
   //a la seccion info le agrego datos importantes de la peli seleccionada que no se muestran en los textareas.
   //pero que despues se mandara en la request si es que el usuario realiza una accion sobre el (Agregar/modificar/etc)
-  
+
   /*var estadoResultAnt = document.querySelector('.resultado-Ok');
 
   if (estadoResultAnt!=null){
@@ -637,7 +637,7 @@ AdminFilms.establecerResultadoSeleccionado = function(resultado,origen,base64){
 
   input = document.querySelector(info + ' .duracion-min');
   input.value = resultado['duracion_min'] || '';
- 
+
   var textarea = document.querySelector(info + ' .trailer-url');
   textarea.value = resultado['trailer'] || '';
 
@@ -684,4 +684,14 @@ AdminFilms.establecerResultadoSeleccionado = function(resultado,origen,base64){
   cruces.forEach(function(cruz) {
     cruz.style.display = 'none';
   });
+}
+
+function showAdminHelpPopup() {
+    var popup = document.querySelector(".overlay");
+    popup.style.visibility = 'visible';
+}
+
+function hideAdminHelpPopup() {
+    var popup = document.querySelector(".overlay");
+    popup.style.visibility = 'hidden';
 }
