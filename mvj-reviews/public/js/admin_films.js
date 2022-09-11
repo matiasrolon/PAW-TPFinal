@@ -214,62 +214,34 @@ AdminFilms.getListaGeneros = function() {
  * Me costo un huevo encontrar como era: https://developer.mozilla.org/en-US/docs/Web/API/FormData/Using_FormData_Objects
  */
 AdminFilms.enviarRequestStoreFilm = function(request){
-  var info = '.resultado-seleccionado .info .campo ';
-  //console.log(titulo);
-  var film ={ // objeto a enviar
-    "origen":document.querySelector('.resultado-seleccionado .info').getAttribute('origen'),
-    "id":document.querySelector('.resultado-seleccionado .info').getAttribute('id'),
-    "titulo": document.querySelector(info+'.titulo').value,
-    "sinopsis": document.querySelector(info+'.sinopsis').value,
-    "categoria": document.querySelector(info+'.categoria').value,
-    "fecha_estreno": document.querySelector(info+'.fecha-estreno').value,
-    "fecha_finalizacion": document.querySelector(info + '.fecha-finalizacion').value,
-    "poster": document.querySelector('.resultado-seleccionado .poster img').getAttribute('path'),
-    // "genero": document.querySelector(info+'.genero').value,
-    "genero": AdminFilms.getListaGeneros(),
-    "pais": document.querySelector(info+'.pais').value,
-    "duracion_min": document.querySelector(info+'.duracion-min').value,
-    "trailer": document.querySelector(info + '.trailer-url').value,
-    // Tomo la id de la variable global.
-    "id_themoviedb": idTheMovieDb
-  };
+    var info = '.resultado-seleccionado .info .campo ';
 
-  var objeto = JSON.stringify(film);
-  // console.log("se va a enviar a "+ objeto);
-  request.open("POST", "/storeFilm", true);
-  // request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-  request.setRequestHeader("Content-type", "application/json");
-  // Para que Laravel responda con un JSON y un HTTP 422 cuando algun campo es invalido
-  request.setRequestHeader('Accept', 'application/json');
-  request.setRequestHeader('X-CSRF-TOKEN', $('meta[name="csrf-token"]').attr('content'));
-  // request.send("objeto="+objeto);
+    var film = {
+        "origen": document.querySelector('.resultado-seleccionado .info').getAttribute('origen'),
+        "id": document.querySelector('.resultado-seleccionado .info').getAttribute('id'),
+        "titulo": document.querySelector(info+'.titulo').value,
+        "sinopsis": document.querySelector(info+'.sinopsis').value,
+        "categoria": document.querySelector(info+'.categoria').value,
+        "fecha_estreno": document.querySelector(info+'.fecha-estreno').value,
+        "fecha_finalizacion": document.querySelector(info + '.fecha-finalizacion').value,
+        "poster": document.querySelector('.resultado-seleccionado .poster img').getAttribute('path'),
+        "genero": AdminFilms.getListaGeneros(),
+        "pais": document.querySelector(info+'.pais').value,
+        "duracion_min": document.querySelector(info+'.duracion-min').value,
+        "trailer": document.querySelector(info + '.trailer-url').value,
+        "id_themoviedb": idTheMovieDb   // Tomo la id de la variable global.
+    };
 
-  /*
-  var formElement = document.getElementById('film-form');
-  var formData = new FormData();
+    if (film.id === "-1")
+        request.open("POST", "/films", true);
+    else
+        request.open("PUT", "/films", true);
 
-  // Esto se podria evitar haciendo FormData(formElement), pero formElement debe cumplir con ciertos requisitos.
-  formData.append('origen', document.querySelector('.resultado-seleccionado .info').getAttribute('origen'));
-  formData.append('id', document.querySelector('.resultado-seleccionado .info').getAttribute('id'));
-  formData.append('titulo', document.querySelector(info+'.titulo').value);
-  formData.append('sinopsis', document.querySelector(info+'.sinopsis').value);
-  formData.append('categoria', document.querySelector(info+'.categoria').value);
-  formData.append('fecha_estreno', document.querySelector(info+'.fecha-estreno').value);
-  formData.append('fecha_finalizacion', document.querySelector(info + '.fecha-finalizacion').value);
-  formData.append('poster', document.querySelector('.resultado-seleccionado .poster img').getAttribute('path'));
-  formData.append('genero', AdminFilms.getListaGeneros());
-  formData.append('pais', document.querySelector(info+'.pais').value);
-  formData.append('duracion_min', document.querySelector(info+'.duracion-min').value);
-  formData.append('trailer', document.querySelector(info + '.trailer-url').value);
-  formData.append('id_themoviedb', idTheMovieDb);
-
-  console.log("se va a enviar a "+ formData);
-  console.log('Length: ' + formData.values().length);
-  for (var myValue of formData.values()) {
-    console.log('formData: ' + myValue);
-  }
-  */
-  request.send(objeto);
+    // Para que Laravel responda con un JSON y un HTTP 422 cuando algun campo es invalido
+    request.setRequestHeader('Accept', 'application/json');
+    request.setRequestHeader("Content-type", "application/json");
+    request.setRequestHeader('X-CSRF-TOKEN', $('meta[name="csrf-token"]').attr('content'));
+    request.send(JSON.stringify(film));
 }
 
 
