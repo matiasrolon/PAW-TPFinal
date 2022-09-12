@@ -785,7 +785,7 @@ img.logo-st {
       text-align: center;
       padding-top: 0.5%;
       border-color: grey;
-      padding: 2%;
+      padding: 8px;
       border-radius: 2px 2px;
       /* display: flex; */
     }
