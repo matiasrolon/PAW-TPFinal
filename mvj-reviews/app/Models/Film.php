@@ -11,7 +11,7 @@ class Film extends Model
     const SERIE = 'Serie';
     const PELICULA = 'Pelicula';
     const CORTOMETRAJE = 'Cortometraje';
-    public static $categorias = [self::SERIE, self::PELICULA, self::CORTOMETRAJE];
+    public static $categorias = [self::SERIE, self::PELICULA];
 
     protected $table = 'film';
 

@@ -76,19 +76,22 @@ class ApiController extends Controller
      * @param string $urlPoster URL que proporciona la API.
      * @return binary|false la imagen.
      */
-    private function getPosterFilm($urlPoster)
-    {
-        $client = new Client();
-        $basePath = 'https://image.tmdb.org/t/p/original';
-        $path =  $basePath . $urlPoster; // Trae un Slash / por defecto.
-        $httpResponse = $client->request('GET', $path);
-        if ($httpResponse->getStatusCode() == 200) {
-            $poster = $httpResponse->getBody()->getContents();
-            // Es necesario guardar la extension? En ese caso, viene al final de poster_path.
-            // $film['poster'] = base64_encode($poster);
-            return $poster;
+    private function getPosterFilm($urlPoster) {
+        if (Auth()->user() != null && Auth()->user()->hasRole('admin')) {
+            $client = new Client();
+            $basePath = 'https://image.tmdb.org/t/p/original';
+            $path =  $basePath . $urlPoster; // Trae un Slash / por defecto.
+            $httpResponse = $client->request('GET', $path);
+            if ($httpResponse->getStatusCode() == 200) {
+                $poster = $httpResponse->getBody()->getContents();
+                // Es necesario guardar la extension? En ese caso, viene al final de poster_path.
+                // $film['poster'] = base64_encode($poster);
+                return $poster;
+            } else {
+                return false;
+            }
         } else {
-            return false;
+            return response()->view('errors.403', [], 403);
         }
     }
 
@@ -123,7 +126,7 @@ class ApiController extends Controller
             if (isset($filmAPI['genre_ids'])) {
                 $generos = array();
                 for ($i = 0; $i < sizeof($filmAPI['genre_ids']); $i++) {
-                    $generos[] = $this->getConfig('genero', $filmAPI['genre_ids'][$i]); 
+                    $generos[] = $this->getConfig('genero', $filmAPI['genre_ids'][$i]);
                 }
                 $film['genero'] = $generos; // Arreglo
             } else {
@@ -268,68 +271,71 @@ class ApiController extends Controller
      * @return array|false. Un arreglo de Film con los resultados que dio la API.
      * Los campos del arreglo son los mismos que los de Film
      */
-    public function admin_search($keywords)
-    {
-        try {
-            //$user_input no esta con los %20, sino escrito bien. Sino no funciona
-            // $user_input = 'Silicon valley'; //Es lo que pone en el buscador
-            $user_input = $keywords;
-            $client = new Client();
-            $method = 'GET';
-            $url = 'https://api.themoviedb.org/3/search/multi';
+    public function admin_search($keywords) {
+        if (Auth()->user() != null && Auth()->user()->hasRole('admin')) {
+            try {
+                //$user_input no esta con los %20, sino escrito bien. Sino no funciona
+                // $user_input = 'Silicon valley'; //Es lo que pone en el buscador
+                $user_input = $keywords;
+                $client = new Client();
+                $method = 'GET';
+                $url = 'https://api.themoviedb.org/3/search/multi';
 
-            // Parametros de la API
-            $parameters = [
-                'api_key' => '41b4c84d818976ed8ab5cb8bd88066a3',
-                'language' => 'es-MX',
-                'query' => $user_input,
-                'page' => '1',
-                'include_adult' => 'false'
-            ];
+                // Parametros de la API
+                $parameters = [
+                    'api_key' => '41b4c84d818976ed8ab5cb8bd88066a3',
+                    'language' => 'es-MX',
+                    'query' => $user_input,
+                    'page' => '1',
+                    'include_adult' => 'false'
+                ];
 
-            //WARNING: 40 requests every 10 seconds max
-            $films = array(); // Aca devuelvo el resultado
-            $page = 1;
-            $total_pages = 1; // Al menos una pagina
-            // Modifico para que no traiga mas de 3 paginas
-            while ($page <= $total_pages && $total_pages <= 3) {
-                // Voy pidiendo las paginas de a una.
-                $parameters['page'] = strval($page); // Convierto a string
-                $httpResponse = $client->request($method, $url, ['query' => $parameters]);
-                if ($httpResponse->getStatusCode() == 200) {
-                    $jsonApi = $httpResponse->getBody()->getContents();
-                    $resp = json_decode($jsonApi, true);
-                    $total_results = (int)$resp['total_results']; // Cant peliculas encontradas
-                    $total_pages = (int)$resp["total_pages"]; // Total de paginas
-                    $results = $resp["results"]; // Arreglo
+                //WARNING: 40 requests every 10 seconds max
+                $films = array(); // Aca devuelvo el resultado
+                $page = 1;
+                $total_pages = 1; // Al menos una pagina
+                // Modifico para que no traiga mas de 3 paginas
+                while ($page <= $total_pages && $total_pages <= 3) {
+                    // Voy pidiendo las paginas de a una.
+                    $parameters['page'] = strval($page); // Convierto a string
+                    $httpResponse = $client->request($method, $url, ['query' => $parameters]);
+                    if ($httpResponse->getStatusCode() == 200) {
+                        $jsonApi = $httpResponse->getBody()->getContents();
+                        $resp = json_decode($jsonApi, true);
+                        $total_results = (int)$resp['total_results']; // Cant peliculas encontradas
+                        $total_pages = (int)$resp["total_pages"]; // Total de paginas
+                        $results = $resp["results"]; // Arreglo
 
-                    $fc = new FilmController;
-                    // Recorro films (Pueden ser peliculas, series o actores)
-                    for ($i = 0; $i < sizeof($results); $i++) {
-                        if ($results[$i]['media_type'] != 'person') { //por ahora no buscamos personas
-                            $tmp = $this->parseFilm($results[$i]);
-                            if ($tmp != false) {
-                                $films[] = $tmp;
+                        $fc = new FilmController;
+                        // Recorro films (Pueden ser peliculas, series o actores)
+                        for ($i = 0; $i < sizeof($results); $i++) {
+                            if ($results[$i]['media_type'] != 'person') { //por ahora no buscamos personas
+                                $tmp = $this->parseFilm($results[$i]);
+                                if ($tmp != false) {
+                                    $films[] = $tmp;
+                                }
                             }
                         }
+                        $page++;
+                    } else { // si la request a la API no fue exitosa
+                        $films = false;
                     }
-                    $page++;
-                } else { // si la request a la API no fue exitosa
-                    $films = false;
+
+
+                    // Para que no se cuelgue la API, espero 0.33 segundos.
+                    // Creo que aun puede mejorarse, pero hay otras prioridades.
+                    usleep(333333);
                 }
-
-
-                // Para que no se cuelgue la API, espero 0.33 segundos.
-                // Creo que aun puede mejorarse, pero hay otras prioridades.
-                usleep(333333);
+                /* Revisar este codigo */
+                /* FIXME: Aca lo correcto es devolver 500 */
+                return response()->json($films, $httpResponse->getStatusCode());
+            } catch (RequestException $e) {
+                // http://docs.guzzlephp.org/en/stable/quickstart.html#exceptions
+                Log::error($e . ' --- Error en el metodo search() de ApiController.');
+                return response()->json('Error de TheMovieDB', $e->getResponse()->getStatusCode());
             }
-            /* Revisar este codigo */
-            /* FIXME: Aca lo correcto es devolver 500 */
-            return response()->json($films, $httpResponse->getStatusCode());
-        } catch (RequestException $e) {
-            // http://docs.guzzlephp.org/en/stable/quickstart.html#exceptions
-            Log::error($e . ' --- Error en el metodo search() de ApiController.');
-            return response()->json('Error de TheMovieDB', $e->getResponse()->getStatusCode());
+        } else {
+            return response()->view('errors.403', [], 403);
         }
     }
 }

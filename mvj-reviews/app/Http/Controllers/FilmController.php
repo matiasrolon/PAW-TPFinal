@@ -276,16 +276,20 @@ class FilmController extends Controller
      * De esta forma ya no aoarecera mas en Admin_Films
     */
     public function solvePendentFilm() {
-      $searchText = json_decode( $_POST['objeto'], true )['searchText'];
-      // return 'PHP: ' . $searchText;
-      $search = PendentSearch::where('busqueda', $searchText)->first();
-      if ($search != null) {
-          $search->estado = 'Resuelta';
-          $search->save();
-          return response('OK');
-      } else {
-        return response('No se encontro una busqueda con ese nombre', 404);
-      }
+        if (Auth()->user() != null && Auth()->user()->hasRole('admin')) {
+            $searchText = json_decode( $_POST['objeto'], true )['searchText'];
+            // return 'PHP: ' . $searchText;
+            $search = PendentSearch::where('busqueda', $searchText)->first();
+            if ($search != null) {
+                $search->estado = 'Resuelta';
+                $search->save();
+                return response('OK');
+            } else {
+                return response('No se encontro una busqueda con ese nombre', 404);
+            }
+        } else {
+            return response()->view('errors.403', [], 403);
+        }
     }
 
 
@@ -315,22 +319,21 @@ class FilmController extends Controller
      * Muestra la pagina admin films, para interactuar con la Api
      * pudiendo dar de alta, modificar o elimianr Films.
      * Ademas, se muestran las busquedas que fueron realizadas por los usuarios
-     *  que no obtuvieron resultados, por orden de importancia.
+     * que no obtuvieron resultados, por orden de importancia.
      */
-    public function admin_films(){
-      if (Auth()->user()!=null){
-          if (Auth()->user()->hasRole('admin')){
-              $searches = PendentSearch::where('estado','pendiente')
+    public function admin_films() {
+        if (Auth()->user() != null && Auth()->user()->hasRole('admin')) {
+            $searches = PendentSearch::where('estado','pendiente')
                                         ->orderBy('cant_busquedas','desc')
                                         ->get();
-              // Hago una lista de los paises disponibles
-              $paises = $this->getCountries();
-              $generos = $this->getGenres();
-              $categorias = Film::$categorias;
+            $paises = $this->getCountries();
+            $generos = $this->getGenres();
+            $categorias = Film::$categorias;
 
-              return view('admin_films',compact('searches', 'paises', 'generos', 'categorias'));
-          }else{return response()->view('errors.403', [], 404);} //personalizar error (no posee los permisos necesarios)
-      }else{return response()->view('errors.403', [], 404);}
+            return view('admin_films',compact('searches', 'paises', 'generos', 'categorias'));
+        } else {
+            return response()->view('errors.403', [], 403);
+        }
     }
 
 
@@ -338,70 +341,81 @@ class FilmController extends Controller
     * Devuelve las peliculas almacenadas en la BD que coinciden con la keyword
     * @return json
     */
-    public function admin_search($filmname)
-    {
-        $DBFilms = $this->searchLocalFilm($filmname);
-        // Agrego los generos a la respuesta
-        $filmsWithGenre = array();
-        $genPorFilm = array(); // Generos por film. Ya que el parse en el js espera recibir un arreglo
-        foreach ($DBFilms as $film) {
-          // Me devuelve un objeto genero. Me quedo solo con el nombre
-          foreach ($film->genres()->get() as $genre) {
-            $genPorFilm[] = $genre->nombre;
-          }
-          // Le saco la coma del final
-          $film->genero = $genPorFilm;
-          $filmsWithGenre[] = $film;
-          // Limpio la variable auxiliar
-          $genPorFilm = array();
+    public function admin_search($filmname) {
+        if (Auth()->user() != null && Auth()->user()->hasRole('admin')) {
+            $DBFilms = $this->searchLocalFilm($filmname);
+            // Agrego los generos a la respuesta
+            $filmsWithGenre = array();
+            $genPorFilm = array(); // Generos por film. Ya que el parse en el js espera recibir un arreglo
+            foreach ($DBFilms as $film) {
+            // Me devuelve un objeto genero. Me quedo solo con el nombre
+            foreach ($film->genres()->get() as $genre) {
+                $genPorFilm[] = $genre->nombre;
+            }
+            // Le saco la coma del final
+            $film->genero = $genPorFilm;
+            $filmsWithGenre[] = $film;
+            // Limpio la variable auxiliar
+            $genPorFilm = array();
+            }
+            return response()->json($filmsWithGenre);
+        } else {
+            return response()->view('errors.403', [], 403);
         }
-        return response()->json($filmsWithGenre);
     }
 
 
     // En el HTTP request debe ponerse 'Accept: application/json' en el header
     // Para que te devuelva un JSON y un HTTP 422 si el validador falla
     public function update(Request $request) {
-        $this->validate_request($request, true);
+        if (Auth()->user() != null && Auth()->user()->hasRole('admin')) {
+            $this->validate_request($request, true);
 
-        $film = Film::where('id',$request->id)->first();
-        $film = $this->set_fields($film, $request);
+            $film = Film::where('id',$request->id)->first();
+            $film = $this->set_fields($film, $request);
 
-        $savedGenres = $film->genres()->select('nombre')->get();
-        $updatedGenres = Genre::all()->whereIn('nombre', $request->genero);
+            $savedGenres = $film->genres()->select('nombre')->get();
+            $updatedGenres = Genre::all()->whereIn('nombre', $request->genero);
 
-        // Quito los generos que ya no estan (Guardados - Nuevos(todos))
-        $genresToDetach = $savedGenres->diff($updatedGenres);
-        if ($genresToDetach) {
-            // detach() es para borrar la relacion en la tabla intermedia.
-            $film->genres()->whereIn('genre_id',$genresToDetach)->detach();
+            // Quito los generos que ya no estan (Guardados - Nuevos(todos))
+            $genresToDetach = $savedGenres->diff($updatedGenres);
+            if ($genresToDetach) {
+                // detach() es para borrar la relacion en la tabla intermedia.
+                $film->genres()->whereIn('genre_id',$genresToDetach)->detach();
+            }
+
+            // Agrego los generos nuevos (Nuevos(Todos) - Guardados)
+            $genresToAttach = $updatedGenres->diff($savedGenres);
+            if ($genresToAttach) {
+                $film->genres()->attach($genresToAttach);
+            }
+
+            $film->save();
+            $request['mensaje'] = 'Actualización exitosa.';
+            return response()->json($request);
+        } else {
+            return response()->view('errors.403', [], 403);
         }
-
-        // Agrego los generos nuevos (Nuevos(Todos) - Guardados)
-        $genresToAttach = $updatedGenres->diff($savedGenres);
-        if ($genresToAttach) {
-            $film->genres()->attach($genresToAttach);
-        }
-
-        $film->save();
-        $request['mensaje'] = 'Actualización exitosa.';
-        return response()->json($request);
     }
 
 
-    public function store(Request $request){
-        $this->validate_request($request, false);
-        $film = $this->set_fields(new Film, $request);
-        $film->save();
+    public function store(Request $request) {
+        if (Auth()->user() != null && Auth()->user()->hasRole('admin')) {
+            $this->validate_request($request, false);
+            $film = $this->set_fields(new Film, $request);
+            $film->save();
 
-        $genres = Genre::all()->intersect(Genre::whereIn('nombre', $request->genero)->get());
-        foreach ($genres as $genre) {
-            $film->genres()->attach($genre);
+            $genres = Genre::all()->intersect(Genre::whereIn('nombre', $request->genero)->get());
+            foreach ($genres as $genre) {
+                $film->genres()->attach($genre);
+            }
+
+            $request['id'] = $film->id;
+            $request['mensaje'] = 'Guardado exitoso.';
+            return response()->json($request);
+        } else {
+            return response()->view('errors.403', [], 403);
         }
-
-        $request['id'] = $film->id;
-        $request['mensaje'] = 'Guardado exitoso.';
-        return response()->json($request);
     }
 
 
@@ -450,24 +464,27 @@ class FilmController extends Controller
      * Elimina un film de la BD por la ID.
      */
     public function destroy($id) {
-      $film = Film::find($id);
-      if ($film != null) {
-        // Las FKs se eliminan por cascada
-        $aux = $film;
-        try {
-          if ($film->delete()){
-            $aux['mensaje'] = 'Eliminado exitoso.';
-            $aux->poster = ''; // Para que no tire error de UTF8 encondin al pasar a JSON
-            return response()->json($aux);
-          }
-        } catch (\Illuminate\Database\QueryException $e) {
-          // SQL 23000: Constraint Violation xq tiene alguna FK puesta en NO ACTION
-          Log::error('Error en FilmController@destroy: ' . $e->getMessage());
-          return response('Error al intentar borrar el film.', 409);
+        if (Auth()->user() != null && Auth()->user()->hasRole('admin')) {
+            $film = Film::find($id);
+            if ($film != null) {
+                // Las FKs se eliminan por cascada
+                $aux = $film;
+                try {
+                    if ($film->delete()) {
+                        $aux['mensaje'] = 'Eliminado exitoso.';
+                        $aux->poster = ''; // Para que no tire error de UTF8 encondin al pasar a JSON
+                        return response()->json($aux);
+                    }
+                } catch (\Illuminate\Database\QueryException $e) {
+                    // SQL 23000: Constraint Violation xq tiene alguna FK puesta en NO ACTION
+                    Log::error('Error en FilmController@destroy: ' . $e->getMessage());
+                    return response('Error al intentar borrar el film.', 409);
+                }
+            }
+            return response('Not found', 404);
+        } else {
+            return response()->view('errors.403', [], 403);
         }
-      }
-      // Else: id inexistente
-      return response('Not found',404);
     }
 
 } // end controller
