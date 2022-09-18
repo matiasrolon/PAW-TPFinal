@@ -50,7 +50,11 @@
                                 <div class="cuadro-film flip-card-inner">
                                     <div class="flip-card-front">
                                         <p class="puntuacion">{{ number_format($pelicula['puntaje'], 1) }}</p>
-                                        <img class="poster" src="data:image/png;base64,{{ $pelicula['portada'] }}">
+                                        @if ($pelicula['portada'] == null)
+                                            <img class="poster" src="images/noimage.jpg">
+                                        @else
+                                            <img class="poster" src="data:image/png;base64,{{ $pelicula['portada'] }}">
+                                        @endif
                                     </div>
                                     <!-- <a style="display:block" href="/films/{{ $pelicula['id'] }}"> -->
                                     <div class="flip-card-back">

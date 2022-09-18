@@ -3,6 +3,8 @@ var window = window || {},
   console = console || {},
   NavPrincipal = NavPrincipal || {};
 
+const GENERIC_IMAGE_URL = '/images/noimage.jpg'
+
 NavPrincipal.iniciarNavPrincipal= function(contenedorHTML){
      window.addEventListener("DOMContentLoaded", function(){
 
@@ -53,7 +55,7 @@ NavPrincipal.iniciarNavPrincipal= function(contenedorHTML){
               var op = document.querySelector('.opciones-login')
               if (op.classList.contains('no-visible'))
                 op.classList.remove('no-visible');
-              else 
+              else
                 op.classList.add('no-visible');
          });
       }
@@ -135,7 +137,7 @@ NavPrincipal.recibirResponseSearchFilm= function(response){ //imprime lista de r
           let p = document.createElement('h4');
           let p2 = document.createElement('p');
           let d = document.createElement('div');
-          img.src = "data:image/png;base64,"+resp[i].poster;
+          img.src = resp[i].poster != null ? "data:image/png;base64,"+resp[i].poster: GENERIC_IMAGE_URL;
           item.classList.add('item-resultado');
           p.innerHTML = resp[i].titulo + " ("+resp[i].fecha_estreno+")";
           let sin = resp[i].sinopsis;

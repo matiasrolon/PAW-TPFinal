@@ -15,7 +15,11 @@
 <div id="page_info" class="content" data-film="{{ $film['id'] }}">
   <section class="resultado-seleccionado info-film opciones-film">
     <div class="poster-container">
-      <img class="poster" src="data:image/png;base64,{{$film['poster']}}">
+      @if($film->poster == null)
+        <img class="poster" src="/images/noimage.jpg" alt="Poster">
+      @else
+        <img class="poster" src="data:image/png;base64,{{$film['poster']}}" alt="Poster">
+      @endif
     </div>
     <div class="detalles-pelicula">
       <ul>

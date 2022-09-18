@@ -390,6 +390,7 @@ input.titulo-review {
 .resultado-seleccionado .poster{
   display: inline-block;
   margin: 0%;
+  object-fit: cover;
 }
 
 .resultado-seleccionado p {

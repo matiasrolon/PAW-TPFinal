@@ -216,14 +216,14 @@ b.externo {
     width: 200px;
     height: 300px;
     border-radius: 5px;
-
+    object-fit: cover;
 }
 
 
-                .ini-fila{
-                /*  background-color: red; /*para comprobar que funciona*/
+.ini-fila{
+/*  background-color: red; /*para comprobar que funciona*/
 
-                }
+}
 
 .admin-resultados .resultado-seleccionado .poster{
         display: inline-block;

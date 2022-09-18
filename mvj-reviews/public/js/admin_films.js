@@ -4,6 +4,8 @@ var window = window || {},
   AdminFilms = AdminFilms || {};
   idTheMovieDb = '';
 
+const GENERIC_IMAGE_URL = '/images/noimage.jpg';
+
 AdminFilms.iniciarPagina = function (contenedorHTML) {
   window.addEventListener("DOMContentLoaded", function () {
     console.log("Film_Profile asocio JS con HTML.");
@@ -479,10 +481,10 @@ AdminFilms.recibirResponseSearchFilmsAdmin = function (response,origen) {
           var poster = document.createElement('img');
           poster.classList.add('poster');
 
-          if (typeof value['poster'] !== 'undefined'){ //a veces no carga bien la imagen proveniente de la api
+          if (value['poster'] != '') {
               poster.src = base64 + value['poster'];
-          }else{//establece una por defecto
-              poster.src = '/images/noimage.jpg';
+          } else {
+              poster.src = GENERIC_IMAGE_URL;
           }
 
           poster.alt = 'Poster';
@@ -622,10 +624,14 @@ AdminFilms.establecerResultadoSeleccionado = function(resultado,origen,base64){
     resultado['genero'].forEach(AdminFilms.agregarGenero);
   }
 
-  var poster = '.admin-resultados .resultado-seleccionado .poster img';
-  var poster = document.querySelector(poster);
-  poster.src = base64+resultado['poster'];
-  poster.setAttribute('path',resultado['poster']);
+  var poster = document.querySelector('.admin-resultados .resultado-seleccionado .poster img');
+  if (resultado.poster == "") {
+    poster.src = GENERIC_IMAGE_URL;
+  } else {
+    poster.src = base64+resultado['poster'];
+    poster.setAttribute('path',resultado['poster']);
+  }
+
   //habilito o desabilito botones
   var btnGuardar = document.querySelector('.resultado-seleccionado .opciones .boton-guardar');
   var btnModificar = document.querySelector('.resultado-seleccionado .opciones .boton-modificar');

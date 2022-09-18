@@ -1,6 +1,7 @@
 const QUERY_PARAM_GENRE_ID = 'genreId';
 const CATEGORY_MOVIES = 'Pelicula';
 const CATEGORY_SERIES = 'Serie';
+const GENERIC_IMAGE_URL = '/images/noimage.jpg';
 
 var document = document || {},
     window = window || {};
@@ -121,7 +122,10 @@ PeliculaGenero.buildGrid = function (response, container) {
     let f = PeliculaGenero.crearElemento("div", ["flip-card-front"]);
     let g = PeliculaGenero.crearElemento("p", ["puntuacion"], puntaje);
     let h = PeliculaGenero.crearElemento("img", ["poster"]);
-    h.setAttribute("src", "data:image/png;base64," + response[ii]['poster']);
+    if (response[ii]['poster'] == null)
+        h.setAttribute("src", GENERIC_IMAGE_URL);
+    else
+        h.setAttribute("src", "data:image/png;base64," + response[ii]['poster']);
     let i = PeliculaGenero.crearElemento("a");
     let j = PeliculaGenero.crearElemento("div", ["flip-card-back"]);
     let k = PeliculaGenero.crearElemento("p", [], response[ii]['fecha_estreno']);
@@ -132,7 +136,6 @@ PeliculaGenero.buildGrid = function (response, container) {
     let m = PeliculaGenero.crearElemento("p", [], sin);
     i.setAttribute("href", "/films/"+ response[ii]['id']);
 
-    // Corregido para que ande tambien en firefox
     f.appendChild(g);
     f.appendChild(h);
     j.appendChild(k);
