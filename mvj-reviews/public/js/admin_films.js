@@ -662,6 +662,8 @@ AdminFilms.establecerResultadoSeleccionado = function(resultado,origen,base64){
   cruces.forEach(function(cruz) {
     cruz.style.display = 'none';
   });
+
+  window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
 function showAdminHelpPopup() {
