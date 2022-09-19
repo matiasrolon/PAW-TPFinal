@@ -1,7 +1,6 @@
 const QUERY_PARAM_GENRE_ID = 'genreId';
 const CATEGORY_MOVIES = 'Pelicula';
 const CATEGORY_SERIES = 'Serie';
-const GENERIC_IMAGE_URL = '/images/noimage.jpg';
 
 var document = document || {},
     window = window || {};
@@ -184,6 +183,10 @@ function updateQueryString(key, value) {
         searchParams.set(key, value);
         var newRelativePathQuery = window.location.pathname + '?' + searchParams.toString();
         history.pushState(null, '', newRelativePathQuery);
+        window.onpopstate(event => {
+            if (event.originalEvent.state == null)
+                console.log("Reloading page");
+        });
     } else {
         // Browser does not support "URLSearchParams"
         console.error('Error al filtrar las peliculas por genero');

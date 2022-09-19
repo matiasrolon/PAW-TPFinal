@@ -4,8 +4,6 @@ var window = window || {},
   AdminFilms = AdminFilms || {};
   idTheMovieDb = '';
 
-const GENERIC_IMAGE_URL = '/images/noimage.jpg';
-
 AdminFilms.iniciarPagina = function (contenedorHTML) {
   window.addEventListener("DOMContentLoaded", function () {
     console.log("Film_Profile asocio JS con HTML.");
