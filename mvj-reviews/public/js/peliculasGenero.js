@@ -56,6 +56,8 @@ PeliculaGenero.load =  function() {
             console.error('Actualice su navegador para utilizar este sitio');
         }
     }
+
+    PeliculaGenero.setupOnPopStateBehaviour();
 }
 
 /**
@@ -155,17 +157,19 @@ PeliculaGenero.buildGrid = function (response, container) {
  */
 PeliculaGenero.setGenre = function (genreId) {
     if (genreId != null) {
-        document.getElementById('section-peliculas').innerHTML = '';
-        document.getElementById('section-series').innerHTML = '';
-
         updateQueryString(QUERY_PARAM_GENRE_ID, genreId);
-        PeliculaGenero.genreId = genreId;
-
-        movies.offset = 0;
-        PeliculaGenero.fetchFilms(CATEGORY_MOVIES);
-        series.offset = 0;
-        PeliculaGenero.fetchFilms(CATEGORY_SERIES);
+        PeliculaGenero.updateFilms(genreId);
     }
+}
+
+PeliculaGenero.updateFilms = function (genreId) {
+    document.getElementById('section-peliculas').innerHTML = '';
+    document.getElementById('section-series').innerHTML = '';
+    PeliculaGenero.genreId = genreId;
+    movies.offset = 0;
+    PeliculaGenero.fetchFilms(CATEGORY_MOVIES);
+    series.offset = 0;
+    PeliculaGenero.fetchFilms(CATEGORY_SERIES);
 }
 
 PeliculaGenero.updateTitle = (category, text) => {
@@ -177,16 +181,27 @@ PeliculaGenero.updateTitle = (category, text) => {
     title.innerText = text;
 }
 
+PeliculaGenero.setupOnPopStateBehaviour = () => {
+    window.addEventListener('popstate', (event) => {
+        if ('URLSearchParams' in window) {
+            const searchParams = new URLSearchParams(window.location.search);
+            const genreId = searchParams.get(QUERY_PARAM_GENRE_ID);
+            if (genreId != null)
+                PeliculaGenero.updateFilms(genreId);
+            else
+                window.location.reload();
+        } else {
+            console.error('Su navegador está muy viejo y no es compatible con esta página. Actualícelo');
+        }
+    });
+}
+
 function updateQueryString(key, value) {
     if ('URLSearchParams' in window) {
         var searchParams = new URLSearchParams(window.location.search)
         searchParams.set(key, value);
         var newRelativePathQuery = window.location.pathname + '?' + searchParams.toString();
         history.pushState(null, '', newRelativePathQuery);
-        window.onpopstate(event => {
-            if (event.originalEvent.state == null)
-                console.log("Reloading page");
-        });
     } else {
         // Browser does not support "URLSearchParams"
         console.error('Error al filtrar las peliculas por genero');
