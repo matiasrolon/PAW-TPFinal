@@ -1,9 +1,10 @@
 @extends('layouts.app')
 
-@section('title') Premio | MVJ Reviews @endsection
+@section('title') MVJ Reviews | Premio @endsection
 
 @section('publics')
-<link href="{{ asset('css/novelties/awards.css',false) }}" rel="stylesheet">
+    <meta name="description" content="{{ $award['descripcion'] }}">
+    <link href="{{ asset('css/novelties/awards.css',false) }}" rel="stylesheet">
 @endsection
 
 @section('content')

@@ -1,8 +1,10 @@
 @extends('layouts.app')
 
-@section('title') Noticia | MVJ Reviews @endsection
+@section('title') MVJ Reviews | {{$news['titulo']}} @endsection
 
 @section('publics')
+    <meta name="description" content="{{$news['copete']}}">
+    <meta name="author" content="{{$news['fuente']}}">
     <link href="{{ asset('css/novelties/news.css',false) }}" rel="stylesheet">
 @endsection
 

@@ -1,5 +1,9 @@
 @extends('layouts.app')
 
+@section('publics')
+    <meta name="description" content="Complete los datos solicitados para terminar de reestablecer su contraseña">
+@endsection
+
 @section('content')
 <div class="container">
     <div class="row justify-content-center">

@@ -1,13 +1,14 @@
 @extends('layouts.app')
 
-@section('title') Premios | MVJ Reviews @endsection
+@section('title') MVJ Reviews | Premios @endsection
 
 @section('publics')
-<script src="{{ asset('js/novelties/awards.js',false) }}"></script>
-<script>
-  Awards.startAwards("content");
-</script>
-<link href="{{ asset('css/novelties/awards.css',false) }}" rel="stylesheet">
+    <meta name="description" content="Seccion de premios y reconocimientos a obras">
+    <script src="{{ asset('js/novelties/awards.js',false) }}"></script>
+    <script>
+    Awards.startAwards("content");
+    </script>
+    <link href="{{ asset('css/novelties/awards.css',false) }}" rel="stylesheet">
 @endsection
 
 @section('content')

@@ -1,14 +1,15 @@
 @extends('layouts.app')
 
-@section('title') {{ $film['titulo'] }} | MVJ Reviews @endsection
+@section('title') MVJ Reviews | {{$film['titulo']}} @endsection
 
 @section('publics')
-<script src="{{ asset('js/film_profile.js',false) }}"></script>
-<script>Pagina.iniciarPagina("content");</script>
-<script type="application/ld+json">
-  {!! $jsonLD !!}
-</script>
-<link href="{{ asset('css/film_profile.css',false) }}" rel="stylesheet">
+    <meta name="description" content="Detalles sobre {{$film['titulo']}}. {{$film['sinopsis']}}">
+    <link href="{{ asset('css/film_profile.css',false) }}" rel="stylesheet">
+    <script src="{{ asset('js/film_profile.js',false) }}"></script>
+    <script>Pagina.iniciarPagina("content");</script>
+    <script type="application/ld+json">
+        {!! $jsonLD !!}
+    </script>
 @endsection
 
 @section('content')

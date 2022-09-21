@@ -1,10 +1,10 @@
 @extends('layouts.app')
 
-@section('title') Ranking Films | MVJ Reviews @endsection
+@section('title') MVJ Reviews | Ranking Films @endsection
 
 @section('publics')
-  <!-- <link href="{{ asset('css/home.css') }}" rel="stylesheet"> -->
-  <link href="{{ asset('css/ranking_films.css',false) }}" rel="stylesheet">
+    <meta name="description" content="Ranking de peliculas y series segun los usuarios registrados">
+    <link href="{{ asset('css/ranking_films.css',false) }}" rel="stylesheet">
 @endsection
 
 @section('content')

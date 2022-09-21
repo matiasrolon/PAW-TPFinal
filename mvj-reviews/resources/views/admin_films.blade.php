@@ -1,12 +1,11 @@
 @extends('layouts.app')
 
-@section('title')
-    Admin Films | MVJ Reviews
-@endsection
+@section('title') MVJ Reviews | Admin Films @endsection
 
 @section('publics')
-    <link href="{{ asset('css/admin_films.css', false) }}" rel="stylesheet">
+    <meta name="description" content="Panel de administracion de peliculas y series">
     <meta name="csrf-token" content="{{ csrf_token() }}" />
+    <link href="{{ asset('css/admin_films.css', false) }}" rel="stylesheet">
     <script src="{{ asset('js/admin_films.js', false) }}"></script>
     <script>
         AdminFilms.iniciarPagina("content");

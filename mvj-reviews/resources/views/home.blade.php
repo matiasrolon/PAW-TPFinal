@@ -1,10 +1,10 @@
 @extends('layouts.app')
 
-@section('title')
-    Home | MVJ Reviews
-@endsection
+@section('title') MVJ Reviews | Club de cine @endsection
 
 @section('publics')
+    <meta name="description" content="Foro club de cine para cinefilos. Lea sobre novedades, criticas y opiniones sobre cine y series de television">
+    <meta name="keywords" content="Cine, Series, TV, Foro, Club, Criticas, Reviews, Cinefilos, Novedades, Noticias, Debate">
     <link href="{{ asset('css/home.css', false) }}" rel="stylesheet">
     <script src="{{ asset('js/peliculasGenero.js', false) }}" charset="utf-8"></script>
     <script src="{{ asset('js/filmCardData.js', false) }}" charset="utf-8"></script>

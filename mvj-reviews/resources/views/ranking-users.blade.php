@@ -1,8 +1,9 @@
 @extends('layouts.app')
 
-@section('title') Ranking Criticos | MVJ Reviews @endsection
+@section('title') MVJ Reviews | Ranking Criticos @endsection
 
 @section('publics')
+    <meta name="description" content="Ranking de criticos (usuarios) segun los votos que han recibido sus criticas (reviews)">
     <link href="{{ asset('css/ranking_users.css',false) }}" rel="stylesheet">
 @endsection
 

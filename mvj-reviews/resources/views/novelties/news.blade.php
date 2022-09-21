@@ -1,8 +1,9 @@
 @extends('layouts.app')
 
-@section('title') Noticia del Dia | MVJ Reviews @endsection
+@section('title') MVJ Reviews | Noticias @endsection
 
 @section('publics')
+    <meta name="description" content="Noticias de actualidad sobre el mundo del cine">
     <script src="{{ asset('js/novelties/news.js',false) }}"></script>
     <script>Noticias.iniciarNoticias("content");</script>
     <link href="{{ asset('css/novelties/news.css',false) }}" rel="stylesheet">

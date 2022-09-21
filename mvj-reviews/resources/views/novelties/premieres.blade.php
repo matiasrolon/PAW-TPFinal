@@ -1,13 +1,14 @@
 @extends('layouts.app')
 
-@section('title') Estrenos | MVJ Reviews @endsection
+@section('title') MVJ Reviews | Estrenos @endsection
 
 @section('publics')
-<script src="{{ asset('js/novelties/premieres.js',false) }}"></script>
-<script>
-  Premieres.startPremieres("content");
-</script>
-<link href="{{ asset('css/novelties/premieres.css',false) }}" rel="stylesheet">
+    <meta name="description" content="Proximos estrenos de peliculas y series">
+    <script src="{{ asset('js/novelties/premieres.js',false) }}"></script>
+    <script>
+        Premieres.startPremieres("content");
+    </script>
+    <link href="{{ asset('css/novelties/premieres.css',false) }}" rel="stylesheet">
 @endsection
 
 @section('content')

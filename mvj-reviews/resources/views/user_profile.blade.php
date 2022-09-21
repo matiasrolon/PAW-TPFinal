@@ -1,13 +1,14 @@
 @extends('layouts.app')
 
-@section('title') {{$user['username']}} | MVJ Reviews @endsection
+@section('title') MVJ Reviews | {{$user['username']}} @endsection
 
 @section('publics')
-  <link href="{{ asset('css/user_profile.css',false) }}" rel="stylesheet">
-  <script src="{{ asset('js/user_profile.js',false) }}" charset="utf-8"></script>
-  <script>
-    User.startProfile();
-  </script>
+    <meta name="description" content="Perfil de usuario de {{$user['username']}}">
+    <link href="{{ asset('css/user_profile.css',false) }}" rel="stylesheet">
+    <script src="{{ asset('js/user_profile.js',false) }}" charset="utf-8"></script>
+    <script>
+        User.startProfile();
+    </script>
 @endsection
 
 @section('content')

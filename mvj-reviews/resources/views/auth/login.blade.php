@@ -1,5 +1,7 @@
 @extends('layouts.app')
+
 @section('publics')
+    <meta name="description" content="Logueate para poder escribir y puntuar criticas">
     <link href="{{ asset('css/login.css',true) }}" rel="stylesheet">
 @endsection
 

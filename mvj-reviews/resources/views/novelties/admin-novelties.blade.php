@@ -1,8 +1,9 @@
 @extends('layouts.app')
 
-@section('title') Admin novedades | MVJ Reviews @endsection
+@section('title') MVJ Reviews | Admin novedades @endsection
 
 @section('publics')
+    <meta name="description" content="Panel de administracion de novedades">
     <script src="{{ asset('js/novelties/admin.js',false) }}"></script>
     <script>Novelties.startNovelties("content");</script>
     <link href="{{ asset('css/novelties/admin.css',false) }}" rel="stylesheet">

@@ -1,5 +1,9 @@
 @extends('layouts.app')
 
+@section('publics')
+    <meta name="description" content="Verifique su casilla de email para terminar de registrarse en el sitio">
+@endsection
+
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
