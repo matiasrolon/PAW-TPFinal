@@ -12,6 +12,7 @@
     <script>
         window.addEventListener("DOMContentLoaded", function() {
             FilmCardData.modificarPuntajeClase();
+            FilmCardData.enableSwipeOnCards();
             Home.iniciarPagina();
             PeliculaGenero.load();
         });
@@ -46,23 +47,21 @@
                 <section id="section-peliculas" class="peliculas">
                     @foreach ($peliculas as $pelicula)
                         <div class="flip-card">
-                            <a style="display:block" href="/films/{{ $pelicula['id'] }}">
+                            <a href="/films/{{ $pelicula['id'] }}">
                                 <div class="cuadro-film flip-card-inner">
                                     <div class="flip-card-front">
                                         <p class="puntuacion">{{ number_format($pelicula['puntaje'], 1) }}</p>
                                         @if ($pelicula['portada'] == null)
-                                            <img class="poster" src="images/noimage.jpg" alt="{{$pelicula['titulo']}} (portada no disponible)">
+                                        <img class="poster" src="images/noimage.jpg" alt="{{$pelicula['titulo']}} (portada no disponible)">
                                         @else
-                                            <img class="poster" src="data:image/png;base64,{{ $pelicula['portada'] }}" alt="{{$pelicula['titulo']}}">
+                                        <img class="poster" src="data:image/png;base64,{{ $pelicula['portada'] }}" alt="{{$pelicula['titulo']}}">
                                         @endif
                                     </div>
-                                    <!-- <a style="display:block" href="/films/{{ $pelicula['id'] }}"> -->
                                     <div class="flip-card-back">
                                         <p>{{ date('d-m-Y', strtotime($pelicula['fecha_estreno'])) }}</p>
                                         <p class="titulo-film">{{ $pelicula['titulo'] }}</p>
                                         <p>{{ str_limit($pelicula['sinopsis'], $limit = 100, $end = '...') }}</p>
                                     </div>
-                                    <!-- </a> -->
                                 </div>
                             </a>
                         </div>
