@@ -55,7 +55,7 @@ class UserController extends Controller
                             ->where('review.user_id',$user->id)
                             ->select('review.*','film.titulo as pelicula',
                             \DB::raw('TO_BASE64(poster) as poster'))
-                            ->orderBy('review.created_at')
+                            ->orderBy('review.created_at', 'desc')
                             ->take(4)
                             ->get();
 
