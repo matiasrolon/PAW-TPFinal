@@ -25,15 +25,18 @@
           <td class="position">{{$indexKey +1}}</td>
           <td class="filmname">
               <a href="{{ route('film_profile', $film['id']) }}" class="link-film">
-                <img src="data:image/png;base64,{{$film['poster64']}}" class="poster" alt="">
-                <div>{{ str_limit($film['titulo'], $limit = 40, $end = '...')  }}</div>
+                @if ($film['poster64'] == null)
+                    <img src="/images/noimage.jpg" class="poster" alt="{{$film['titulo']}}">
+                @else
+                    <img src="data:image/png;base64,{{$film['poster64']}}" class="poster" alt="{{$film['titulo']}}">
+                @endif
+                {{ str_limit($film['titulo'], $limit = 40, $end = '...') }}
               </a>
           </td>
           <td class="category">{{ $film['categoria'] }}</td>
           <td class="date">{{ date('d-m-Y', strtotime($film['fecha_estreno'])) }}</td>
           <td class="pais">{{ $film['pais'] }}</td>
           <td>{{ number_format($film['puntaje'], 2) }}</td>
-            <!-- </div> -->
         </tr>
       @endforeach
       </tbody>

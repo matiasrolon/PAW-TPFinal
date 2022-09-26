@@ -28,9 +28,9 @@
                       @csrf
                         <div class="info-avatar">
                             @if ($user['avatar']==null)
-                              <img class="field avatar" src="{{asset('images/default_avatar.png')}}">
+                              <img class="field avatar" src="{{asset('images/default_avatar.png')}}" alt="Sin foto de perfil">
                             @else
-                              <img class="field avatar" src="data:image/png;base64,{{$user['avatar']}}">
+                              <img class="field avatar" src="data:image/png;base64,{{$user['avatar']}} alt="Foto de perfil de {{$user['username']}}"">
                             @endif
                             <input name="avatar" class="editable avatar no-visible" type="file">
                         </div>
@@ -83,13 +83,17 @@
                         </div>
                       </div>
                     </form>
-                      <h3 class="tittle">Reviews Recientes </h3>
+                      <h3 class="tittle">Reviews Recientes</h3>
                         @if (count($reviews)>0)
                           <div class="container-reviews">
                             @foreach ($reviews as $review)
                               <div class="review-user">
                                 <a href="/films/{{$review['film_id']}}/{{$review['id']}}">
-                                  <img class="poster" src="data:image/png;base64,{{$review['poster']}}">
+                                    @if ($review['poster'] == null)
+                                        <img class="poster" src="/images/noimage.jpg" alt="{{$review['pelicula']}} (portada no disponible)">
+                                    @else
+                                        <img class="poster" src="data:image/png;base64,{{$review['poster']}}" alt="{{$review['pelicula']}}">
+                                    @endif
                                   <div class="info-review-user">
                                     <label class="info-review" for=""> <b> Review: </b> {{ $review['titulo'] }}</label>
                                     <!-- <label class="info-review" for=""> <b> Puntos: </b> {{ $review['puntaje_total'] }} </label> -->
