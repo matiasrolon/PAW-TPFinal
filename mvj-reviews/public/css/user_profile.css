@@ -267,6 +267,8 @@ input[type=reset]:hover,
 }
 .review-user .poster{
   width: 200px;
+  height: 300px;
+  object-fit: cover;
   display: block;
   margin: 10px auto;
 }
