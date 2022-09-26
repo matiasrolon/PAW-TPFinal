@@ -13,7 +13,7 @@
       <div class="noticia">
           <h1>{{$news['titulo']}}</h1>
           <h2>{{ date('d-m-Y', strtotime($news['fecha'])) }} - {{$news['copete']}}</h2>
-          <img src="data:image/png;base64, {{$news['portada']}}" alt="">
+          <img src="data:image/png;base64, {{$news['portada']}}" alt="Portada de la noticia">
           <div class="content">
             {!! $news['cuerpo'] !!} <!-- EN HTML -->
           </div>

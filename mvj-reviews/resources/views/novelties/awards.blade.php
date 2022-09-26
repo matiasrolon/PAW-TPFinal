@@ -17,7 +17,7 @@
   @foreach ($awards as $award)
   <div class="award">
     <a href="/novelties/awards/{{$award['award_id']}}">
-      <img class="portada" src="data:image/png;base64,{{$award['portada']}}">
+      <img class="portada" src="data:image/png;base64,{{$award['portada']}}" alt="Portada del premio">
       <div class="data">
         <h2>{{$award['nombreAward']}}</p>
         <p>Fecha: {{ date('d-m-Y', strtotime( $award['fecha_realizacion'] ) ) }}</p>

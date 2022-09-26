@@ -81,9 +81,9 @@
 
                 <p class="description"> La reputacion de una obra la hacemos entre todos, no solo una elite</p>
                 <div class="images">
-                          <img class="field avatar" src="{{asset('images/votar-review.png')}}">
-                          <img class="field avatar" src="{{asset('images/votar-film.png')}}">
-                          <img class="field avatar" src="{{asset('images/buscador.png')}}">
+                          <img class="field avatar" src="{{asset('images/votar-review.png')}}" alt="Indica cómo calificar una película o serie">
+                          <img class="field avatar" src="{{asset('images/votar-film.png')}}" alt="Indica cómo votar una review">
+                          <img class="field avatar" src="{{asset('images/buscador.png')}}" alt="Indica cómo funciona el buscador">
                 </div>
                 <p>Puntua films, likea Reviews, encontra info de cualquier film</p>
                 <p class="final-msj"> Registrate y disfruta la mejor interaccion con el mundo cinefilo!</p>

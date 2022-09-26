@@ -17,9 +17,9 @@
   <section class="resultado-seleccionado info-film opciones-film">
     <div class="poster-container">
       @if($film->poster == null)
-        <img class="poster" src="/images/noimage.jpg" alt="Poster">
+        <img class="poster" src="/images/noimage.jpg" alt="{{$film['titulo']}} (portada no disponible)">
       @else
-        <img class="poster" src="data:image/png;base64,{{$film['poster']}}" alt="Poster">
+        <img class="poster" src="data:image/png;base64,{{$film['poster']}}" alt="{{$film['titulo']}}">
       @endif
     </div>
     <div class="detalles-pelicula">

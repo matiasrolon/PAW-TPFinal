@@ -13,7 +13,7 @@
     <h2>Evento: {{$award['nombre']}}</h2>
     <p> Fecha: {{ date('d-m-Y', strtotime( $award['fecha_realizacion'] ) ) }}</p>
     <p>{{$award['descripcion']}}</p>
-    <img src="data:image/png;base64, {{$award['portada']}}" alt="">
+    <img src="data:image/png;base64, {{$award['portada']}}" alt="Portada del premio">
   </div>
   <div class="cuerpo">
     <ul class="categorias">

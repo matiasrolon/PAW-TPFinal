@@ -30,7 +30,7 @@
                             @if ($user['avatar']==null)
                               <img class="field avatar" src="{{asset('images/default_avatar.png')}}" alt="Sin foto de perfil">
                             @else
-                              <img class="field avatar" src="data:image/png;base64,{{$user['avatar']}} alt="Foto de perfil de {{$user['username']}}"">
+                              <img class="field avatar" src="data:image/png;base64,{{$user['avatar']}}" alt="Foto de perfil de {{$user['username']}}">
                             @endif
                             <input name="avatar" class="editable avatar no-visible" type="file">
                         </div>

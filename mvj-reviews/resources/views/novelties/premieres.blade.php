@@ -28,7 +28,11 @@
             <a style="display:block" href="/films/{{$premiere['id']}}">
               <div class="cuadro-film flip-card-inner">
                 <div class="flip-card-front">
-                  <img class="poster" src="data:image/png;base64,{{$premiere['portada']}}">
+                    @if ($premiere['portada'] == null)
+                        <img class="poster" src="images/noimage.jpg" alt="{{$premiere['titulo']}} (portada no disponible)">
+                    @else
+                        <img class="poster" src="data:image/png;base64,{{$premiere['portada']}}" alt="{{$premiere['titulo']}}">
+                    @endif
                 </div>
                 <div class="flip-card-back">
                   <p>{{ date('d-m-Y', strtotime($premiere['fecha_estreno'])) }}</p>

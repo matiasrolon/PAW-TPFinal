@@ -51,9 +51,9 @@
                                     <div class="flip-card-front">
                                         <p class="puntuacion">{{ number_format($pelicula['puntaje'], 1) }}</p>
                                         @if ($pelicula['portada'] == null)
-                                            <img class="poster" src="images/noimage.jpg">
+                                            <img class="poster" src="images/noimage.jpg" alt="{{$pelicula['titulo']}} (portada no disponible)">
                                         @else
-                                            <img class="poster" src="data:image/png;base64,{{ $pelicula['portada'] }}">
+                                            <img class="poster" src="data:image/png;base64,{{ $pelicula['portada'] }}" alt="{{$pelicula['titulo']}}">
                                         @endif
                                     </div>
                                     <!-- <a style="display:block" href="/films/{{ $pelicula['id'] }}"> -->
@@ -86,7 +86,11 @@
                                 <div class="cuadro-film flip-card-inner">
                                     <div class="flip-card-front">
                                         <p class="puntuacion">{{ number_format($serie['puntuacion'], 1) }}</p>
-                                        <img class="poster" src="data:image/png;base64,{{ $serie['portada'] }}">
+                                        @if ($pelicula['portada'] == null)
+                                            <img class="poster" src="images/noimage.jpg" alt="{{$serie['titulo']}} (portada no disponible)">
+                                        @else
+                                            <img class="poster" src="data:image/png;base64,{{ $serie['portada'] }}" alt="{{$serie['titulo']}}">
+                                        @endif
                                     </div>
                                     <div class="flip-card-back">
                                         <p>{{ date('d-m-Y', strtotime($serie['fecha_estreno'])) }}</p>
@@ -117,8 +121,7 @@
                     <tbody>
                         @foreach ($users as $user)
                             <tr>
-                                <td class="username"><a href="/users/{{ $user['username'] }}"> {{ $user['username'] }}</a>
-                                </td>
+                                <td class="username"><a href="/users/{{ $user['username'] }}"> {{ $user['username'] }}</a></td>
                                 <td>{{ $user['cantReviews'] }}</td>
                                 <td>{{ number_format($user['puntos'], 2) }}</td>
                             </tr>
@@ -127,6 +130,7 @@
                 </table>
             </div>
             <div id="container101">
+                <!-- FIXME: Quizás no es una lista de elementos si cada li contiene tantas cosas -->
                 <ul class="ultimas-reviews-container">
                     @foreach ($reviews as $review)
                         <li review_id="{{ $review['review_id'] }}">

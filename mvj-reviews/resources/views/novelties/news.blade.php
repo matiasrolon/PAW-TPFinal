@@ -18,7 +18,7 @@
                 <a href="/novelties/news/{{ $noticia['id'] }}">
                     <span class="fecha">{{ date('d-m-Y', strtotime($noticia['fecha'])) }}</span>
                     <h3>{{$noticia['titulo']}}</h3>
-                    <img class="portada" src="data:image/png;base64,{{$noticia['portada']}}" alt="">
+                    <img class="portada" src="data:image/png;base64,{{$noticia['portada']}}" alt="Portada de la noticia">
                     {{-- <b>{{$noticia['titulo']}}</b> --}}
                     <p>{{$noticia['copete']}}</p>
                 </a>

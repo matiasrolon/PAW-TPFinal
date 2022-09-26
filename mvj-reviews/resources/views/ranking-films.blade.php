@@ -26,7 +26,7 @@
           <td class="filmname">
               <a href="{{ route('film_profile', $film['id']) }}" class="link-film">
                 @if ($film['poster64'] == null)
-                    <img src="/images/noimage.jpg" class="poster" alt="{{$film['titulo']}}">
+                    <img src="/images/noimage.jpg" class="poster" alt="{{$film['titulo']}} (portada no disponible)">
                 @else
                     <img src="data:image/png;base64,{{$film['poster64']}}" class="poster" alt="{{$film['titulo']}}">
                 @endif
