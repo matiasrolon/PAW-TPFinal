@@ -92,6 +92,7 @@ PeliculaGenero.getNextChunk = (category) => {
             var container = document.getElementById(category.container);
             PeliculaGenero.buildGrid(response, container);
             FilmCardData.modificarPuntajeClase();
+            FilmCardData.enableSwipeOnCards();
             showSpinner(false);
         };
     }
