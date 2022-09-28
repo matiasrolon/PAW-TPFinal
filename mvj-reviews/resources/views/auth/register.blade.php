@@ -2,7 +2,7 @@
 
 @section('publics')
     <meta name="description" content="Registrate para poder escribir y puntuar criticas">
-    <link href="{{ asset('css/register.css',true) }}" rel="stylesheet">
+    <link href="{{ asset('css/register.css', false) }}" rel="stylesheet">
 @endsection
 
 @section('content')
