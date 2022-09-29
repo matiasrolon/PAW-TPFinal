@@ -50,6 +50,7 @@
             <i class="fas fa-bars"></i>
           </div>
         </div>
+
         <div class="navseccion autenticacion">
           @guest
           <ul class="opciones-guest">
@@ -64,24 +65,18 @@
             @endif
           </ul>
           @else
-          <li class="">
             <i class="fas fa-user-circle"></i>
-            <a class="" href="#">
-              {{ Auth::user()->username }} <span class=""></span>
+            <a href="#">
+              {{ Auth::user()->username }}
               <button class="boton-opciones-login" type="button" name="button">
                 <i class="fas fa-angle-down"></i>
               </button>
             </a>
 
             <ul class="opciones-login no-visible">
+              <li><a href="{{ route('user_profile', Auth::user()->username) }}">Perfil</a></li>
               <li>
-                <a class="" href="{{ route('user_profile', Auth::user()->username) }}">
-                  Perfil
-                </a>
-              </li>
-              <li>
-                <a class="" href="{{ route('logout') }}" onclick="event.preventDefault();
-                                                                   document.getElementById('logout-form').submit();">
+                <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                   Salir
                 </a>
                 <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
@@ -89,10 +84,10 @@
                 </form>
               </li>
             </ul>
-          </li>
           @endguest
         </div>
       </nav>
+
       <div class="toggle-menu">
         <nav class="menus no-visible-menu">
           <div class="seccion-menu">

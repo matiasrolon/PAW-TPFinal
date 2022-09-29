@@ -55,7 +55,11 @@
 /*  align-content: start;*/
 }
 
-
+.field{
+}
+.field label{
+  /*! margin-left: 5%; */
+}
 
 input[id="username"]{
   width: 80%;
