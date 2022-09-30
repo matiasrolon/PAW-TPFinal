@@ -55,23 +55,18 @@
           @guest
           <ul class="opciones-guest">
             <li>
-              <i class="fas fa-user"></i>
-              <a class="fontAwesome login-item" href="{{ route('login') }}"> {{ __('Login') }}</a>
+                <a class="fontAwesome login-item" href="{{ route('login') }}">
+                    <i class="fas fa-user"></i>
+                    <span>{{ __('Login') }}</span>
+                </a>
             </li>
-            @if (Route::has('register'))
-            <li>
-              <i class="fas fa-child"></i>
-              <a class="fontAwesome login-item" href="{{ route('register') }}">{{ __('Register') }}</a></li>
-            @endif
           </ul>
           @else
             <i class="fas fa-user-circle"></i>
-            <a href="#">
-              {{ Auth::user()->username }}
-              <button class="boton-opciones-login" type="button" name="button">
+            <span>{{ Auth::user()->username }}</span>
+            <button class="boton-opciones-login" type="button" name="button">
                 <i class="fas fa-angle-down"></i>
-              </button>
-            </a>
+            </button>
 
             <ul class="opciones-login no-visible">
               <li><a href="{{ route('user_profile', Auth::user()->username) }}">Perfil</a></li>
@@ -91,45 +86,66 @@
       <div class="toggle-menu">
         <nav class="menus no-visible-menu">
           <div class="seccion-menu">
-            <i class="fas fa-home"></i>
-            <a href="{{ route('home') }}">Home</a>
+              <a href="{{ route('home') }}">
+                <i class="fas fa-home"></i>
+                Home
+            </a>
           </div>
 
           <div class="seccion-menu">
-            <i class="fas fa-film"></i>
-            <a href="{{ route('ranking-films') }}">Ranking films</a>
+              <a href="{{ route('ranking-films') }}">
+                <i class="fas fa-film"></i>
+                Ranking films
+            </a>
           </div>
 
           <div class="seccion-menu">
-            <i class="fas fa-chart-line"></i>
-            <a href="{{ route('ranking-users') }}">Ranking Criticos</a>
+              <a href="{{ route('ranking-users') }}">
+                <i class="fas fa-chart-line"></i>
+                Ranking Criticos
+            </a>
           </div>
 
           <div class="seccion-menu novedades">
-            <i class="fas fa-newspaper"></i>
-            <a href="#"> Novedades </a>
+            <span>
+                <i class="fas fa-newspaper"></i>
+                Novedades
+            </span>
             <ul class="submenu novedades no-visible">
               <li>
-                <i class="fas fa-award"></i>
-                <a href="{{ route('awards') }}">Premios</a>
+
+                <a href="{{ route('awards') }}">
+                    <i class="fas fa-award"></i>
+                    Premios
+                </a>
               </li>
               <li>
-                <i class="fas fa-surprise"></i>
-                <a href="{{ route('news') }}">Noticias</a></li>
+                  <a href="{{ route('news') }}">
+                    <i class="fas fa-surprise"></i>
+                    Noticias
+                </a>
+              </li>
               <li>
-                <i class="fas fa-fire-alt"></i>
-                <a href="{{ route('premieres') }}">Estrenos</a></li>
+                  <a href="{{ route('premieres') }}">
+                    <i class="fas fa-fire-alt"></i>
+                    Estrenos
+                </a>
+            </li>
             </ul>
           </div>
           @auth
           @if ( Auth::user()->hasRole('admin') )
           <div class="seccion-menu">
-            <i class="fas fa-tools"></i>
-            <a href="{{ route('admin-films') }}"> Admin Films </a>
+            <a href="{{ route('admin-films') }}">
+                <i class="fas fa-tools"></i>
+                Admin Films
+            </a>
           </div>
           <div class="seccion-menu">
-            <i class="fas fa-heading"></i>
-            <a href="{{ route('admin-novelties') }}"> Admin Novedades </a>
+            <a href="{{ route('admin-novelties') }}">
+                <i class="fas fa-heading"></i>
+                Admin Novedades
+            </a>
           </div>
           @endif
           @endauth

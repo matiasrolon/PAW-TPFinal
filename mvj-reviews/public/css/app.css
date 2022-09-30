@@ -21,6 +21,7 @@
 }
 
 .boton-opciones-login {
+    cursor: pointer;
     border-radius: 5px;
     border: 2px solid rgba(0, 0, 0, 0.25);
     background-color: rgba(0, 0, 0, 0.12);
@@ -45,6 +46,10 @@ body {
 
 .header-menu-mvj {
     width: 100%;
+}
+
+nav a {
+    text-decoration: none;
 }
 
 .nav-principal {
@@ -105,6 +110,7 @@ img.logo-st {
     margin: 0;
     padding: 0;
     list-style: none;
+    z-index: 1;     /* Para que las opciones del perfil se vean por encima del nav */
 }
 
 .navseccion.autenticacion a {
@@ -112,9 +118,14 @@ img.logo-st {
     color: black;
 }
 
-nav a {
-    text-decoration: none;
+.toggle-menu a, .toggle-menu span {
     color: white;
+    text-align: center;
+    cursor: pointer;
+
+    /* Hago que el anchor sea clickeable en todo el div */
+    display: block;
+    width: 100%;
 }
 
 .menus{
@@ -125,52 +136,51 @@ nav a {
     background: #000000;
 }
 
-  .seccion-menu{
+  .seccion-menu {
+    display: flex;
+    flex-grow: 1;
+    align-items: center;
+    justify-content: center;
+    position: relative;
     height: 30px;
-    /*! width: auto; */
-    text-align: center;
-    /*! padding-top: 0.5%; */
-    /*! border-color: grey; */
     padding: 8px;
     border-radius: 2px 2px;
   }
 
-  .seccion-menu path{
-    /* padding: 2%; */
-  }
-
 .seccion-menu .submenu{
-    position: relative;
+    position: absolute;
     z-index: 9;     /* Para que este por encima de las cards */
     margin: 0;
     padding: 0;
     background-color: black;
     border-radius: 2px 2px;
     list-style: none;
+    /*! display: flex; */
+    flex-direction: column;
+    top: 40px;
+    width: 100%;
 }
 
-    .toggle-menu-hamburger {
-        padding: 0 0.5em 0 1em;
-        margin: auto;
-      }
+.toggle-menu-hamburger {
+    padding: 0 0.5em 0 1em;
+    margin: auto;
+}
 
-      .seccion-menu svg{
-        padding: 1% 3%;
-      }
 
-      .seccion-menu .novedades a {
-        flex: 1 100%;
-      }
+.seccion-menu .novedades a {
+    flex: 1 100%;
+}
 
+div.seccion-menu.novedades:active > ul {
+    display: flex !important;
+}
 
 .submenu li{
-    flex: 1 100%;
-    flex-flow: row wrap;
-    align-items: stretch;
-    width: 100%;
-    margin: 0%;
+    padding: 0 1em;
     border-radius: 2px;
     color: white;
+    display: flex;
+    align-items: center;
 }
 
 .seccion-menu:hover,
@@ -196,20 +206,26 @@ nav a {
       list-style: none;
     }
 
-    .opciones-guest li{
-        margin-right: 0.5em;
+    .opciones-guest li {
         min-width: fit-content;
     }
 
+    .opciones-guest li:first-of-type {
+        margin-right: 0.5em;
+    }
+
     .opciones-guest a {
-        color: black;
         text-decoration: none;
+    }
+
+    .opciones-guest a span {
+        color: black;
         display: none;
     }
 
-@media screen and (min-width: 380px) {
+@media screen and (min-width: 320px) {
 
-    .opciones-guest a {
+    .opciones-guest a span {
         display: inline;    /* Vuelve visible los labels de login y register */
     }
 
@@ -257,13 +273,6 @@ nav a {
   width: auto;
   background-color: var(--fondo);
 }
-
-/*
-.login-item {
-  text-decoration: none;
-  color: black;
-}
-
 
 .resultados-buscador{
   text-align: left;
@@ -332,7 +341,6 @@ li.item-resultado:hover {
   border-radius: 5px 5px;
 }
 
-/*  */
 .opciones-login{
     position: absolute;
     right: 0.5em;
@@ -430,14 +438,6 @@ ul.resultados-buscador a {
       width: 100vw;
     }
 
-    .seccion-menu svg{
-      padding: 1% 3%;
-    }
-
-    .opciones-login{
-      width: 30%;
-    }
-
     .resultados-buscador{
       margin-top: 10%;
       width: 97%;
@@ -459,9 +459,12 @@ ul.resultados-buscador a {
     }
 
     .menus{
-      display: grid;
-      grid-template-columns: repeat(5, 1fr);
-      grid-gap: 0px;
+      /*! display: grid; */
+      /*! grid-template-columns: repeat(6, 1fr); */
+      /*! grid-gap: 0px; */
+      display: flex;
+      gap: 0 0.5em;
+      flex-flow: wrap;
     }
 
     .toggle-menu-hamburger {
