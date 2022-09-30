@@ -1,11 +1,10 @@
-
 :root {
-  --menu-principal:yellowgreen;
-  --fondo:#CBD5B7;
-  --sector:yellowgreen;
-  --font-family: 'Pridi', 'Serif';
-  --font-size: larger;
-  --border-radius: 5px;
+    --menu-principal: yellowgreen;
+    --fondo: #CBD5B7;
+    --sector: yellowgreen;
+    --font-family: 'Pridi', 'Serif';
+    --font-size: larger;
+    --border-radius: 5px;
 }
 
 
@@ -16,17 +15,17 @@
     font-family: 'Pridi', 'FontAwesome', sans-serif;
 }
 
-.no-visible{
+.no-visible {
     display: none;
 }
 
-#app{
+#app {
     color: black;
     margin: auto;
     display: flex;
     flex-flow: row wrap;
     margin-left: auto;
-    margin-right:auto;
+    margin-right: auto;
     height: auto;
     width: auto;
     background-color: var(--fondo);
@@ -55,8 +54,8 @@ nav a {
 .nav-principal {
     display: grid;
     grid-template-columns: auto;
-    grid-template-areas: "a1 a3" "a2 a2";
-    background-color:var(--menu-principal);
+    grid-template-areas: "a1 a3""a2 a2";
+    background-color: var(--menu-principal);
 }
 
 
@@ -70,7 +69,8 @@ nav a {
     color: black;
     text-decoration: none;
     min-width: 6em;
-    margin: auto 0;   /* Lo centro verticalmente */
+    margin: auto 0;
+    /* Lo centro verticalmente */
 }
 
 .navseccion.icono img {
@@ -88,8 +88,9 @@ nav a {
     padding: 0 0.5em 0.5em 0.5em;
 }
 
-  .navseccion.buscador input {
-    font-family: 'Pridi', 'FontAwesome', sans-serif; /* Para que tome el logo de la lupa de font awesome */
+.navseccion.buscador input {
+    font-family: 'Pridi', 'FontAwesome', sans-serif;
+    /* Para que tome el logo de la lupa de font awesome */
     font-size: 1em;
     border-radius: var(--border-radius);
     width: 100%;
@@ -103,16 +104,18 @@ nav a {
 
 .navseccion.autenticacion {
     grid-area: a3;
-    margin: auto 0;    /* Centro los elementos verticalmente */
+    margin: auto 0;
+    /* Centro los elementos verticalmente */
     text-align: right;
     padding-right: 0.5em;
 }
 
-.navseccion.autenticacion > ul {
+.navseccion.autenticacion>ul {
     margin: 0;
     padding: 0;
     list-style: none;
-    z-index: 1;     /* Para que las opciones del perfil se vean por encima del nav */
+    z-index: 1;
+    /* Para que las opciones del perfil se vean por encima del nav */
 }
 
 .navseccion.autenticacion a {
@@ -128,7 +131,8 @@ nav a {
 }
 
 
-.toggle-menu a, .toggle-menu span {
+.toggle-menu a,
+.toggle-menu span {
     color: white;
     text-align: center;
     cursor: pointer;
@@ -142,7 +146,7 @@ nav a {
     display: none;
 }
 
-.menus{
+.menus {
     color: white;
 }
 
@@ -150,7 +154,7 @@ nav a {
     background: #000000;
 }
 
-  .seccion-menu {
+.seccion-menu {
     display: flex;
     flex-grow: 1;
     align-items: center;
@@ -159,11 +163,12 @@ nav a {
     height: 30px;
     padding: 8px;
     border-radius: 2px 2px;
-  }
+}
 
-.seccion-menu .submenu{
+.seccion-menu .submenu {
     position: absolute;
-    z-index: 1;     /* Para que este por encima de las cards */
+    z-index: 1;
+    /* Para que este por encima de las cards */
     margin: 0;
     padding: 0;
     background-color: black;
@@ -184,11 +189,11 @@ nav a {
     flex: 1 100%;
 }
 
-div.seccion-menu.novedades:active > ul {
+div.seccion-menu.novedades:active>ul {
     display: flex !important;
 }
 
-.submenu li{
+.submenu li {
     padding: 0 1em;
     border-radius: 2px;
     color: white;
@@ -197,45 +202,46 @@ div.seccion-menu.novedades:active > ul {
 }
 
 .seccion-menu:hover,
-.seccion-menu:hover > a,
+.seccion-menu:hover>a,
 .submenu li:hover,
-.submenu li:hover > a {
+.submenu li:hover>a {
     color: black;
     background-color: #CBD5B7;
 }
 
-  .opciones-guest {
-      display: flex;
-      justify-content: right;
-      margin-top: 0px;
-      list-style: none;
-    }
+.opciones-guest {
+    display: flex;
+    justify-content: right;
+    margin-top: 0px;
+    list-style: none;
+}
 
-    .opciones-guest li {
-        min-width: fit-content;
-    }
+.opciones-guest li {
+    min-width: fit-content;
+}
 
-    .opciones-guest li:first-of-type {
-        margin-right: 0.5em;
-    }
+.opciones-guest li:first-of-type {
+    margin-right: 0.5em;
+}
 
-    .opciones-guest a {
-        text-decoration: none;
-    }
+.opciones-guest a {
+    text-decoration: none;
+}
 
-    .opciones-guest a span {
-        color: black;
-        display: none;
-    }
+.opciones-guest a span {
+    color: black;
+    display: none;
+}
 
 @media screen and (min-width: 320px) {
     .opciones-guest a span {
-        display: inline;    /* Vuelve visible el label de login */
+        display: inline;
+        /* Vuelve visible el label de login */
     }
 }
 
 
-.resultados-buscador{
+.resultados-buscador {
     position: absolute;
     z-index: 2;
     background: darkgrey;
@@ -249,10 +255,10 @@ div.seccion-menu.novedades:active > ul {
 }
 
 .resultados-buscador li img {
-  display: none;
-  height: 240px;
-  border-radius: 5px 5px;
-  border: 2px solid white;
+    display: none;
+    height: 240px;
+    border-radius: 5px 5px;
+    border: 2px solid white;
 }
 
 li.item-resultado:hover img,
@@ -260,47 +266,47 @@ li.item-resultado:hover p {
     display: block;
 }
 
-li.item-resultado:hover h4{
-  border: 2px solid #000000;
+li.item-resultado:hover h4 {
+    border: 2px solid #000000;
 }
 
 li.item-resultado:hover {
-  background-color: #96ff7f;
-  border-radius: 5px 5px;
-  border: 2px solid black;
+    background-color: #96ff7f;
+    border-radius: 5px 5px;
+    border: 2px solid black;
 }
 
 
-.resultados-buscador li p{
-  display:none;
-  padding: 8% 2%;
-  margin: 2% 1%;
-  color: #4f4b4b;
-  border: 2px dashed #989898;
-  border-radius: 5px 5px;
+.resultados-buscador li p {
+    display: none;
+    padding: 8% 2%;
+    margin: 2% 1%;
+    color: #4f4b4b;
+    border: 2px dashed #989898;
+    border-radius: 5px 5px;
 }
 
-.resultados-buscador li h4{
-  padding: 2px 0px 2px 10px;
-  margin: 1% 0%;
-  color: black;
-  display: block;
-  border-radius: 5px 5px;
+.resultados-buscador li h4 {
+    padding: 2px 0px 2px 10px;
+    margin: 1% 0%;
+    color: black;
+    display: block;
+    border-radius: 5px 5px;
 }
 
-.item-resultado{
-  display: flex;
-  background: #bbbbbb;
-  border: 1px solid white;
-  border-radius: 5px 5px;
+.item-resultado {
+    display: flex;
+    background: #bbbbbb;
+    border: 1px solid white;
+    border-radius: 5px 5px;
 }
 
-.opciones-login{
+.opciones-login {
     position: absolute;
     right: 0.5em;
 }
 
-.opciones-login > li{
+.opciones-login>li {
     width: 6em;
     text-align: center;
     background-color: #CBD5B7;
@@ -309,40 +315,55 @@ li.item-resultado:hover {
 }
 
 .opciones-login a {
-  text-decoration: none;
-  color: black;
+    text-decoration: none;
+    color: black;
 }
 
 
 .loading-spin {
-    position:fixed;
-    width:100%;
-    left:0;right:0;top:0;bottom:0;
-    background-color: rgba(255,255,255,0.7);
-    z-index:9999;
+    position: fixed;
+    width: 100%;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    background-color: rgba(255, 255, 255, 0.7);
+    z-index: 9999;
 }
 
 @-webkit-keyframes spin {
-    from {-webkit-transform:rotate(0deg);}
-    to {-webkit-transform:rotate(360deg);}
+    from {
+        -webkit-transform: rotate(0deg);
+    }
+
+    to {
+        -webkit-transform: rotate(360deg);
+    }
 }
 
 @keyframes spin {
-    from {transform:rotate(0deg);}
-    to {transform:rotate(360deg);}
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
 }
 
 .loading-spin::after {
-    content:'';
-    display:block;
-    position:absolute;
-    left:48%;top:40%;
-    width:40px;height:40px;
-    border-style:solid;
-    border-color:black;
-    border-top-color:transparent;
+    content: '';
+    display: block;
+    position: absolute;
+    left: 48%;
+    top: 40%;
+    width: 40px;
+    height: 40px;
+    border-style: solid;
+    border-color: black;
+    border-top-color: transparent;
     border-width: 4px;
-    border-radius:50%;
+    border-radius: 50%;
     -webkit-animation: spin .8s linear infinite;
     animation: spin .8s linear infinite;
 }
@@ -350,7 +371,9 @@ li.item-resultado:hover {
 
 @media (min-width: 700px) {
 
-    body {font-size: large;}
+    body {
+        font-size: large;
+    }
 
     .nav-principal {
         grid-template-columns: 30% 1fr 30%;
@@ -369,20 +392,21 @@ li.item-resultado:hover {
     }
 
 
-    .menus{
+    .menus {
         gap: 0 0.5em;
         flex-flow: wrap;
     }
 
     .no-visible-menu {
-        display: flex;  /* Vuelve visible el menu */
+        display: flex;
+        /* Vuelve visible el menu */
     }
 
     .toggle-menu-hamburger {
         display: none;
     }
 
-    .resultados-buscador{
+    .resultados-buscador {
         width: 39%;
         margin: 0;
     }
